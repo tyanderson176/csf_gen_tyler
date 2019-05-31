@@ -1,6 +1,7 @@
 import p2d
 import dmc
 import subprocess
+import sys
 
 from pyscf import scf, gto, mcscf
 
@@ -14,13 +15,7 @@ mol.spin = 0
 mol.verbose = 0
 mol.build(0, 0)
 mol.symmetry = 'dooh'
-
 mf = scf.RHF(mol).run()
-#mc = mcscf.CASSCF(mf, 12, 4)
-
-#grid = p2d.radial_grid(0, 7, 10, 1.1)
-#rvals = p2d.radial_wf_vals(mol, 'H', grid)
-#occ = p2d.occ_orbs_str(mol, 'H', 4)
 
 eps_var = [1e-2, 5e-3, 1e-3]
 eps_var_sched = eps_var

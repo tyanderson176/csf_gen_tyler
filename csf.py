@@ -11,7 +11,7 @@ def get_det_info(shci_out):
     #estimate S; use <S^2> = s(s+1); S = 1/2 +- sqrt(<S^2 + 1/4>)
     S = numpy.rint(numpy.sqrt(S2 + 0.25) - 0.5)
     dets = det_strs2dets(det_strs)
-    csfs = get_csfs(dets, S, 'projection')
+    csfs = get_csfs(dets, wf_coeffs, S, 'projection')
     det_indices, ovlp = csf_matrix(csfs)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets)
     wf_csf_coeffs = numpy.dot(ovlp, wf_det_coeffs)
@@ -29,12 +29,11 @@ def get_det_coeffs(det_indices, wf_coeffs, dets):
         det_coeffs[index] = coeff
     return det_coeffs
 
-def get_csfs(dets, S, method='projection'):
-#    dets = dets_str2dets(dets_str)
+def get_csfs(dets, wf_coeffs, S, method='projection'):
     Sz = get_Sz(dets)
     configs = set(vec.Config(det) for det in dets)
     csfs = []
-    parity = 1 #TODO: S = 0; Find parity from PySCF?
+    parity = 1
     for config in configs: 
         csfs += compute_csfs(config, S, Sz, parity, method)
     return csfs
@@ -47,7 +46,6 @@ def get_proj_error(ovlp, wf_det_coeffs):
 def det_strs2dets(det_strs):
     #TODO: give a format string i.e. "up_occs     dn_occs"
     #or "up_occs\t\t\tdn_occs"
-#    det_strs = dets_str.split('\n')
     dets = []
     for det_str in det_strs:
         up_str, dn_str = tuple(det_str.split('     '))
@@ -127,10 +125,6 @@ class IndexList:
         return str(self.indices)
 
 if __name__ == '__main__':
-#    det_str = '1 2 3 4     1 2 5 6'#\n'5 6 7     5 6 7\n1 2 3     1 4 5'
-    #det_str = '1 2 3     1 2 4'
-#    csfs = get_csfs(det_str, 1) 
-
     out = "START DMC\n0   1   2   3      0   1\n0   2   3   7      0   7\n0   1   2  10      0   7\n0   1   3   9      0   7\n0   1   3  13      1   3\n0   1   2  13      1   2\n0   1   2  12      1   3\n0   1   3  12      1   2\n0   2   3  14      1   2\n0   2   3  15      1   3\n0   2   7  10      0   1\n0   3   7   9      0   1\n0   1   9  10      0   1\n0   2   3  16      0  16\n0   1   2   3      1  11\n0   1   2  11      1   3\n0   1   3  11      1   2\n0   2   3   7      1  11\n1   2   3  11      0   7\n0   1   2  10      1  11\nDET COEFFS:\n 0.97958444    -0.05930949    -0.04187026     0.04187026     0.03630456    -0.03630456    -0.03630456    -0.03630456    -0.03492338    -0.03492338     0.03245056    -0.03245056    -0.03139306    -0.02819201    -0.02761537    -0.02653736     0.02653736    -0.02641846    -0.02607992    -0.02601047\nS^2 VAL:\n 2.00000006\nEND DMC"
     lines = out.split('\n')
     start_index = lines.index("START DMC")
