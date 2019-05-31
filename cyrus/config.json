@@ -1,0 +1,20 @@
+{
+	"system": "chem",
+	"n_up": 7,
+	"n_dn": 7,
+	"dmc_num_dets": 100,
+	"var_only": true,
+	"eps_vars": [
+		0.01,
+		0.005,
+		0.001
+	],
+	"eps_vars_schedule": [
+		0.01,
+		0.005,
+		0.001
+	],
+	"chem": {
+		"point_group": "dooh"
+	}
+}
