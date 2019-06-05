@@ -19,6 +19,10 @@ class Vec:
         coeffs = numpy.array(self.coeffs)
         return numpy.sqrt(numpy.dot(coeffs, coeffs))
 
+    @staticmethod
+    def zero():
+        return Vec({})
+
     def __repr__(self):
         if len(self.dets) == 0:
             return '0'
@@ -75,6 +79,14 @@ class Det:
         dmc_str += ['%4d' % orb for orb in self.dn_occ]
         return "".join(dmc_str)
 
+    def __mul__(self, other):
+        if isinstance(other, (int, float, numpy.int64, numpy.float64)):
+            return Vec({self: other})
+        raise Exception("Unknown type \'" + str(type(other)) +
+                "\' in Det.__mul__")
+
+    __rmul__ = __mul__
+
     def _parity(self, occ1, occ2):
         occ1, occ2 = copy.deepcopy(occ1), copy.deepcopy(occ2)
         num_perms = 0
@@ -110,6 +122,12 @@ class Config:
             self.occs[up_orb] = 1
         for dn_orb in det.dn_occ:
             self.occs[dn_orb] = (1 if dn_orb not in self.occs else 2)
+        self.num_open = \
+            sum([1 if self.occs[orb] == 1 else 0 for orb in self.occs])
+
+    @classmethod
+    def fromorbs(cls, up_orbs, dn_orbs):
+        return cls(Det(up_orbs, dn_orbs))
 
     def make_config_str(self):
         orbs = sorted([orb for orb in self.occs])
