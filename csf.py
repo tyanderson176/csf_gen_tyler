@@ -9,9 +9,9 @@ tol = 1e-15
 def get_det_info(shci_out):
     S2, det_strs, wf_coeffs = shci_out
     #estimate S; use <S^2> = s(s+1); S = 1/2 +- sqrt(<S^2 + 1/4>)
-    S = numpy.rint(numpy.sqrt(S2 + 0.25) - 0.5)
+    s = numpy.rint(numpy.sqrt(S2 + 0.25) - 0.5)
     dets = det_strs2dets(det_strs)
-    csfs = get_csfs(dets, wf_coeffs, S, 'projection')
+    csfs = get_csfs(dets, wf_coeffs, s, 'projection')
     det_indices, ovlp = csf_matrix(csfs)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets)
     wf_csf_coeffs = numpy.dot(ovlp, wf_det_coeffs)
@@ -29,13 +29,19 @@ def get_det_coeffs(det_indices, wf_coeffs, dets):
         det_coeffs[index] = coeff
     return det_coeffs
 
-def get_csfs(dets, wf_coeffs, S, method='projection'):
-    Sz = get_Sz(dets)
+def get_csfs(dets, wf_coeffs, s, method='projection', cache=False):
+    sz = get_Sz(dets)
     configs = set(vec.Config(det) for det in dets)
+    max_open = max([config.num_open for config in configs])
+    print("Max open: %d", % max_open)
     csfs = []
-    parity = 1
-    for config in configs: 
-        csfs += compute_csfs(config, S, Sz, parity, method)
+    if cache:
+        csf_data = gen.load_csf_info(max_open, s, sz)
+        for config in configs:
+            csfs += gen.config2csfs(config, csf_data, rel_parity=False)
+    else:
+        for config in configs: 
+            csfs += compute_csfs(config, s, sz, method)
     return csfs
 
 def get_proj_error(ovlp, wf_det_coeffs):
@@ -76,16 +82,17 @@ def get_coeffs(csf, det_indices):
         coeffs[index] = coeff
     return coeffs/csf.norm()
 
-def compute_csfs(config, S, Sz, parity, method):
+def compute_csfs(config, S, Sz, method):
     '''
     Use projection method to compute configurations
     '''
     if method == 'projection':
         config_str = config.make_config_str()
-        proj_csfs = proj.compute_csfs(config_str, S, Sz, parity)
+        #TODO: lookup the appropriate csf from the table and convert
+        proj_csfs = proj.compute_csfs(config_str, S, Sz)
         csfs = convert_proj_csfs(proj_csfs)
     else:
-        raise Exception('Invalid method \'' + method + '\' in computer_csfs')
+        raise Exception('Invalid method \'' + method + '\' in compute_csfs')
     return csfs
 
 def convert_proj_csfs(proj_csfs):

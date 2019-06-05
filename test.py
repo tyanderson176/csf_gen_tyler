@@ -7,6 +7,7 @@ from pyscf import scf, gto, mcscf
 
 mol = gto.Mole()
 #mol.atom = 'H 0 0 1; N 0 0 0; H 1 0 0; H 0 1 0'
+mol.unit = 'bohr'
 mol.atom = 'N 0 0 -1; N 0 0 1'
 mol.basis = 'sto-3g'
 #mol.basis = 'ccpvdz'

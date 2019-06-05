@@ -1,8 +1,8 @@
 #!/usr/bin/env/python3
 # -*- coding: utf-8 -*-
 
-import itertools
-import numpy as np
+import itertools 
+import numpy as np 
 from copy import copy
 from operator import mul
 from functools import reduce
@@ -482,9 +482,9 @@ def get_csfs_by_configs(N, desired_L, desired_S, desired_parity, configs_str, co
 	for i, config in enumerate(configs):
 		config_csfs = []
 
-		#print('------------------------------')
-		#print("CONFIGURATION:", configs_str[i], '(' + str(i+1) + ' of ' + str(len(configs)) + ')')
-		#print('------------------------------')
+		print('------------------------------')
+		print("CONFIGURATION:", configs_str[i], '(' + str(i+1) + ' of ' + str(len(configs)) + ')')
+		print('------------------------------')
 
 		max_n = np.max(np.array(config)[:, 0])
 		l_z, l_plus, l_minus, s_z, s_plus, s_minus = build_operators2(max_n)	
@@ -504,11 +504,11 @@ def get_csfs_by_configs(N, desired_L, desired_S, desired_parity, configs_str, co
 			wrong_ang_mom_vals.remove(desired_L)
 			wrong_spin_vals.remove(desired_S)
 			
-			#print("GENERATING DETERMINANTS WITH S_z = ", desired_S, "AND L_z = ", ', '.join([str(l_z) for l_z in desired_L_z]) + "...")
+			print("GENERATING DETERMINANTS WITH S_z = ", desired_S, "AND L_z = ", ', '.join([str(l_z) for l_z in desired_L_z]) + "...")
 			all_dets, filtered_dets = dets_from_configs(config, desired_S, desired_parity, desired_L_z=desired_L_z, desired_S_z=desired_S_z)
-			#print("Generated", len(filtered_dets), "determinants.")
+			print("Generated", len(filtered_dets), "determinants.")
 
-			#print("\n\nITERATING OVER DETERMINANTS TO GENERATE CSFS")
+			print("\n\nITERATING OVER DETERMINANTS TO GENERATE CSFS")
 
 			if config_targets and config_tol:
 				target = config_targets[i]
@@ -518,11 +518,11 @@ def get_csfs_by_configs(N, desired_L, desired_S, desired_parity, configs_str, co
 
 			for j, det in enumerate(filtered_dets):
 
-				#print('\n')
-				#print("Current determinant:", det, "(", j+1, "of", len(filtered_dets), ")")
+				print('\n')
+				print("Current determinant:", det, "(", j+1, "of", len(filtered_dets), ")")
 				#print("Projecting L^2...")
 				#projected_state = project_ang_mom(det, l_z, l_plus, l_minus, wrong_ang_mom_vals)
-				#print("Projecting S^2...")
+				print("Projecting S^2...")
 				projected_state = project_ang_mom(det, s_z, s_plus, s_minus, wrong_spin_vals)
 				#print("Changing basis to real harmonics...")
 				#orbitals = [orbital for new_det in projected_state.dets for orbital in new_det.orbitals]
@@ -538,15 +538,15 @@ def get_csfs_by_configs(N, desired_L, desired_S, desired_parity, configs_str, co
 						#print("BREAKING CURRENT CONFIGURATION.")
 						break
 
-		#print("\n\nGenerated ", len(config_csfs), "CSFs.")
+		print("\n\nGenerated ", len(config_csfs), "CSFs.")
 		
 		if config_csfs:
-			#print('Found', len(config_csfs), 'linearly independent states.')
+			print('Found', len(config_csfs), 'linearly independent states.')
 			csfs.append(config_csfs)
 		else:
 			csfs.append([])
 
-	#print('------------------------------')
+	print('------------------------------')
 	#print("\n\nCALCULATED ALL CSFS, PRINTING RESULTS")
 	
 	unique_dets = []
@@ -584,16 +584,17 @@ def get_csfs_by_configs(N, desired_L, desired_S, desired_parity, configs_str, co
 			#print("No CSFs were found for this configuration.")
 
 	#print("\n------")
-	#print("Generated", len(all_csfs), "CSFs with", len(unique_dets), "unique determinants.")
+	print("Generated", len(all_csfs), "CSFs with", len(unique_dets), "unique determinants.")
 
 	return all_csfs
 
-def compute_csfs(config_str, S, Sz, parity):
+def compute_csfs(config_str, S, Sz):
     nelec = lambda orb_str : int(orb_str[orb_str.index('S')+1:])
     N = sum([nelec(orb_str) for orb_str in config_str.split('_')])
     L = 0
     Lzs = [0]
     Szs = [Sz]
+    parity = 1
     return get_csfs_by_configs(N, L, S, parity, [config_str], desired_L_z=Lzs, desired_S_z=Szs)
 
 if __name__ == '__main__':
