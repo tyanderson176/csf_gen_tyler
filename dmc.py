@@ -98,7 +98,7 @@ def print_orbs(fname, mol, aos, opt_orbs = False):
     f.close()
 
 def get_shci_output(mol, mf, eps_vars, eps_vars_sched,
-        shci_path, shci_cmd, num_dets):
+        shci_path, shci_cmd, num_dets, cache):
     try:
         fh = open('FCIDUMP', 'r')
         print("FCIDUMP found.\n")
@@ -122,7 +122,8 @@ def get_shci_output(mol, mf, eps_vars, eps_vars_sched,
         out = f.read()
     shci_out, opt_orbs = parse_output(out)
     print("Starting CSF calculation...")
-    wf_csf_coeffs, csfs_info, det_indices, err = csf.get_det_info(shci_out)
+    wf_csf_coeffs, csfs_info, det_indices, err = \
+            csf.get_det_info(shci_out, cache)
     print("CSF calculation complete.")
     print("Projection error = %10.5f %%" % (100*err))
     return wf_csf_coeffs, csfs_info, det_indices, opt_orbs
@@ -187,7 +188,7 @@ def write_config_var(f, var_name, vals, end = ","):
     return
 
 def print_shci(fname, wf_csf_coeffs, csfs_info, det_indices):
-    csf_coeffs_str = '\t'.join([str(coeff) for coeff in wf_csf_coeffs])
+    csf_coeffs_str = '\t'.join(['%.10f' % coeff for coeff in wf_csf_coeffs])
     ndets_str = '\t'.join([str(len(csf_info)) for csf_info in csfs_info])
     f = open(fname, 'a')
     sorted_dets = sorted([det for det in det_indices.indices], 
@@ -214,8 +215,8 @@ def clear_file(fname):
 def make_dmc(mol, mf, eps_vars, eps_vars_schedule, shci_cmd,
         shci_path, num_dets, fname):
     wf_csf_coeffs, csfs_info, det_indices, opt_orbs = \
-            get_shci_output(mol, mf, eps_vars, 
-            eps_vars_schedule, shci_path, shci_cmd, num_dets)
+            get_shci_output(mol, mf, eps_vars, eps_vars_schedule, 
+                    shci_path, shci_cmd, num_dets, cache = False)
     aos = p2d.mol2aos(mol, mf)
     clear_file(fname)
     print_header(fname, mol, aos, len(det_indices))

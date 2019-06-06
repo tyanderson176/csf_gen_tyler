@@ -6,12 +6,12 @@ import vec
 
 tol = 1e-15
 
-def get_det_info(shci_out):
+def get_det_info(shci_out, cache = False):
     S2, det_strs, wf_coeffs = shci_out
     #estimate S; use <S^2> = s(s+1); S = 1/2 +- sqrt(<S^2 + 1/4>)
     s = numpy.rint(numpy.sqrt(S2 + 0.25) - 0.5)
     dets = det_strs2dets(det_strs)
-    csfs = get_csfs(dets, wf_coeffs, s, 'projection')
+    csfs = get_csfs(dets, wf_coeffs, s, 'projection', cache)
     det_indices, ovlp = csf_matrix(csfs)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets)
     wf_csf_coeffs = numpy.dot(ovlp, wf_det_coeffs)
@@ -33,7 +33,7 @@ def get_csfs(dets, wf_coeffs, s, method='projection', cache=False):
     sz = get_Sz(dets)
     configs = set(vec.Config(det) for det in dets)
     max_open = max([config.num_open for config in configs])
-    print("Max open: %d", % max_open)
+    print("Max open: %d" % max_open)
     csfs = []
     if cache:
         csf_data = gen.load_csf_info(max_open, s, sz)
