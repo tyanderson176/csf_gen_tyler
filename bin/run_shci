@@ -1,5 +1,0 @@
-#!/bin/bash
-
-OUT_DIR=${1?Error: No output dir}
-
-(cd $OUT_DIR; mpirun -n 1 ~/Projects/dmc/dmc/bin/shci_dmc > shci.out)
