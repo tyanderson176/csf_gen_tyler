@@ -216,7 +216,7 @@ def make_dmc(mol, mf, eps_vars, eps_vars_schedule, shci_cmd,
         shci_path, num_dets, fname):
     wf_csf_coeffs, csfs_info, det_indices, opt_orbs = \
             get_shci_output(mol, mf, eps_vars, eps_vars_schedule, 
-                    shci_path, shci_cmd, num_dets, cache = False)
+                    shci_path, shci_cmd, num_dets, cache = True)
     aos = p2d.mol2aos(mol, mf)
     clear_file(fname)
     print_header(fname, mol, aos, len(det_indices))
