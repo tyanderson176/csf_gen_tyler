@@ -1,17 +1,19 @@
 import numpy
+import math
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 import csfgen as proj
 import vec
+import gen
 
 tol = 1e-15
 
 def get_det_info(shci_out, cache = False):
-    S2, det_strs, wf_coeffs = shci_out
+    s2, det_strs, wf_coeffs = shci_out
     #estimate S; use <S^2> = s(s+1); S = 1/2 +- sqrt(<S^2 + 1/4>)
-    s = numpy.rint(numpy.sqrt(S2 + 0.25) - 0.5)
+    twice_s = round(2*math.sqrt(s2 + 0.25) - 1)
     dets = det_strs2dets(det_strs)
-    csfs = get_csfs(dets, wf_coeffs, s, 'projection', cache)
+    csfs = get_csfs(dets, wf_coeffs, twice_s, 'projection', cache)
     det_indices, ovlp = csf_matrix(csfs)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets)
     wf_csf_coeffs = numpy.dot(ovlp, wf_det_coeffs)
@@ -29,19 +31,18 @@ def get_det_coeffs(det_indices, wf_coeffs, dets):
         det_coeffs[index] = coeff
     return det_coeffs
 
-def get_csfs(dets, wf_coeffs, s, method='projection', cache=False):
-    sz = get_Sz(dets)
+def get_csfs(dets, wf_coeffs, twice_s, method='projection', cache=False):
+    twice_sz = get_2sz(dets)
     configs = set(vec.Config(det) for det in dets)
     max_open = max([config.num_open for config in configs])
-    print("Max open: %d" % max_open)
     csfs = []
     if cache:
-        csf_data = gen.load_csf_info(max_open, s, sz)
+        csf_data = gen.load_csf_info(max_open, twice_s, twice_sz)
         for config in configs:
             csfs += gen.config2csfs(config, csf_data, rel_parity=False)
     else:
         for config in configs: 
-            csfs += compute_csfs(config, s, sz, method)
+            csfs += gen.compute_csfs(config, twice_s, twice_sz, method)
     return csfs
 
 def get_proj_error(ovlp, wf_det_coeffs):
@@ -60,12 +61,12 @@ def det_strs2dets(det_strs):
         dets.append(vec.Det(up_occs, dn_occs))
     return dets
 
-def get_Sz(dets):
-    sz_vals = set(det.get_Sz() for det in dets)
-    if len(sz_vals) > 1:
-        raise Exception("Different Sz values in dets")
-    for sz in sz_vals:
-        return sz
+def get_2sz(dets):
+    _2sz_vals = set(round(2*det.get_Sz()) for det in dets)
+    if len(_2sz_vals) > 1:
+        raise Exception("Different sz values in dets")
+    for _2sz in _2sz_vals:
+        return _2sz
 
 def csf_matrix(csfs):
     det_indices = IndexList()
@@ -82,10 +83,11 @@ def get_coeffs(csf, det_indices):
         coeffs[index] = coeff
     return coeffs/csf.norm()
 
+'''
 def compute_csfs(config, S, Sz, method):
-    '''
-    Use projection method to compute configurations
-    '''
+'''
+#    Use projection method to compute configurations
+'''
     if method == 'projection':
         config_str = config.make_config_str()
         #TODO: lookup the appropriate csf from the table and convert
@@ -112,6 +114,7 @@ def convert_proj_csfs(proj_csfs):
             csf_dets[vec.Det(up_occs, dn_occs)] = coeff
         csfs.append(vec.Vec(csf_dets))
     return csfs
+'''
 
 class IndexList:
     def __init__(self):
