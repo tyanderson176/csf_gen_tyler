@@ -1,5 +1,6 @@
 import copy
 import numpy
+import bisect
 
 tol = 1e-15
 
@@ -10,13 +11,12 @@ class Vec:
     determinants.
     '''
     def __init__(self, det_dict={}):
-        self.det_dict = {key: det_dict[key] for key in det_dict 
+        self.dets = {key: det_dict[key] for key in det_dict 
                 if abs(det_dict[key]) > tol}
-        self.dets = [det for det in self.det_dict]
-        self.coeffs = [det_dict[det] for det in self.dets] 
+        self.my_hash = self._compute_hash()
 
     def norm(self):
-        coeffs = numpy.array(self.coeffs)
+        coeffs = numpy.array([self.dets[det] for det in self.dets])
         return numpy.sqrt(numpy.dot(coeffs, coeffs))
 
     @staticmethod
@@ -26,48 +26,60 @@ class Vec:
     def __repr__(self):
         if len(self.dets) == 0:
             return '0'
-        vec_str = ' + '.join([self._coeff_str(coeff) + str(det) 
-            for det, coeff in zip(self.dets, self.coeffs)])
+        vec_str = ' + '.join([self._coeff_str(self.dets[det]) + str(det) 
+            for det in self.dets])
         return vec_str
 
     def _coeff_str(self, coeff):
         return '' if coeff == 1 else str(coeff)
 
-    def __add__(self, other):
-        sum_dict = copy.deepcopy(self.det_dict)
-        for det in other.det_dict:
-            if det in sum_dict:
-                sum_dict[det] += other.det_dict[det]
+    def __iadd__(self, other):
+        for det in other.dets:
+            if det in self.dets:
+                self.dets[det] += other.dets[det]
             else:
-                sum_dict[det] = other.det_dict[det]
-        return Vec(sum_dict)
+                self.dets[det] = other.dets[det]
+        self.my_hash = self._compute_hash()
+        return self
+
+    def __add__(self, other):
+        sum_dets = copy.deepcopy(self.dets)
+        for det in other.dets:
+            if det in sum_dets:
+                sum_dets[det] += other.dets[det]
+            else:
+                sum_dets[det] = other.dets[det]
+        return Vec(sum_dets)
 
     def __rmul__(self, scalar):
         mul_dict = {}
-        for det in self.det_dict:
-            mul_dict[det] = scalar*self.det_dict[det]
+        for det in self.dets:
+            mul_dict[det] = scalar*self.dets[det]
         return Vec(mul_dict)
 
-    def __hash__(self):
+    def _compute_hash(self):
         #TODO: Compute only once; calc in __init__, return result here
         #Safe to add hash values? Should order dets/coeffs and
         #simply use hash(self.__repr__()).
-        det_strs = [str(coeff) + str(det) 
-                for det, coeff in zip(self.dets, self.coeffs)]
+        det_strs = [str(self.dets[det]) + str(det) for det in self.dets]
         return sum([hash(det_str) for det_str in det_strs])
 
+    def __hash__(self):
+        return self.my_hash
+
     def __eq__(self, other):
-        return self.det_dict == other.det_dict
+        return self.dets == other.dets
 
 class Det:
     def __init__(self, up_occ, dn_occ):
         #TODO: Handle permutation?
         self.up_occ = sorted(up_occ)
         self.dn_occ = sorted(dn_occ)
-        parity = (self._parity(up_occ, self.up_occ)
-                *self._parity(dn_occ, self.dn_occ))
-        if parity != 1:
-            raise Exception("Occs supplied to Det have wrong parity.")
+#        parity = (self._parity(up_occ, self.up_occ)
+#                *self._parity(dn_occ, self.dn_occ))
+#        if parity != 1:
+#            raise Exception("Occs supplied to Det have wrong parity.")
+        self.my_hash = self._compute_hash()
 
     def get_Sz(self):
         #TODO: Is this safe?
@@ -101,6 +113,9 @@ class Det:
         return (-2)*num_perms%2 + 1 
 
     def __hash__(self):
+        return self.my_hash
+
+    def _compute_hash(self):
         return hash(self.__repr__())
 
     def __eq__(self, other):

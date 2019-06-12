@@ -114,6 +114,7 @@ def get_shci_output(mol, mf, eps_vars, eps_vars_sched,
     except FileNotFoundError:
         print("config.json not found. Making new config.json...\n")
         make_config(mol, mf, eps_vars, eps_vars_sched, num_dets)
+    print("Running shci...\n")
     output = subprocess.run(shci_cmd.split(' '), capture_output = True)
     if shci_path == 'stdout':
         out = output.stdout.decode('ascii')

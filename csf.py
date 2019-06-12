@@ -18,7 +18,7 @@ def get_det_info(shci_out, cache = False):
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets)
     wf_csf_coeffs = numpy.dot(ovlp, wf_det_coeffs)
     csf_info = [
-        [(det_indices.index(d), c) for d, c in zip(csf.dets, csf.coeffs)] 
+        [(det_indices.index(d), csf.dets[d]) for d in csf.dets] 
         for csf in csfs]
     err = get_proj_error(ovlp, wf_det_coeffs)
     return wf_csf_coeffs, csf_info, det_indices, err
@@ -37,8 +37,10 @@ def get_csfs(dets, wf_coeffs, twice_s, method='projection', cache=False):
     max_open = max([config.num_open for config in configs])
     csfs = []
     if cache:
+        print("Loading csf data...\n\n");
         csf_data = gen.load_csf_info(max_open, twice_s, twice_sz)
-        for config in configs:
+        print("Converting configs...\n\n");
+        for n, config in enumerate(configs):
             csfs += gen.config2csfs(config, csf_data, rel_parity=False)
     else:
         for config in configs: 
@@ -78,43 +80,11 @@ def csf_matrix(csfs):
 
 def get_coeffs(csf, det_indices):
     coeffs = numpy.zeros(len(det_indices))
-    for det, coeff in zip(csf.dets, csf.coeffs):
+    for det in csf.dets:
+        coeff = csf.dets[det]
         index = det_indices.index(det)
         coeffs[index] = coeff
     return coeffs/csf.norm()
-
-'''
-def compute_csfs(config, S, Sz, method):
-'''
-#    Use projection method to compute configurations
-'''
-    if method == 'projection':
-        config_str = config.make_config_str()
-        #TODO: lookup the appropriate csf from the table and convert
-        proj_csfs = proj.compute_csfs(config_str, S, Sz)
-        csfs = convert_proj_csfs(proj_csfs)
-    else:
-        raise Exception('Invalid method \'' + method + '\' in compute_csfs')
-    return csfs
-
-def convert_proj_csfs(proj_csfs):
-    csfs = []
-    for proj_csf in proj_csfs:
-        csf_dets = {} 
-        for proj_det in proj_csf.dets:
-            coeff = proj_csf.get_det_coeff(proj_det)
-            up_occs, dn_occs = [], []
-            for orb in proj_det.orbitals:
-                sz = orb.labels['s_z']
-                n = orb.labels['n']
-                if sz == 0.5: 
-                    up_occs.append(n)
-                else: 
-                    dn_occs.append(n)
-            csf_dets[vec.Det(up_occs, dn_occs)] = coeff
-        csfs.append(vec.Vec(csf_dets))
-    return csfs
-'''
 
 class IndexList:
     def __init__(self):

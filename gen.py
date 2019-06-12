@@ -30,7 +30,8 @@ def make_csf_info(max_open, twice_s, twice_sz):
         csfs_coefs = []
         for csf in csfs:
             coef_list = [0]*len(occ_strs)
-            for det, coef in zip(csf.dets, csf.coeffs):
+            for det in csf.dets:
+                coef = csf.dets[det]
                 index = index_dict[det2open_occ_str(det)]
                 coef_list[index] = coef
             csfs_coefs.append(coef_list)
@@ -118,7 +119,7 @@ def config2csfs(config, csf_info, rel_parity = False):
     csf_coefs, index2occs = csf_info[nopen]
     dets = [make_det(occs, config) for occs in index2occs]
     csfs = []
-    for coefs in csf_coefs:
+    for m, coefs in enumerate(csf_coefs):
         csf = Vec.zero()
         for n, coef in enumerate(coefs):
             p = parity(det) if rel_parity else 1
