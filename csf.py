@@ -5,30 +5,35 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 import csfgen as proj
 import vec
 import gen
+from scipy.sparse import csr_matrix
+import scipy.sparse as sparse
 
 tol = 1e-15
 
-def get_det_info(shci_out, cache = False):
+def get_det_info(shci_out, cache = False, rep = 'sparse'):
     s2, det_strs, wf_coeffs = shci_out
     #estimate S; use <S^2> = s(s+1); S = 1/2 +- sqrt(<S^2 + 1/4>)
     twice_s = round(2*math.sqrt(s2 + 0.25) - 1)
     dets = det_strs2dets(det_strs)
     csfs = get_csfs(dets, wf_coeffs, twice_s, 'projection', cache)
-    det_indices, ovlp = csf_matrix(csfs)
-    wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets)
-    wf_csf_coeffs = numpy.dot(ovlp, wf_det_coeffs)
-    csf_info = [
-        [(det_indices.index(d), csf.dets[d]) for d in csf.dets] 
+    det_indices, ovlp = csf_matrix(csfs, rep)
+    wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
+    wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
+    csf_info = [[(det_indices.index(d), csf.dets[d]) for d in csf.dets] 
         for csf in csfs]
-    err = get_proj_error(ovlp, wf_det_coeffs)
+    err = get_proj_error(ovlp, wf_det_coeffs, rep)
+    if rep == 'sparse':
+        wf_csf_coeffs = wf_csf_coeffs.toarray()
     return wf_csf_coeffs, csf_info, det_indices, err
     
-def get_det_coeffs(det_indices, wf_coeffs, dets):
+def get_det_coeffs(det_indices, wf_coeffs, dets, rep='dense'):
     wf_coeffs = [float(coeff) for coeff in wf_coeffs.split()]
     det_coeffs = numpy.zeros(len(det_indices))
     for det, coeff in zip(dets, wf_coeffs):
         index = det_indices.index(det)
         det_coeffs[index] = coeff
+    if rep == 'sparse':
+        det_coeffs = csr_matrix(det_coeffs).T
     return det_coeffs
 
 def get_csfs(dets, wf_coeffs, twice_s, method='projection', cache=False):
@@ -47,10 +52,26 @@ def get_csfs(dets, wf_coeffs, twice_s, method='projection', cache=False):
             csfs += gen.compute_csfs(config, twice_s, twice_sz, method)
     return csfs
 
-def get_proj_error(ovlp, wf_det_coeffs):
-    err_op = numpy.identity(len(wf_det_coeffs)) - numpy.dot(ovlp.T, ovlp)
-    err_vec = numpy.dot(err_op, wf_det_coeffs)
-    return numpy.dot(err_vec, err_vec)/numpy.dot(wf_det_coeffs, wf_det_coeffs)
+def matrix_mul(ovlp, wf_det_coeffs, rep = 'dense'):
+    if (rep == 'dense'):
+        return numpy.dot(ovlp, wf_det_coeffs)
+    elif (rep == 'sparse'):
+        return ovlp*wf_det_coeffs
+    else:
+        raise Exception('Unknown matrix rep \'' + rep + '\' in matrix_mul')
+
+def get_proj_error(ovlp, wf_det_coeffs, rep = 'dense'):
+    if rep == 'dense':
+        err_op = numpy.identity(len(wf_det_coeffs)) - numpy.dot(ovlp.T, ovlp)
+        err_vec = numpy.dot(err_op, wf_det_coeffs)
+        return numpy.dot(err_vec, err_vec)/numpy.dot(wf_det_coeffs, wf_det_coeffs)
+    elif rep == 'sparse':
+        err_op = sparse.identity(wf_det_coeffs.shape[0]) - ovlp.T*ovlp 
+        err_vec = err_op*wf_det_coeffs
+        err = err_vec.T*err_vec/(wf_det_coeffs.T*wf_det_coeffs)
+        return err[0,0]
+    else:
+        raise Exception('Unknown matrix rep \''+ rep + '\' in get_proj_error')
 
 def det_strs2dets(det_strs):
     #TODO: give a format string i.e. "up_occs     dn_occs"
@@ -70,13 +91,26 @@ def get_2sz(dets):
     for _2sz in _2sz_vals:
         return _2sz
 
-def csf_matrix(csfs):
+def csf_matrix(csfs, rep = 'dense'):
     det_indices = IndexList()
     for csf in csfs:
         for det in csf.dets:
             det_indices.add(det)
-    matrix = numpy.array([get_coeffs(csf, det_indices) for csf in csfs])
-    return det_indices, matrix
+    if rep == 'dense':
+        matrix = numpy.array([get_coeffs(csf, det_indices) for csf in csfs])
+        return det_indices, matrix
+    elif rep == 'sparse':
+        coefs, rows, cols = [], [], []
+        for n, csf in enumerate(csfs):
+            norm = csf.norm()
+            for det in csf.dets:
+                rows.append(n)
+                cols.append(det_indices.index(det))
+                coefs.append(csf.dets[det]/norm)
+        matrix = csr_matrix((coefs, (rows, cols)))
+        return det_indices, matrix
+    else:
+        raise Exception('Unknown rep \'' + rep + '\' in csf_matrix')
 
 def get_coeffs(csf, det_indices):
     coeffs = numpy.zeros(len(det_indices))

@@ -13,7 +13,6 @@ class Vec:
     def __init__(self, det_dict={}):
         self.dets = {key: det_dict[key] for key in det_dict 
                 if abs(det_dict[key]) > tol}
-        self.my_hash = self._compute_hash()
 
     def norm(self):
         coeffs = numpy.array([self.dets[det] for det in self.dets])
@@ -39,7 +38,6 @@ class Vec:
                 self.dets[det] += other.dets[det]
             else:
                 self.dets[det] = other.dets[det]
-        self.my_hash = self._compute_hash()
         return self
 
     def __add__(self, other):
@@ -57,15 +55,11 @@ class Vec:
             mul_dict[det] = scalar*self.dets[det]
         return Vec(mul_dict)
 
-    def _compute_hash(self):
-        #TODO: Compute only once; calc in __init__, return result here
+    def __hash__(self):
         #Safe to add hash values? Should order dets/coeffs and
-        #simply use hash(self.__repr__()).
+        #simply use hash(self.__repr__())?
         det_strs = [str(self.dets[det]) + str(det) for det in self.dets]
         return sum([hash(det_str) for det_str in det_strs])
-
-    def __hash__(self):
-        return self.my_hash
 
     def __eq__(self, other):
         return self.dets == other.dets

@@ -30,10 +30,11 @@ def make_csf_info(max_open, twice_s, twice_sz):
         csfs_coefs = []
         for csf in csfs:
             coef_list = [0]*len(occ_strs)
+            norm = csf.norm()
             for det in csf.dets:
                 coef = csf.dets[det]
                 index = index_dict[det2open_occ_str(det)]
-                coef_list[index] = coef
+                coef_list[index] = coef/norm
             csfs_coefs.append(coef_list)
         csf_info[nopen] = (csfs_coefs, occ_strs)
     return csf_info 
@@ -94,7 +95,7 @@ def save_csf_info(cache_name, csf_info, twice_s, twice_sz):
             f.write(str(key) + '\n')
             f.write(det_strs + '\n')
             for csf_coefs in csfs_coefs:
-                f.write(', '.join([str(c) for c in csf_coefs]) + '\n')
+                f.write(', '.join(['%10.5E'%c for c in csf_coefs]) + '\n')
         f.close()
 
 def combs(n, r):
