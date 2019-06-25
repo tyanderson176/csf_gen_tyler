@@ -202,7 +202,7 @@ def print_shci(fname, wf_csf_coeffs, csfs_info, det_indices):
     for csf_info in csfs_info:
         index_str = (' '.join([str(pair[0] + 1) for pair in csf_info]) +
             ' (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
-        coeff_str = (' '.join([str(pair[1]) for pair in csf_info]) +
+        coeff_str = (' '.join(['%.8f'%pair[1] for pair in csf_info]) +
             ' (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
         f.write(index_str)
         f.write(coeff_str)
