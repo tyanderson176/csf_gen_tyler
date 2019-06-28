@@ -130,7 +130,7 @@ class Config:
         for up_orb in det.up_occ:
             self.occs[up_orb] = 1
         for dn_orb in det.dn_occ:
-            self.occs[dn_orb] = (1 if dn_orb not in self.occs else 2)
+            self.occs[dn_orb] = 1 if dn_orb not in self.occs else 2
         self.num_open = \
             sum([1 if self.occs[orb] == 1 else 0 for orb in self.occs])
 

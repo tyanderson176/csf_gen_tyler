@@ -1,102 +1,66 @@
 import sys
 import os
-#sys.path.append('/home/tanderson/Projects/dmc/dmc/')
+import subprocess
 sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 import csfgen as proj
 import vec
 from vec import Det, Vec, Config
 #from csf import compute_csfs 
 
-def make_csf_info(max_open, twice_s, twice_sz):
-    '''
-    Generate eigenfunctions of S and Sz w/ desired eigenvalues.
-        1. iter through nopen vals (1, 3, 5, ...nopen)
-        1.5. Generate indexing of dets (depends on nup)
-        2. make a dummy config and use proj method to find csfs
-        3. add coeffs to CSF info
-    '''
-    min_open = twice_s if twice_s != 0 else 2
-    csf_info = {}
-    if (twice_s == 0):
+def parse_csf_file(num_open_shells_max, twice_s, csf_file_contents):
+    lines = csf_file_contents.split('\n')
+    max_nelecs = 0
+    blocks, csf_info = [], {}
+    if (twice_s == 0): 
         csf_info[0] = ([[1]], [''])
-    for nopen in range(min_open, max_open+1, 2): 
-        nup = round((nopen + twice_sz)/2)
-        config = Config.fromorbs([n+1 for n in range(nopen)], [])
-        print("Computing csfs for n = %d" % (nopen))
-        csfs = compute_csfs(config, twice_s, twice_sz, 'projection')
-        print("Done computing csfs.")
-        occ_strs = list(combs(nopen, nup))
-        index_dict = {comb:n for n, comb in enumerate(occ_strs)}
-        csfs_coefs = []
-        for csf in csfs:
-            coef_list = [0]*len(occ_strs)
-            norm = csf.norm()
-            for det in csf.dets:
-                coef = csf.dets[det]
-                index = index_dict[det2open_occ_str(det)]
-                coef_list[index] = coef/norm
-            csfs_coefs.append(coef_list)
-        csf_info[nopen] = (csfs_coefs, occ_strs)
-    return csf_info 
-
-def load_csf_info(max_open, twice_s, twice_sz):
-    cache_name = "csfinfo" + "_2s" + str(twice_s) + "_2sz" + str(twice_sz) + ".dat"
-    try:
-        f = open(cache_name, 'r')
-    except:
-        csf_info = make_csf_info(max_open, twice_s, twice_sz)
-        save_csf_info(cache_name, csf_info, twice_s, twice_sz)
-        return csf_info
-    cache = f.read()
-    csf_info, loaded_max, loaded_twice_s, loaded_twice_sz = parse_cache(cache)
-    if (loaded_twice_s != twice_s or loaded_twice_sz != twice_sz):
-        raise Exception("s & sz values loaded from csfinfo file " +
-                "do not match desired values.")
-    if (loaded_max < max_open):
-        raise Exception("csfinfo file does not contain CSFs for " +
-                "desired number of open shells.")
-    return csf_info
-
-def parse_cache(cache):
-    cache = cache.split('\n\n\n')
-    loaded_max, loaded_twice_s, loaded_twice_sz = \
-            (int(dat) for dat in cache[0].split(' '))
-    csf_info = {}
-    for n_cache in cache[1:]:
-        nopen, det_strs = None, None
+    while 'END' in lines:
+        blocks.append(lines[lines.index('START')+1:lines.index('END')])
+        lines = lines[lines.index('END')+1:]
+    for block in blocks:
+        header = block[0].split(' ')
+        n, s = int(header[2]), float(header[5])
         coefs = []
-        for n, line in enumerate(n_cache.split('\n')):
-            if (n == 0):
-                nopen = int(line)
-            elif (n == 1):
-                det_strs = line.split(', ')
-            elif (not line):
-                continue
-            else:
-                coef = [float(dat) for dat in line.split(', ')]
-                coefs.append(coef)
-        assert(nopen != None and det_strs != None)
-        csf_info[nopen] = (coefs, det_strs)
-    return csf_info, loaded_max, loaded_twice_s, loaded_twice_sz
+        if (n > num_open_shells_max):
+            break
+        if (twice_s/2. != s): 
+            continue
+        max_nelecs = max(n, max_nelecs)
+        det_strs = block[1].split(' ')[:-1]
+        for line in block[2:]:
+            coefs.append([float(num) for num in line.split('\t')[:-1]])
+        csf_info[n] = (coefs, det_strs)
+    return csf_info, max_nelecs
 
-def save_csf_info(cache_name, csf_info, twice_s, twice_sz):
+def make_csf_file(max_open, twice_s):
+    filename = "csfs.txt"
     try:
-        f = open(cache_name, 'r')
-        raise Exception('File \'' + cache_name + '\' already exists.' +
-                'save_csf_info will not overwrite it.')
+        f = open(filename, 'r')
+        raise Exception(cache_name + " already exists." + 
+                "make_csf_file will not attempt to overwrite it")
     except:
-        f = open(cache_name, 'w+')
-        max_open = max([key for key in csf_info])
-        f.write("%d %d %d\n" % (max_open, twice_s, twice_sz))
-        for key in csf_info:
-            csfs_coefs, det_list = csf_info[key]
-            det_strs = ', '.join(det_list)
-            f.write('\n\n')
-            f.write(str(key) + '\n')
-            f.write(det_strs + '\n')
-            for csf_coefs in csfs_coefs:
-                f.write(', '.join(['%10.5E'%c for c in csf_coefs]) + '\n')
-        f.close()
+        gen_script = os.path.dirname(__file__) + '/bin/run_csfgen'
+        out_dir = '.'
+        nelecs = str(max_open)
+        subprocess.run([gen_script, out_dir, filename, nelecs])
+        f = open(filename, 'r')
+        file_contents = f.read()
+        return parse_csf_file(sys.maxsize, twice_s, file_contents)
+
+def load_csf_file(max_open, twice_s):
+    filename = "csfs.txt"
+    try:
+        f = open(filename, 'r')
+    except:
+        csf_info, max_nelecs = make_csf_file(max_open, twice_s)
+        return csf_info
+    file_contents = f.read()
+    csf_info, max_loaded = parse_csf_file(max_open, twice_s, file_contents)
+    if (max_loaded < max_open or len(csf_info) == 0):
+        raise Exception("Could not find CSFs with requested nelecs " + 
+                "and/or spin eigenvalue in " + filename + 
+                ". To re-calculate CSFS, remove " + filename + 
+                " from the current directory.")
+    return csf_info
 
 def combs(n, r):
     if r == 0:
@@ -195,11 +159,4 @@ def convert_proj_csfs(proj_csfs):
     return csfs
 
 if __name__ == "__main__":
-#    csf_info = make_csf_info(2, 0, 0)
-    csf_info = load_csf_info(8, 0, 0)
-    config = Config.fromorbs([3, 4, 7, 8], [1, 2, 5, 6])
-    config2 = Config.fromorbs([1, 2], [1, 3])
-    csfs = config2csfs(config, csf_info)
-    csfs2 = config2csfs(config2, csf_info)
-    print('ncsf: ', len(csfs))
-    print(csfs2)
+    csf_info = load_csf_file(8, 2)

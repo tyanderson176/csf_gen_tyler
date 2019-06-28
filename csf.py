@@ -9,6 +9,7 @@ from scipy.sparse import csr_matrix
 import scipy.sparse as sparse
 
 tol = 1e-15
+#coef_tol = 1e-5
 
 def get_det_info(shci_out, cache = False, rep = 'sparse'):
     s2, det_strs, wf_coeffs = shci_out
@@ -19,8 +20,12 @@ def get_det_info(shci_out, cache = False, rep = 'sparse'):
     det_indices, ovlp = csf_matrix(csfs, rep)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
     wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
+#    wf_csf_coeffs_tol = [coef for coef in wf_csf_coeffs.toarray() 
+#            if coef > coef_tol]
     csf_info = [[(det_indices.index(d), csf.dets[d]) for d in csf.dets] 
         for csf in csfs]
+#    csf_info_tol = [[(det_indices.index(d), csf.dets[d]) for d in csf.dets] 
+#        for n, csf in enumerate(csfs) if wf_csf_coeffs.toarray()[n] > coef_tol]
     err = get_proj_error(ovlp, wf_det_coeffs, rep)
     if rep == 'sparse':
         wf_csf_coeffs = wf_csf_coeffs.toarray()
@@ -38,12 +43,16 @@ def get_det_coeffs(det_indices, wf_coeffs, dets, rep='dense'):
 
 def get_csfs(dets, wf_coeffs, twice_s, method='projection', cache=False):
     twice_sz = get_2sz(dets)
+    if (twice_sz != twice_s):
+        raise Exception("CSFs only saved for sz = s. Cannot find CSFs with " +
+                "s = " + str(twice_s/2.) + " and sz = " + str(twice_sz/2.) + 
+                " in get_csfs.")
     configs = set(vec.Config(det) for det in dets)
     max_open = max([config.num_open for config in configs])
     csfs = []
     if cache:
         print("Loading csf data...\n\n");
-        csf_data = gen.load_csf_info(max_open, twice_s, twice_sz)
+        csf_data = gen.load_csf_file(max_open, twice_s)
         print("Converting configs...\n\n");
         for n, config in enumerate(configs):
             csfs += gen.config2csfs(config, csf_data, rel_parity=False)
@@ -138,19 +147,4 @@ class IndexList:
     def __repr__(self):
         return str(self.indices)
 
-if __name__ == '__main__':
-    out = "START DMC\n0   1   2   3      0   1\n0   2   3   7      0   7\n0   1   2  10      0   7\n0   1   3   9      0   7\n0   1   3  13      1   3\n0   1   2  13      1   2\n0   1   2  12      1   3\n0   1   3  12      1   2\n0   2   3  14      1   2\n0   2   3  15      1   3\n0   2   7  10      0   1\n0   3   7   9      0   1\n0   1   9  10      0   1\n0   2   3  16      0  16\n0   1   2   3      1  11\n0   1   2  11      1   3\n0   1   3  11      1   2\n0   2   3   7      1  11\n1   2   3  11      0   7\n0   1   2  10      1  11\nDET COEFFS:\n 0.97958444    -0.05930949    -0.04187026     0.04187026     0.03630456    -0.03630456    -0.03630456    -0.03630456    -0.03492338    -0.03492338     0.03245056    -0.03245056    -0.03139306    -0.02819201    -0.02761537    -0.02653736     0.02653736    -0.02641846    -0.02607992    -0.02601047\nS^2 VAL:\n 2.00000006\nEND DMC"
-    lines = out.split('\n')
-    start_index = lines.index("START DMC")
-    det_index = lines.index("DET COEFFS:")
-    s2_index = lines.index("S^2 VAL:")
-    end_index = lines.index("END DMC")
-    S2 = float(lines[s2_index+1])
-    det_strs = lines[start_index+1:det_index]
-    det_coefs = lines[det_index+1]
-    shci_out = (S2, det_strs, det_coefs)
-#    shci_out = "1 2     1 3\n1 3     1 2\n2 3     2 4\n0.99 -0.98 0.01"
-    coeffs, info, dets = get_det_info(shci_out)
-#    print(coeffs)
-#    print(info)
-    print([det.dmc_str() for det in dets.indices])
+#if __name__ == '__main__':
