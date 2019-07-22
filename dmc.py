@@ -83,7 +83,9 @@ def print_orbs(fname, mol, aos, opt_orbs = False):
     atoms = atom_types(mol)
     for atom in atoms:
         f.write(p2d.occ_orbs_str(aos, atom)[2:] + '\tn1s,n2s,n2px,...\n')
-        f.write(p2d.basis_func_str(aos, atom) + '\tiorb=1, natom_orbs\n')
+        f.write(p2d.bf_str(aos, atom) + '\t(iwrwf(ib),ib=1,nbastyp)\n')
+#    basis_func_str = ' '.join([p2d.bf_str(aos, atom) for atom in atoms])
+#    f.write(basis_func_str + '\t(iwrwf(ib),ib=1,nbastyp)\n')
     orb_coeffs = get_orb_coeffs(aos, opt_orbs)
     for n, row in enumerate(orb_coeffs):
         for orb_coeff in row:
@@ -94,7 +96,7 @@ def print_orbs(fname, mol, aos, opt_orbs = False):
     #print dummy exponents
     for _ in range(mol.nbas):
         f.write('%15.8E\t'% 0)
-    f.write('(bas_exp(ibas), ibas=1, nbas)\n')
+    f.write(' (bas_exp(ibas), ibas=1, nbas)\n')
     f.close()
 
 def get_shci_output(mol, mf, eps_vars, eps_vars_sched,
@@ -195,10 +197,10 @@ def print_shci(fname, wf_csf_coeffs, csfs_info, det_indices):
     sorted_dets = sorted([det for det in det_indices.indices], 
             key=lambda d: det_indices.index(d))
     dets_str = '\n'.join([det.dmc_str() for det in sorted_dets])
-    f.write(dets_str + '(iworbd(iel,idet), iel=1, nelec)\n')
+    f.write(dets_str + ' (iworbd(iel,idet), iel=1, nelec)\n')
     f.write(str(len(csfs_info)) + ' ncsf\n')
-    f.write(csf_coeffs_str + '(csf_coef(icsf), icsf=1, ncsf)\n')
-    f.write(ndets_str + '(ndet_in_csf(icsf), icsf=1, ncsf)\n')
+    f.write(csf_coeffs_str + ' (csf_coef(icsf), icsf=1, ncsf)\n')
+    f.write(ndets_str + ' (ndet_in_csf(icsf), icsf=1, ncsf)\n')
     for csf_info in csfs_info:
         index_str = (' '.join([str(pair[0] + 1) for pair in csf_info]) +
             ' (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
@@ -215,6 +217,7 @@ def clear_file(fname):
 
 def make_dmc(mol, mf, eps_vars, eps_vars_schedule, shci_cmd,
         shci_path, num_dets, fname):
+    assert(mol.unit == 'bohr')
     wf_csf_coeffs, csfs_info, det_indices, opt_orbs = \
             get_shci_output(mol, mf, eps_vars, eps_vars_schedule, 
                     shci_path, shci_cmd, num_dets, cache = True)

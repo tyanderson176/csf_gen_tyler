@@ -13,10 +13,11 @@ tol = 1e-15
 
 def get_det_info(shci_out, cache = False, rep = 'sparse'):
     s2, det_strs, wf_coeffs = shci_out
+    wf_coeffs = normalize([float(coeff) for coeff in wf_coeffs.split()])
     #estimate S; use <S^2> = s(s+1); S = 1/2 +- sqrt(<S^2 + 1/4>)
     twice_s = round(2*math.sqrt(s2 + 0.25) - 1)
     dets = det_strs2dets(det_strs)
-    csfs = get_csfs(dets, wf_coeffs, twice_s, 'projection', cache)
+    csfs = get_csfs(dets, twice_s, 'projection', cache)
     det_indices, ovlp = csf_matrix(csfs, rep)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
     wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
@@ -30,9 +31,13 @@ def get_det_info(shci_out, cache = False, rep = 'sparse'):
     if rep == 'sparse':
         wf_csf_coeffs = wf_csf_coeffs.toarray()
     return wf_csf_coeffs, csf_info, det_indices, err
+
+def normalize(coeffs):
+    norm = math.sqrt(sum([c**2 for c in coeffs]))
+    return [c/norm for c in coeffs]
     
 def get_det_coeffs(det_indices, wf_coeffs, dets, rep='dense'):
-    wf_coeffs = [float(coeff) for coeff in wf_coeffs.split()]
+#    wf_coeffs = [float(coeff) for coeff in wf_coeffs.split()]
     det_coeffs = numpy.zeros(len(det_indices))
     for det, coeff in zip(dets, wf_coeffs):
         index = det_indices.index(det)
@@ -41,7 +46,7 @@ def get_det_coeffs(det_indices, wf_coeffs, dets, rep='dense'):
         det_coeffs = csr_matrix(det_coeffs).T
     return det_coeffs
 
-def get_csfs(dets, wf_coeffs, twice_s, method='projection', cache=False):
+def get_csfs(dets, twice_s, method='projection', cache=False):
     twice_sz = get_2sz(dets)
     if (twice_sz != twice_s):
         raise Exception("CSFs only saved for sz = s. Cannot find CSFs with " +

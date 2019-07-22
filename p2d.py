@@ -10,6 +10,7 @@ class basis_vec():
         self.bv_id = bv_id
         self.cs, self.zs = cs, zs
         self.gto_ctrs = self._cgto_list()
+        #TODO: If Slater, should have the exponent here?
 
     def _gto(self, n, l, z, c):
         return lambda r: c*pow(r, l)*numpy.exp(-z*r)
@@ -64,7 +65,7 @@ class atomic_orb():
         self.n = n
         self.l = l
         self.m = m
-        self.quant_nums = (n, l, m)
+        self.quant_nums = n, l, m
         self.ia = ia
         self.atom = self.mol.atom_symbol(ia)
         self.bvec = bvec
@@ -157,12 +158,15 @@ def occ_orbs_str(aos, atom_type, gto_type = 'numerical'):
         orb_count = count_orbs(atom_aos)
         return str(orb_count) 
 
-def basis_func_str(aos, atom_type, gto_type = 'numerical'):
+def bf_str(aos, atom_type, gto_type = 'numerical'):
     atom_aos = get_atom_aos(aos, atom_type)
     if not atom_aos:
         raise Exception("Atom type '"+str(atom_type)+
             "' not found in set of basis vectors.")
     return ' '.join([str(ao.bvec.bv_id+1) for ao in atom_aos])
+
+def bf_str_all(aos, gto_type = 'numerical'):
+    return ' '.join([str(ao.bvec.bv_id+1) for ao in aos])
 
 def radial_bf_vals(aos, atom_type, grid):
     atom_bvecs = aos2atom_bvecs(aos, atom_type)
