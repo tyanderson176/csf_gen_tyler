@@ -93,7 +93,7 @@ def print_orbs(fname, mol, aos, opt_orbs = False):
     orb_coeffs = get_orb_coeffs(aos, opt_orbs)
     for n, row in enumerate(orb_coeffs):
         for orb_coeff in row:
-            f.write('%15.8E \t'% (orb_coeff if orb_coeff > 1e-15 else 0)) 
+            f.write('%15.8E\t'% (orb_coeff if orb_coeff > 1e-15 else 0)) 
         if n == 0:
             f.write('\t((coef(ibasis, iorb), ibasis=1, nbasis) iorb=1, norb)')
         f.write('\n')
