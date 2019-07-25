@@ -10,6 +10,9 @@ from decimal import Decimal
 
 def print_header(fname, mol, aos, num_dets):
     f = open(fname, 'a')
+    f.write('ORB INFO:\n')
+    for ao in aos:
+        f.write(str(ao) + '\n')
     f.write('TODO: REST OF HEADER\n\n')
     print_geometry_header(f, mol)
     print_determinant_header(f, aos, num_dets)

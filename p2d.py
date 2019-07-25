@@ -12,6 +12,9 @@ class basis_vec():
         self.gto_ctrs = self._cgto_list()
         #TODO: If Slater, should have the exponent here?
 
+    def __repr__(self):
+        return "Zetas: " + str(self.zs) + " Coefs: " + str(self.cs)
+
     def _gto(self, n, l, z, c):
         return lambda r: c*pow(r, l)*numpy.exp(-z*r)
 
@@ -70,6 +73,11 @@ class atomic_orb():
         self.atom = self.mol.atom_symbol(ia)
         self.bvec = bvec
         self.mo_coeffs = mo_coeffs
+
+    def __repr__(self):
+        ret = "AO: n=%d l=%d m=%d" % (self.n, self.l, self.m)
+        ret += "\tBasis Vec: " + str(self.bvec)
+        return ret
 
     def __lt__(self, other):
         if self.ia != other.ia:
