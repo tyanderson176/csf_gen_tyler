@@ -11,6 +11,12 @@ from decimal import Decimal
 def print_header(fname, mol, mf, aos, num_dets):
     f = open(fname, 'a')
     f.write("HF ENERGY: %f\n" % mf.e_tot)
+    f.write("\n")
+    for row in mf.mo_coeff:
+        f.write("\n")
+        for entry in row:
+            f.write("%8.5f   " % entry)
+    f.write("\n\n")
     f.write('ORB INFO:\n')
     for ao in aos:
         f.write(str(ao) + '\n')
