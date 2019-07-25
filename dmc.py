@@ -8,8 +8,9 @@ from pyscf import ao2mo, gto
 
 from decimal import Decimal
 
-def print_header(fname, mol, aos, num_dets):
+def print_header(fname, mol, mf, aos, num_dets):
     f = open(fname, 'a')
+    f.write("HF ENERGY: %f\n" % mf.e_tot)
     f.write('ORB INFO:\n')
     for ao in aos:
         f.write(str(ao) + '\n')
@@ -226,7 +227,7 @@ def make_dmc(mol, mf, eps_vars, eps_vars_schedule, shci_cmd,
                     shci_path, shci_cmd, num_dets, cache = True)
     aos = p2d.mol2aos(mol, mf)
     clear_file(fname)
-    print_header(fname, mol, aos, len(det_indices))
+    print_header(fname, mol, mf, aos, len(det_indices))
     print_radial_bfs(mol, aos)
     print_orbs(fname, mol, aos, opt_orbs)
     print_shci(fname, wf_csf_coeffs, csfs_info, det_indices)
