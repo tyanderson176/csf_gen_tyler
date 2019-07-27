@@ -10,16 +10,16 @@ from decimal import Decimal
 
 def print_header(fname, mol, mf, aos, num_dets):
     f = open(fname, 'a')
-    f.write("HF ENERGY: %f\n" % mf.e_tot)
-    f.write("\n")
-    for row in mf.mo_coeff:
-        f.write("\n")
-        for entry in row:
-            f.write("%8.5f   " % entry)
-    f.write("\n\n")
-    f.write('ORB INFO:\n')
-    for ao in aos:
-        f.write(str(ao) + '\n')
+#    f.write("HF ENERGY: %f\n" % mf.e_tot)
+#    f.write("\n")
+#    for row in mf.mo_coeff:
+#        f.write("\n")
+#        for entry in row:
+#            f.write("%8.5f   " % entry)
+#    f.write("\n\n")
+#    f.write('ORB INFO:\n')
+#    for ao in aos:
+#        f.write(str(ao) + '\n')
     f.write('TODO: REST OF HEADER\n\n')
     print_geometry_header(f, mol)
     print_determinant_header(f, aos, num_dets)
@@ -99,7 +99,7 @@ def print_orbs(fname, mol, aos, opt_orbs = False):
     orb_coeffs = get_orb_coeffs(aos, opt_orbs)
     for n, row in enumerate(orb_coeffs):
         for orb_coeff in row:
-            f.write('%15.8E\t'% (orb_coeff if orb_coeff > 1e-15 else 0)) 
+            f.write('%15.8E\t'% (orb_coeff if abs(orb_coeff) > 1e-15 else 0)) 
         if n == 0:
             f.write('\t((coef(ibasis, iorb), ibasis=1, nbasis) iorb=1, norb)')
         f.write('\n')
