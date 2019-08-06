@@ -4,12 +4,13 @@ import copy
 from functools import reduce
 
 class basis_vec():
-    def __init__(self, n, l, bv_id, cs, zs):
+    def __init__(self, n, l, bv_id, cs, zs, slater_z = 0):
         self.n = n
         self.l = l
         self.bv_id = bv_id
         self.cs, self.zs = cs, zs
         self.gto_ctrs = self._cgto_list()
+        self.slater_z = slater_z
         #TODO: If Slater, should have the exponent here?
 
     def __repr__(self):
@@ -73,6 +74,7 @@ class atomic_orb():
         self.atom = self.mol.atom_symbol(ia)
         self.bvec = bvec
         self.mo_coeffs = mo_coeffs
+        self.d_key = {0:0, 2:1, -2:2, 1:3, -1:4}
 
     def __repr__(self):
         ret = "AO: n=%d l=%d m=%d" % (self.n, self.l, self.m)
@@ -84,19 +86,25 @@ class atomic_orb():
             return self.ia < other.ia
         elif self.l != other.l:
             return self.l < other.l
+        elif self.m != other.m:
+            if (self.l == 2):
+                return self.d_key[self.m] < self.d_key[other.m]
+            return self.m < other.m
         elif self.n != other.n:
             return self.n < other.n
-        elif self.m != other.m:
-            return self.m < other.m
         else:
             return False
 
-def mol2aos(mol, mf):
+def mol2aos(mol, mf, basis = None):
     assert(not mol.cart)
+    if basis:
+    	assert(len(basis) == mol.nas)
     bv_ids, aos = {}, []
     orb_id = 0
     count = numpy.zeros((mol.natm, 9), dtype=int)
     for ib in range(mol.nbas):
+	if basis:
+	    assert(basis.ls[ib] == mol.bas_angular(ib))
         ia = mol.bas_atom(ib)
         l = mol.bas_angular(ib)
         nc = mol.bas_nctr(ib)
@@ -113,12 +121,14 @@ def mol2aos(mol, mf):
         count[ia,l] += nc
         ns = range(shl_start, shl_start+nc)
         for i, n in enumerate(ns):
+	    n = basis.ns[ib] if basis else n
+	    slater_z = basis.slater_exponents[ib] if basis else 0
             cs, zs = bv_coeffs[:,i], bv_exps 
-            bvec = basis_vec(n, l, bv_ids[ia], cs, zs)
+            bvec = basis_vec(n, l, bv_ids[ia], cs, zs, slater_z)
             bv_ids[ia] += 1
             for m in range(-l, l+1):
                 mo_coeffs = mf.mo_coeff[orb_id]
-                aos += [atomic_orb(mol, n, l, m, ia, bvec, mo_coeffs)]
+                aos.append(atomic_orb(mol, n, l, m, ia, bvec, mo_coeffs))
                 orb_id += 1
     assert(len(aos) == len(mol.ao_labels()))
     return sorted(aos)
@@ -146,9 +156,10 @@ def aos2atom_bvecs(aos, atom):
             bvecs += [bvec]
     return sorted(bvecs, key=lambda bvec : bvec.bv_id)
 
-def count_orbs(atom_aos, numerical = True):
+def count_orbs(atom_aos, num_shells = 6, numerical = True):
     ''' Rewrite without the extra orb_matrix infrastructure? '''
     occ_count = orb_matrix(0)
+    occ_count[num_shells-1, 0, 0] = 0;
     for ao in atom_aos:
         n, l, m = ao.quant_nums
         if numerical:
@@ -157,13 +168,13 @@ def count_orbs(atom_aos, numerical = True):
             occ_count[n, l, m] += 1
     return occ_count
 
-def occ_orbs_str(aos, atom_type, gto_type = 'numerical'):
+def occ_orbs_str(aos, atom_type, num_shells = 6, gto_type = 'numerical'):
     atom_aos = get_atom_aos(aos, atom_type)
     if not atom_aos:
         raise Exception("Atom type '"+str(atom_type)+
             "' not found in set of basis vectors.")
     else:
-        orb_count = count_orbs(atom_aos)
+        orb_count = count_orbs(atom_aos, num_shells, gto_type)
         return str(orb_count) 
 
 def bf_str(aos, atom_type, gto_type = 'numerical'):

@@ -1,5 +1,6 @@
 scripts/*
 out/*
 bin/*
+test/*
 __pycache__/*
 lib/__pycache__/*

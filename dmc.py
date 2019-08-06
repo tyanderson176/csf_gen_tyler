@@ -88,18 +88,18 @@ def get_orb_coeffs(aos, opt_orbs):
         return opt_orbs
     return p2d.aos2mo_coeffs(aos)
 
-def print_orbs(fname, mol, aos, opt_orbs = False):
+def print_orbs(fname, mol, aos, num_shells = 6, opt_orbs = False):
     f = open(fname, 'a')
     atoms = atom_types(mol)
     for atom in atoms:
-        f.write(p2d.occ_orbs_str(aos, atom)[2:] + '\tn1s,n2s,n2px,...\n')
+        f.write(p2d.occ_orbs_str(aos, num_shells, atom)[2:] + '\tn1s,n2s,n2px,...\n')
         f.write(p2d.bf_str(aos, atom) + '\t(iwrwf(ib),ib=1,nbastyp)\n')
 #    basis_func_str = ' '.join([p2d.bf_str(aos, atom) for atom in atoms])
 #    f.write(basis_func_str + '\t(iwrwf(ib),ib=1,nbastyp)\n')
     orb_coeffs = get_orb_coeffs(aos, opt_orbs)
     for n, row in enumerate(orb_coeffs):
         for orb_coeff in row:
-            f.write('%15.8E\t'% (orb_coeff if abs(orb_coeff) > 1e-15 else 0)) 
+            f.write('%15.8E\t'% (orb_coeff if abs(orb_coeff) > 1e-12 else 0)) 
         if n == 0:
             f.write('\t((coef(ibasis, iorb), ibasis=1, nbasis) iorb=1, norb)')
         f.write('\n')
@@ -226,14 +226,14 @@ def clear_file(fname):
     return
 
 def make_dmc(mol, mf, eps_vars, eps_vars_schedule, shci_cmd,
-        shci_path, num_dets, fname):
+        shci_path, num_dets, fname, basis = None):
     assert(mol.unit == 'bohr')
     wf_csf_coeffs, csfs_info, det_indices, opt_orbs = \
             get_shci_output(mol, mf, eps_vars, eps_vars_schedule, 
                     shci_path, shci_cmd, num_dets, cache = True)
-    aos = p2d.mol2aos(mol, mf)
+    aos = p2d.mol2aos(mol, mf, basis)
     clear_file(fname)
     print_header(fname, mol, mf, aos, len(det_indices))
     print_radial_bfs(mol, aos)
-    print_orbs(fname, mol, aos, opt_orbs)
+    print_orbs(fname, mol, aos, num_shells = 6, opt_orbs = False)
     print_shci(fname, wf_csf_coeffs, csfs_info, det_indices)
