@@ -4,14 +4,13 @@ import copy
 from functools import reduce
 
 class basis_vec():
-    def __init__(self, n, l, bv_id, cs, zs, slater_z = 0):
+    def __init__(self, n, l, bv_id, cs, zs, slater_exp = 0):
         self.n = n
         self.l = l
         self.bv_id = bv_id
         self.cs, self.zs = cs, zs
         self.gto_ctrs = self._cgto_list()
-        self.slater_z = slater_z
-        #TODO: If Slater, should have the exponent here?
+        self.slater_exp = slater_exp
 
     def __repr__(self):
         return "Zetas: " + str(self.zs) + " Coefs: " + str(self.cs)
@@ -76,6 +75,9 @@ class atomic_orb():
         self.mo_coeffs = mo_coeffs
         self.d_key = {0:0, 2:1, -2:2, 1:3, -1:4}
 
+    def slater_exp(self):
+        return self.bvec.slater_exp
+
     def __repr__(self):
         ret = "AO: n=%d l=%d m=%d" % (self.n, self.l, self.m)
         ret += "\tBasis Vec: " + str(self.bvec)
@@ -97,19 +99,16 @@ class atomic_orb():
 
 def mol2aos(mol, mf, basis = None):
     assert(not mol.cart)
-    if basis:
-    	assert(len(basis) == mol.nas)
     bv_ids, aos = {}, []
     orb_id = 0
     count = numpy.zeros((mol.natm, 9), dtype=int)
     for ib in range(mol.nbas):
-	if basis:
-	    assert(basis.ls[ib] == mol.bas_angular(ib))
         ia = mol.bas_atom(ib)
         l = mol.bas_angular(ib)
         nc = mol.bas_nctr(ib)
         atom = mol.atom_symbol(ia)
         bv_coeffs, bv_exps = mol.bas_ctr_coeff(ib), mol.bas_exp(ib)
+        sto = basis.find(atom, l, bv_coeffs, bv_exps) if basis else None
         if ia not in bv_ids:
             bv_ids[ia] = 0
         nelec_ecp = mol.atom_nelec_core(ia)
@@ -121,10 +120,10 @@ def mol2aos(mol, mf, basis = None):
         count[ia,l] += nc
         ns = range(shl_start, shl_start+nc)
         for i, n in enumerate(ns):
-	    n = basis.ns[ib] if basis else n
-	    slater_z = basis.slater_exponents[ib] if basis else 0
+            n = sto.get_n() if sto else n
+            slater_exp = sto.get_slater_exponent() if sto else 0
             cs, zs = bv_coeffs[:,i], bv_exps 
-            bvec = basis_vec(n, l, bv_ids[ia], cs, zs, slater_z)
+            bvec = basis_vec(n, l, bv_ids[ia], cs, zs, slater_exp)
             bv_ids[ia] += 1
             for m in range(-l, l+1):
                 mo_coeffs = mf.mo_coeff[orb_id]
@@ -142,7 +141,7 @@ def get_atom_aos(aos, atom):
         if atom_rep == ao.ia:
             atom_aos += [ao]
     if not atom_aos:
-        raise Exception("Atom type '"+str(atom_type)+
+        raise Exception("Atom type '"+str(atom)+
             "' not found in set of basis vectors.")
     return atom_aos
 

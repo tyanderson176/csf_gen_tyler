@@ -92,7 +92,7 @@ def print_orbs(fname, mol, aos, num_shells = 6, opt_orbs = False):
     f = open(fname, 'a')
     atoms = atom_types(mol)
     for atom in atoms:
-        f.write(p2d.occ_orbs_str(aos, num_shells, atom)[2:] + '\tn1s,n2s,n2px,...\n')
+        f.write(p2d.occ_orbs_str(aos, atom, num_shells)[2:] + '\tn1s,n2s,n2px,...\n')
         f.write(p2d.bf_str(aos, atom) + '\t(iwrwf(ib),ib=1,nbastyp)\n')
 #    basis_func_str = ' '.join([p2d.bf_str(aos, atom) for atom in atoms])
 #    f.write(basis_func_str + '\t(iwrwf(ib),ib=1,nbastyp)\n')
@@ -104,8 +104,8 @@ def print_orbs(fname, mol, aos, num_shells = 6, opt_orbs = False):
             f.write('\t((coef(ibasis, iorb), ibasis=1, nbasis) iorb=1, norb)')
         f.write('\n')
     #print dummy exponents
-    for _ in range(mol.nbas):
-        f.write('%15.8E\t'% 0)
+    for ao in aos:
+        f.write('%15.8E\t'% ao.slater_exp())
     f.write(' (bas_exp(ibas), ibas=1, nbas)\n')
     f.close()
 
