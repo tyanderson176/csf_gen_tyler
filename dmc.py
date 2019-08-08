@@ -10,23 +10,12 @@ from decimal import Decimal
 
 def print_header(fname, mol, mf, aos, num_dets):
     f = open(fname, 'a')
-#    f.write("HF ENERGY: %f\n" % mf.e_tot)
-#    f.write("\n")
-#    for row in mf.mo_coeff:
-#        f.write("\n")
-#        for entry in row:
-#            f.write("%8.5f   " % entry)
-#    f.write("\n\n")
-#    f.write('ORB INFO:\n')
-#    for ao in aos:
-#        f.write(str(ao) + '\n')
     f.write('TODO: REST OF HEADER\n\n')
     print_geometry_header(f, mol)
     print_determinant_header(f, aos, num_dets)
     f.close()
 
 def print_determinant_header(f, aos, num_dets):
-    #TODO: num_dets should match csf diagonalization output
     f.write('\'* Determinantal section\'\n')
     f.write('0 0                    inum_orb\n')
     f.write('%d %d %d               ndet, nbasis, norb \n\n'% 
@@ -40,13 +29,16 @@ def print_geometry_header(f, mol):
     f.write('\' * Geometry section\'\n')
     f.write('3\t\t\tndim\n')
     f.write('%d %d\t\t\tnctypes, ncent\n'% (len(atoms), mol.natm))
+
     #For each atom, write the atom type
     ia2species = [atoms.index(mol.atom_symbol(ia))+1 for ia in range(mol.natm)]
     f.write(' '.join([str(species) for species in ia2species]))
     f.write('\t\t\t(iwctype(i), i= 1,ncent)\n')
+
     #For each atom type, write Z
     f.write(' '.join([str(gto.charge(atom)) for atom in atoms]))
     f.write('\t\t\t(znuc(i), i=1, nctype)\n')
+
     #For each atom, write the coordinates/atom type
     for ia in range(mol.natm):
         f.write('%E\t%E\t%E\t%d\n'% (tuple(mol.atom_coord(ia)) + (ia2species[ia],)))
@@ -94,8 +86,6 @@ def print_orbs(fname, mol, aos, num_shells = 6, opt_orbs = False):
     for atom in atoms:
         f.write(p2d.occ_orbs_str(aos, atom, num_shells)[2:] + '\tn1s,n2s,n2px,...\n')
         f.write(p2d.bf_str(aos, atom) + '\t(iwrwf(ib),ib=1,nbastyp)\n')
-#    basis_func_str = ' '.join([p2d.bf_str(aos, atom) for atom in atoms])
-#    f.write(basis_func_str + '\t(iwrwf(ib),ib=1,nbastyp)\n')
     orb_coeffs = get_orb_coeffs(aos, opt_orbs)
     for n, row in enumerate(orb_coeffs):
         for orb_coeff in row:
@@ -103,7 +93,6 @@ def print_orbs(fname, mol, aos, num_shells = 6, opt_orbs = False):
         if n == 0:
             f.write('\t((coef(ibasis, iorb), ibasis=1, nbasis) iorb=1, norb)')
         f.write('\n')
-    #print dummy exponents
     for ao in aos:
         f.write('%15.8E\t'% ao.slater_exp())
     f.write(' (bas_exp(ibas), ibas=1, nbas)\n')
@@ -142,9 +131,6 @@ def get_shci_output(mol, mf, eps_vars, eps_vars_sched,
     return wf_csf_coeffs, csfs_info, det_indices, opt_orbs
 
 def parse_output(out):
-#    dmc_start = out.find('START DMC\n') 
-#    dmc_end = out.find('END DMC')
-#    shci_out = out[dmc_start+len('START DMC\n'):dmc_end]
     lines = out.split('\n')
     start_index = lines.index("START DMC")
     end_index = lines.index("END DMC")
@@ -232,6 +218,7 @@ def make_dmc(mol, mf, eps_vars, eps_vars_schedule, shci_cmd,
             get_shci_output(mol, mf, eps_vars, eps_vars_schedule, 
                     shci_path, shci_cmd, num_dets, cache = True)
     aos = p2d.mol2aos(mol, mf, basis)
+
     clear_file(fname)
     print_header(fname, mol, mf, aos, len(det_indices))
     print_radial_bfs(mol, aos)
