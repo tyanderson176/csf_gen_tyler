@@ -30,18 +30,34 @@ class GamessBasis():
         self.basis_vecs[atom].append(
             GamessBasisVec(atom, l_label, l, n, slater_exp, coeffs, gauss_exps))
 
+    def same_coeffs(self, coeffs, bv):
+        if coeffs.shape != bv.coeffs.shape:
+            return False
+        coeffs = sorted(coeffs)
+        bv_coeffs = sorted(bv.coeffs)
+        for coef, my_coef in zip(coeffs, bv_coeffs):
+            if np.abs((coef - my_coef)/my_coef) > 1e-2:
+                return False
+        return True
+
+    def same_exps(self, exps, bv):
+        if exps.shape != bv.gauss_exps.shape:
+            return False
+        exps = sorted(exps)
+        bv_exps = sorted(bv.gauss_exps)
+        for exp, my_exp in zip(exps, bv_exps):
+            if np.abs((exp-my_exp)/my_exp) > 1e-2:
+                return False
+        return True
+
     def find(self, atom, l, coeffs, exps):
         for bv in self.basis_vecs[atom]:
             if bv.l != l:
                 continue
-            if coeffs.shape != bv.coeffs.shape or exps.shape != bv.gauss_exps.shape:
+            if not self.same_coeffs(coeffs, bv):
                 continue
-            for coef, bv_coef in zip(coeffs, bv.coeffs):
-                if np.abs((bv_coef - coef)/coef) > 1e-2:
-                    continue
-            for exp, bv_exp in zip(exps, bv.gauss_exps):
-                if np.abs((exp - bv_exp)/exp) > 1e-2:
-                    continue
+            if not self.same_exps(exps, bv):
+                continue
             return bv
         raise Exception("Could not find basis vector from PySCF in GAMESS input")
 
@@ -53,7 +69,7 @@ class GamessBasis():
             basis_str += "%s\t%s\n" % (atom, l_label)
             coeffs, gauss_exps = bv.coeffs, bv.gauss_exps
             for coef, exp in zip(coeffs, gauss_exps):
-                basis_str += "%8.5f\t%8.5f\n" % (exp, coef)
+                basis_str += "%20.10f\t%15.10f\n" % (exp, coef)
             basis_str += '\n'
         return basis_str
 

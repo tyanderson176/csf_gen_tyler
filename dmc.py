@@ -30,6 +30,14 @@ class Maker():
         self.mf = scf.RHF(self.mol).run()
         print("Finished RHF.") 
 
+#        print("Gamess Basis:")
+#        print(self.basis)
+#
+#        for ib in range(self.mol.nbas):
+#            mol_coefs, mol_exps = mol.bas_ctr_coeff(ib), mol.bas_exp(ib)
+#            print(mol_exps)
+#            print(mol_coefs)
+
         #Get atomic orbitals
         self.aos = p2d.mol2aos(self.mol, self.mf, self.basis)
         self.mo_coeffs = p2d.aos2mo_coeffs(self.aos)
@@ -40,14 +48,14 @@ class Maker():
         #SHCI variables & output data
         self.config = config
         self.cache_csfs = True
-        self.wf_csf_coeffs = []
-        self.csf_data = {}
-        self.det_data = []
+        self.wf_csf_coeffs = None
+        self.csf_data = None
+        self.det_data = None
 
+    def make(self, filename):
         #Updates wf_csfs_coeffs, csf_data, and det_data
         self.get_shci_output()
 
-    def make(self, filename):
         #Set output file
         self.clear_file(filename)
         self.out_file = open(filename, 'a')

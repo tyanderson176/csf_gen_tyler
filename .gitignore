@@ -1,5 +1,5 @@
 scripts/*
-out/*
+out*/*
 bin/*
 test/*
 __pycache__/*

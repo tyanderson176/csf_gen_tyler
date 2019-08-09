@@ -120,7 +120,16 @@ def mol2aos(mol, mf, basis = None):
         count[ia,l] += nc
         ns = range(shl_start, shl_start+nc)
         for i, n in enumerate(ns):
-            n = sto.get_n() if sto else n
+            '''
+            The 'ns' computed by Pyscf simply enumerate the basis functions
+            as they appear in the input basis file - they may have little
+            to do with the 'actual' ns cooresponding to those basis functions.
+            Because of this, I have opted to redefine n below. If n was
+            provided in some external basis, we use n = sto.get_n(). Otherwise,
+            we use the numerical DMC convention that n = l+1 (i.e. all shells 
+            with a fixed angular momentum l are placed in the same 'bucket')
+            '''
+            n = sto.get_n() if sto else l+1
             slater_exp = sto.get_slater_exponent() if sto else 0
             cs, zs = bv_coeffs[:,i], bv_exps 
             bvec = basis_vec(n, l, bv_ids[ia], cs, zs, slater_exp)
@@ -155,25 +164,26 @@ def aos2atom_bvecs(aos, atom):
             bvecs += [bvec]
     return sorted(bvecs, key=lambda bvec : bvec.bv_id)
 
-def count_orbs(atom_aos, num_shells = 6, numerical = True):
+def count_orbs(atom_aos, num_shells = 6):
     ''' Rewrite without the extra orb_matrix infrastructure? '''
     occ_count = orb_matrix(0)
     occ_count[num_shells-1, 0, 0] = 0;
     for ao in atom_aos:
         n, l, m = ao.quant_nums
-        if numerical:
-            occ_count[l+1, l, m] += 1
-        else:
-            occ_count[n, l, m] += 1
+        occ_count[n, l, m] += 1
+#        if numerical:
+#            occ_count[l+1, l, m] += 1
+#        else:
+#            occ_count[n, l, m] += 1
     return occ_count
 
-def occ_orbs_str(aos, atom_type, num_shells = 6, gto_type = 'numerical'):
+def occ_orbs_str(aos, atom_type, num_shells = 6):
     atom_aos = get_atom_aos(aos, atom_type)
     if not atom_aos:
         raise Exception("Atom type '"+str(atom_type)+
             "' not found in set of basis vectors.")
     else:
-        orb_count = count_orbs(atom_aos, num_shells, gto_type)
+        orb_count = count_orbs(atom_aos, num_shells)
         return str(orb_count) 
 
 def bf_str(aos, atom_type, gto_type = 'numerical'):
