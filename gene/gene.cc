@@ -114,15 +114,13 @@ std::ostream & operator << (std::ostream &out, const CSF& csf) {
     return out;
 }
 
-//set of csfs corresponding to the same representation
-using CSFSet = std::vector<CSF>;
-using SpinSet = std::vector<CSFSet>;
-//using csf_vec = std::vector<csf>;
-//using csf_vec_2D = std::vector<csf_vec>
+using csf_vec = std::vector<CSF>;
+using csf_vec2D = std::vector<csf_vec>;
+using csf_vec3D = std::vector<csf_vec2D>;
 
-CSFSet inc_spin(CSFSet& csfs, double s, int orb) {
+csf_vec inc_spin(csf_vec& csfs, double s, int orb) {
     assert(csfs.size() == 2*s+1);
-    CSFSet new_csfs;
+    csf_vec new_csfs;
     double sz = -s, coef1, coef2;
     new_csfs.push_back(csfs[0].add_dn_elec(orb));
     for(int i=0; i<csfs.size()-1; ++i, ++sz) {
@@ -137,9 +135,9 @@ CSFSet inc_spin(CSFSet& csfs, double s, int orb) {
 }
 
 
-CSFSet dec_spin(CSFSet& csfs, double s, int orb) {
+csf_vec dec_spin(csf_vec& csfs, double s, int orb) {
     assert(csfs.size() == 2*s+1);
-    CSFSet new_csfs;
+    csf_vec new_csfs;
     double sz = -s, coef1, coef2;
     for(int i=0; i<csfs.size()-1; ++i, ++sz) {
         coef1 = -sqrt((s-sz)/(2*s+1));
@@ -151,32 +149,30 @@ CSFSet dec_spin(CSFSet& csfs, double s, int orb) {
     return new_csfs;
 }
 
-void inc_electron(std::vector<SpinSet> &spins, int nelecs) {
+void add_electron(csf_vec3D &spins, int nelecs) {
     double s = 0.5*(nelecs%2);
-//    tw_spin = nelecs%2;
-    std::vector<SpinSet> new_spins(spins.size()+nelecs%2);
+    csf_vec3D new_spins(spins.size()+nelecs%2);
     //Iterate over spin values
     for(int i = 0; i < spins.size(); ++i, ++s) {
         int j = nelecs%2 ? i : i-1;
-        SpinSet &spin_set = spins[i];
-        for(CSFSet& csfs : spin_set) {
-            CSFSet add = inc_spin(csfs, s, nelecs);
+        csf_vec2D &spin_set = spins[i];
+        for(csf_vec& csfs : spin_set) {
+            csf_vec add = inc_spin(csfs, s, nelecs);
             new_spins[j+1].push_back(add);
             if (s == 0) continue;
             assert(j >= 0);
-            CSFSet sub = dec_spin(csfs, s, nelecs);
+            csf_vec sub = dec_spin(csfs, s, nelecs);
             new_spins[j].push_back(sub);
         }
     }
     spins = new_spins;
 }
 
-void print_csfs(std::vector<SpinSet> &spins, int nelecs) {
+void print_csfs(csf_vec3D &spins, int nelecs) {
     std::cout << '\n';
     for(int s=0; s<spins.size(); s++) {
         auto csf_sets = spins[s];
         std::cout << "Spin: " << s + 0.5*(nelecs%2) << '\n';
-//        std::cout << "Size: " << csf_sets.size() << '\n';
         for(int i = 0; i < csf_sets.size(); i++) {
             std::cout << "  Set #: " << i << '\n';
             auto set = csf_sets[i];
@@ -226,7 +222,7 @@ void fill_index_of(std::unordered_map<Det, int, DetHasher> &index_of,
     }
 }
 
-void save_csfs(std::vector<SpinSet> &spins, int nelecs) {
+void save_csfs(csf_vec3D &spins, int nelecs) {
     int two_s = nelecs%2;
     for(int i=0; i<spins.size(); ++i, two_s += 2) {
         std::vector<std::vector<CSF>> sets = spins[i];
@@ -253,24 +249,22 @@ void save_csfs(std::vector<SpinSet> &spins, int nelecs) {
     }
 }
 
-std::vector<SpinSet> spin_one_half() {
+csf_vec3D spin_one_half() {
     Det up_det, dn_det;
     up_det.up.set(0);
     dn_det.dn.set(0);
     std::vector<CSF> one_half;
     one_half.push_back(CSF(dn_det));
     one_half.push_back(CSF(up_det));
-    return std::vector<SpinSet>(1, SpinSet(1, one_half));
+    return csf_vec3D(1, csf_vec2D(1, one_half));
 }
 
 void compute_csfs(int max_nelecs) {
-    std::vector<SpinSet> spins = spin_one_half();
-//    print_csfs(spins, 1);
+    csf_vec3D spins = spin_one_half();
     std::cout << '\n';
     save_csfs(spins, 1);
     for(int nelecs = 1; nelecs < max_nelecs; ++nelecs) {
-        inc_electron(spins, nelecs);
-//        print_csfs(spins, nelecs+1);
+        add_electron(spins, nelecs);
         save_csfs(spins, nelecs+1);
     }
 }

@@ -56,7 +56,7 @@ def get_csfs(dets, twice_s, method='projection', cache=False):
     max_open = max([config.num_open for config in configs])
     csfs = []
     if cache:
-        print("Loading csf data...\n\n");
+        print("Loading CSF data...\n\n");
         csf_data = gen.load_csf_file(max_open, twice_s)
         print("Converting configs...\n\n");
         for n, config in enumerate(configs):

@@ -32,7 +32,7 @@ def parse_csf_file(num_open_shells_max, twice_s, csf_file_contents):
     return csf_info, max_nelecs
 
 def make_csf_file(max_open, twice_s):
-    filename = "csfs.txt"
+    filename = "csf_cache.txt"
     try:
         f = open(filename, 'r')
         raise Exception(cache_name + " already exists." + 
@@ -47,7 +47,7 @@ def make_csf_file(max_open, twice_s):
         return parse_csf_file(sys.maxsize, twice_s, file_contents)
 
 def load_csf_file(max_open, twice_s):
-    filename = "csfs.txt"
+    filename = "csf_cache.txt"
     try:
         f = open(filename, 'r')
     except:

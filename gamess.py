@@ -1,7 +1,8 @@
 import numpy as np
 import numpy.linalg
+from pyscf import gto
 
-class BasisVec():
+class GamessBasisVec():
     def __init__(self, atom, l_label, l, n, slater_exp, coeffs, gauss_exps):
         self.atom = atom
         self.l_label = l_label
@@ -27,7 +28,7 @@ class GamessBasis():
         if atom not in self.basis_vecs:
             self.basis_vecs[atom] = []
         self.basis_vecs[atom].append(
-            BasisVec(atom, l_label, l, n, slater_exp, coeffs, gauss_exps))
+            GamessBasisVec(atom, l_label, l, n, slater_exp, coeffs, gauss_exps))
 
     def find(self, atom, l, coeffs, exps):
         for bv in self.basis_vecs[atom]:
@@ -35,10 +36,12 @@ class GamessBasis():
                 continue
             if coeffs.shape != bv.coeffs.shape or exps.shape != bv.gauss_exps.shape:
                 continue
-            if np.linalg.norm(coeffs - bv.coeffs)/len(coeffs) > 1e-3:
-                continue
-            if np.linalg.norm(exps - bv.gauss_exps)/len(exps) > 1e-3:
-                continue
+            for coef, bv_coef in zip(coeffs, bv.coeffs):
+                if np.abs((bv_coef - coef)/coef) > 1e-2:
+                    continue
+            for exp, bv_exp in zip(exps, bv.gauss_exps):
+                if np.abs((exp - bv_exp)/exp) > 1e-2:
+                    continue
             return bv
         raise Exception("Could not find basis vector from PySCF in GAMESS input")
 
@@ -57,7 +60,7 @@ class GamessBasis():
     def get_pyscf_basis(self):
         pyscf_basis = {}
         for atom in self.basis_vecs:
-            pyscf_basis[atom] = self.get_basis_str(atom)
+            pyscf_basis[atom] = gto.basis.parse(self.get_basis_str(atom))
         return pyscf_basis
 
     def __len__(self):
