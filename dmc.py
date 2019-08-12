@@ -289,7 +289,7 @@ class Maker():
     #----------------
     def print_shci(self):
         csf_coeffs_str = '\t'.join(['%.10f' % coeff for coeff in self.wf_csf_coeffs])
-        ndets_str = '\t'.join([str(len(csf_info)) for csf_info in self.csf_data])
+        ndets_str = '\t'.join([str(len(csf_datum)) for csf_datum in self.csf_data])
         sorted_dets = sorted(
             [det for det in self.det_data.indices], 
             key=lambda d: self.det_data.index(d))
