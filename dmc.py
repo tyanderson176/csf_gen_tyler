@@ -223,7 +223,7 @@ class Maker():
                 eri = ao2mo.full(self.mol, self.mf.mo_coeff)
             else:
                 eri = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
-            orbsym = getattr(self.mf.mo_coeff, 'orbsym', None)
+            orbsym = [sym+1 for sym in getattr(self.mf.mo_coeff, 'orbsym', None)]
             nuc = self.mf.energy_nuc()
             fcidump.from_integrals(
                 'FCIDUMP', h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
