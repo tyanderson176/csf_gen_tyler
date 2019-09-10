@@ -36,6 +36,8 @@ class Maker():
         #Optimized_orbs init value from config?
         self.optimized_orbs = False
         self.atoms = self.get_atom_types() 
+        self.n_up, self.n_down = self.mol.nelec
+        self.hf_energy = self.mf.energy_tot()
 
         #SHCI variables & output data
         self.config = config
@@ -62,9 +64,42 @@ class Maker():
         return
 
     def print_header(self):
-        self.out_file.write('TODO: REST OF HEADER\n\n')
+#        self.out_file.write('TODO: REST OF HEADER\n\n')
+        self.print_dmc_header()
         self.print_geometry_header()
         self.print_determinant_header()
+        return
+
+    def print_dmc_header(self):
+        format_str = '{:40}'
+        self.out_file.write(
+            format_str.format('\'ncsf=%d ndet=%d norb=%d\''% 
+            (len(self.csf_data), len(self.det_data), len(self.mo_coeffs))) 
+            + 'title\n')
+        self.out_file.write(format_str.format('1837465927472523') + 'irn\n')
+        self.out_file.write(
+            format_str.format('0  1 slater') 
+            + 'iperiodic,ibasis,which_analytical_basis\n')
+        self.out_file.write(
+            format_str.format('0.5  %10.3f  \'Hartrees\''% self.hf_energy) 
+            + 'hb,etrial,eunit\n')
+        self.out_file.write(
+            format_str.format('%d  10  1  100  0'% self.config['dmc_steps']) 
+            + 'nstep,nblk,nblkeq,nconf,nconf_new\n')
+        self.out_file.write(
+            format_str.format('0  0  1  -2') 
+            + 'idump,irstar,isite,ipr\n')
+        self.out_file.write(
+            format_str.format('6  1.  5.  1.  1.') 
+            + 'imetro delta,deltar,deltat fbias\n')
+        self.out_file.write( 
+            format_str.format('2  1  1  1  1  0  0  0  0')
+            + 'idmc,ipq,itau_eff,iacc_rej,icross,icuspg,idiv_v,icut_br,icut_e\n')
+        self.out_file.write(format_str.format('50  .01') + 'nfprod, tau\n')
+        self.out_file.write(format_str.format('0  -3  1   0') + 'nloc,numr,nforce,nefp\n')
+        self.out_file.write(
+            format_str.format('%d %d'% (self.n_up + self.n_down, self.n_up)) 
+            + 'nelec,nup\n')
         return
     
     def print_determinant_header(self):
@@ -183,9 +218,18 @@ class Maker():
             h1 = reduce(
                 numpy.dot, 
                 (self.mf.mo_coeff.T, self.mf.get_hcore(), self.mf.mo_coeff))
-            h2 = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
-            fcidump.from_integrals('FCIDUMP', h1, h2, h1.shape[0], 
-                           self.mol.nelectron, tol=1e-15)
+#            h2 = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
+            if self.mf._eri is None:
+                eri = ao2mo.full(self.mol, self.mf.mo_coeff)
+            else:
+                eri = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
+            orbsym = [sym+1 for sym in getattr(self.mf.mo_coeff, 'orbsym', None)]
+            nuc = self.mf.energy_nuc()
+            fcidump.from_integrals(
+                'FCIDUMP', h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
+                tol=1e-15, float_format=' %.16g')
+#            fcidump.from_integrals('FCIDUMP', h1, h2, h1.shape[0], 
+#                           self.mol.nelectron, tol=1e-15)
         try:
             attempt = open('config.json', 'r')
             print("config.json found.\n")
@@ -203,6 +247,11 @@ class Maker():
         num_dets = self.config['num_dets']
         n_up = (self.mol.nelectron + self.mol.spin)//2
         n_dn = (self.mol.nelectron - self.mol.spin)//2
+        if not self.mol.symmetry:
+            raise Exception(
+                "Point group for molecule is required to run SHCI.\n"
+                + "SHCI supports `C1`, `C2`, `Cs`, `Ci`, `C2v`, `C2h`, `Coov`," 
+                + "`D2`, `D2h`, and `Dooh`.")
         sym = '\"' + str(self.mol.symmetry) + '\"'
     
         #Write config file
@@ -281,7 +330,7 @@ class Maker():
     #----------------
     def print_shci(self):
         csf_coeffs_str = '\t'.join(['%.10f' % coeff for coeff in self.wf_csf_coeffs])
-        ndets_str = '\t'.join([str(len(csf_info)) for csf_info in self.csf_data])
+        ndets_str = '\t'.join([str(len(csf_datum)) for csf_datum in self.csf_data])
         sorted_dets = sorted(
             [det for det in self.det_data.indices], 
             key=lambda d: self.det_data.index(d))
