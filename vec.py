@@ -125,6 +125,8 @@ class Det:
         return det_str
 
 class Config:
+    #Data structure for orbital configuration.
+    #Gives occupation of each spacial orbital (0, 1 or 2)
     def __init__(self, det):
         self.occs = {}
         for up_orb in det.up_occ:

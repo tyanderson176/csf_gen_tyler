@@ -339,10 +339,13 @@ class Maker():
         self.out_file.write(str(len(self.csf_data)) + ' ncsf\n')
         self.out_file.write(csf_coeffs_str + ' (csf_coef(icsf), icsf=1, ncsf)\n')
         self.out_file.write(ndets_str + ' (ndet_in_csf(icsf), icsf=1, ncsf)\n')
-        for csf_info in self.csf_data:
-            index_str = (' '.join([str(pair[0] + 1) for pair in csf_info]) +
+ 
+        #'csf_data' is a list of 'csf's
+        #'csf' is a list of (index, coeff) pairs for each det in the csf
+        for csf in self.csf_data:
+            index_str = (' '.join([str(pair[0] + 1) for pair in csf]) +
                 ' (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
-            coeff_str = (' '.join(['%.8f'%pair[1] for pair in csf_info]) +
+            coeff_str = (' '.join(['%.8f'%pair[1] for pair in csf]) +
                 ' (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
             self.out_file.write(index_str)
             self.out_file.write(coeff_str)

@@ -5,3 +5,4 @@ test/*
 __pycache__/*
 lib/__pycache__/*
 run_dmc/*
+linsymm/*
