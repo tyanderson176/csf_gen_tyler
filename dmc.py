@@ -4,6 +4,8 @@ import subprocess
 import p2d
 import csf
 import gamess
+import vec
+import linsymm
 from pyscf.tools import fcidump
 from pyscf import scf, ao2mo, gto
 
@@ -300,14 +302,32 @@ class Maker():
             out = output.stdout.decode('ascii')
         else:
             out = open(self.shci_path).read()
-        parsed_out, self.optimized_orbs = self.parse_output(out)
+        parsed_output, self.optimized_orbs = self.parse_output(out)
         print("Starting CSF calculation...")
         self.wf_csf_coeffs, self.csf_data, self.det_data, err = \
-            csf.get_det_info(parsed_out, self.cache_csfs)
+            csf.get_det_info(parsed_output, self.cache_csfs)
+#        self.csf_stats(self.csf_data, self.det_data)
+#        linsymm.check_symm(self.mol, self.mf, self.csf_data, self.det_data, self.wf_csf_coeffs)
+        linsymm.check_configs(self.mol, self.mf, self.csf_data, self.det_data, self.wf_csf_coeffs)
         print("CSF calculation complete.")
         print("Projection error = %10.5f %%" % (100*err))
         return
-    
+
+    def csf_stats(self, csf_data, det_data):
+        configs = {}
+        index2det = {}
+        for det in det_data.indices:
+            index2det[det_data.index(det)] = det
+        for csf in csf_data:
+            csf_configs = set([vec.Config(index2det[pair[0]]) for pair in csf])
+            config, = csf_configs
+            if config not in configs:
+                configs[config] = 0
+            configs[config] += 1
+        for config in configs:
+            print('csfs with config ' + str(config) + ' : ' 
+                + str(configs[config]))
+
     def parse_output(self, out):
         lines = out.split('\n')
         start_index = lines.index("START DMC")

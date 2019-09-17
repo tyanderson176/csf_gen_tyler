@@ -111,6 +111,8 @@ def make_det(occ_str, config):
     return Det(up_occs, dn_occs)
 
 def parity(det):
+    #computes parity relative to ordering s.t. up/down spins for the same
+    #spacial orbital are adjacent
     up_occ, dn_occ = det.up_occ, det.dn_occ
     if len(up_occ) == 0 or len(dn_occ) == 0:
         return 1

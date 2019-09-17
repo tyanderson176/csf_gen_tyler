@@ -55,11 +55,15 @@ class Vec:
             mul_dict[det] = scalar*self.dets[det]
         return Vec(mul_dict)
 
-    def __hash__(self):
-        #Safe to add hash values? Should order dets/coeffs and
-        #simply use hash(self.__repr__())?
-        det_strs = [str(self.dets[det]) + str(det) for det in self.dets]
-        return sum([hash(det_str) for det_str in det_strs])
+    def __sub__(self, other):
+        return self + (-1)*other
+
+#    def __hash__(self):
+#        #Safe to add hash values? Should order dets/coeffs and
+#        #simply use hash(self.__repr__())?
+#        print('hash')
+#        det_strs = [str(self.dets[det]) + str(det) for det in self.dets]
+#        return sum([hash(det_str) for det_str in det_strs])
 
     def __eq__(self, other):
         return self.dets == other.dets
@@ -69,8 +73,8 @@ class Det:
         #TODO: Handle permutation?
         self.up_occ = sorted(up_occ)
         self.dn_occ = sorted(dn_occ)
-#        parity = (self._parity(up_occ, self.up_occ)
-#                *self._parity(dn_occ, self.dn_occ))
+#        parity = (self.parity()
+#                *self.parity())
 #        if parity != 1:
 #            raise Exception("Occs supplied to Det have wrong parity.")
         self.my_hash = self._compute_hash()
@@ -92,6 +96,24 @@ class Det:
                 "\' in Det.__mul__")
 
     __rmul__ = __mul__
+
+    def _compute_parity(self):
+        #Computes parity relative to if up/dn orbs were next to eachother
+        up_occ, dn_occ = self.up_occ, self.dn_occ
+        if len(up_occ) == 0 or len(dn_occ) == 0:
+            return 1
+        up_ptr, dn_ptr = len(up_occ)-1, len(dn_occ)-1
+        alt_sum, count = 0, 0
+        while -1 < dn_ptr:
+            dn = dn_occ[dn_ptr]
+            if up_ptr != -1 and up_occ[up_ptr] > dn:
+                count += 1
+                up_ptr += -1
+            else:
+                alt_sum = count - alt_sum 
+                dn_ptr += -1
+        assert(alt_sum > -1)
+        return (1 if alt_sum%2 == 0 else -1)
 
     def _parity(self, occ1, occ2):
         occ1, occ2 = copy.deepcopy(occ1), copy.deepcopy(occ2)

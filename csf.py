@@ -18,6 +18,8 @@ def get_det_info(shci_out, cache = False, rep = 'sparse'):
     twice_s = round(2*math.sqrt(s2 + 0.25) - 1)
     dets = det_strs2dets(det_strs)
     csfs = get_csfs(dets, twice_s, 'projection', cache)
+    #if point_group in ('Coov', 'Dooh'):
+    #    csfs = linsymm.symmetrize(csfs)
     det_indices, ovlp = csf_matrix(csfs, rep)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
     wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
