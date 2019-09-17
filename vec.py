@@ -61,7 +61,6 @@ class Vec:
 #    def __hash__(self):
 #        #Safe to add hash values? Should order dets/coeffs and
 #        #simply use hash(self.__repr__())?
-#        print('hash')
 #        det_strs = [str(self.dets[det]) + str(det) for det in self.dets]
 #        return sum([hash(det_str) for det_str in det_strs])
 
