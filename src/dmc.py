@@ -5,9 +5,9 @@ import p2d
 import csf
 import gamess
 import vec
-import linsymm
+import symm as sy
 from pyscf.tools import fcidump
-from pyscf import scf, ao2mo, gto
+from pyscf import scf, ao2mo, gto, symm
 
 from decimal import Decimal
 
@@ -15,6 +15,7 @@ class Maker():
     #config = {eps_vars, eps_vars_schedule, num_dets}
     def __init__(self, mol, config, shci_cmd, shci_path, basis_path = None):
         assert(mol.unit == 'bohr')
+        assert(mol.symmetry)
         self.out_path = ""
         self.out_file = None
         self.shci_cmd = shci_cmd
@@ -40,6 +41,15 @@ class Maker():
         self.atoms = self.get_atom_types() 
         self.n_up, self.n_down = self.mol.nelec
         self.hf_energy = self.mf.energy_tot()
+        print('HF ENERGY: ' + str(self.hf_energy))
+
+        #Symmetry
+        self.symmetry = self.mol.symmetry.upper()
+        if self.symmetry in ('DOOH', 'COOV'):
+            self.partner_orbs = self.mf.partner_orbs
+            self.porbs = None
+            self.xorbs = None 
+            self.real = None
 
         #SHCI variables & output data
         self.config = config
@@ -66,7 +76,6 @@ class Maker():
         return
 
     def print_header(self):
-#        self.out_file.write('TODO: REST OF HEADER\n\n')
         self.print_dmc_header()
         self.print_geometry_header()
         self.print_determinant_header()
@@ -220,18 +229,24 @@ class Maker():
             h1 = reduce(
                 numpy.dot, 
                 (self.mf.mo_coeff.T, self.mf.get_hcore(), self.mf.mo_coeff))
-#            h2 = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
             if self.mf._eri is None:
                 eri = ao2mo.full(self.mol, self.mf.mo_coeff)
             else:
                 eri = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
-            orbsym = [sym+1 for sym in getattr(self.mf.mo_coeff, 'orbsym', None)]
             nuc = self.mf.energy_nuc()
-            fcidump.from_integrals(
-                'FCIDUMP', h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
-                tol=1e-15, float_format=' %.16g')
-#            fcidump.from_integrals('FCIDUMP', h1, h2, h1.shape[0], 
-#                           self.mol.nelectron, tol=1e-15)
+            orbsym = getattr(self.mf.mo_coeff, 'orbsym', None) 
+#            orb_symm = symm.label_orb_symm(self.mol, self.mol.irrep_name, self.mol.symm_orb, self.mf.mo_coeff)
+#            print('orbsym (labels): ' + str(orb_symm))
+            if self.symmetry in ('DOOH', 'COOV'):
+                partner_orbs = self.partner_orbs
+                sy.writeComplexOrbIntegrals(
+                    h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, 
+                    partner_orbs)
+            else:
+                orbsym = [sym+1 for sym in orbsym]
+                fcidump.from_integrals(
+                    'FCIDUMP', h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
+                    tol=1e-15, float_format=' %.16g')
         try:
             attempt = open('config.json', 'r')
             print("config.json found.\n")
@@ -254,7 +269,9 @@ class Maker():
                 "Point group for molecule is required to run SHCI.\n"
                 + "SHCI supports `C1`, `C2`, `Cs`, `Ci`, `C2v`, `C2h`, `Coov`," 
                 + "`D2`, `D2h`, and `Dooh`.")
-        sym = '\"' + str(self.mol.symmetry) + '\"'
+
+        symmetry = self.mol.symmetry
+        sym = '\"' + str(symmetry) + '\"'
     
         #Write config file
         config = open('config.json', 'w')
@@ -262,7 +279,6 @@ class Maker():
         self.write_config_var(config, 'system', '\"chem\"')
         self.write_config_var(config, 'n_up', n_up)
         self.write_config_var(config, 'n_dn', n_dn)
-        self.write_config_var(config, 'dmc_num_dets', num_dets)
         self.write_config_var(config, 'var_only', 'true')
         self.write_config_var(config, 'eps_vars', eps_vars)
         self.write_config_var(config, 'eps_vars_schedule', eps_vars_sched)
@@ -298,17 +314,13 @@ class Maker():
         self.setup_shci()
         print("Running shci...\n")
         output = subprocess.run(self.shci_cmd.split(' '), capture_output = True)
-        if self.shci_path == 'stdout':
-            out = output.stdout.decode('ascii')
-        else:
-            out = open(self.shci_path).read()
-        parsed_output, self.optimized_orbs = self.parse_output(out)
-        print("Starting CSF calculation...")
+        eps_vars = self.config['eps_vars']
+        wf_filename = 'wf_eps1_%3.2e.dat' % eps_vars[-1]
+        print('Loading WF from: ' + wf_filename)
+        print('Starting CSF calculation...')
+        orbsym = getattr(self.mf.mo_coeff, 'orbsym')
         self.wf_csf_coeffs, self.csf_data, self.det_data, err = \
-            csf.get_det_info(parsed_output, self.cache_csfs)
-#        self.csf_stats(self.csf_data, self.det_data)
-#        linsymm.check_symm(self.mol, self.mf, self.csf_data, self.det_data, self.wf_csf_coeffs)
-        linsymm.check_configs(self.mol, self.mf, self.csf_data, self.det_data, self.wf_csf_coeffs)
+            csf.get_det_info(self, orbsym, wf_filename, self.cache_csfs)
         print("CSF calculation complete.")
         print("Projection error = %10.5f %%" % (100*err))
         return

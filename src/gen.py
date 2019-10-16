@@ -1,11 +1,14 @@
 import sys
 import os
 import subprocess
-sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
+
+from pyscf import symm
+import numpy as np
 import csfgen as proj
 import vec
+import symm as sy
 from vec import Det, Vec, Config
-#from csf import compute_csfs 
 
 def parse_csf_file(num_open_shells_max, twice_s, csf_file_contents):
     lines = csf_file_contents.split('\n')
@@ -38,7 +41,7 @@ def make_csf_file(max_open, twice_s):
         raise Exception(cache_name + " already exists." + 
                 "make_csf_file will not attempt to overwrite it")
     except:
-        gen_script = os.path.dirname(__file__) + '/bin/run_csfgen'
+        gen_script = os.path.join(os.path.dirname(__file__), '../bin/run_csfgen')
         out_dir = '.'
         nelecs = str(max_open)
         subprocess.run([gen_script, out_dir, filename, nelecs])
@@ -77,21 +80,45 @@ def det2open_occ_str(det):
     #could be faster
     occs = sorted(det.up_occ + det.dn_occ)
     return ''.join(['1' if occ in det.up_occ else '0' for occ in occs])
-    
 
-def config2csfs(config, csf_info, rel_parity = False):
+def symm_configs(dmc, configs):
+    #if mol is a sigma state, this avoids creating duplicate csfs
+    skip = set()
+    for config in configs:
+        if config in skip: continue
+        yield config
+        skip.update([config, sy.partner_config(dmc, config)])
+
+def configs2csfs(dmc, csf_info, configs, rel_parity = False):
+    csfs = []
+    if dmc.symmetry in ('DOOH', 'COOV'):
+        configs = symm_configs(dmc, configs)
+    for config in configs:
+        csfs += list(config2csfs(dmc, config, csf_info, rel_parity))
+    return csfs
+
+def config2csfs(dmc, config, csf_info, rel_parity = True):
+    '''
+    When csf coefs are generated, they are sometimes generated as though
+    the electrons are bosonic. If rel_parity = True, this program will
+    correct this issue and insert the appropriate sign.
+
+    The gene.cc program uses no extra sign (bosonic) by default.
+    '''
     nopen = len([orb for orb in config.occs if config.occs[orb] == 1])
     csf_coefs, index2occs = csf_info[nopen]
     dets = [make_det(occs, config) for occs in index2occs]
     csfs = []
-    for m, coefs in enumerate(csf_coefs):
+    for coefs in csf_coefs:
         csf = Vec.zero()
         for n, coef in enumerate(coefs):
-            p = parity(det) if rel_parity else 1
             det = dets[n] 
-            csf += p*coef*det 
-        csfs.append(csf)
-    return csfs
+            p = parity(det) if rel_parity else 1
+            if dmc.symmetry in ('DOOH', 'COOV'):
+                det = sy.convert_det(dmc, det)
+            csf += p*coef*det
+        if csf.norm() > 0: csfs.append(csf)
+    return np.array(csfs)
 
 def make_det(occ_str, config):
     up_occs, dn_occs, orbs, is_open = [], [], [], {}

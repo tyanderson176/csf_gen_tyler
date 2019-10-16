@@ -2,7 +2,11 @@ scripts/*
 out*/*
 bin/*
 test/*
+build/*.o
 __pycache__/*
 lib/__pycache__/*
+lib/hps/*
+lib/*.so
 run_dmc/*
 linsymm/*
+*.pyc

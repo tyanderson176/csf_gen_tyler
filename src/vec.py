@@ -15,6 +15,8 @@ class Vec:
                 if abs(det_dict[key]) > tol}
 
     def norm(self):
+        if (not self.dets): 
+            return 0.
         coeffs = numpy.array([self.dets[det] for det in self.dets])
         return numpy.sqrt(numpy.dot(coeffs, coeffs))
 
@@ -36,6 +38,8 @@ class Vec:
         for det in other.dets:
             if det in self.dets:
                 self.dets[det] += other.dets[det]
+                if (abs(self.dets[det]) < tol): 
+                    del self.dets[det]
             else:
                 self.dets[det] = other.dets[det]
         return self
@@ -49,14 +53,17 @@ class Vec:
                 sum_dets[det] = other.dets[det]
         return Vec(sum_dets)
 
+    def __sub__(self, other):
+        return self + (-1)*other
+
     def __rmul__(self, scalar):
         mul_dict = {}
         for det in self.dets:
             mul_dict[det] = scalar*self.dets[det]
         return Vec(mul_dict)
 
-    def __sub__(self, other):
-        return self + (-1)*other
+    def __truediv__(self, scalar):
+        return (1/scalar)*self
 
 #    def __hash__(self):
 #        #Safe to add hash values? Should order dets/coeffs and
@@ -77,10 +84,17 @@ class Det:
 #        if parity != 1:
 #            raise Exception("Occs supplied to Det have wrong parity.")
         self.my_hash = self._compute_hash()
+        self._parity = None
 
     def get_Sz(self):
         #TODO: Is this safe?
         return (len(self.up_occ) - len(self.dn_occ))/2
+
+    @property
+    def parity(self):
+        if not self._parity:
+            self._parity = self._compute_parity()
+        return self._parity
 
     def dmc_str(self):
         dmc_str = ['%4d' % orb for orb in self.up_occ]
@@ -96,8 +110,23 @@ class Det:
 
     __rmul__ = __mul__
 
+    def _parity_rel(self, occ1, occ2):
+        #Computes relative parity of occ1 and occ2
+        occ1, occ2 = copy.deepcopy(occ1), copy.deepcopy(occ2)
+        num_perms = 0
+        for n, orb in enumerate(occ1):
+            index = occ2.index(orb)
+            if index == -1:
+                raise Exception(
+                        "Occupation strings not permutations in _parity")
+            if index != n:
+                occ2[index], occ2[n] = occ2[n], occ2[index]
+                num_perms += 1
+        return (-2)*num_perms%2 + 1 
+
     def _compute_parity(self):
-        #Computes parity relative to if up/dn orbs were next to eachother
+        #computes parity relative to ordering s.t. up/down spins for the same
+        #spacial orbital are adjacent
         up_occ, dn_occ = self.up_occ, self.dn_occ
         if len(up_occ) == 0 or len(dn_occ) == 0:
             return 1
@@ -113,19 +142,6 @@ class Det:
                 dn_ptr += -1
         assert(alt_sum > -1)
         return (1 if alt_sum%2 == 0 else -1)
-
-    def _parity(self, occ1, occ2):
-        occ1, occ2 = copy.deepcopy(occ1), copy.deepcopy(occ2)
-        num_perms = 0
-        for n, orb in enumerate(occ1):
-            index = occ2.index(orb)
-            if index == -1:
-                raise Exception(
-                        "Occupation strings not permutations in _parity")
-            if index != n:
-                occ2[index], occ2[n] = occ2[n], occ2[index]
-                num_perms += 1
-        return (-2)*num_perms%2 + 1 
 
     def __hash__(self):
         return self.my_hash
@@ -173,15 +189,3 @@ class Config:
 
     def __eq__(self, other):
         return self.occs == other.occs 
-
-if __name__ == "__main__":
-    v = Vec()
-    det = Det([1, 3, 2], [1, 2, 4])
-    det2 = Det([10, 3, 2], [1, 2, 4])
-    v += Vec({det : 1})
-    w = Vec({det2: 2})
-    v2 = v + w
-    w += v
-    d = {v2}
-    print(w)
-    print(w + (-2)*v)

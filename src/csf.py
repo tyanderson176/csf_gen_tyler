@@ -1,37 +1,39 @@
 import numpy
 import math
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../lib/csfgen'))
 import csfgen as proj
 import vec
 import gen
+import symm as sy
+import wf
 from scipy.sparse import csr_matrix
 import scipy.sparse as sparse
 
 tol = 1e-15
 #coef_tol = 1e-5
 
-def get_det_info(shci_out, cache = False, rep = 'sparse'):
-    s2, det_strs, wf_coeffs = shci_out
-    wf_coeffs = normalize([float(coeff) for coeff in wf_coeffs.split()])
-    #estimate S; use <S^2> = s(s+1); S = 1/2 +- sqrt(<S^2 + 1/4>)
-    twice_s = round(2*math.sqrt(s2 + 0.25) - 1)
-    dets = det_strs2dets(det_strs)
-    csfs = get_csfs(dets, twice_s, 'projection', cache)
-    #if point_group in ('Coov', 'Dooh'):
-    #    csfs = linsymm.symmetrize(csfs)
+def get_det_info(dmc, orbsym, shci_out, cache = False, rep = 'sparse'):
+    wfn = wf.load(shci_out)
+    dets = [vec.Det([o+1 for o in up], [o+1 for o in dn]) 
+        for [up, dn] in wfn['dets']]
+    wf_coeffs = normalize(wfn['coefs'])
+    twice_s = wfn['n_up'] - wfn['n_dn']
+    if dmc.symmetry in ('DOOH', 'COOV'):
+        sy.setup_dmc(dmc, orbsym, dets)
+    csfs = get_csfs(dmc, dets, twice_s, 'projection', cache)
     det_indices, ovlp = csf_matrix(csfs, rep)
+    #Convert to real wf if molecule has linear symm
+    if dmc.symmetry in ('DOOH', 'COOV'):
+        dets, wf_coeffs = sy.convert_wf(dmc, dets, wf_coeffs)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
     wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
-#    wf_csf_coeffs_tol = [coef for coef in wf_csf_coeffs.toarray() 
-#            if coef > coef_tol]
-    csf_info = [[(det_indices.index(d), csf.dets[d]) for d in csf.dets] 
-        for csf in csfs]
-#    csf_info_tol = [[(det_indices.index(d), csf.dets[d]) for d in csf.dets] 
-#        for n, csf in enumerate(csfs) if wf_csf_coeffs.toarray()[n] > coef_tol]
     err = get_proj_error(ovlp, wf_det_coeffs, rep)
     if rep == 'sparse':
         wf_csf_coeffs = wf_csf_coeffs.toarray()
+    csf_info = [
+            [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
     return wf_csf_coeffs, csf_info, det_indices, err
 
 def normalize(coeffs):
@@ -39,7 +41,6 @@ def normalize(coeffs):
     return [c/norm for c in coeffs]
     
 def get_det_coeffs(det_indices, wf_coeffs, dets, rep='dense'):
-#    wf_coeffs = [float(coeff) for coeff in wf_coeffs.split()]
     det_coeffs = numpy.zeros(len(det_indices))
     for det, coeff in zip(dets, wf_coeffs):
         index = det_indices.index(det)
@@ -48,7 +49,7 @@ def get_det_coeffs(det_indices, wf_coeffs, dets, rep='dense'):
         det_coeffs = csr_matrix(det_coeffs).T
     return det_coeffs
 
-def get_csfs(dets, twice_s, method='projection', cache=False):
+def get_csfs(dmc, dets, twice_s, method='projection', cache=False):
     twice_sz = get_2sz(dets)
     if (twice_sz != twice_s):
         raise Exception("CSFs only saved for sz = s. Cannot find CSFs with " +
@@ -61,8 +62,7 @@ def get_csfs(dets, twice_s, method='projection', cache=False):
         print("Loading CSF data...\n\n");
         csf_data = gen.load_csf_file(max_open, twice_s)
         print("Converting configs...\n\n");
-        for n, config in enumerate(configs):
-            csfs += gen.config2csfs(config, csf_data, rel_parity=False)
+        csfs = gen.configs2csfs(dmc, csf_data, configs, rel_parity=True)
     else:
         for config in configs: 
             csfs += gen.compute_csfs(config, twice_s, twice_sz, method)
@@ -88,17 +88,6 @@ def get_proj_error(ovlp, wf_det_coeffs, rep = 'dense'):
         return err[0,0]
     else:
         raise Exception('Unknown matrix rep \''+ rep + '\' in get_proj_error')
-
-def det_strs2dets(det_strs):
-    #TODO: give a format string i.e. "up_occs     dn_occs"
-    #or "up_occs\t\t\tdn_occs"
-    dets = []
-    for det_str in det_strs:
-        up_str, dn_str = tuple(det_str.split('     '))
-        up_occs = [int(orb)+1 for orb in up_str.split()]
-        dn_occs = [int(orb)+1 for orb in dn_str.split()]
-        dets.append(vec.Det(up_occs, dn_occs))
-    return dets
 
 def get_2sz(dets):
     _2sz_vals = set(round(2*det.get_Sz()) for det in dets)
