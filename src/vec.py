@@ -63,7 +63,7 @@ class Vec:
         return Vec(mul_dict)
 
     def __truediv__(self, scalar):
-        return (1/scalar)*self
+        return (1./scalar)*self
 
 #    def __hash__(self):
 #        #Safe to add hash values? Should order dets/coeffs and

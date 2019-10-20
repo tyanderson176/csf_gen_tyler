@@ -17,9 +17,10 @@ tol = 1e-15
 def get_det_info(dmc, orbsym, shci_out, cache = False, rep = 'sparse'):
     wfn = wf.load(shci_out)
     dets = [vec.Det([o+1 for o in up], [o+1 for o in dn]) 
-        for [up, dn] in wfn['dets']]
+            for [up, dn] in wfn['dets']]
     wf_coeffs = normalize(wfn['coefs'])
     twice_s = wfn['n_up'] - wfn['n_dn']
+#    dmc.symmetry = 'D2H'
     if dmc.symmetry in ('DOOH', 'COOV'):
         sy.setup_dmc(dmc, orbsym, dets)
     csfs = get_csfs(dmc, dets, twice_s, 'projection', cache)
@@ -29,7 +30,10 @@ def get_det_info(dmc, orbsym, shci_out, cache = False, rep = 'sparse'):
         dets, wf_coeffs = sy.convert_wf(dmc, dets, wf_coeffs)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
     wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
-    err = get_proj_error(ovlp, wf_det_coeffs, rep)
+    perr = get_proj_error(ovlp, wf_det_coeffs, det_indices, rep)
+    err = get_error(dets, wf_coeffs, csfs, wf_csf_coeffs)
+    print('perr: %.10f, err: %.10f' % (perr, err))
+#    err2 = get_bf_error(wf_det_coeffs, det_indices, wf_csf_coeffs, csfs)
     if rep == 'sparse':
         wf_csf_coeffs = wf_csf_coeffs.toarray()
     csf_info = [
@@ -59,9 +63,9 @@ def get_csfs(dmc, dets, twice_s, method='projection', cache=False):
     max_open = max([config.num_open for config in configs])
     csfs = []
     if cache:
-        print("Loading CSF data...\n\n");
+        print("Loading CSF data...\n");
         csf_data = gen.load_csf_file(max_open, twice_s)
-        print("Converting configs...\n\n");
+        print("Converting configs...\n");
         csfs = gen.configs2csfs(dmc, csf_data, configs, rel_parity=True)
     else:
         for config in configs: 
@@ -76,7 +80,7 @@ def matrix_mul(ovlp, wf_det_coeffs, rep = 'dense'):
     else:
         raise Exception('Unknown matrix rep \'' + rep + '\' in matrix_mul')
 
-def get_proj_error(ovlp, wf_det_coeffs, rep = 'dense'):
+def get_proj_error(ovlp, wf_det_coeffs, dis, rep = 'dense'):
     if rep == 'dense':
         err_op = numpy.identity(len(wf_det_coeffs)) - numpy.dot(ovlp.T, ovlp)
         err_vec = numpy.dot(err_op, wf_det_coeffs)
@@ -88,6 +92,15 @@ def get_proj_error(ovlp, wf_det_coeffs, rep = 'dense'):
         return err[0,0]
     else:
         raise Exception('Unknown matrix rep \''+ rep + '\' in get_proj_error')
+
+def get_error(dets, det_coeffs, csfs, csf_coeffs):
+    wf_diff = vec.Vec.zero()
+    for det, coef in zip(dets, det_coeffs):
+        wf_diff += coef*det
+    for csf, [coef] in zip(csfs, csf_coeffs.toarray()):
+        wf_diff += -1*coef*csf
+    dnorm = wf_diff.norm()
+    return dnorm*dnorm
 
 def get_2sz(dets):
     _2sz_vals = set(round(2*det.get_Sz()) for det in dets)

@@ -16,6 +16,7 @@ class Maker():
     def __init__(self, mol, config, shci_cmd, shci_path, basis_path = None):
         assert(mol.unit == 'bohr')
         assert(mol.symmetry)
+        print('TODO: Add (-1)**l factor for l != 0')
         self.out_path = ""
         self.out_file = None
         self.shci_cmd = shci_cmd
@@ -49,6 +50,7 @@ class Maker():
             self.partner_orbs = self.mf.partner_orbs
             self.porbs = None
             self.xorbs = None 
+            self.ang_mom = None
             self.real = None
 
         #SHCI variables & output data

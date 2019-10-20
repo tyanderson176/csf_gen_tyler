@@ -117,7 +117,7 @@ def config2csfs(dmc, config, csf_info, rel_parity = True):
             if dmc.symmetry in ('DOOH', 'COOV'):
                 det = sy.convert_det(dmc, det)
             csf += p*coef*det
-        if csf.norm() > 0: csfs.append(csf)
+        if csf.norm() > 0: csfs.append(csf/csf.norm())
     return np.array(csfs)
 
 def make_det(occ_str, config):

@@ -150,24 +150,26 @@ def partner_config(dmc, config):
     dn_orbs = [orb for orb in partner_occs if partner_occs[orb] == 2]
     return vec.Config.fromorbs(up_orbs, dn_orbs) 
 
-def real_orbs(porbs, xorbs, orbs):
+def real_orbs(porbs, xorbs, l, orbs):
     if not orbs:
         return [(1, [])]
-    rot_first = real_orbs(porbs, xorbs, orbs[:-1])
+    rot_first = real_orbs(porbs, xorbs, l, orbs[:-1])
     orb = orbs[-1]
     if porbs[orb] == orb:
         return [(f, orbs + [orb]) for f, orbs in rot_first]
-    root2 = math.sqrt(2)
+    root2inv = 1./math.sqrt(2)
     xorb, yorb = (orb, porbs[orb]) if orb in xorbs else (porbs[orb], orb)
-    y_factor = 1j/root2 if orb in xorbs else -1j/root2
-    rorbs = [(f/root2, orbs + [xorb]) for f, orbs in rot_first if xorb not in orbs]
-    rorbs += [(f*y_factor, orbs + [yorb]) for f, orbs in rot_first if yorb not in orbs]
+    sign = -1 if (l%2) else 1
+    c_y = sign*1j*root2inv if orb in xorbs else -1j*root2inv
+    c_x = sign*root2inv if orb in xorbs else root2inv
+    rorbs = [(c*c_x, orbs + [xorb]) for c, orbs in rot_first if xorb not in orbs]
+    rorbs += [(c*c_y, orbs + [yorb]) for c, orbs in rot_first if yorb not in orbs]
     return rorbs
 
-def convert_det_helper(dmc, det, tol=1e-8):
+def convert_det_helper(dmc, det):
     rdet, idet = vec.Vec.zero(), vec.Vec.zero()
-    rup = real_orbs(dmc.porbs, dmc.xorbs, det.up_occ)
-    rdn = real_orbs(dmc.porbs, dmc.xorbs, det.dn_occ)
+    rup = real_orbs(dmc.porbs, dmc.xorbs, dmc.ang_mom, det.up_occ)
+    rdn = real_orbs(dmc.porbs, dmc.xorbs, dmc.ang_mom, det.dn_occ)
     for ucoef, up in rup:
         for dcoef, dn in rdn:
             coef = rel_parity(up)*rel_parity(dn)*ucoef*dcoef
@@ -175,8 +177,8 @@ def convert_det_helper(dmc, det, tol=1e-8):
             idet += coef.imag*vec.Det(up, dn)
     return rdet, idet
 
-def convert_det(dmc, det, tol=1e-8):
-    rdet, idet = convert_det_helper(dmc, det, tol)
+def convert_det(dmc, det):
+    rdet, idet = convert_det_helper(dmc, det)
     return rdet if dmc.real else idet
 
 def xorbs_of(orbsym):
@@ -192,10 +194,24 @@ def xorbs_of(orbsym):
 def porbs_of(dmc):
     return {n+1: orb+1 for n, orb in enumerate(dmc.partner_orbs) }
 
+def ir_lz(ir):
+    if ir%10 in (0, 1, 4, 5):
+        l = ir//10 * 2
+    else:
+        l = ir//10 * 2 + 1
+    
+    return l if (ir%10 in (0, 2, 5, 7)) else -l
+
+def lz_of(orbsym, det):
+    return (sum([ir_lz(orbsym[orb-1]) for orb in det.up_occ]) 
+          + sum([ir_lz(orbsym[orb-1]) for orb in det.dn_occ]))
+
 def setup_dmc(dmc, orbsym, dets):
     dmc.xorbs = xorbs_of(orbsym)
     dmc.porbs = porbs_of(dmc) 
-    rhf_det, ihf_det = convert_det_helper(dmc, dets[0], 1e-8)
+    dmc.ang_mom = abs(lz_of(orbsym, dets[0]))
+    print("ang_mom: " + str(dmc.ang_mom))
+    rhf_det, ihf_det = convert_det_helper(dmc, dets[0])
     dmc.real = (rhf_det.norm() >= ihf_det.norm())
 
 def convert_wf(dmc, dets, wf_coeffs):
