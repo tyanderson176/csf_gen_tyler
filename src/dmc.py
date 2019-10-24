@@ -13,14 +13,13 @@ from decimal import Decimal
 
 class Maker():
     #config = {eps_vars, eps_vars_schedule, num_dets}
-    def __init__(self, mol, config, shci_cmd, shci_path, basis_path = None):
+    def __init__(self, mol, config, shci_cmd, basis_path = None):
         assert(mol.unit == 'bohr')
         assert(mol.symmetry)
         print('TODO: Add (-1)**l factor for l != 0')
         self.out_path = ""
         self.out_file = None
         self.shci_cmd = shci_cmd
-        self.shci_path = shci_path
 
         #Use analytic basis external to pyscf
         self.mol = mol
@@ -263,7 +262,6 @@ class Maker():
         #Get variables
         eps_vars = self.config['eps_vars']
         eps_vars_sched = self.config['eps_vars_sched']
-        num_dets = self.config['num_dets']
         n_up = (self.mol.nelectron + self.mol.spin)//2
         n_dn = (self.mol.nelectron - self.mol.spin)//2
         if not self.mol.symmetry:

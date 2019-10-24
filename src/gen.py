@@ -89,7 +89,7 @@ def symm_configs(dmc, configs):
         yield config
         skip.update([config, sy.partner_config(dmc, config)])
 
-def configs2csfs(dmc, csf_info, configs, rel_parity = False):
+def configs2csfs(dmc, csf_info, configs, rel_parity = True):
     csfs = []
     if dmc.symmetry in ('DOOH', 'COOV'):
         configs = symm_configs(dmc, configs)
@@ -187,5 +187,15 @@ def convert_proj_csfs(proj_csfs):
         csfs.append(vec.Vec(csf_dets))
     return csfs
 
+class Dummy():
+  def __init__(porbs, xorbs):
+    self.symmetry = 'DOOH'
+    self.xorbs = porbs
+    self.porbs = xorbs
+    self.ang_mom = ang_mom
+    self.real = real
+
 if __name__ == "__main__":
-    csf_info = load_csf_file(8, 2)
+    csf_info = load_csf_file(4, 0)
+    print(csf_info[4]) 
+

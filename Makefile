@@ -5,7 +5,7 @@ CXXFLAGS := -std=c++11 -fPIC $(CXX_WARNING_OPTIONS)
 SRC_DIR := src/tools
 BUILD_DIR := build
 LIB_DIR := lib
-PYLIB_DIR := /home/tanderson/anaconda3/include/python3.7m/
+PYLIB_DIR := /home/cyrus/anaconda2/pkgs/python-3.7.4-h265db76_1/include/python3.7m/
 MODULE := wf
 EXE := csf_gen
 

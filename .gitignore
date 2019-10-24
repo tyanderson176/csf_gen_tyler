@@ -7,6 +7,6 @@ __pycache__/*
 lib/__pycache__/*
 lib/hps/*
 lib/*.so
-run_dmc/*
+run_vmc/*
 linsymm/*
 *.pyc
