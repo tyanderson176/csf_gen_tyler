@@ -238,9 +238,7 @@ void save_csfs(csf_vec3D &spins, int nelecs) {
             CSF& max_sz_csf = set[set.size()-1];
             for(const auto& pair : max_sz_csf.dets) {
                 const Det& det = pair.first;
-                //coefs[index_of[det]] = perm_factor(det)*max_sz_csf.dets[det];
-                //perm factor computed in gen.py (need for spacial csfs)
-                coefs[index_of[det]] = max_sz_csf.dets[det];
+                coefs[index_of[det]] = perm_factor(det)*max_sz_csf.dets[det];
             }
             //print the coefs in appropriate order
             for(int i=0; i<coefs.size(); i++)

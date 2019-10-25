@@ -112,7 +112,7 @@ def get_csfs(dmc, dets, twice_s, method='projection', cache=False):
         print("Loading CSF data...\n");
         csf_data = gen.load_csf_file(max_open, twice_s)
         print("Converting configs...\n");
-        csfs = gen.configs2csfs(dmc, csf_data, configs, rel_parity=False)
+        csfs = gen.configs2csfs(dmc, csf_data, configs)
     else:
         for config in configs: 
             csfs += gen.compute_csfs(config, twice_s, twice_sz, method)

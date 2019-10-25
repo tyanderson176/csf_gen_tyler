@@ -89,22 +89,15 @@ def symm_configs(dmc, configs):
         yield config
         skip.update([config, sy.partner_config(dmc, config)])
 
-def configs2csfs(dmc, csf_info, configs, rel_parity = True):
+def configs2csfs(dmc, csf_info, configs):
     csfs = []
     if dmc.symmetry in ('DOOH', 'COOV'):
         configs = symm_configs(dmc, configs)
     for config in configs:
-        csfs += list(config2csfs(dmc, config, csf_info, rel_parity))
+        csfs += list(config2csfs(dmc, config, csf_info))
     return csfs
 
-def config2csfs(dmc, config, csf_info, rel_parity = True):
-    '''
-    When csf coefs are generated, they are sometimes generated as though
-    the electrons are bosonic. If rel_parity = True, this program will
-    correct this issue and insert the appropriate sign.
-
-    The gene.cc program uses no extra sign (bosonic) by default.
-    '''
+def config2csfs(dmc, config, csf_info):
     nopen = len([orb for orb in config.occs if config.occs[orb] == 1])
     csf_coefs, index2occs = csf_info[nopen]
     dets = [make_det(occs, config) for occs in index2occs]
@@ -113,10 +106,9 @@ def config2csfs(dmc, config, csf_info, rel_parity = True):
         csf = Vec.zero()
         for n, coef in enumerate(coefs):
             det = dets[n] 
-            p = parity(det) if rel_parity else 1
             if dmc.symmetry in ('DOOH', 'COOV'):
                 det = sy.convert_det(dmc, det)
-            csf += p*coef*det
+            csf += coef*det
         if csf.norm() > 0: csfs.append(csf/csf.norm())
     return np.array(csfs)
 
