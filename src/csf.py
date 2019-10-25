@@ -43,7 +43,8 @@ def get_det_info(dmc, orbsym, wf_filename, cache = False, rep = 'sparse'):
     csfs_info = [
             [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
 
-    #test_csf_wf = sorted([(coef, csf) for coef, csf in zip(wf_csf_coeffs, csfs_info)],
+    wf_csf_coeffs, csfs_info = sorted_csfs(wf_csf_coeffs, csfs_info)
+    #sorted_csf_wf = sorted([(coef, csf) for coef, csf in zip(wf_csf_coeffs, csfs_info)],
     #                     key = lambda pair: -abs(pair[0]))
     #itod = {index:det for det, index in det_indices.indices.items()}
     #for n, (coef, csf_info) in enumerate(test_csf_wf):
@@ -53,6 +54,12 @@ def get_det_info(dmc, orbsym, wf_filename, cache = False, rep = 'sparse'):
     #        print('\t' + str(coef*det_coef) + ' ' + str(itod[det_index]))
 
     return wf_csf_coeffs, csfs_info, det_indices, err
+
+def sorted_csfs(wf_csf_coeffs, csfs_info):
+    sorted_csf_wf = sorted([(coef, csf) for coef, csf in zip(wf_csf_coeffs, csfs_info)],
+                           key = lambda pair: -abs(pair[0]))
+    return ([coef for coef, csf_info in sorted_csf_wf], 
+            [csf_info for coef, csf_info in sorted_csf_wf])
 
 def get_det_info2(dmc, orbsym, wf_filename, cache=False, rep='sparse'):
     wfn = wf.load(wf_filename)
