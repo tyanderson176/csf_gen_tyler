@@ -16,7 +16,6 @@ class Maker():
     def __init__(self, mol, config, shci_cmd, basis_path = None):
         assert(mol.unit == 'bohr')
         assert(mol.symmetry)
-        print('TODO: Add (-1)**l factor for l != 0')
         self.out_path = ""
         self.out_file = None
         self.shci_cmd = shci_cmd
@@ -45,6 +44,8 @@ class Maker():
 
         #Symmetry
         self.symmetry = self.mol.symmetry.upper()
+        self.orb_symm = symm.label_orb_symm(self.mol, self.mol.irrep_name, self.mol.symm_orb, 
+                                            self.mf.mo_coeff)
         if self.symmetry in ('DOOH', 'COOV'):
             self.partner_orbs = self.mf.partner_orbs
             self.porbs = None
@@ -72,6 +73,8 @@ class Maker():
         self.print_radial_bfs()
         self.print_orbs()
         self.print_shci()
+        self.print_jastrow()
+        self.print_opt()
 
         self.out_file.close()
         return
@@ -96,7 +99,7 @@ class Maker():
             format_str.format('0.5  %10.3f  \'Hartrees\''% self.hf_energy) 
             + 'hb,etrial,eunit\n')
         self.out_file.write(
-            format_str.format('%d  10  1  100  0'% self.config['dmc_steps']) 
+            format_str.format('100  100  1  100  0') 
             + 'nstep,nblk,nblkeq,nconf,nconf_new\n')
         self.out_file.write(
             format_str.format('0  0  1  -2') 
@@ -382,7 +385,71 @@ class Maker():
             self.out_file.write(index_str)
             self.out_file.write(coeff_str)
         return
+
+    #PRINT JASTROW/OPTIMIZATION SECTIONS
+    #-----------------------------------
+
+    def print_jastrow(self):
+        self.out_file.write('\n\'* Jastrow section\'\n')
+        self.out_file.write('1             ianalyt_lap\n')
+        self.out_file.write('4 4 1 1 5 0   ijas,isc,nspin1,nspin2,nord,ifock\n')
+        self.out_file.write('5 5 5         norda,nordb,nordc\n')
+        self.out_file.write('1. 0. scalek,a21\n')
+        self.out_file.write('0. 0. 0. 0. 0. 0. (a(iparmj),iparmj=1,nparma)\n')
+        self.out_file.write('0. 1. 0. 0. 0. 0. (b(iparmj),iparmj=1,nparmb)\n')
+        self.out_file.write('0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. ' 
+                            + '(c(iparmj),iparmj=1,nparmc)\n')
     
+    def print_opt(self):
+        self.out_file.write('\n\'* Optimization section\'\n')
+        self.out_file.write('0 10000 1.d-8 0.05 1.d-4     ' 
+                            + 'nopt_iter,nblk_max,add_diag(1),p_var,tol_energy\n') 
+        self.out_file.write('1000 24 1 1 5 1000 21101 1 NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr\n')
+        self.out_file.write('0 0 0 0 i3body,irewgt,iaver,istrech\n')
+        self.out_file.write('0 0 0 0 0 0 0 0 0 0 ' 
+                            + 'ipos,idcds,idcdr,idcdt,id2cds,id2cdr,id2cdt,idbds,idbdr,idbdt\n')
+        self.out_file.write('1 '*len(self.mo_coeffs) + '(lo(iorb),iorb=1,norb)\n')
+        self.out_file.write('0  4  5  15  0  0 0 0  ' 
+                            + 'nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmg\n')
+        self.out_file.write('  (iworb(iparm),iwbasi(iparm),iparm=1,nlarml)\n')
+        self.out_file.write('  (iwbase(iparm),iparm=1,nparm-nparml)\n')
+        self.out_file.write('  (iwcsf(iparm),iparm=1,nparmcsf)\n')
+        self.out_file.write('    3 4 5 6 (iwjasa(iparm),iparm=1,nparma)\n')
+        self.out_file.write('    3   5   7 8 9    11    13 14 15 16 17 18    20 21    23 '
+                            + '(iwjasc(iparm),iparm=1,nparmc)\n')
+        self.out_file.write('0 0       necn,nebase\n')
+        self.out_file.write('          ((ieorb(j,i),iebasi(j,i),j=1,2),i=1,necn)\n')
+        self.out_file.write('          ((iebase(j,i),j=1,2),i=1,nebase)\n')
+        self.out_file.write('0 '*len(self.mo_coeffs) + '(ipivot(j),j=1,norb)\n')
+        self.out_file.write('%6.2f'%self.hf_energy + ' eave\n')
+        self.out_file.write('1.d-6 5. 1 15 4 pmarquardt,tau,noutput,nstep,ibold\n')
+        self.out_file.write('T F analytic,cholesky\n')
+        self.out_file.write('end\n\n')
+        self.out_file.write('basis\n')
+        self.out_file.write('which_analytical_basis = slater\n')
+        self.out_file.write('optimized_exponents ' 
+                            + ' '.join([str(n+1) for n in range(len(self.mo_coeffs))]) + ' end\n')
+        self.out_file.write('end\n\n')
+        self.out_file.write('orbitals\n')
+        self.out_file.write(' energies\n')
+        self.out_file.write(' '.join(["%.8f"%energy for energy in self.mf.mo_energy]) + '\n')
+        self.out_file.write(' end\n')
+        self.out_file.write(' symmetry\n')
+        self.out_file.write(' '.join(self.orb_symm) + '\n')
+        self.out_file.write(' end\n')
+        self.out_file.write('end\n\n')
+        self.out_file.write('exit\n\n')
+        self.out_file.write('optimization\n')
+        self.out_file.write(' parameters jastrow end\n')
+        self.out_file.write('  method = linear\n')
+        self.out_file.write('!linear renormalize=true end\n')
+        self.out_file.write(' increase_blocks=true\n')
+        self.out_file.write(' increase_blocks_factor=1.4\n')
+        self.out_file.write('!casscf=true\n')
+        self.out_file.write('!check_redundant_orbital_derivative=false\n')
+        self.out_file.write('!do_add_diag_mult_exp=.true.\n')
+        self.out_file.write('end\n')
+
     #AUX
     #---
     def clear_file(self, filename):

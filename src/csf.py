@@ -16,34 +16,33 @@ tol = 1e-15
 
 def get_det_info(dmc, orbsym, wf_filename, cache = False, rep = 'sparse'):
     wfn = wf.load(wf_filename)
-#    dets = [vec.Det([o+1 for o in up], [o+1 for o in dn]) 
-#            for n, [up, dn] in enumerate(wfn['dets']) if abs(wfn['coefs'][n]) > eps]
     wf_tol = dmc.config['wf_tol']
     trunc_wf = [(coef, vec.Det([orb+1 for orb in up], [orb+1 for orb in dn]))
                 for coef, [up, dn] in zip(wfn['coefs'], wfn['dets']) if abs(coef) > wf_tol]
     dets, wf_coeffs = [det for coef, det in trunc_wf], [coef for coef, det in trunc_wf]
     wf_coeffs = normalize(wf_coeffs)
     twice_s = wfn['n_up'] - wfn['n_dn']
-#    dmc.symmetry = 'D2H'
     if dmc.symmetry in ('DOOH', 'COOV'):
         sy.setup_dmc(dmc, orbsym, dets)
     csfs = get_csfs(dmc, dets, twice_s, 'projection', cache)
-    det_indices, ovlp = csf_matrix(csfs, rep)
 #    Convert to real wf if molecule has linear symm
     if dmc.symmetry in ('DOOH', 'COOV'):
         dets, wf_coeffs = sy.convert_wf(dmc, dets, wf_coeffs)
+    det_indices, ovlp = csf_matrix(csfs, get_det_indices(dets, wf_coeffs), rep)
+#    det_indices, ovlp = sorted_dets(dets, wf_coeffs, det_indices, ovlp)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
     wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
+#    We should have perr = err. If perr != err, there is likely an error
+#    during the projection part.
     perr = get_proj_error(ovlp, wf_det_coeffs, det_indices, rep)
     err = get_error(dets, wf_coeffs, csfs, wf_csf_coeffs)
     print('perr: %.10f, err: %.10f' % (perr, err))
-#    err2 = get_bf_error(wf_det_coeffs, det_indices, wf_csf_coeffs, csfs)
     if rep == 'sparse':
         wf_csf_coeffs = wf_csf_coeffs.toarray()
     csfs_info = [
             [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
 
-    wf_csf_coeffs, csfs_info = sorted_csfs(wf_csf_coeffs, csfs_info)
+    wf_csf_coeffs, csfs_info = sorted_csfs(wf_csf_coeffs, csfs_info, wf_tol)
     #sorted_csf_wf = sorted([(coef, csf) for coef, csf in zip(wf_csf_coeffs, csfs_info)],
     #                     key = lambda pair: -abs(pair[0]))
     #itod = {index:det for det, index in det_indices.indices.items()}
@@ -55,9 +54,10 @@ def get_det_info(dmc, orbsym, wf_filename, cache = False, rep = 'sparse'):
 
     return wf_csf_coeffs, csfs_info, det_indices, err
 
-def sorted_csfs(wf_csf_coeffs, csfs_info):
-    sorted_csf_wf = sorted([(coef, csf) for coef, csf in zip(wf_csf_coeffs, csfs_info)],
-                           key = lambda pair: -abs(pair[0]))
+def sorted_csfs(wf_csf_coeffs, csfs_info, tol):
+    sorted_csf_wf = sorted(
+        [(coef, csf) for coef, csf in zip(wf_csf_coeffs, csfs_info) if abs(coef) > tol],
+        key = lambda pair: -abs(pair[0]))
     return ([coef for coef, csf_info in sorted_csf_wf], 
             [csf_info for coef, csf_info in sorted_csf_wf])
 
@@ -91,7 +91,6 @@ def get_det_info2(dmc, orbsym, wf_filename, cache=False, rep='sparse'):
     csf_info = [
             [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
     return wf_csf_coeffs, csf_info, det_indices, err
-    
 
 def normalize(coeffs):
     norm = math.sqrt(sum([c**2 for c in coeffs]))
@@ -162,8 +161,13 @@ def get_2sz(dets):
     for _2sz in _2sz_vals:
         return _2sz
 
-def csf_matrix(csfs, rep = 'dense'):
-    det_indices = IndexList()
+def get_det_indices(dets, wf_coeffs):
+    sorted_wf = sorted([(coef, det) for coef, det in zip(wf_coeffs, dets)],
+                        key = lambda pair: -abs(pair[0]))
+    return IndexList([det for coef, det in sorted_wf])
+
+def csf_matrix(csfs, det_indices, rep = 'dense'):
+#    det_indices = IndexList()
     for csf in csfs:
         for det in csf.dets:
             det_indices.add(det)
@@ -192,8 +196,10 @@ def get_coeffs(csf, det_indices):
     return coeffs/csf.norm()
 
 class IndexList:
-    def __init__(self):
+    def __init__(self, objects):
         self.indices = {}
+        for obj in objects:
+            self.add(obj)
 
     def add(self, obj):
         sz = len(self)
