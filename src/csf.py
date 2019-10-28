@@ -2,8 +2,6 @@ import numpy
 import math
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
-sys.path.append(os.path.join(os.path.dirname(__file__), '../lib/csfgen'))
-import csfgen as proj
 import vec
 import gen
 import symm as sy
@@ -14,9 +12,15 @@ import scipy.sparse as sparse
 tol = 1e-15
 #coef_tol = 1e-5
 
-def get_det_info(dmc, orbsym, wf_filename, cache = False, rep = 'sparse'):
-    wfn = wf.load(wf_filename)
-    wf_tol = dmc.config['wf_tol']
+class CsfMaker(SymmUtils):
+    def __init__(self, wf_filename):
+        self.wf_filename = wf_filename
+        self.orbsym = getattr(self.mf.mo_coeff, 'orbsym')
+        self.rep = 'sparse'
+
+def get_csf_info(self, orbsym, wf_filename, rep = 'sparse'):
+    wfn = wf.load(self.wf_filename)
+    wf_tol = self.config['wf_tol']
     trunc_wf = [(coef, vec.Det([orb+1 for orb in up], [orb+1 for orb in dn]))
                 for coef, [up, dn] in zip(wfn['coefs'], wfn['dets']) if abs(coef) > wf_tol]
     dets, wf_coeffs = [det for coef, det in trunc_wf], [coef for coef, det in trunc_wf]
@@ -24,12 +28,11 @@ def get_det_info(dmc, orbsym, wf_filename, cache = False, rep = 'sparse'):
     twice_s = wfn['n_up'] - wfn['n_dn']
     if dmc.symmetry in ('DOOH', 'COOV'):
         sy.setup_dmc(dmc, orbsym, dets)
-    csfs = get_csfs(dmc, dets, twice_s, 'projection', cache)
+    csfs = get_csfs(dmc, dets, twice_s)
 #    Convert to real wf if molecule has linear symm
     if dmc.symmetry in ('DOOH', 'COOV'):
         dets, wf_coeffs = sy.convert_wf(dmc, dets, wf_coeffs)
     det_indices, ovlp = csf_matrix(csfs, get_det_indices(dets, wf_coeffs), rep)
-#    det_indices, ovlp = sorted_dets(dets, wf_coeffs, det_indices, ovlp)
     wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
     wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep)
 #    We should have perr = err. If perr != err, there is likely an error
@@ -43,15 +46,6 @@ def get_det_info(dmc, orbsym, wf_filename, cache = False, rep = 'sparse'):
             [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
 
     wf_csf_coeffs, csfs_info = sorted_csfs(wf_csf_coeffs, csfs_info, wf_tol)
-    #sorted_csf_wf = sorted([(coef, csf) for coef, csf in zip(wf_csf_coeffs, csfs_info)],
-    #                     key = lambda pair: -abs(pair[0]))
-    #itod = {index:det for det, index in det_indices.indices.items()}
-    #for n, (coef, csf_info) in enumerate(test_csf_wf):
-    #    print('-------------------')
-    #    print('CSF #%d:' % (n,))
-    #    for det_index, det_coef in csf_info:
-    #        print('\t' + str(coef*det_coef) + ' ' + str(itod[det_index]))
-
     return wf_csf_coeffs, csfs_info, det_indices, err
 
 def sorted_csfs(wf_csf_coeffs, csfs_info, tol):
@@ -60,37 +54,6 @@ def sorted_csfs(wf_csf_coeffs, csfs_info, tol):
         key = lambda pair: -abs(pair[0]))
     return ([coef for coef, csf_info in sorted_csf_wf], 
             [csf_info for coef, csf_info in sorted_csf_wf])
-
-def get_det_info2(dmc, orbsym, wf_filename, cache=False, rep='sparse'):
-    wfn = wf.load(wf_filename)
-    wf_tol = dmc.config['wf_tol']
-    trunc_wf = [(coef, vec.Det([orb+1 for orb in up], [orb+1 for orb in dn]))
-                for coef, [up, dn] in zip(wfn['coefs'], wfn['dets']) if abs(coef) > wf_tol]
-    dets, wf_coeffs = [det for coef, det in trunc_wf], [coef for coef, det in trunc_wf]
-    wf_coeffs = normalize(wf_coeffs)
-    twice_s = wfn['n_up'] - wfn['n_dn']
-    if dmc.symmetry in ('DOOH', 'COOV'):
-        sy.setup_dmc(dmc, orbsym, dets)
-#    csfs = get_csfs(dmc, dets, twice_s, 'projection', cache)
-#    Convert to real wf if molecule has linear symm
-    if dmc.symmetry in ('DOOH', 'COOV'):
-        dets, wf_coeffs = sy.convert_wf(dmc, dets, wf_coeffs)
-
-    wavefunc = vec.Vec.zero()
-    for det, coef in zip(dets, wf_coeffs):
-      wavefunc += coef*det
-    csfs = [wavefunc]
-
-    det_indices, ovlp = csf_matrix(csfs, rep)
-    wf_det_coeffs = get_det_coeffs(det_indices, wf_coeffs, dets, rep)
-    wf_csf_coeffs = matrix_mul(ovlp, wf_det_coeffs, rep) 
-    err = get_error(dets, wf_coeffs, csfs, wf_csf_coeffs)
-    print('err: %.10f' % err)
-    if rep == 'sparse':
-        wf_csf_coeffs = wf_csf_coeffs.toarray()
-    csf_info = [
-            [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
-    return wf_csf_coeffs, csf_info, det_indices, err
 
 def normalize(coeffs):
     norm = math.sqrt(sum([c**2 for c in coeffs]))
@@ -105,7 +68,7 @@ def get_det_coeffs(det_indices, wf_coeffs, dets, rep='dense'):
         det_coeffs = csr_matrix(det_coeffs).T
     return det_coeffs
 
-def get_csfs(dmc, dets, twice_s, method='projection', cache=False):
+def get_csfs(dmc, dets, twice_s):
     twice_sz = get_2sz(dets)
     if (twice_sz != twice_s):
         raise Exception("CSFs only saved for sz = s. Cannot find CSFs with " +
@@ -113,15 +76,10 @@ def get_csfs(dmc, dets, twice_s, method='projection', cache=False):
                 " in get_csfs.")
     configs = set(vec.Config(det) for det in dets)
     max_open = max([config.num_open for config in configs])
-    csfs = []
-    if cache:
-        print("Loading CSF data...\n");
-        csf_data = gen.load_csf_file(max_open, twice_s)
-        print("Converting configs...\n");
-        csfs = gen.configs2csfs(dmc, csf_data, configs)
-    else:
-        for config in configs: 
-            csfs += gen.compute_csfs(config, twice_s, twice_sz, method)
+    print("Loading CSF data...\n");
+    csf_data = gen.load_csf_file(max_open, twice_s)
+    print("Converting configs...\n");
+    csfs = gen.configs2csfs(dmc, csf_data, configs)
     return csfs
 
 def matrix_mul(ovlp, wf_det_coeffs, rep = 'dense'):

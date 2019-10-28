@@ -2,10 +2,8 @@ import sys
 import os
 import subprocess
 sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
-
 from pyscf import symm
 import numpy as np
-import csfgen as proj
 import vec
 import symm as sy
 from vec import Det, Vec, Config
@@ -148,19 +146,6 @@ def parity(det):
     assert(alt_sum > -1)
     return (1 if alt_sum%2 == 0 else -1)
 
-def compute_csfs(config, twice_s, twice_sz, method):
-    '''
-    Use projection method to compute configurations
-    '''
-    s, sz = twice_s/2, twice_sz/2
-    if method == 'projection':
-        config_str = config.make_config_str()
-        proj_csfs = proj.compute_csfs(config_str, s, sz)
-        csfs = convert_proj_csfs(proj_csfs)
-    else:
-        raise Exception('Invalid method \'' + method + '\' in compute_csfs')
-    return csfs
-
 def convert_proj_csfs(proj_csfs):
     csfs = []
     for proj_csf in proj_csfs:
@@ -178,14 +163,6 @@ def convert_proj_csfs(proj_csfs):
             csf_dets[vec.Det(up_occs, dn_occs)] = coeff
         csfs.append(vec.Vec(csf_dets))
     return csfs
-
-class Dummy():
-  def __init__(porbs, xorbs):
-    self.symmetry = 'DOOH'
-    self.xorbs = porbs
-    self.porbs = xorbs
-    self.ang_mom = ang_mom
-    self.real = real
 
 if __name__ == "__main__":
     csf_info = load_csf_file(4, 0)

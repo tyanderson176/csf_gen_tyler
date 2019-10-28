@@ -55,7 +55,6 @@ class Maker():
 
         #SHCI variables & output data
         self.config = config
-        self.cache_csfs = True
         self.wf_csf_coeffs = None
         self.csf_data = None
         self.det_data = None
@@ -323,7 +322,7 @@ class Maker():
         print('Starting CSF calculation...')
         orbsym = getattr(self.mf.mo_coeff, 'orbsym')
         self.wf_csf_coeffs, self.csf_data, self.det_data, err = \
-            csf.get_det_info(self, orbsym, wf_filename, self.cache_csfs)
+            csf.get_csf_info(self, orbsym, wf_filename)
         print("CSF calculation complete.")
         print("Projection error = %10.5f %%" % (100*err))
         return

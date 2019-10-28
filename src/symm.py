@@ -199,7 +199,6 @@ def ir_lz(ir):
         l = ir//10 * 2
     else:
         l = ir//10 * 2 + 1
-    
     return l if (ir%10 in (0, 2, 5, 7)) else -l
 
 def lz_of(orbsym):
