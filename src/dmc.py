@@ -1,17 +1,19 @@
 from functools import reduce
 import numpy
 import subprocess
+from decimal import Decimal
+
 import p2d
-import csf
 import gamess
 import vec
-import symm as sy
+from symm import SymMethods
+from gen import GenMethods
+from csf import CsfMethods
+
 from pyscf.tools import fcidump
 from pyscf import scf, ao2mo, gto, symm
 
-from decimal import Decimal
-
-class Maker():
+class Maker(SymMethods, GenMethods, CsfMethods):
     #config = {eps_vars, eps_vars_schedule, num_dets}
     def __init__(self, mol, config, shci_cmd, basis_path = None):
         assert(mol.unit == 'bohr')
@@ -43,16 +45,12 @@ class Maker():
         print('HF ENERGY: ' + str(self.hf_energy))
 
         #Symmetry
-        self.symmetry = self.mol.symmetry.upper()
-        self.orb_symm = symm.label_orb_symm(self.mol, self.mol.irrep_name, self.mol.symm_orb, 
-                                            self.mf.mo_coeff)
-        if self.symmetry in ('DOOH', 'COOV'):
-            self.partner_orbs = self.mf.partner_orbs
-            self.porbs = None
-            self.xorbs = None 
-            self.ang_mom = None
-            self.real = None
-
+        SymMethods.__init__(self)
+        #Csf Generation
+        GenMethods.__init__(self)
+        #Csf Projection/Formatting
+        CsfMethods.__init__(self)
+        
         #SHCI variables & output data
         self.config = config
         self.wf_csf_coeffs = None
@@ -218,7 +216,7 @@ class Maker():
             self.out_file.write('\n')
         for ao in self.aos:
             self.out_file.write('%15.8E\t'% ao.slater_exp())
-        self.out_file.write(' (bas_exp(ibas), ibas=1, nbas)\n')
+        self.out_file.write(' (zex(ibas), ibas=1, nbas)\n')
         return
     
     #SETUP SHCI CALCULATION
@@ -238,13 +236,10 @@ class Maker():
                 eri = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
             nuc = self.mf.energy_nuc()
             orbsym = getattr(self.mf.mo_coeff, 'orbsym', None) 
-#            orb_symm = symm.label_orb_symm(self.mol, self.mol.irrep_name, self.mol.symm_orb, self.mf.mo_coeff)
-#            print('orbsym (labels): ' + str(orb_symm))
             if self.symmetry in ('DOOH', 'COOV'):
-                partner_orbs = self.partner_orbs
-                sy.writeComplexOrbIntegrals(
+                self.writeComplexOrbIntegrals(
                     h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, 
-                    partner_orbs)
+                    self.partner_orbs)
             else:
                 orbsym = [sym+1 for sym in orbsym]
                 fcidump.from_integrals(
@@ -259,8 +254,6 @@ class Maker():
         return
     
     def make_config(self):
-        #TODO: inc error checking for symmetry (should be valid, like d2h, etc)
-        
         #Get variables
         eps_vars = self.config['eps_vars']
         eps_vars_sched = self.config['eps_vars_sched']
@@ -434,7 +427,7 @@ class Maker():
         self.out_file.write(' '.join(["%.8f"%energy for energy in self.mf.mo_energy]) + '\n')
         self.out_file.write(' end\n')
         self.out_file.write(' symmetry\n')
-        self.out_file.write(' '.join(self.orb_symm) + '\n')
+        self.out_file.write(' '.join(self.orb_symm_labels) + '\n')
         self.out_file.write(' end\n')
         self.out_file.write('end\n\n')
         self.out_file.write('exit\n\n')
