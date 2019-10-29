@@ -40,13 +40,14 @@ class SymMethods():
         self.orb_symm_labels = symm.label_orb_symm(
             self.mol, self.mol.irrep_name, self.mol.symm_orb, self.mf.mo_coeff)
         #Orbital information used for real to complex spherical harmonic conversion
-        self.xorbs = self.get_xorbs()
         if self.symmetry in ('DOOH', 'COOV'):
+            self.partner_orbs = self.mf.partner_orbs
+            self.xorbs = self.get_xorbs()
             self.porbs = {n+1: orb+1 for n, orb in enumerate(self.partner_orbs) }
         self.orb2lz = self.get_orb2lz()
         self.use_real_part = None #Use Hartree-Fock det from SHCI
 
-    def real_or_imag_part(hf_det):
+    def real_or_imag_part(self, hf_det):
         rhf, ihf = self.convert_det_helper(hf_det)
         self.use_real_part = (rhf.norm() >= ihf.norm())
 
@@ -184,8 +185,8 @@ class SymMethods():
         # See L146 of pyscf/symm/basis.py
         Ex_irrep_ids = [ir for ir in E_irrep_ids if (ir % 10) in (0, 2, 5, 7)]
         for ir in Ex_irrep_ids:
-    #        Ex, = numpy.where(orbsym == ir)
-    #        Ey = numpy.array([partner_orbs[orb] for orb in Ex])
+            Ex_ty, = numpy.where(orbsym == ir)
+            Ey_ty = numpy.array([partner_orbs[orb] for orb in Ex_ty])
             is_gerade = (ir % 10) in (0, 2)
             if is_gerade:
                 # See L146 of basis.py
@@ -194,7 +195,10 @@ class SymMethods():
             else:
                 Ex = numpy.where(orbsym == ir)[0]
                 Ey = numpy.where(orbsym == ir - 1)[0]
-    
+
+            assert(list(Ex) == list(Ex_ty))
+            assert(list(Ey) == list(Ey_ty))
+
             if ir % 10 in (0, 5):
                 l = (ir // 10) * 2
             else:

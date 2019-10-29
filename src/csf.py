@@ -11,7 +11,7 @@ import scipy.sparse as sparse
 
 class CsfMethods():
     def __init__(self):
-        self.rep = 'sparse'
+        self.proj_matrix_rep = 'sparse'
 
     def get_csf_info(self, wf_filename):
         wfn = wf.load(wf_filename)
@@ -20,21 +20,21 @@ class CsfMethods():
                     for coef, [up, dn] in zip(wfn['coefs'], wfn['dets']) if abs(coef) > wf_tol]
         dets, wf_coeffs = [det for coef, det in trunc_wf], [coef for coef, det in trunc_wf]
         wf_coeffs = self.normalize(wf_coeffs)
-        self.real_or_imag_part(det[0])
+        self.real_or_imag_part(dets[0])
 
         csfs = self.get_csfs(dets, abs(wfn['n_up'] - wfn['n_dn']))
 #       Convert to real wf if molecule has linear symm
         if self.symmetry in ('DOOH', 'COOV'):
             dets, wf_coeffs = self.convert_wf(dets, wf_coeffs)
-        det_indices, ovlp = self.csf_matrix(csfs, self.get_det_indices(dets, wf_coeffs), rep)
+        det_indices, ovlp = self.csf_matrix(csfs, self.get_det_indices(dets, wf_coeffs))
         wf_det_coeffs = self.get_det_coeffs(det_indices, wf_coeffs, dets)
-        wf_csf_coeffs = self.matrix_mul(ovlp, wf_det_coeffs, rep)
+        wf_csf_coeffs = self.matrix_mul(ovlp, wf_det_coeffs)
 #       We should have perr = err. If perr != err, there is likely an error
 #       during the projection part.
-        perr = self.get_proj_error(ovlp, wf_det_coeffs, det_indices, rep)
+        perr = self.get_proj_error(ovlp, wf_det_coeffs)
         err = self.get_error(dets, wf_coeffs, csfs, wf_csf_coeffs)
         print('perr: %.10f, err: %.10f' % (perr, err))
-        if self.rep == 'sparse':
+        if self.proj_matrix_rep == 'sparse':
             wf_csf_coeffs = wf_csf_coeffs.toarray()
         csfs_info = [
                 [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
@@ -57,7 +57,7 @@ class CsfMethods():
         for det, coeff in zip(dets, wf_coeffs):
             index = det_indices.index(det)
             det_coeffs[index] = coeff
-        if self.rep == 'sparse':
+        if self.proj_matrix_rep == 'sparse':
             det_coeffs = csr_matrix(det_coeffs).T
         return det_coeffs
 
@@ -83,25 +83,25 @@ class CsfMethods():
             return _2sz
 
     def matrix_mul(self, ovlp, wf_det_coeffs):
-        if (self.rep == 'dense'):
+        if (self.proj_matrix_rep == 'dense'):
             return numpy.dot(ovlp, wf_det_coeffs)
-        elif (self.rep == 'sparse'):
+        elif (self.proj_matrix_rep == 'sparse'):
             return ovlp*wf_det_coeffs
         else:
-            raise Exception('Unknown matrix rep \'' + self.rep + '\' in matrix_mul')
+            raise Exception('Unknown matrix rep \'' + self.proj_matrix_rep + '\' in matrix_mul')
 
-    def get_proj_error(self, ovlp, wf_det_coeffs, dis):
-        if self.rep == 'dense':
+    def get_proj_error(self, ovlp, wf_det_coeffs):
+        if self.proj_matrix_rep == 'dense':
             err_op = numpy.identity(len(wf_det_coeffs)) - numpy.dot(ovlp.T, ovlp)
             err_vec = numpy.dot(err_op, wf_det_coeffs)
             return numpy.dot(err_vec, err_vec)/numpy.dot(wf_det_coeffs, wf_det_coeffs)
-        elif self.rep == 'sparse':
+        elif self.proj_matrix_rep == 'sparse':
             err_op = sparse.identity(wf_det_coeffs.shape[0]) - ovlp.T*ovlp 
             err_vec = err_op*wf_det_coeffs
             err = err_vec.T*err_vec/(wf_det_coeffs.T*wf_det_coeffs)
             return err[0,0]
         else:
-            raise Exception('Unknown matrix rep \''+ self.rep + '\' in get_proj_error')
+            raise Exception('Unknown matrix rep \''+ self.proj_matrix_rep + '\' in get_proj_error')
 
     def get_error(self, dets, det_coeffs, csfs, csf_coeffs):
         wf_diff = vec.Vec.zero()
@@ -122,10 +122,10 @@ class CsfMethods():
         for csf in csfs:
             for det in csf.dets:
                 det_indices.add(det)
-        if self.rep == 'dense':
+        if self.proj_matrix_rep == 'dense':
             matrix = numpy.array([self.get_coeffs(csf, det_indices) for csf in csfs])
             return det_indices, matrix
-        elif self.rep == 'sparse':
+        elif self.proj_matrix_rep == 'sparse':
             coefs, rows, cols = [], [], []
             for n, csf in enumerate(csfs):
                 norm = csf.norm()
@@ -136,7 +136,7 @@ class CsfMethods():
             matrix = csr_matrix((coefs, (rows, cols)))
             return det_indices, matrix
         else:
-            raise Exception('Unknown rep \'' + self.rep + '\' in csf_matrix')
+            raise Exception('Unknown rep \'' + self.proj_matrix_rep + '\' in csf_matrix')
 
     def get_coeffs(self, csf, det_indices):
         coeffs = numpy.zeros(len(det_indices))

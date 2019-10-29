@@ -43,12 +43,30 @@ class GenMethods():
             raise Exception(cache_name + " already exists." + 
                     "make_csf_file will not attempt to overwrite it")
         except:
-            gen_script = os.path.join(os.path.dirname(__file__), '../bin/run_csfgen')
-            out_dir = '.'
-            nelecs = str(max_open)
-            subprocess.run([gen_script, out_dir, filename, nelecs])
-            f = open(filename, 'r')
-            file_contents = f.read()
+            csf_gen_exe = os.path.join(os.path.dirname(__file__), '../lib/csf_generate')
+            process = subprocess.Popen(
+                '%s %d'% (csf_gen_exe, max_open), shell=True, stdout=subprocess.PIPE,
+                universal_newlines = True)
+            csf_cache_file = open(filename, 'w+')
+            file_contents = ''
+            for line in iter(process.stdout.readline, ''):
+                csf_cache_file.write(line)
+                file_contents += line
+            csf_cache_file.close()
+
+#            csf_gen_exe = os.path.join(os.path.dirname(__file__), '../lib/csf_generate')
+#            out_dir = '.'
+#            nelecs = str(max_open)
+#            subprocess.run([gen_script, out_dir, filename, nelecs])
+#            f = open(filename, 'r')
+#            file_contents = f.read()
+
+#            gen_script = os.path.join(os.path.dirname(__file__), '../bin/run_csfgen')
+#            out_dir = '.'
+#            nelecs = str(max_open)
+#            subprocess.run([gen_script, out_dir, filename, nelecs])
+#            f = open(filename, 'r')
+#            file_contents = f.read()
             return self.parse_csf_file(sys.maxsize, twice_s, file_contents)
 
     def load_csf_file(self, max_open, twice_s):
@@ -89,7 +107,7 @@ class GenMethods():
         for config in configs:
             if config in skip: continue
             yield config
-            skip.update([config, self.partner_config(self, config)])
+            skip.update([config, self.partner_config(config)])
 
     def configs2csfs(self, csf_info, configs):
         csfs = []
@@ -149,3 +167,8 @@ class GenMethods():
 #            dn_ptr += -1
 #    assert(alt_sum > -1)
 #    return (1 if alt_sum%2 == 0 else -1)
+
+if __name__ == "__main__":
+    meth = GenMethods()
+    
+    meth.make_csf_file(4, 2)

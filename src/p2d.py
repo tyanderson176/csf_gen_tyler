@@ -124,9 +124,9 @@ def mol2aos(mol, mf, basis = None):
             The 'ns' computed by Pyscf simply enumerate the basis functions
             as they appear in the input basis file - they may have little
             to do with the 'actual' ns cooresponding to those basis functions.
-            Because of this, I have opted to redefine n below. If n was
+            Because of this, I have redefined n below. If n was
             provided in some external basis, we use n = sto.get_n(). Otherwise,
-            we use the numerical DMC convention that n = l+1 (i.e. all shells 
+            we use the numerical QMC convention that n = l+1 (i.e. all shells 
             with a fixed angular momentum l are placed in the same 'bucket')
             '''
             n = sto.get_n() if sto else l+1
@@ -213,7 +213,6 @@ def radial_grid(start, end, num_pts, x):
     return [r0*(pow(x, i) - 1)+start for i in range(0, num_pts)]
 
 def aos2mo_coeffs(aos):
-    #CHECK! Make sure that mo_coeffs are correct.
     '''
     Prints the mo_coeffs.
     Each column corresponds to an atomic orbital. Columns are printed in the 

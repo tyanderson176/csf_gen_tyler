@@ -13,13 +13,14 @@ from csf import CsfMethods
 from pyscf.tools import fcidump
 from pyscf import scf, ao2mo, gto, symm
 
-class Maker(SymMethods, GenMethods, CsfMethods):
+class InputMaker(SymMethods, GenMethods, CsfMethods):
     #config = {eps_vars, eps_vars_schedule, num_dets}
-    def __init__(self, mol, config, shci_cmd, basis_path = None):
+    def __init__(self, mol, config, shci_cmd, wf_filename = None, basis_path = None,
+                 optimize_orbs = False):
         assert(mol.unit == 'bohr')
         assert(mol.symmetry)
-        self.out_path = ""
         self.out_file = None
+        self.wf_filename = wf_filename if wf_filename else 'wf_eps1_%.2e.dat'%config['eps_vars'][-1]
         self.shci_cmd = shci_cmd
 
         #Use analytic basis external to pyscf
@@ -37,18 +38,19 @@ class Maker(SymMethods, GenMethods, CsfMethods):
         #Get atomic orbitals
         self.aos = p2d.mol2aos(self.mol, self.mf, self.basis)
         self.mo_coeffs = p2d.aos2mo_coeffs(self.aos)
-        #Optimized_orbs init value from config?
-        self.optimized_orbs = False
         self.atoms = self.get_atom_types() 
         self.n_up, self.n_down = self.mol.nelec
         self.hf_energy = self.mf.energy_tot()
+        #Optimized_orbs
+        self.optimize_orbs = optimize_orbs
+        self.rotation_matrix = None
         print('HF ENERGY: ' + str(self.hf_energy))
 
-        #Symmetry
+        #Import symmetry methods
         SymMethods.__init__(self)
-        #Csf Generation
+        #Import csf generation methods
         GenMethods.__init__(self)
-        #Csf Projection/Formatting
+        #Import csf projection/formatting methods
         CsfMethods.__init__(self)
         
         #SHCI variables & output data
@@ -57,7 +59,7 @@ class Maker(SymMethods, GenMethods, CsfMethods):
         self.csf_data = None
         self.det_data = None
 
-    def make(self, filename):
+    def make_input(self, filename):
         #Updates wf_csfs_coeffs, csf_data, and det_data
         self.get_shci_output()
 
@@ -77,12 +79,12 @@ class Maker(SymMethods, GenMethods, CsfMethods):
         return
 
     def print_header(self):
-        self.print_dmc_header()
+        self.print_qmc_header()
         self.print_geometry_header()
         self.print_determinant_header()
         return
 
-    def print_dmc_header(self):
+    def print_qmc_header(self):
         format_str = '{:40}'
         self.out_file.write(
             format_str.format('\'ncsf=%d ndet=%d norb=%d\''% 
@@ -192,8 +194,8 @@ class Maker(SymMethods, GenMethods, CsfMethods):
     #WRITE ORBITAL INFORMATION
     #-------------------------
     def get_orb_coeffs(self):
-        if self.optimized_orbs:
-            raise Exception("Optimized Orbs not yet implemented")
+        if self.optimize_orbs:
+            return numpy.dot(self.rotation_matrix, self.mo_coeffs)
         return self.mo_coeffs
     
     def print_orbs(self):
@@ -277,6 +279,15 @@ class Maker(SymMethods, GenMethods, CsfMethods):
         self.write_config_var(config, 'var_only', 'true')
         self.write_config_var(config, 'eps_vars', eps_vars)
         self.write_config_var(config, 'eps_vars_schedule', eps_vars_sched)
+
+        if self.optimize_orbs:
+            self.write_config_var(config, 'optorb', 'true')
+            opt_orbs_vars = [
+                '\"rotation_matrix\": true,', 
+                '\"method\", \"appnewton\"',
+                '\"accelerate\": true']
+            self.write_config_var(config, 'optimization', opt_orbs_vars, curly = True)
+
         sym_var = ('{\n' +
                    '\t\t\"point_group\": ' + sym + '\n' +
                    '\t}')
@@ -285,74 +296,63 @@ class Maker(SymMethods, GenMethods, CsfMethods):
         config.close()
         return
     
-    def write_config_var(self, filename, var_name, vals, end = ","):
-        filename.write('\t"'+var_name+'": ')
+    def write_config_var(self, config_file, var_name, vals, end = ",", curly = False):
+        config_file.write('\t"'+var_name+'": ')
         if not isinstance(vals, list):
-            filename.write(str(vals) + end + '\n')
+            config_file.write(str(vals) + end + '\n')
             return
         elif len(vals) == 1:
-            filename.write(str(vals[0]) + end + '\n')
+            config_file.write(str(vals[0]) + end + '\n')
             return
         elif len(vals) > 1:
-            filename.write('[\n')
+            open_paren, closed_paren = '{', '}' if curly else '[', ']' 
+            config_file.write(open_paren + '\n')
             for val in vals[:-1]:
-                filename.write('\t\t' + str(val) + ',\n')
-            filename.write('\t\t' + str(vals[-1]) + '\n')
-            filename.write('\t]' + end + '\n')
+                config_file.write('\t\t' + str(val) + ',\n')
+            config_file.write('\t\t' + str(vals[-1]) + '\n')
+            config_file.write('\t' + closed_paren + end + '\n')
             return
-        raise Exception('Passed null list as vals to put_config_var.')
+        raise Exception('Passed null list as vals to write_config_var.')
         return
 
     #GET SHCI DATA
     #-------------
     def get_shci_output(self):
         self.setup_shci()
-        print("Running shci...\n")
-        output = subprocess.run(self.shci_cmd.split(' '), capture_output = True)
-        eps_vars = self.config['eps_vars']
-        wf_filename = 'wf_eps1_%3.2e.dat' % eps_vars[-1]
-        print('Loading WF from: ' + wf_filename)
+        try:
+            wf_file = open(self.wf_filename, 'r')
+            if self.optimize_orbs:
+                rot_matrix_file = open('rotation_matrix', 'r')
+        except FileNotFoundError:
+            print("Running shci...\n")
+            self.run_shci()
+        print('Loading WF from: ' + self.wf_filename)
         print('Starting CSF calculation...')
-        orbsym = getattr(self.mf.mo_coeff, 'orbsym')
         self.wf_csf_coeffs, self.csf_data, self.det_data, err = \
-            csf.get_csf_info(self, orbsym, wf_filename)
+            self.get_csf_info(self.wf_filename)
+        if self.optimize_orbs:
+            self.rotation_matrix = self.load_rotation_matrix()
         print("CSF calculation complete.")
         print("Projection error = %10.5f %%" % (100*err))
         return
 
-    def csf_stats(self, csf_data, det_data):
-        configs = {}
-        index2det = {}
-        for det in det_data.indices:
-            index2det[det_data.index(det)] = det
-        for csf in csf_data:
-            csf_configs = set([vec.Config(index2det[pair[0]]) for pair in csf])
-            config, = csf_configs
-            if config not in configs:
-                configs[config] = 0
-            configs[config] += 1
-        for config in configs:
-            print('csfs with config ' + str(config) + ' : ' 
-                + str(configs[config]))
+    def run_shci(self):
+        process = subprocess.Popen(
+            self.shci_cmd, shell=True, stdout=subprocess.PIPE,
+            universal_newlines = True)
+        shci_output_file = open('shci.out', 'w')
+        for line in iter(process.stdout.readline, ''):
+            shci_output_file.write(line)
+        return
 
-    def parse_output(self, out):
-        lines = out.split('\n')
-        start_index = lines.index("START DMC")
-        end_index = lines.index("END DMC")
-        dmc_lines = lines[start_index: end_index+1]
-        coef_index = dmc_lines.index("DET COEFFS:")
-        s2_index = dmc_lines.index("S^2 VAL:") 
-        S, det_strs, coeffs = -1, [], []
-        for n, line in enumerate(dmc_lines):
-            if 0 < n < coef_index: 
-                det_strs.append(line)
-            elif n == coef_index + 1:
-                coeffs = line
-            elif n == s2_index + 1:
-                S = float(line) 
-        shci_out = (S, det_strs, coeffs)
-        return shci_out, False
-    
+    def load_rotation_matrix(self):
+        rot_matrix_file = open('rotation_matrix', 'r')
+        self.rotation_matrix = numpy.array([])
+        for line in rot_matrix_file:
+            row = np.array([float(elmt) for elmt in line.strip().split(' ')])
+            self.rotation_matrix.append(row)
+        return
+
     #OUTPUT SHCI DATA
     #----------------
     def print_shci(self):
@@ -361,7 +361,7 @@ class Maker(SymMethods, GenMethods, CsfMethods):
         sorted_dets = sorted(
             [det for det in self.det_data.indices], 
             key=lambda d: self.det_data.index(d))
-        dets_str = '\n'.join([det.dmc_str() for det in sorted_dets])
+        dets_str = '\n'.join([det.qmc_str() for det in sorted_dets])
         self.out_file.write(dets_str + ' (iworbd(iel,idet), iel=1, nelec)\n')
         self.out_file.write(str(len(self.csf_data)) + ' ncsf\n')
         self.out_file.write(csf_coeffs_str + ' (csf_coef(icsf), icsf=1, ncsf)\n')

@@ -1,6 +1,7 @@
 scripts/*
 out*/*
 bin/*
+old_bin/*
 test/*
 build/*.o
 

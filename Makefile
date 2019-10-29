@@ -7,7 +7,7 @@ BUILD_DIR := build
 LIB_DIR := lib
 PYLIB_DIR := /home/cyrus/anaconda2/pkgs/python-3.7.4-h265db76_1/include/python3.7m/
 MODULE := wf
-EXE := csf_gen
+EXE := csf_generate
 
 # Libraries.
 CXXFLAGS := $(CXXFLAGS) -I $(LIB_DIR) -I $(PYLIB_DIR)

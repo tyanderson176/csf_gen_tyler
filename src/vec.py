@@ -76,7 +76,6 @@ class Vec:
 
 class Det:
     def __init__(self, up_occ, dn_occ):
-        #TODO: Handle permutation?
         self.up_occ = sorted(up_occ)
         self.dn_occ = sorted(dn_occ)
 #        parity = (self.parity()
@@ -87,7 +86,6 @@ class Det:
         self._parity = None
 
     def get_Sz(self):
-        #TODO: Is this safe?
         return (len(self.up_occ) - len(self.dn_occ))/2
 
     @property
@@ -96,11 +94,11 @@ class Det:
             self._parity = self._compute_parity()
         return self._parity
 
-    def dmc_str(self):
-        dmc_str = ['%4d' % orb for orb in self.up_occ]
-        dmc_str += '     '
-        dmc_str += ['%4d' % orb for orb in self.dn_occ]
-        return "".join(dmc_str)
+    def qmc_str(self):
+        qmc_str = ['%4d' % orb for orb in self.up_occ]
+        qmc_str += '     '
+        qmc_str += ['%4d' % orb for orb in self.dn_occ]
+        return "".join(qmc_str)
 
     def __mul__(self, other):
         if isinstance(other, (int, float, numpy.int64, numpy.float64)):
