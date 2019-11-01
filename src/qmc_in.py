@@ -43,14 +43,14 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         self.hf_energy = self.mf.energy_tot()
         #Optimized_orbs
         self.optimize_orbs = optimize_orbs
-        self.rotation_matrix = None
+        self.rotation_matrix = []
         print('HF ENERGY: ' + str(self.hf_energy))
 
-        #Import symmetry methods
+        #Initialize symmetry vars
         SymMethods.__init__(self)
-        #Import csf generation methods
+        #Initialize csf generation vars
         GenMethods.__init__(self)
-        #Import csf projection/formatting methods
+        #Initialize csf projection/formatting vars
         CsfMethods.__init__(self)
         
         #SHCI variables & output data
@@ -195,7 +195,7 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
     #-------------------------
     def get_orb_coeffs(self):
         if self.optimize_orbs:
-            return numpy.dot(self.rotation_matrix, self.mo_coeffs)
+            return numpy.matmul(self.rotation_matrix, self.mo_coeffs)
         return self.mo_coeffs
     
     def print_orbs(self):
@@ -229,24 +229,7 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
             print("FCIDUMP found.\n")
         except FileNotFoundError:
             print("FCIDUMP not found. Making new FCIDUMP...\n")
-            h1 = reduce(
-                numpy.dot, 
-                (self.mf.mo_coeff.T, self.mf.get_hcore(), self.mf.mo_coeff))
-            if self.mf._eri is None:
-                eri = ao2mo.full(self.mol, self.mf.mo_coeff)
-            else:
-                eri = ao2mo.full(self.mf._eri, self.mf.mo_coeff)
-            nuc = self.mf.energy_nuc()
-            orbsym = getattr(self.mf.mo_coeff, 'orbsym', None) 
-            if self.symmetry in ('DOOH', 'COOV'):
-                self.writeComplexOrbIntegrals(
-                    h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, 
-                    self.partner_orbs)
-            else:
-                orbsym = [sym+1 for sym in orbsym]
-                fcidump.from_integrals(
-                    'FCIDUMP', h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
-                    tol=1e-15, float_format=' %.16g')
+            self.make_fcidump('FCIDUMP')
         try:
             attempt = open('config.json', 'r')
             print("config.json found.\n")
@@ -254,6 +237,42 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
             print("config.json not found. Making new config.json...\n")
             self.make_config()
         return
+
+    def make_fcidump(self, filename):
+        mo_coeff = self.mf.mo_coeff
+        h1 = reduce(
+            numpy.dot, 
+            (mo_coeff.T, self.mf.get_hcore(), mo_coeff))
+        if self.mf._eri is None:
+            eri = ao2mo.full(self.mol, mo_coeff)
+        else:
+            eri = ao2mo.full(self.mf._eri, mo_coeff)
+        nuc = self.mf.energy_nuc()
+        orbsym = getattr(mo_coeff, 'orbsym', None) 
+        if self.symmetry in ('DOOH', 'COOV'):
+            self.writeComplexOrbIntegrals(
+                h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, 
+                self.partner_orbs)
+        else:
+            orbsym = [sym+1 for sym in orbsym]
+            fcidump.from_integrals(
+                filename, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
+                tol=1e-15, float_format=' %.16g')
+
+    def test_fcidump(self, filename):
+        mo_coeff = self.mf.mo_coeff
+        orbsym = getattr(mo_coeff, 'orbsym', None) 
+        mo_coeff = reduce(numpy.dot, (mo_coeff, self.real2complex_coeffs.conj().T))
+        h1 = reduce(numpy.dot, (mo_coeff.conj().T, self.mf.get_hcore(), mo_coeff))
+        if self.mf._eri is None:
+            eri = ao2mo.full(self.mol, mo_coeff)
+        else:
+            eri = ao2mo.full(self.mf._eri, mo_coeff)
+        nuc = self.mf.energy_nuc()
+        orbsym = [sym+1 for sym in orbsym]
+        fcidump.from_integrals(
+            filename, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
+            tol=1e-15, float_format=' %.16g')
     
     def make_config(self):
         #Get variables
@@ -283,8 +302,8 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         if self.optimize_orbs:
             self.write_config_var(config, 'optorb', 'true')
             opt_orbs_vars = [
-                '\"rotation_matrix\": true,', 
-                '\"method\", \"appnewton\"',
+                '\"rotation_matrix\": true', 
+                '\"method\": \"appnewton\"',
                 '\"accelerate\": true']
             self.write_config_var(config, 'optimization', opt_orbs_vars, curly = True)
 
@@ -301,11 +320,8 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         if not isinstance(vals, list):
             config_file.write(str(vals) + end + '\n')
             return
-        elif len(vals) == 1:
-            config_file.write(str(vals[0]) + end + '\n')
-            return
-        elif len(vals) > 1:
-            open_paren, closed_paren = '{', '}' if curly else '[', ']' 
+        else:
+            open_paren, closed_paren = ('{', '}') if curly else ('[', ']')
             config_file.write(open_paren + '\n')
             for val in vals[:-1]:
                 config_file.write('\t\t' + str(val) + ',\n')
@@ -331,27 +347,25 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         self.wf_csf_coeffs, self.csf_data, self.det_data, err = \
             self.get_csf_info(self.wf_filename)
         if self.optimize_orbs:
-            self.rotation_matrix = self.load_rotation_matrix()
+            self.load_rotation_matrix()
         print("CSF calculation complete.")
         print("Projection error = %10.5f %%" % (100*err))
         return
 
     def run_shci(self):
-        process = subprocess.Popen(
-            self.shci_cmd, shell=True, stdout=subprocess.PIPE,
-            universal_newlines = True)
         shci_output_file = open('shci.out', 'w')
-        for line in iter(process.stdout.readline, ''):
-            shci_output_file.write(line)
+        subprocess.run(self.shci_cmd.split(), stdout=shci_output_file)
         return
 
     def load_rotation_matrix(self):
         rot_matrix_file = open('rotation_matrix', 'r')
-        self.rotation_matrix = numpy.array([])
         for line in rot_matrix_file:
-            row = np.array([float(elmt) for elmt in line.strip().split(' ')])
+            row = numpy.array([float(elmt) for elmt in line.strip().split()])
             self.rotation_matrix.append(row)
-        return
+        self.rotation_matrix = numpy.array(self.rotation_matrix).T
+        if self.symmetry in ('DOOH', 'COOV'):
+            R = self.real2complex_coeffs
+            self.rotation_matrix = reduce(numpy.dot, (R.conj().T, self.rotation_matrix, R)).real
 
     #OUTPUT SHCI DATA
     #----------------

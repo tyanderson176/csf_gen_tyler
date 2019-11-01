@@ -46,6 +46,7 @@ class SymMethods():
             self.porbs = {n+1: orb+1 for n, orb in enumerate(self.partner_orbs) }
         self.orb2lz = self.get_orb2lz()
         self.use_real_part = None #Use Hartree-Fock det from SHCI
+        self.real2complex_coeffs = None
 
     def real_or_imag_part(self, hf_det):
         rhf, ihf = self.convert_det_helper(hf_det)
@@ -141,6 +142,7 @@ class SymMethods():
         coeffs, num_rows, row_index, row_coeffs, orbsym = \
             self.realToComplex(norb, nelec, orbsym, partner_orbs)
     
+        self.real2complex_coeffs = coeffs
         new_h1 = reduce(numpy.dot, (coeffs, h1, coeffs.conj().T)).real
         eri = pyscf.ao2mo.restore(1, eri, norb)
         new_eri = numpy.zeros_like(eri)

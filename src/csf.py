@@ -29,6 +29,7 @@ class CsfMethods():
         det_indices, ovlp = self.csf_matrix(csfs, self.get_det_indices(dets, wf_coeffs))
         wf_det_coeffs = self.get_det_coeffs(det_indices, wf_coeffs, dets)
         wf_csf_coeffs = self.matrix_mul(ovlp, wf_det_coeffs)
+#        csfs, wf_csf_coeffs = self.rotate_csfs(csfs, wf_csf_coeffs, reduce_space = True)
 #       We should have perr = err. If perr != err, there is likely an error
 #       during the projection part.
         perr = self.get_proj_error(ovlp, wf_det_coeffs)
