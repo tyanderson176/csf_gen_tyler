@@ -109,27 +109,30 @@ class GenMethods():
             yield config
             skip.update([config, self.partner_config(config)])
 
-    def configs2csfs(self, csf_info, configs):
-        csfs = []
+    def configs2csfs(self, csf_cache, configs):
+        csfs, config_labels = [], []
         if self.symmetry in ('DOOH', 'COOV'):
             configs = self.symm_configs(configs)
-        for config in configs:
-            csfs += list(self.config2csfs(config, csf_info))
-        return csfs
+        for n, config in enumerate(configs):
+            config_csfs = list(self.config2csfs(csf_cache, config))
+            csfs += config_csfs
+            config_labels += [n for csf in config_csfs]
+        assert(len(csfs) == len(config_labels))
+        return csfs, config_labels
 
-    def config2csfs(self, config, csf_info):
+    def config2csfs(self, csf_cache, config):
         nopen = len([orb for orb in config.occs if config.occs[orb] == 1])
-        csf_coefs, index2occs = csf_info[nopen]
+        csfs_coefs, index2occs = csf_cache[nopen]
         dets = [self.make_det(occs, config) for occs in index2occs]
         csfs = []
-        for coefs in csf_coefs:
+        for coefs in csfs_coefs:
             csf = Vec.zero()
             for n, coef in enumerate(coefs):
                 det = dets[n] 
                 if self.symmetry in ('DOOH', 'COOV'):
                     det = self.convert_det(det)
                 csf += coef*det
-            if csf.norm() > 0: csfs.append(csf/csf.norm())
+            if csf.norm() != 0: csfs.append(csf/csf.norm())
         return np.array(csfs)
 
     def make_det(self, occ_str, config):

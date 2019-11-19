@@ -20,8 +20,10 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         assert(mol.unit == 'bohr')
         assert(mol.symmetry)
         self.out_file = None
-        self.wf_filename = wf_filename if wf_filename else 'wf_eps1_%.2e.dat'%config['eps_vars'][-1]
+        self.wf_filename = \
+            wf_filename if wf_filename else 'wf_eps1_%.2e.dat'%config['eps_vars'][-1]
         self.shci_cmd = shci_cmd
+        self.config = config
 
         #Use analytic basis external to pyscf
         self.mol = mol
@@ -54,10 +56,11 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         CsfMethods.__init__(self)
         
         #SHCI variables & output data
-        self.config = config
         self.wf_csf_coeffs = None
         self.csf_data = None
+        self.config_data = None
         self.det_data = None
+        self.det_config_labels = None
 
     def make_input(self, filename):
         #Updates wf_csfs_coeffs, csf_data, and det_data
@@ -337,19 +340,18 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         self.setup_shci()
         try:
             wf_file = open(self.wf_filename, 'r')
-            if self.optimize_orbs:
-                rot_matrix_file = open('rotation_matrix', 'r')
+            rot_matrix_file = open('rotation_matrix', 'r') if self.optimize_orbs else None
         except FileNotFoundError:
             print("Running shci...\n")
             self.run_shci()
         print('Loading WF from: ' + self.wf_filename)
         print('Starting CSF calculation...')
-        self.wf_csf_coeffs, self.csf_data, self.det_data, err = \
+        self.wf_csf_coeffs, self.csf_data, self.config_data, self.det_data, err = \
             self.get_csf_info(self.wf_filename)
         if self.optimize_orbs:
             self.load_rotation_matrix()
         print("CSF calculation complete.")
-        print("Projection error = %10.5f %%" % (100*err))
+        print("Projection error = %10.5f" % err)
         return
 
     def run_shci(self):
@@ -373,9 +375,8 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         csf_coeffs_str = '\t'.join(['%.10f' % coeff for coeff in self.wf_csf_coeffs])
         ndets_str = '\t'.join([str(len(csf_datum)) for csf_datum in self.csf_data])
         sorted_dets = sorted(
-            [det for det in self.det_data.indices], 
-            key=lambda d: self.det_data.index(d))
-        dets_str = '\n'.join([det.qmc_str() for det in sorted_dets])
+            [det for det in self.det_data.indices], key=lambda d: self.det_data.index(d))
+        dets_str = '\n'.join([self.det_row_str(det, n) for n, det in enumerate(sorted_dets)])
         self.out_file.write(dets_str + ' (iworbd(iel,idet), iel=1, nelec)\n')
         self.out_file.write(str(len(self.csf_data)) + ' ncsf\n')
         self.out_file.write(csf_coeffs_str + ' (csf_coef(icsf), icsf=1, ncsf)\n')
@@ -383,14 +384,18 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
  
         #'csf_data' is a list of 'csf's
         #'csf' is a list of (index, coeff) pairs for each det in the csf
-        for csf in self.csf_data:
+        for csf, config in zip(self.csf_data, self.config_data):
             index_str = (' '.join([str(pair[0] + 1) for pair in csf]) +
                 ' (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
             coeff_str = (' '.join(['%.8f'%pair[1] for pair in csf]) +
-                ' (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
+                ' (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf)) (%d)\n'%(config+1))
             self.out_file.write(index_str)
             self.out_file.write(coeff_str)
         return
+
+    def det_row_str(self, det, n):
+        label = self.det_config_labels[det]
+        return det.qmc_str() + '\t\t' + str(n+1) + '\t' + str(label)
 
     #PRINT JASTROW/OPTIMIZATION SECTIONS
     #-----------------------------------
