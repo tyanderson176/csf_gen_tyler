@@ -10,7 +10,7 @@ __pycache__/*
 lib/__pycache__/*
 lib/hps/*
 lib/*.so
-lib/csf_gen
+lib/spin_csf_gen
 
 run_vmc/*
 linsymm/*

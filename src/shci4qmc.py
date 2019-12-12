@@ -13,7 +13,7 @@ from csf import CsfMethods
 from pyscf.tools import fcidump
 from pyscf import scf, ao2mo, gto, symm
 
-class InputMaker(SymMethods, GenMethods, CsfMethods):
+class CacheMaker(SymMethods, GenMethods, CsfMethods):
     #config = {eps_vars, eps_vars_schedule, num_dets}
     def __init__(self, mol, config, shci_cmd, wf_filename = None, basis_path = None,
                  optimize_orbs = False):
@@ -55,14 +55,13 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         #Initialize csf projection/formatting vars
         CsfMethods.__init__(self)
         
-        #SHCI variables & output data
-        self.wf_csf_coeffs = None
-        self.csf_data = None
-        self.config_data = None
-        self.det_data = None
-        self.det_config_labels = None
+#        #SHCI variables & output data
+#        self.wf_csf_coeffs = None
+#        self.csf_data = None
+#        self.config_data = None
+#        self.det_data = None
 
-    def make_input(self, filename):
+    def make_cache(self, filename):
         #Updates wf_csfs_coeffs, csf_data, and det_data
         self.get_shci_output()
 
@@ -230,6 +229,8 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         try:
             attempt = open('FCIDUMP', 'r')
             print("FCIDUMP found.\n")
+            if self.symmetry in ('DOOH', 'COOV'):
+                self.make_real2complex_coeffs()
         except FileNotFoundError:
             print("FCIDUMP not found. Making new FCIDUMP...\n")
             self.make_fcidump('FCIDUMP')
@@ -240,6 +241,20 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
             print("config.json not found. Making new config.json...\n")
             self.make_config()
         return
+
+    def make_real2complex_coeffs(self):
+        mo_coeff = self.mf.mo_coeff
+        h1 = reduce(
+            numpy.dot, 
+            (mo_coeff.T, self.mf.get_hcore(), mo_coeff))
+        if self.mf._eri is None:
+            eri = ao2mo.full(self.mol, mo_coeff)
+        else:
+            eri = ao2mo.full(self.mf._eri, mo_coeff)
+        nuc = self.mf.energy_nuc()
+        orbsym = getattr(mo_coeff, 'orbsym', None) 
+        self.get_real2complex_coeffs(
+            h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, self.partner_orbs)
 
     def make_fcidump(self, filename):
         mo_coeff = self.mf.mo_coeff
@@ -299,6 +314,7 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
         self.write_config_var(config, 'n_up', n_up)
         self.write_config_var(config, 'n_dn', n_dn)
         self.write_config_var(config, 'var_only', 'true')
+        self.write_config_var(config, 'reorder_orbs', 'false')
         self.write_config_var(config, 'eps_vars', eps_vars)
         self.write_config_var(config, 'eps_vars_schedule', eps_vars_sched)
 
@@ -346,12 +362,12 @@ class InputMaker(SymMethods, GenMethods, CsfMethods):
             self.run_shci()
         print('Loading WF from: ' + self.wf_filename)
         print('Starting CSF calculation...')
-        self.wf_csf_coeffs, self.csf_data, self.config_data, self.det_data, err = \
-            self.get_csf_info(self.wf_filename)
+#        self.wf_csf_coeffs, self.csf_data, self.config_data, self.det_data, err = \
+        self.get_csf_info(self.wf_filename)
         if self.optimize_orbs:
             self.load_rotation_matrix()
         print("CSF calculation complete.")
-        print("Projection error = %10.5f" % err)
+        print("Projection error = %10.5f" % self.err)
         return
 
     def run_shci(self):

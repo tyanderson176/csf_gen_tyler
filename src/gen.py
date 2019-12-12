@@ -43,7 +43,7 @@ class GenMethods():
             raise Exception(cache_name + " already exists." + 
                     "make_csf_file will not attempt to overwrite it")
         except:
-            csf_gen_exe = os.path.join(os.path.dirname(__file__), '../lib/csf_generate')
+            csf_gen_exe = os.path.join(os.path.dirname(__file__), '../lib/spin_csf_gen')
             process = subprocess.Popen(
                 '%s %d'% (csf_gen_exe, max_open), shell=True, stdout=subprocess.PIPE,
                 universal_newlines = True)
@@ -54,7 +54,7 @@ class GenMethods():
                 file_contents += line
             csf_cache_file.close()
 
-#            csf_gen_exe = os.path.join(os.path.dirname(__file__), '../lib/csf_generate')
+#            csf_gen_exe = os.path.join(os.path.dirname(__file__), '../lib/spin_csf_gen')
 #            out_dir = '.'
 #            nelecs = str(max_open)
 #            subprocess.run([gen_script, out_dir, filename, nelecs])
@@ -125,6 +125,8 @@ class GenMethods():
         csfs_coefs, index2occs = csf_cache[nopen]
         dets = [self.make_det(occs, config) for occs in index2occs]
         csfs = []
+#        print('--------')
+#        print('CONFIG: ', config)
         for coefs in csfs_coefs:
             csf = Vec.zero()
             for n, coef in enumerate(coefs):
@@ -132,8 +134,31 @@ class GenMethods():
                 if self.symmetry in ('DOOH', 'COOV'):
                     det = self.convert_det(det)
                 csf += coef*det
-            if csf.norm() != 0: csfs.append(csf/csf.norm())
+            if csf.norm() != 0: # and self.orthogonal_to_prev(csf/csf.norm(), csfs): 
+                csfs.append(csf/csf.norm())
+        csfs = Vec.gram_schmidt(csfs, len(csfs), tol=1e-10)
+        self.check_orthogonal(csfs)
+#        for csf in csfs:
+#            print(csf, '\n>>>')
         return np.array(csfs)
+
+    def check_orthogonal(self, csfs):
+        for n, csf1 in enumerate(csfs):
+            for m, csf2 in enumerate(csfs):
+                if m <= n:
+                    continue
+                if (csf1.dot(csf2) > 1e-2):
+                    print('Not orthogonal: ', csf1.dot(csf2)) 
+
+    def orthogonal_to_prev(self, csf, csfs):
+        #csf_cache only printed to 6 decimal places
+        #errors l.t. 1e-6 considered unimportant
+        tol = 1e-6 
+        for prev_csf in csfs:
+            if abs(csf.dot(prev_csf)) > tol:
+                print('CSF Rejected: abs(dot(csf1, csf2)) = %e' % abs(csf.dot(prev_csf)))
+                return False
+        return True
 
     def make_det(self, occ_str, config):
         up_occs, dn_occs, orbs, is_open = [], [], [], {}

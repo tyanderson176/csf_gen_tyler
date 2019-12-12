@@ -85,7 +85,7 @@ static PyObject* load(PyObject *self, PyObject *args) {
     return wf2PyDict(wf);
 }
 
-static PyMethodDef wf_methods[] = { 
+static PyMethodDef load_wf_methods[] = { 
     {
         "load", load, METH_VARARGS,
         "Loads dets of wf"
@@ -93,15 +93,15 @@ static PyMethodDef wf_methods[] = {
     {NULL, NULL, 0, NULL}
 };
 
-static struct PyModuleDef wf_definition = { 
+static struct PyModuleDef load_wf_definition = { 
     PyModuleDef_HEAD_INIT,
-    "wf",
-    "A Python module that loads a wf.",
+    "load_wf",
+    "A Python module that loads a wavefunctions serialized by FGPL.",
     -1, 
-    wf_methods
+    load_wf_methods
 };
 
-PyMODINIT_FUNC PyInit_wf(void) {
+PyMODINIT_FUNC PyInit_load_wf(void) {
     Py_Initialize();
-    return PyModule_Create(&wf_definition);
+    return PyModule_Create(&load_wf_definition);
 }

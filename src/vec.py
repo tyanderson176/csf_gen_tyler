@@ -31,6 +31,22 @@ class Vec:
     def zero():
         return Vec({})
 
+    @staticmethod
+    def gram_schmidt(vecs, dim, tol=tol):
+        orthonormal_basis = []
+        for vec in vecs: #for vec in numpy.copy(vecs):
+            new_vec = Vec.zero()
+            new_vec += vec #vs. numpy.copy(vecs)
+            if len(orthonormal_basis) == dim:
+                return orthonormal_basis
+            for basis_vec in orthonormal_basis:
+                new_vec += -basis_vec.dot(new_vec) * basis_vec
+            if new_vec.norm() <= tol:
+                continue
+            new_vec /= new_vec.norm()
+            orthonormal_basis.append(new_vec)
+        return orthonormal_basis
+
     def __repr__(self):
         if len(self.dets) == 0:
             return '0'
@@ -51,17 +67,17 @@ class Vec:
                 self.dets[det] = other.dets[det]
         return self
 
-    def __add__(self, other):
-        sum_dets = copy.deepcopy(self.dets)
-        for det in other.dets:
-            if det in sum_dets:
-                sum_dets[det] += other.dets[det]
-            else:
-                sum_dets[det] = other.dets[det]
-        return Vec(sum_dets)
+#    def __add__(self, other):
+#        sum_dets = copy.deepcopy(self.dets)
+#        for det in other.dets:
+#            if det in sum_dets:
+#                sum_dets[det] += other.dets[det]
+#            else:
+#                sum_dets[det] = other.dets[det]
+#        return Vec(sum_dets)
 
-    def __sub__(self, other):
-        return self + (-1)*other
+#    def __sub__(self, other):
+#        return self + (-1)*other
 
     def __rmul__(self, scalar):
         mul_dict = {}

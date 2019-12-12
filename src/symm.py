@@ -1,7 +1,10 @@
 import numpy
 import ctypes
 import math
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
 
+from rel_parity import rel_parity
 import vec
 from functools import reduce
 import pyscf
@@ -54,6 +57,7 @@ class SymMethods():
     def real_or_imag_part(self, hf_det):
         rhf, ihf = self.convert_det_helper(hf_det)
         self.use_real_part = (rhf.norm() >= ihf.norm())
+        #self.use_real_part = False
 
     def get_xorbs(self):
         A_irrep_ids = set([0, 1, 4, 5])
@@ -65,13 +69,14 @@ class SymMethods():
             xorbs += list(orbs)
         return set([xorb + 1 for xorb in xorbs])
 
-    def rel_parity(self, orbs):
+    def rel_parity_old(self, orbs):
         #find parity of (potentially) unsorted orbs relative to sorted orbs
+        #Obsolete, use rel_parity module instead (written in c, ~10x faster)
         if not orbs:
             return 1
         first, rest = orbs[0], orbs[1:]
         p = -1 if len([orb for orb in rest if orb < first])%2 else 1
-        return p*self.rel_parity(rest)
+        return p*self.rel_parity_old(rest)
 
     def partner_config(self, config):
         partner_occs = {self.porbs[orb]: config.occs[orb] for orb in config.occs}
@@ -101,7 +106,7 @@ class SymMethods():
         rdn = self.real_orbs(det.dn_occ)
         for ucoef, up in rup:
             for dcoef, dn in rdn:
-                coef = self.rel_parity(up)*self.rel_parity(dn)*ucoef*dcoef
+                coef = rel_parity(up)*rel_parity(dn)*ucoef*dcoef
                 rdet += coef.real*vec.Det(up, dn)
                 idet += coef.imag*vec.Det(up, dn)
         return rdet, idet
@@ -126,8 +131,20 @@ class SymMethods():
             rdet, idet = self.convert_det_helper(det)
             rwf += coef*rdet
             iwf += coef*idet
-        assert(self.use_real_part == (rwf.norm() >= iwf.norm()))
+        #assert(self.use_real_part == (rwf.norm() >= iwf.norm()))
         converted_wf = rwf if self.use_real_part else iwf
+
+#        iwf_list = sorted([(det, coef) for det, coef in iwf.dets.items()],
+#                          key = lambda det_coef: -abs(det_coef[1]))
+#        print('IWF:')
+#        for det, coef in iwf_list:
+#            print(det, coef)
+#        rwf_list = sorted([(det, coef) for det, coef in rwf.dets.items()],
+#                          key = lambda det_coef: -abs(det_coef[1]))
+#        print('RWF:')
+#        for det, coef in rwf_list:
+#            print(det, coef)
+
         dets, coefs = [], []
         for det, coef in converted_wf.dets.items():
             dets.append(det)
@@ -141,6 +158,11 @@ class SymMethods():
             rcsf += coef*rdet if self.use_real_part else coef*idet
         return rcsf
 
+    def get_real2complex_coeffs(self, h1, eri, norb, nelec, ecore, orbsym, partner_orbs):
+        coeffs, num_rows, row_index, row_coeffs, orbsym = \
+            self.realToComplex(norb, nelec, orbsym, partner_orbs)
+        self.real2complex_coeffs = coeffs
+    
     def writeComplexOrbIntegrals(self, h1, eri, norb, nelec, ecore, orbsym, partner_orbs):
         coeffs, num_rows, row_index, row_coeffs, orbsym = \
             self.realToComplex(norb, nelec, orbsym, partner_orbs)
@@ -201,6 +223,8 @@ class SymMethods():
                 Ex = numpy.where(orbsym == ir)[0]
                 Ey = numpy.where(orbsym == ir - 1)[0]
 
+            # These should be the same, unless Sandeep's script or my method to calculate
+            # Ex or Ey is incorrect. Ex_ty, Ey_ty are my labels.
             assert(list(Ex) == list(Ex_ty))
             assert(list(Ey) == list(Ey_ty))
 

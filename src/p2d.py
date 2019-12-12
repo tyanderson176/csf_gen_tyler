@@ -123,7 +123,7 @@ def mol2aos(mol, mf, basis = None):
             '''
             The 'ns' computed by Pyscf simply enumerate the basis functions
             as they appear in the input basis file - they may have little
-            to do with the 'actual' ns cooresponding to those basis functions.
+            to do with the 'actual' ns cooresponding to energy level.
             Because of this, I have redefined n below. If n was
             provided in some external basis, we use n = sto.get_n(). Otherwise,
             we use the numerical QMC convention that n = l+1 (i.e. all shells 

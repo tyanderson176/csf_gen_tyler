@@ -242,7 +242,7 @@ void save_csfs(csf_vec3D &spins, int nelecs) {
             }
             //print the coefs in appropriate order
             for(int i=0; i<coefs.size(); i++)
-                printf("%f\t", coefs[i]);
+                printf("%17.15f\t", coefs[i]);
             printf("\n");
         }
         printf("END\n");

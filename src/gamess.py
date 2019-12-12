@@ -97,7 +97,8 @@ def not_basis_chunk(chunk):
     return False
 
 def get_gamess_basis(filename):
-    f = open(filename, 'r')
+    enc = 'iso-8859-15'
+    f = open(filename, 'r', encoding=enc)
     read_data = f.read()
     ao_start = read_data.index('SHELL TYPE PRIMITIVE')
     data_chunks = read_data[ao_start:].split('\n\n')[1:]
