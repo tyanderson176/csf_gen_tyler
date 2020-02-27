@@ -30,6 +30,13 @@ long par_sort(std::vector<long> &array, size_t start, size_t end) {
 }
 
 long rel_parity(std::vector<long> &array) {
+    /**
+      Divide and conquer algorithm to find parity of an array.
+      It should be asymptotically faster than rel_parity, but
+      a small amount of testing indicates that the simplicity
+      of rel_parity_few_elec makes it about as fast as rel_parity
+      for arrays of size ~10
+    **/
     return par_sort(array, 0, array.size()) == 0 ? 1 : -1;
 }
 
@@ -37,9 +44,13 @@ long rel_parity_few_elec(std::vector<long> &array) {
     int count = 0;
     for(int start = 0; start < array.size(); ++start) {
         for(int i=start+1; i < array.size(); ++i)
-            count += (array[i] < array[start]) ? 1 : 0;
+            //count += (array[i] < array[start]) ? 1 : 0;
+            if (array[i] < array[start])
+                count++;
+            else if (array[i] == array[start])
+                return 0;
     }
-    return count%2;
+    return (count%2 == 0) ? 1 : -1;
 }
 
 static PyObject* rel_parity(PyObject *self, PyObject *args) {

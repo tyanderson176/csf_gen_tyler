@@ -1,0 +1,74 @@
+33 23 23             ndet,nbasis,norb
+* Determinantal section
+1 2 3 4      1 2 1
+1 3 4 5      1 5 2
+1 3 6 9      1 2 3
+1 4 7 9      1 2 4
+1 2 6 9      1 3 5
+1 2 7 9      1 4 6
+1 2 3 9      1 6 7
+1 2 4 9      1 7 8
+1 2 3 6      1 9 9
+1 2 4 7      1 9 10
+1 2 3 6      1 2 11
+1 2 4 7      1 2 12
+1 3 4 7      1 3 13
+1 3 4 6      1 4 14
+1 4 5 8      1 3 15
+1 3 5 8      1 4 16
+1 3 5 6      1 5 17
+1 4 5 7      1 5 18
+1 3 4 8      1 5 19
+1 2 6 7      1 2 20
+1 3 4 5      1 8 21
+1 3 4 9      1 2 22
+1 2 4 9      1 3 23
+1 2 3 9      1 4 24
+1 2 3 4      1 9 25
+1 3 4 9      1 9 26
+1 3 4 7      1 7 27
+1 3 4 6      1 6 28
+1 3 4 8      1 8 29
+1 6 7 9      1 2 30
+1 2 6 9      1 7 31
+1 2 7 9      1 6 32
+1 2 6 7      1 9 33 (iworbd(iel,idet),iel=1,nelec), label_det(idet)
+14 ncsf
+0.979955760999 -0.138649000776 -0.0734017110023 0.0713090745788 -0.0436048052807 0.0418950262423 -0.0340338962617 -0.0336932630762 -0.0311183427203 0.0301926248197 -0.0258938583721 -0.0245812503545 0.0204374353715 0.011181346352
+1  1  8  2  7  1  4  4  1  3  3  4  5  4
+1  (iwdet_in_csf(idet_in_csf,1),idet_in_csf=1,ndet_in_csf(1))
+1.0  (cdet_csf(idet_in_csf,1),idet_in_csf=1,ndet_in_csf(1))
+2  (iwdet_in_csf(idet_in_csf,2),idet_in_csf=1,ndet_in_csf(2))
+1.0  (cdet_csf(idet_in_csf,2),idet_in_csf=1,ndet_in_csf(2))
+3 4 5 6 7 8 9 10  (iwdet_in_csf(idet_in_csf,3),idet_in_csf=1,ndet_in_csf(3))
+0.204124145232 -0.204124145232 -0.204124145232 0.204124145232 0.204124145232 -0.204124145232 0.612372435696 -0.612372435696  (cdet_csf(idet_in_csf,3),idet_in_csf=1,ndet_in_csf(3))
+11 12  (iwdet_in_csf(idet_in_csf,4),idet_in_csf=1,ndet_in_csf(4))
+0.707106781187 -0.707106781187  (cdet_csf(idet_in_csf,4),idet_in_csf=1,ndet_in_csf(4))
+13 14 15 16 17 18 19  (iwdet_in_csf(idet_in_csf,5),idet_in_csf=1,ndet_in_csf(5))
+0.632455532034 0.632455532034 -0.158113883008 0.158113883008 0.158113883008 -0.158113883008 0.316227766017  (cdet_csf(idet_in_csf,5),idet_in_csf=1,ndet_in_csf(5))
+20  (iwdet_in_csf(idet_in_csf,6),idet_in_csf=1,ndet_in_csf(6))
+1.0  (cdet_csf(idet_in_csf,6),idet_in_csf=1,ndet_in_csf(6))
+15 16 19 21  (iwdet_in_csf(idet_in_csf,7),idet_in_csf=1,ndet_in_csf(7))
+0.288675134595 -0.288675134595 0.288675134595 0.866025403784  (cdet_csf(idet_in_csf,7),idet_in_csf=1,ndet_in_csf(7))
+22 23 24 25  (iwdet_in_csf(idet_in_csf,8),idet_in_csf=1,ndet_in_csf(8))
+0.288675134595 -0.288675134595 0.288675134595 0.866025403784  (cdet_csf(idet_in_csf,8),idet_in_csf=1,ndet_in_csf(8))
+26  (iwdet_in_csf(idet_in_csf,9),idet_in_csf=1,ndet_in_csf(9))
+1.0  (cdet_csf(idet_in_csf,9),idet_in_csf=1,ndet_in_csf(9))
+22 23 24  (iwdet_in_csf(idet_in_csf,10),idet_in_csf=1,ndet_in_csf(10))
+0.816496580928 0.408248290464 -0.408248290464  (cdet_csf(idet_in_csf,10),idet_in_csf=1,ndet_in_csf(10))
+27 28 29  (iwdet_in_csf(idet_in_csf,11),idet_in_csf=1,ndet_in_csf(11))
+0.57735026919 0.57735026919 0.57735026919  (cdet_csf(idet_in_csf,11),idet_in_csf=1,ndet_in_csf(11))
+3 4 5 6  (iwdet_in_csf(idet_in_csf,12),idet_in_csf=1,ndet_in_csf(12))
+0.5 -0.5 0.5 -0.5  (cdet_csf(idet_in_csf,12),idet_in_csf=1,ndet_in_csf(12))
+17 18 19 16 15  (iwdet_in_csf(idet_in_csf,13),idet_in_csf=1,ndet_in_csf(13))
+0.612372435696 -0.612372435696 -0.408248290464 -0.204124145232 0.204124145232  (cdet_csf(idet_in_csf,13),idet_in_csf=1,ndet_in_csf(13))
+30 31 32 33  (iwdet_in_csf(idet_in_csf,14),idet_in_csf=1,ndet_in_csf(14))
+0.288675134595 0.288675134595 -0.288675134595 0.866025403784  (cdet_csf(idet_in_csf,14),idet_in_csf=1,ndet_in_csf(14))
+orbitals 
+ energies
+-17.938245716 -3.861194052 -3.326848776 -3.326848776 -3.326848776 -2.180198776 -2.180198776 -2.180198776 -2.101038985 -1.998938916 -1.998938916 -1.998938916 -1.998938916 -1.998938916 -1.702355518 -1.702355518 -1.702355518 -0.670967226 15.510933045 21.44144944 21.44144944 21.44144944 145.987434897
+ end
+ symmetry
+AG AG B3U B2U B1U B2U B3U B1U AG B3G B2G B1G AG AG B3U B2U B1U AG AG B2U B3U B1U AG
+ end
+end

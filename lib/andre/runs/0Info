@@ -1,0 +1,11 @@
+gamess14r1_modified seems to have a bug when running mcscf with D2H symmetry.
+For example ci_oh_orbs.inp runs correctly with gamess09_modified but not gamess14r1_modified.
+--------------------------
+To get orbitals with the right symmetry for atoms, I can run ROHF or DFT with OH symmetry.
+(When I run DFT, the EG and T2G orbitals in the DFT run do not have exactly the same energy, but
+they do have that (at least when there is just 1 d function) in the CI run, which then allows csf2csf to run correctly.)
+However, MCSCF and CI do not have OH symmetry.
+If I try running with D4H symmetry then it complains about an integral (2 2 6 4) that should be zero not being zero.
+If I run with D2H symmetry, then it runs.  However, if I use MCSCF to optimize the orbitals, it will destroy the symmetry.
+However, I can use CI and the energy is only a litle worse than for MCSCF.
+See ci_pbe_oh2_orbs_cas4-8.out or ci_pbe_oh_orbs_cas4-13.out in the current directory, ~/qmc_setup/gamess_runs/allelec/atoms/c/sto_cvb1

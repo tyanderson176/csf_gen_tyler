@@ -1,0 +1,2349 @@
+---------
+WARNING: found impure orbital. Keeping largest component.
+Impure orbital:
+ + 1.8e-08 |3S_(4.40)+ 〉 - 1.2e-08 |3S_(2.98)+ 〉 - 0.08940852733333333 |3D_2Z^2-X^2-Y^2_(9.8549)+ 〉 + 0.3912051466666666 |3D_2Z^2-X^2-Y^2_(4.8498)+ 〉 - 2.5149438486666664 |3D_2Z^2-X^2-Y^2_(2.92)+ 〉 + 3.1999710746666667 |3D_2Z^2-X^2-Y^2_(1.7389)+ 〉 - 1.3627752066666667 |3D_2Z^2-X^2-Y^2_(1.0594)+ 〉
+
+
+New pure orbital:
+ - 0.08940852733333333 |3D_2Z^2-X^2-Y^2_(9.8549)+ 〉 + 0.3912051466666666 |3D_2Z^2-X^2-Y^2_(4.8498)+ 〉 - 2.5149438486666664 |3D_2Z^2-X^2-Y^2_(2.92)+ 〉 + 3.1999710746666667 |3D_2Z^2-X^2-Y^2_(1.7389)+ 〉 - 1.3627752066666667 |3D_2Z^2-X^2-Y^2_(1.0594)+ 〉
+---------
+WARNING: found impure orbital. Keeping largest component.
+Impure orbital:
+ + 1.8e-08 |3S_(4.40)- 〉 - 1.2e-08 |3S_(2.98)- 〉 - 0.08940852733333333 |3D_2Z^2-X^2-Y^2_(9.8549)- 〉 + 0.3912051466666666 |3D_2Z^2-X^2-Y^2_(4.8498)- 〉 - 2.5149438486666664 |3D_2Z^2-X^2-Y^2_(2.92)- 〉 + 3.1999710746666667 |3D_2Z^2-X^2-Y^2_(1.7389)- 〉 - 1.3627752066666667 |3D_2Z^2-X^2-Y^2_(1.0594)- 〉
+
+
+New pure orbital:
+ - 0.08940852733333333 |3D_2Z^2-X^2-Y^2_(9.8549)- 〉 + 0.3912051466666666 |3D_2Z^2-X^2-Y^2_(4.8498)- 〉 - 2.5149438486666664 |3D_2Z^2-X^2-Y^2_(2.92)- 〉 + 3.1999710746666667 |3D_2Z^2-X^2-Y^2_(1.7389)- 〉 - 1.3627752066666667 |3D_2Z^2-X^2-Y^2_(1.0594)- 〉
+---------
+WARNING: found impure orbital. Keeping largest component.
+Impure orbital:
+ + 1.1e-08 |3S_(6.36)+ 〉 - 1.2e-08 |3S_(4.40)+ 〉 + 0.1969591653333333 |3D_2Z^2-X^2-Y^2_(9.8549)+ 〉 - 2.6093794133333335 |3D_2Z^2-X^2-Y^2_(4.8498)+ 〉 + 3.678321243333333 |3D_2Z^2-X^2-Y^2_(2.92)+ 〉 - 2.43549217 |3D_2Z^2-X^2-Y^2_(1.7389)+ 〉 + 0.8403078213333333 |3D_2Z^2-X^2-Y^2_(1.0594)+ 〉
+
+
+New pure orbital:
+ + 0.1969591653333333 |3D_2Z^2-X^2-Y^2_(9.8549)+ 〉 - 2.6093794133333335 |3D_2Z^2-X^2-Y^2_(4.8498)+ 〉 + 3.678321243333333 |3D_2Z^2-X^2-Y^2_(2.92)+ 〉 - 2.43549217 |3D_2Z^2-X^2-Y^2_(1.7389)+ 〉 + 0.8403078213333333 |3D_2Z^2-X^2-Y^2_(1.0594)+ 〉
+---------
+WARNING: found impure orbital. Keeping largest component.
+Impure orbital:
+ + 1.1e-08 |3S_(6.36)- 〉 - 1.2e-08 |3S_(4.40)- 〉 + 0.1969591653333333 |3D_2Z^2-X^2-Y^2_(9.8549)- 〉 - 2.6093794133333335 |3D_2Z^2-X^2-Y^2_(4.8498)- 〉 + 3.678321243333333 |3D_2Z^2-X^2-Y^2_(2.92)- 〉 - 2.43549217 |3D_2Z^2-X^2-Y^2_(1.7389)- 〉 + 0.8403078213333333 |3D_2Z^2-X^2-Y^2_(1.0594)- 〉
+
+
+New pure orbital:
+ + 0.1969591653333333 |3D_2Z^2-X^2-Y^2_(9.8549)- 〉 - 2.6093794133333335 |3D_2Z^2-X^2-Y^2_(4.8498)- 〉 + 3.678321243333333 |3D_2Z^2-X^2-Y^2_(2.92)- 〉 - 2.43549217 |3D_2Z^2-X^2-Y^2_(1.7389)- 〉 + 0.8403078213333333 |3D_2Z^2-X^2-Y^2_(1.0594)- 〉
+------------------------------
+CONFIGURATION: 3D3 (1 of 5)
+------------------------------
+0.5 1.5
+GENERATING DETERMINANTS WITH S_z =  0.5 AND L_z =  2, -2...
+Generated 12 determinants.
+
+
+ITERATING OVER DETERMINANTS TO GENERATE CSFS
+
+
+Current determinant: |3D_-2+, 3D_-2-, 3D_2+ 〉 ( 1 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.18421722965656065
+
+
+Current determinant: |3D_-2+, 3D_-1+, 3D_1- 〉 ( 2 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4704375086179684
+
+
+Current determinant: |3D_-2+, 3D_-1-, 3D_1+ 〉 ( 3 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4704375086179684
+
+
+Current determinant: |3D_-2+, 3D_0+, 3D_0- 〉 ( 4 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4704375086179684
+
+
+Current determinant: |3D_-2+, 3D_2+, 3D_2- 〉 ( 5 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.6546547382745288
+
+
+Current determinant: |3D_-2-, 3D_-1+, 3D_1+ 〉 ( 6 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.6546547382745288
+
+
+Current determinant: |3D_-1+, 3D_-1-, 3D_0+ 〉 ( 7 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.6546547382745288
+
+
+Current determinant: |3D_-1+, 3D_1+, 3D_2- 〉 ( 8 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9408750172359318
+
+
+Current determinant: |3D_-1+, 3D_1-, 3D_2+ 〉 ( 9 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9408750172359318
+
+
+Current determinant: |3D_-1-, 3D_1+, 3D_2+ 〉 ( 10 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9408750172359318
+
+
+Current determinant: |3D_0+, 3D_0-, 3D_2+ 〉 ( 11 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9408750172359318
+
+
+Current determinant: |3D_0+, 3D_1+, 3D_1- 〉 ( 12 of 12 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9408750172359318
+
+
+Generated  4 CSFs.
+Found 4 linearly independent states.
+------------------------------
+CONFIGURATION: 3D2_4S1 (2 of 5)
+------------------------------
+0.5 1.5
+GENERATING DETERMINANTS WITH S_z =  0.5 AND L_z =  2, -2...
+Generated 8 determinants.
+
+
+ITERATING OVER DETERMINANTS TO GENERATE CSFS
+
+
+Current determinant: |3D_-2+, 3D_0+, 4S_0- 〉 ( 1 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0
+
+
+Current determinant: |3D_-2+, 3D_0-, 4S_0+ 〉 ( 2 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4978951897141434
+
+
+Current determinant: |3D_-2-, 3D_0+, 4S_0+ 〉 ( 3 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4978951897141434
+
+
+Current determinant: |3D_-1+, 3D_-1-, 4S_0+ 〉 ( 4 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4978951897141434
+
+
+Current determinant: |3D_0+, 3D_2+, 4S_0- 〉 ( 5 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4978951897141434
+
+
+Current determinant: |3D_0+, 3D_2-, 4S_0+ 〉 ( 6 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.995790379428287
+
+
+Current determinant: |3D_0-, 3D_2+, 4S_0+ 〉 ( 7 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.995790379428287
+
+
+Current determinant: |3D_1+, 3D_1-, 4S_0+ 〉 ( 8 of 8 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.995790379428287
+
+
+Generated  2 CSFs.
+Found 2 linearly independent states.
+------------------------------
+CONFIGURATION: 3D1_4P2 (3 of 5)
+------------------------------
+0.5 1.5
+GENERATING DETERMINANTS WITH S_z =  0.5 AND L_z =  2, -2...
+Generated 16 determinants.
+
+
+ITERATING OVER DETERMINANTS TO GENERATE CSFS
+
+
+Current determinant: |3D_-2+, 4P_-1+, 4P_1- 〉 ( 1 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.35760810458681214
+
+
+Current determinant: |3D_-2+, 4P_-1-, 4P_1+ 〉 ( 2 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.40810875868342616
+
+
+Current determinant: |3D_-2+, 4P_0+, 4P_0- 〉 ( 3 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4999997486425265
+
+
+Current determinant: |3D_-2-, 4P_-1+, 4P_1+ 〉 ( 4 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4999997486425265
+
+
+Current determinant: |3D_-1+, 4P_-1+, 4P_0- 〉 ( 5 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4999997486425265
+
+
+Current determinant: |3D_-1+, 4P_-1-, 4P_0+ 〉 ( 6 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4999997486425265
+
+
+Current determinant: |3D_-1-, 4P_-1+, 4P_0+ 〉 ( 7 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4999997486425265
+
+
+Current determinant: |3D_0+, 4P_-1+, 4P_-1- 〉 ( 8 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.4999997486425265
+
+
+Current determinant: |3D_0+, 4P_1+, 4P_1- 〉 ( 9 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.5035724548175579
+
+
+Current determinant: |3D_1+, 4P_0+, 4P_1- 〉 ( 10 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.5110435511667424
+
+
+Current determinant: |3D_1+, 4P_0-, 4P_1+ 〉 ( 11 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.5110435511667424
+
+
+Current determinant: |3D_1-, 4P_0+, 4P_1+ 〉 ( 12 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.5110435511667424
+
+
+Current determinant: |3D_2+, 4P_-1+, 4P_1- 〉 ( 13 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9999994972850527
+
+
+Current determinant: |3D_2+, 4P_-1-, 4P_1+ 〉 ( 14 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9999994972850527
+
+
+Current determinant: |3D_2+, 4P_0+, 4P_0- 〉 ( 15 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9999994972850527
+
+
+Current determinant: |3D_2-, 4P_-1+, 4P_1+ 〉 ( 16 of 16 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9999994972850527
+
+
+Generated  6 CSFs.
+Found 6 linearly independent states.
+------------------------------
+CONFIGURATION: 4P2_4S1 (4 of 5)
+------------------------------
+0.5 1.5
+GENERATING DETERMINANTS WITH S_z =  0.5 AND L_z =  2, -2...
+Generated 2 determinants.
+
+
+ITERATING OVER DETERMINANTS TO GENERATE CSFS
+
+
+Current determinant: |4P_-1+, 4P_-1-, 4S_0+ 〉 ( 1 of 2 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.49999999998855144
+
+
+Current determinant: |4P_1+, 4P_1-, 4S_0+ 〉 ( 2 of 2 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.9999999999771029
+
+
+Generated  2 CSFs.
+Found 2 linearly independent states.
+------------------------------
+CONFIGURATION: 3D1_4S2 (5 of 5)
+------------------------------
+0.5 1.5
+GENERATING DETERMINANTS WITH S_z =  0.5 AND L_z =  2, -2...
+Generated 2 determinants.
+
+
+ITERATING OVER DETERMINANTS TO GENERATE CSFS
+
+
+Current determinant: |3D_-2+, 4S_0+, 4S_0- 〉 ( 1 of 2 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 0.5000000000000001
+
+
+Current determinant: |3D_2+, 4S_0+, 4S_0- 〉 ( 2 of 2 )
+Projecting L^2...
+Projecting S^2...
+Changing basis to real harmonics...
+Current dot product: 1.0000000000000002
+BREAKING CURRENT CONFIGURATION.
+
+
+Generated  2 CSFs.
+Found 2 linearly independent states.
+------------------------------
+
+
+CALCULATED ALL CSFS, PRINTING RESULTS
+
+
+------------------------------
+CONFIGURATION: 3D3
+------------------------------
+
+
+
+CSF # 1 (with 18 determinants)
+Converting coefficients to integers failed.
+-0.5232681184722835j |3D_XY+, 3D_X^2-Y^2+, 3D_X^2-Y^2- 〉 - 0.5232681184722835 |3D_XY+, 3D_X^2-Y^2+, 3D_XY- 〉 + 0.22750787759664534j |3D_XZ+, 3D_YZ+, 3D_X^2-Y^2- 〉 + 0.22750787759664534 |3D_XZ+, 3D_YZ+, 3D_XY- 〉 - 0.1820063020773157 |3D_XZ+, 3D_X^2-Y^2+, 3D_XZ- 〉 + 0.1137539387983222j |3D_X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 + 0.1137539387983222j |3D_XZ+, 3D_X^2-Y^2+, 3D_YZ- 〉 + 0.1820063020773157 |3D_X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 + (-0-0.1820063020773157j) |3D_XY+, 3D_XZ+, 3D_XZ- 〉 + 0.1137539387983222 |3D_XY+, 3D_YZ+, 3D_XZ- 〉 - 0.1137539387983222 |3D_XY+, 3D_XZ+, 3D_YZ- 〉 + (-0-0.1820063020773157j) |3D_XY+, 3D_YZ+, 3D_YZ- 〉 - 0.19702760155977558 |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_XZ- 〉 + 0.19702760155977558j |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_YZ- 〉 + 0.19702760155977558j |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 + 0.19702760155977558 |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 - 0.06825236327899324 |3D_2Z^2-X^2-Y^2+, 3D_X^2-Y^2+, 3D_2Z^2-X^2-Y^2- 〉 + 0.06825236327899324j |3D_2Z^2-X^2-Y^2+, 3D_XY+, 3D_2Z^2-X^2-Y^2- 〉
+
+
+
+
+
+
+CSF # 2 (with 16 determinants)
+Converting coefficients to integers failed.
+ - 0.312771621085612 |3D_XZ+, 3D_X^2-Y^2+, 3D_XZ- 〉 + -0.10425720702853532j |3D_X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 + -0.10425720702853532j |3D_XZ+, 3D_X^2-Y^2+, 3D_YZ- 〉 + 0.3127716210856121 |3D_X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 + (-0-0.3127716210856121j) |3D_XY+, 3D_XZ+, 3D_XZ- 〉 - 0.10425720702853532 |3D_XY+, 3D_YZ+, 3D_XZ- 〉 + 0.10425720702853532 |3D_XY+, 3D_XZ+, 3D_YZ- 〉 + (-0-0.3127716210856121j) |3D_XY+, 3D_YZ+, 3D_YZ- 〉 - 0.4170288281141506 |3D_2Z^2-X^2-Y^2+, 3D_X^2-Y^2+, 3D_2Z^2-X^2-Y^2- 〉 + 0.4170288281141506j |3D_2Z^2-X^2-Y^2+, 3D_XY+, 3D_2Z^2-X^2-Y^2- 〉 + 0.18057877962865385 |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_XZ- 〉 + -0.18057877962865385j |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_YZ- 〉 + -0.18057877962865385j |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 - 0.18057877962865385 |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 + -0.20851441405707477j |3D_XZ+, 3D_YZ+, 3D_X^2-Y^2- 〉 - 0.20851441405707477 |3D_XZ+, 3D_YZ+, 3D_XY- 〉
+
+
+
+
+
+
+CSF # 3 (with 18 determinants)
+Converting coefficients to integers failed.
+0.5232681184722842j |3D_XY+, 3D_X^2-Y^2+, 3D_X^2-Y^2- 〉 - 0.5232681184722842 |3D_XY+, 3D_X^2-Y^2+, 3D_XY- 〉 + -0.22750787759664523j |3D_XZ+, 3D_YZ+, 3D_X^2-Y^2- 〉 + 0.22750787759664523 |3D_XZ+, 3D_YZ+, 3D_XY- 〉 - 0.18200630207731502 |3D_XZ+, 3D_X^2-Y^2+, 3D_XZ- 〉 + -0.11375393879832144j |3D_XZ+, 3D_X^2-Y^2+, 3D_YZ- 〉 + 0.18200630207731502j |3D_XY+, 3D_XZ+, 3D_XZ- 〉 - 0.11375393879832144 |3D_XY+, 3D_XZ+, 3D_YZ- 〉 + (-0-0.11375393879832144j) |3D_X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 + 0.18200630207731502 |3D_X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 + 0.11375393879832144 |3D_XY+, 3D_YZ+, 3D_XZ- 〉 + 0.18200630207731502j |3D_XY+, 3D_YZ+, 3D_YZ- 〉 - 0.19702760155977592 |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_XZ- 〉 + -0.19702760155977592j |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_YZ- 〉 + -0.19702760155977592j |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 + 0.19702760155977592 |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 - 0.06825236327899357 |3D_2Z^2-X^2-Y^2+, 3D_X^2-Y^2+, 3D_2Z^2-X^2-Y^2- 〉 + -0.06825236327899357j |3D_2Z^2-X^2-Y^2+, 3D_XY+, 3D_2Z^2-X^2-Y^2- 〉
+
+
+
+
+
+
+CSF # 4 (with 16 determinants)
+Converting coefficients to integers failed.
+0.20851441405707494j |3D_XZ+, 3D_YZ+, 3D_X^2-Y^2- 〉 - 0.20851441405707494 |3D_XZ+, 3D_YZ+, 3D_XY- 〉 + 0.1805787796286593 |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_XZ- 〉 + 0.1805787796286593j |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_YZ- 〉 + 0.1805787796286593j |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 - 0.1805787796286593 |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 - 0.31277162108560763 |3D_XZ+, 3D_X^2-Y^2+, 3D_XZ- 〉 + 0.10425720702854169j |3D_XZ+, 3D_X^2-Y^2+, 3D_YZ- 〉 + 0.31277162108560763j |3D_XY+, 3D_XZ+, 3D_XZ- 〉 + 0.10425720702854169 |3D_XY+, 3D_XZ+, 3D_YZ- 〉 + 0.10425720702854169j |3D_X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉 + 0.31277162108560763 |3D_X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉 - 0.10425720702854169 |3D_XY+, 3D_YZ+, 3D_XZ- 〉 + 0.31277162108560763j |3D_XY+, 3D_YZ+, 3D_YZ- 〉 - 0.4170288281141493 |3D_2Z^2-X^2-Y^2+, 3D_X^2-Y^2+, 3D_2Z^2-X^2-Y^2- 〉 + -0.4170288281141493j |3D_2Z^2-X^2-Y^2+, 3D_XY+, 3D_2Z^2-X^2-Y^2- 〉
+
+
+
+
+
+------------------------------
+CONFIGURATION: 3D2_4S1
+------------------------------
+
+
+
+CSF # 1 (with 8 determinants)
+Converting coefficients to integers failed.
+ + 0.37796447300922853 |3D_X^2-Y^2+, 4S_S+, 3D_2Z^2-X^2-Y^2- 〉 + (-0-0.37796447300922853j) |3D_XY+, 4S_S+, 3D_2Z^2-X^2-Y^2- 〉 - 0.3273268353539892 |3D_XZ+, 4S_S+, 3D_XZ- 〉 + 0.3273268353539892j |3D_XZ+, 4S_S+, 3D_YZ- 〉 + 0.3273268353539892j |3D_YZ+, 4S_S+, 3D_XZ- 〉 + 0.3273268353539892 |3D_YZ+, 4S_S+, 3D_YZ- 〉 + 0.3779644730092248 |3D_2Z^2-X^2-Y^2+, 4S_S+, 3D_X^2-Y^2- 〉 + (-0-0.3779644730092248j) |3D_2Z^2-X^2-Y^2+, 4S_S+, 3D_XY- 〉
+
+
+
+
+
+
+CSF # 2 (with 8 determinants)
+Converting coefficients to integers failed.
+ + 0.377964473009227 |3D_2Z^2-X^2-Y^2+, 4S_S+, 3D_X^2-Y^2- 〉 + 0.377964473009227j |3D_2Z^2-X^2-Y^2+, 4S_S+, 3D_XY- 〉 - 0.32732683535398893 |3D_XZ+, 4S_S+, 3D_XZ- 〉 + (-0-0.32732683535398893j) |3D_XZ+, 4S_S+, 3D_YZ- 〉 + (-0-0.32732683535398893j) |3D_YZ+, 4S_S+, 3D_XZ- 〉 + 0.32732683535398893 |3D_YZ+, 4S_S+, 3D_YZ- 〉 + 0.377964473009227 |3D_X^2-Y^2+, 4S_S+, 3D_2Z^2-X^2-Y^2- 〉 + 0.377964473009227j |3D_XY+, 4S_S+, 3D_2Z^2-X^2-Y^2- 〉
+
+
+
+
+
+------------------------------
+CONFIGURATION: 3D1_4P2
+------------------------------
+
+
+
+CSF # 1 (with 28 determinants)
+Converting coefficients to integers failed.
+ - 0.11200358417204112 |4P_X+, 4P_Z+, 3D_XZ- 〉 + 0.11200358417204112j |4P_Y+, 4P_Z+, 3D_XZ- 〉 + 0.11200358417204112j |4P_X+, 4P_Z+, 3D_YZ- 〉 + 0.11200358417204112 |4P_Y+, 4P_Z+, 3D_YZ- 〉 + 0.01600051202457742 |3D_XZ+, 4P_Z+, 4P_X- 〉 + -0.01600051202457742j |3D_XZ+, 4P_Z+, 4P_Y- 〉 + -0.01600051202457742j |3D_YZ+, 4P_Z+, 4P_X- 〉 - 0.01600051202457742 |3D_YZ+, 4P_Z+, 4P_Y- 〉 + 0.12800409619661857 |3D_XZ+, 4P_X+, 4P_Z- 〉 + -0.12800409619661857j |3D_XZ+, 4P_Y+, 4P_Z- 〉 + -0.12800409619661857j |3D_YZ+, 4P_X+, 4P_Z- 〉 - 0.12800409619661857 |3D_YZ+, 4P_Y+, 4P_Z- 〉 + -0.22400716834408244j |4P_X+, 4P_Y+, 3D_X^2-Y^2- 〉 - 0.22400716834408244 |4P_X+, 4P_Y+, 3D_XY- 〉 + 0.3840122885898555 |3D_X^2-Y^2+, 4P_X+, 4P_X- 〉 + 0.1120035841720412j |3D_X^2-Y^2+, 4P_X+, 4P_Y- 〉 + -0.1120035841720412j |3D_X^2-Y^2+, 4P_Y+, 4P_X- 〉 + 0.3840122885898555 |3D_X^2-Y^2+, 4P_Y+, 4P_Y- 〉 + -0.3840122885898555j |3D_XY+, 4P_X+, 4P_X- 〉 + 0.1120035841720412 |3D_XY+, 4P_X+, 4P_Y- 〉 - 0.1120035841720412 |3D_XY+, 4P_Y+, 4P_X- 〉 + -0.3840122885898555j |3D_XY+, 4P_Y+, 4P_Y- 〉 - 0.08314109932105428 |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_X- 〉 + 0.08314109932105428j |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_Y- 〉 + 0.08314109932105428j |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_X- 〉 + 0.08314109932105428 |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_Y- 〉 + 0.24000768036865963 |3D_X^2-Y^2+, 4P_Z+, 4P_Z- 〉 + -0.24000768036865963j |3D_XY+, 4P_Z+, 4P_Z- 〉
+
+
+
+
+
+
+CSF # 2 (with 28 determinants)
+Converting coefficients to integers failed.
+ - 0.20739033894608494 |4P_X+, 4P_Z+, 3D_XZ- 〉 + 0.20739033894608494j |4P_Y+, 4P_Z+, 3D_XZ- 〉 + 0.20739033894608494j |4P_X+, 4P_Z+, 3D_YZ- 〉 + 0.20739033894608494 |4P_Y+, 4P_Z+, 3D_YZ- 〉 - 0.14258085802543352 |3D_XZ+, 4P_Z+, 4P_X- 〉 + 0.14258085802543352j |3D_XZ+, 4P_Z+, 4P_Y- 〉 + 0.14258085802543352j |3D_YZ+, 4P_Z+, 4P_X- 〉 + 0.14258085802543352 |3D_YZ+, 4P_Z+, 4P_Y- 〉 + 0.06480948092065152 |3D_XZ+, 4P_X+, 4P_Z- 〉 + -0.06480948092065152j |3D_XZ+, 4P_Y+, 4P_Z- 〉 + -0.06480948092065152j |3D_YZ+, 4P_X+, 4P_Z- 〉 - 0.06480948092065152 |3D_YZ+, 4P_Y+, 4P_Z- 〉 + -0.4147806778921703j |4P_X+, 4P_Y+, 3D_X^2-Y^2- 〉 - 0.4147806778921703 |4P_X+, 4P_Y+, 3D_XY- 〉 - 0.207390338946085 |3D_X^2-Y^2+, 4P_X+, 4P_X- 〉 + 0.20739033894608508j |3D_X^2-Y^2+, 4P_X+, 4P_Y- 〉 + -0.20739033894608508j |3D_X^2-Y^2+, 4P_Y+, 4P_X- 〉 - 0.207390338946085 |3D_X^2-Y^2+, 4P_Y+, 4P_Y- 〉 + 0.207390338946085j |3D_XY+, 4P_X+, 4P_X- 〉 + 0.20739033894608508 |3D_XY+, 4P_X+, 4P_Y- 〉 - 0.20739033894608508 |3D_XY+, 4P_Y+, 4P_X- 〉 + 0.207390338946085j |3D_XY+, 4P_Y+, 4P_Y- 〉 + 0.044901325506693894 |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_X- 〉 + -0.044901325506693894j |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_Y- 〉 + -0.044901325506693894j |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_X- 〉 - 0.044901325506693894 |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_Y- 〉 - 0.12961896184130334 |3D_X^2-Y^2+, 4P_Z+, 4P_Z- 〉 + 0.12961896184130334j |3D_XY+, 4P_Z+, 4P_Z- 〉
+
+
+
+
+
+
+CSF # 3 (with 14 determinants)
+Converting coefficients to integers failed.
+ - 0.43301270189222013 |3D_X^2-Y^2+, 4P_Z+, 4P_Z- 〉 + 0.43301270189222013j |3D_XY+, 4P_Z+, 4P_Z- 〉 + 0.2165063509461096 |3D_XZ+, 4P_X+, 4P_Z- 〉 + -0.2165063509461096j |3D_XZ+, 4P_Y+, 4P_Z- 〉 + -0.2165063509461096j |3D_YZ+, 4P_X+, 4P_Z- 〉 - 0.2165063509461096 |3D_YZ+, 4P_Y+, 4P_Z- 〉 + 0.21650635094610965 |3D_XZ+, 4P_Z+, 4P_X- 〉 + -0.21650635094610965j |3D_XZ+, 4P_Z+, 4P_Y- 〉 + -0.21650635094610965j |3D_YZ+, 4P_Z+, 4P_X- 〉 - 0.21650635094610965 |3D_YZ+, 4P_Z+, 4P_Y- 〉 - 0.2499999999999995 |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_X- 〉 + 0.2499999999999995j |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_Y- 〉 + 0.2499999999999995j |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_X- 〉 + 0.2499999999999995 |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_Y- 〉
+
+
+
+
+
+
+CSF # 4 (with 18 determinants)
+Converting coefficients to integers failed.
+ - 0.2672612419124244 |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_X- 〉 + -0.2672612419124244j |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_Y- 〉 + -0.2672612419124244j |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_X- 〉 + 0.2672612419124244 |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_Y- 〉 + 0.23145502494313783 |3D_XZ+, 4P_Z+, 4P_X- 〉 + 0.23145502494313783j |3D_XZ+, 4P_Z+, 4P_Y- 〉 + 0.23145502494313783j |3D_YZ+, 4P_Z+, 4P_X- 〉 - 0.23145502494313783 |3D_YZ+, 4P_Z+, 4P_Y- 〉 + 0.23145502494313783 |3D_XZ+, 4P_X+, 4P_Z- 〉 + 0.23145502494313783j |3D_XZ+, 4P_Y+, 4P_Z- 〉 + 0.23145502494313783j |3D_YZ+, 4P_X+, 4P_Z- 〉 - 0.23145502494313783 |3D_YZ+, 4P_Y+, 4P_Z- 〉 + 0.15430334996209238 |3D_X^2-Y^2+, 4P_X+, 4P_X- 〉 + 0.15430334996209238 |3D_X^2-Y^2+, 4P_Y+, 4P_Y- 〉 + 0.15430334996209238j |3D_XY+, 4P_X+, 4P_X- 〉 + 0.15430334996209238j |3D_XY+, 4P_Y+, 4P_Y- 〉 - 0.3086066999241836 |3D_X^2-Y^2+, 4P_Z+, 4P_Z- 〉 + -0.3086066999241836j |3D_XY+, 4P_Z+, 4P_Z- 〉
+
+
+
+
+
+
+CSF # 5 (with 18 determinants)
+ - 2.0 |4P_X+, 4P_Z+, 3D_XZ- 〉 + -2j |4P_Y+, 4P_Z+, 3D_XZ- 〉 + -2j |4P_X+, 4P_Z+, 3D_YZ- 〉 + 2.0 |4P_Y+, 4P_Z+, 3D_YZ- 〉 + |3D_XZ+, 4P_X+, 4P_Z- 〉 + 1j |3D_XZ+, 4P_Y+, 4P_Z- 〉 + 1j |3D_YZ+, 4P_X+, 4P_Z- 〉 - |3D_YZ+, 4P_Y+, 4P_Z- 〉 - |3D_XZ+, 4P_Z+, 4P_X- 〉 + -1j |3D_XZ+, 4P_Z+, 4P_Y- 〉 + -1j |3D_YZ+, 4P_Z+, 4P_X- 〉 + |3D_YZ+, 4P_Z+, 4P_Y- 〉 + 4j |4P_X+, 4P_Y+, 3D_X^2-Y^2- 〉 - 4.0 |4P_X+, 4P_Y+, 3D_XY- 〉 + -2j |3D_X^2-Y^2+, 4P_X+, 4P_Y- 〉 + 2j |3D_X^2-Y^2+, 4P_Y+, 4P_X- 〉 + 2.0 |3D_XY+, 4P_X+, 4P_Y- 〉 - 2.0 |3D_XY+, 4P_Y+, 4P_X- 〉
+
+
+
+
+
+
+CSF # 6 (with 6 determinants)
+|3D_X^2-Y^2+, 4P_X+, 4P_X- 〉 + |3D_X^2-Y^2+, 4P_Y+, 4P_Y- 〉 + 1j |3D_XY+, 4P_X+, 4P_X- 〉 + 1j |3D_XY+, 4P_Y+, 4P_Y- 〉 + |3D_X^2-Y^2+, 4P_Z+, 4P_Z- 〉 + 1j |3D_XY+, 4P_Z+, 4P_Z- 〉
+
+
+
+
+
+------------------------------
+CONFIGURATION: 4P2_4S1
+------------------------------
+
+
+
+CSF # 1 (with 4 determinants)
+|4P_X+, 4S_S+, 4P_X- 〉 + -1j |4P_X+, 4S_S+, 4P_Y- 〉 + -1j |4P_Y+, 4S_S+, 4P_X- 〉 - |4P_Y+, 4S_S+, 4P_Y- 〉
+
+
+
+
+
+
+CSF # 2 (with 4 determinants)
+|4P_X+, 4S_S+, 4P_X- 〉 + 1j |4P_X+, 4S_S+, 4P_Y- 〉 + 1j |4P_Y+, 4S_S+, 4P_X- 〉 - |4P_Y+, 4S_S+, 4P_Y- 〉
+
+
+
+
+
+------------------------------
+CONFIGURATION: 3D1_4S2
+------------------------------
+
+
+
+CSF # 1 (with 2 determinants)
+ - |3D_X^2-Y^2+, 4S_S+, 4S_S- 〉 + 1j |3D_XY+, 4S_S+, 4S_S- 〉
+
+
+
+
+
+
+CSF # 2 (with 2 determinants)
+|3D_X^2-Y^2+, 4S_S+, 4S_S- 〉 + 1j |3D_XY+, 4S_S+, 4S_S- 〉
+
+
+
+
+------
+Generated 16 CSFs with 60 unique determinants.
+CSF:
+  - |3D_X^2-Y^2+, 4S_S+, 4S_S- 〉 + -1j |3D_XY+, 4S_S+, 4S_S- 〉
+DETS:
+--------
+ 0 |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_X- 〉
+--------
+ 1 |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_YZ- 〉
+--------
+ 2 |4P_X+, 4P_Y+, 3D_XY- 〉
+--------
+ 3 |3D_X^2-Y^2+, 4P_Y+, 4P_X- 〉
+--------
+ 4 |3D_XZ+, 3D_YZ+, 3D_X^2-Y^2- 〉
+--------
+ 5 |3D_YZ+, 4P_Y+, 4P_Z- 〉
+--------
+ 6 |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉
+--------
+ 7 |3D_XY+, 4P_X+, 4P_Y- 〉
+--------
+ 8 |3D_XZ+, 4P_Y+, 4P_Z- 〉
+--------
+ 9 |3D_2Z^2-X^2-Y^2+, 4S_S+, 3D_XY- 〉
+--------
+ 10 |3D_2Z^2-X^2-Y^2+, 3D_X^2-Y^2+, 3D_2Z^2-X^2-Y^2- 〉
+--------
+ 11 |3D_XZ+, 3D_X^2-Y^2+, 3D_YZ- 〉
+--------
+ 12 |3D_XZ+, 4P_Z+, 4P_X- 〉
+--------
+ 13 |3D_XZ+, 3D_X^2-Y^2+, 3D_XZ- 〉
+--------
+ 14 |3D_X^2-Y^2+, 4P_X+, 4P_X- 〉
+--------
+ 15 |3D_X^2-Y^2+, 4P_X+, 4P_Y- 〉
+--------
+ 16 |3D_XZ+, 3D_YZ+, 3D_XY- 〉
+--------
+ 17 |3D_2Z^2-X^2-Y^2+, 3D_XY+, 3D_2Z^2-X^2-Y^2- 〉
+--------
+ 18 |3D_YZ+, 4S_S+, 3D_YZ- 〉
+--------
+ 19 |4P_Y+, 4S_S+, 4P_X- 〉
+--------
+ 20 |3D_XY+, 3D_YZ+, 3D_YZ- 〉
+--------
+ 21 |3D_XZ+, 4S_S+, 3D_YZ- 〉
+--------
+ 22 |4P_X+, 4P_Z+, 3D_YZ- 〉
+--------
+ 23 |4P_X+, 4P_Z+, 3D_XZ- 〉
+--------
+ 24 |4P_Y+, 4P_Z+, 3D_YZ- 〉
+--------
+ 25 |3D_XZ+, 4P_X+, 4P_Z- 〉
+--------
+ 26 |3D_XY+, 4P_Z+, 4P_Z- 〉
+--------
+ 27 |3D_XY+, 3D_YZ+, 3D_XZ- 〉
+--------
+ 28 |3D_YZ+, 4P_Z+, 4P_X- 〉
+--------
+ 29 |3D_X^2-Y^2+, 3D_YZ+, 3D_YZ- 〉
+--------
+ 30 |3D_X^2-Y^2+, 4P_Y+, 4P_Y- 〉
+--------
+ 31 |4P_Y+, 4S_S+, 4P_Y- 〉
+--------
+ 32 |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_X- 〉
+--------
+ 33 |3D_XY+, 3D_XZ+, 3D_YZ- 〉
+--------
+ 34 |3D_2Z^2-X^2-Y^2+, 4P_X+, 4P_Y- 〉
+--------
+ 35 |3D_XY+, 4S_S+, 4S_S- 〉
+--------
+ 36 |3D_2Z^2-X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉
+--------
+ 37 |3D_2Z^2-X^2-Y^2+, 3D_XZ+, 3D_XZ- 〉
+--------
+ 38 |3D_XZ+, 4S_S+, 3D_XZ- 〉
+--------
+ 39 |4P_X+, 4P_Y+, 3D_X^2-Y^2- 〉
+--------
+ 40 |3D_XY+, 4P_X+, 4P_X- 〉
+--------
+ 41 |4P_Y+, 4P_Z+, 3D_XZ- 〉
+--------
+ 42 |3D_YZ+, 4S_S+, 3D_XZ- 〉
+--------
+ 43 |4P_X+, 4S_S+, 4P_Y- 〉
+--------
+ 44 |3D_X^2-Y^2+, 4P_Z+, 4P_Z- 〉
+--------
+ 45 |3D_XZ+, 4P_Z+, 4P_Y- 〉
+--------
+ 46 |4P_X+, 4S_S+, 4P_X- 〉
+--------
+ 47 |3D_XY+, 4S_S+, 3D_2Z^2-X^2-Y^2- 〉
+--------
+ 48 |3D_XY+, 3D_X^2-Y^2+, 3D_XY- 〉
+--------
+ 49 |3D_XY+, 4P_Y+, 4P_Y- 〉
+--------
+ 50 |3D_X^2-Y^2+, 4S_S+, 4S_S- 〉
+--------
+ 51 |3D_YZ+, 4P_Z+, 4P_Y- 〉
+--------
+ 52 |3D_X^2-Y^2+, 3D_YZ+, 3D_XZ- 〉
+--------
+ 53 |3D_XY+, 3D_XZ+, 3D_XZ- 〉
+--------
+ 54 |3D_2Z^2-X^2-Y^2+, 4S_S+, 3D_X^2-Y^2- 〉
+--------
+ 55 |3D_YZ+, 4P_X+, 4P_Z- 〉
+--------
+ 56 |3D_2Z^2-X^2-Y^2+, 4P_Y+, 4P_Y- 〉
+--------
+ 57 |3D_X^2-Y^2+, 4S_S+, 3D_2Z^2-X^2-Y^2- 〉
+--------
+ 58 |3D_XY+, 4P_Y+, 4P_X- 〉
+--------
+ 59 |3D_XY+, 3D_X^2-Y^2+, 3D_X^2-Y^2- 〉
+16 CSFs left after filtering with 60 unique determinants.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+Converting coefficients to integers failed.
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4S_S+ 
+to:  10
+ORB:  4S_S- 
+to:  10
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 12], [1, 2, 3, 4, 10]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4S_S+ 
+to:  10
+ORB:  4S_S- 
+to:  10
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 13], [1, 2, 3, 4, 10]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4S_S+ 
+to:  10
+ORB:  4S_S- 
+to:  10
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 12], [1, 2, 3, 4, 10]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4S_S+ 
+to:  10
+ORB:  4S_S- 
+to:  10
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 13], [1, 2, 3, 4, 10]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 18], [1, 2, 3, 4, 18]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 18], [1, 2, 3, 4, 14]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 17, 18], [1, 2, 3, 4, 14]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 18], [1, 2, 3, 4, 15]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 17, 18], [1, 2, 3, 4, 15]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 17]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y+ 
+to:  17
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 17], [1, 2, 3, 4, 12]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y+ 
+to:  17
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 17], [1, 2, 3, 4, 13]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 17], [1, 2, 3, 4, 16]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 16], [1, 2, 3, 4, 16]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 16], [1, 2, 3, 4, 17]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 17], [1, 2, 3, 4, 16]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 17], [1, 2, 3, 4, 17]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 16], [1, 2, 3, 4, 16]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 16], [1, 2, 3, 4, 17]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 17], [1, 2, 3, 4, 16]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4S_S+ 
+to:  10
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 17], [1, 2, 3, 4, 17]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 18], [1, 2, 3, 4, 14]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 17, 18], [1, 2, 3, 4, 14]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 18], [1, 2, 3, 4, 15]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 17, 18], [1, 2, 3, 4, 15]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 17], [1, 2, 3, 4, 18]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y+ 
+to:  17
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 17], [1, 2, 3, 4, 12]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y+ 
+to:  17
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 17], [1, 2, 3, 4, 13]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 11], [1, 2, 3, 4, 12]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 11], [1, 2, 3, 4, 13]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 12], [1, 2, 3, 4, 11]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 13], [1, 2, 3, 4, 11]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 12], [1, 2, 3, 4, 11]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 13], [1, 2, 3, 4, 11]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 11], [1, 2, 3, 4, 12]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4S_S+ 
+to:  10
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 10, 11], [1, 2, 3, 4, 13]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 17]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 18], [1, 2, 3, 4, 14]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 17, 18], [1, 2, 3, 4, 14]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 18], [1, 2, 3, 4, 15]]
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z+ 
+to:  18
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 17, 18], [1, 2, 3, 4, 15]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 17], [1, 2, 3, 4, 18]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y+ 
+to:  17
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 17], [1, 2, 3, 4, 12]]
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y+ 
+to:  17
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 16, 17], [1, 2, 3, 4, 13]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 12], [1, 2, 3, 4, 11]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 13], [1, 2, 3, 4, 11]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 12]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 13]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 12]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 13]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 12], [1, 2, 3, 4, 11]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 13], [1, 2, 3, 4, 11]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 13], [1, 2, 3, 4, 12]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 13], [1, 2, 3, 4, 13]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 12]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 13]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 12], [1, 2, 3, 4, 11]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 13], [1, 2, 3, 4, 11]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 13], [1, 2, 3, 4, 12]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 13], [1, 2, 3, 4, 13]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_X^2-Y^2- 
+to:  12
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 12]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XY- 
+to:  13
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 15], [1, 2, 3, 4, 13]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XZ+ 
+to:  14
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 14], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_XZ- 
+to:  14
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 14]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_YZ+ 
+to:  15
+ORB:  3D_YZ- 
+to:  15
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 15], [1, 2, 3, 4, 15]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 12], [1, 2, 3, 4, 11]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  3D_XY+ 
+to:  13
+ORB:  3D_2Z^2-X^2-Y^2- 
+to:  11
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 13], [1, 2, 3, 4, 11]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 16], [1, 2, 3, 4, 17]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 16]]
+ORB:  3D_2Z^2-X^2-Y^2+ 
+to:  11
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 11, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 16]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 18], [1, 2, 3, 4, 17]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_XZ+ 
+to:  14
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 14, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 16], [1, 2, 3, 4, 18]]
+ORB:  3D_YZ+ 
+to:  15
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 15, 17], [1, 2, 3, 4, 18]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_X+ 
+to:  16
+ORB:  4P_X- 
+to:  16
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 16], [1, 2, 3, 4, 16]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Y+ 
+to:  17
+ORB:  4P_Y- 
+to:  17
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 17], [1, 2, 3, 4, 17]]
+ORB:  3D_X^2-Y^2+ 
+to:  12
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 12, 18], [1, 2, 3, 4, 18]]
+ORB:  3D_XY+ 
+to:  13
+ORB:  4P_Z+ 
+to:  18
+ORB:  4P_Z- 
+to:  18
+ALPHA UP ELECS:  [1, 2, 3, 4, 5]
+SORTED_DET:  [[1, 2, 3, 4, 5, 13, 18], [1, 2, 3, 4, 18]]
+-------
+RAN PROGRAM SUCCESSFULLY BUT WITH WARNINGS:
+Found 2 impure orbitals.

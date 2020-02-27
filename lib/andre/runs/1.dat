@@ -1,0 +1,18 @@
+ $DATA  
+C with OH symmetry and CVB1 basis                                               
+DNH      4
+
+C           6.0      0.0000000000      0.0000000000      0.0000000000
+   1S     14
+   1S     14
+   1S     14
+   2S     14
+   2S     14
+   2S     14
+   2P     14
+   2P     14
+   2P     14
+   2P     14
+   3D     14
+        
+ $END      

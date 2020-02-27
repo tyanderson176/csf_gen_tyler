@@ -1,0 +1,37 @@
+ $CONTRL RUNTYP=ENERGY EXETYP=RUN COORD=UNIQUE NORMF=1 UNITS=BOHR MULT=3
+         ISPHER=1                                                               # gives 5 rather than 6 d fns etc.
+         SCFTYP=ROHF $END                                                       # ROHF only
+#        SCFTYP=MCSCF CITYP=NONE MAXIT=200 $END                                 # MCSCF only
+#        SCFTYP=NONE CITYP=GUGA MAXIT=200 $END                                  # CI only
+#$SYSTEM MWORDS=100 $END
+ $GUESS  GUESS=HUCKEL PRTMO=.TRUE. $END                                         # ROHF only
+#$GUESS  GUESS=MOREAD PRTMO=.TRUE. NORB=23 $END                                 # MCSCF and CI only
+#$DFT    DFTTYP=SVWN THRESH=1.0E-15 $END
+#$SCF    MVOQ=0 DIRSCF=.FALSE. RSTRCT=.TRUE. $END
+#$SCF    DIIS=.F. SOSCF=.T. $END                                                # sometimes needed to get correct convergence for DNH 4
+ $DFT    DFTTYP=PBE   NRAD=200 NTHE=32 NPHI=64 THRESH=1.0E-15 GTHRE=10. $END
+ $SCF    MVOQ=0 DIRSCF=.FALSE. CONV=1.D-10 RSTRCT=.TRUE. $END
+#$MCSCF  CISTEP=GUGA MAXIT=200 $END                                             # MCSCF only
+#$DRT    GROUP=D4H IEXCIT=4 NDOC=1 NALP=2 NVAL=19 NMCC=1 NPRT=1                 # MCSCF only
+#        NEXT=0 SOCI=.FALSE. $END                                               # MCSCF only
+#$CIDRT  GROUP=D4H IEXCIT=4 NDOC=1 NALP=2 NVAL=19 NFZC=1 NPRT=2 $END            # CI only
+#$GUGDIA NSTATE=1 PRTTOL=0.001 KPRINT=2 $END                                    # MCSCF and CI only
+
+ $DATA
+C with D4H symmetry and CVB1 basis
+DNH 4
+
+C 6.  0. 0. 0.
+1S   14   8.361682
+1S   14   5.206173
+1S   14   10.30548
+2S   14   4.063249
+2S   14   2.057774
+2S   14   1.329176
+2P   14   3.571537
+2P   14   1.748226
+2P   14   1.059707
+2P   14   8.081902
+3D   14   1.953933
+
+ $END

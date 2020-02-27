@@ -1,0 +1,19 @@
+Using the orbitals from hf_d4h.dat
+    23 ORBITALS ARE OCCUPIED (    1 CORE ORBITALS).
+     1=A1G      2=A1G      3=EU       4=EU       5=A2U      6=EU       7=EU
+     8=A1G      9=A2U     10=B2G     11=B1G     12=EG      13=EG      14=A1G
+    15=EU      16=EU      17=A2U     18=A1G     19=A1G     20=EU      21=EU
+    22=A2U     23=A1G
+
+The inputs are labeled by N_elec, N_orb, N_excit, where
+N_elec  = 2*NDOC+NALP
+N_orb   = NDOC+NALP+NVAL
+N_excit = IEXCIT
+Since we have S=1, NALP=2 and since we have 6 electrons, NMCC+NDOC+NALP=4
+
+Since we want to include both members of degenerate levels, we have following restrictions:
+NALP   must be 2
+IEXCIT is 4 if we freeze the 1s core
+NMCC   is 1 if we freeze the 1s core
+NDOC   is 1 (2s)
+NVAL   can be 1, 3, 4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 17, 18, 19 (going forwards from 5=A2U)

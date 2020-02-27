@@ -1,0 +1,3538 @@
+----- GAMESS execution script -----
+This job is running on host qmc4
+under operating system Linux at Thu Mar 16 09:17:27 EDT 2017
+Available scratch disk space (Kbyte units) at beginning of the job is
+Filesystem      1K-blocks       Used Available Use% Mounted on
+/dev/sda7      1515619644 1040568848 398038732  73% /
+
+ Distributed Data Interface kickoff program.
+ Initiating 1 compute processes on 1 nodes to run the following command:
+ /home/cyrus/qmc_setup/gamess09_modified/gamess.00.x ci_pbe_oh_orbs_cas4-13 
+
+          ******************************************************
+          *         GAMESS VERSION = 12 JAN 2009 (R3)          *
+          *             FROM IOWA STATE UNIVERSITY             *
+          * M.W.SCHMIDT, K.K.BALDRIDGE, J.A.BOATZ, S.T.ELBERT, *
+          *   M.S.GORDON, J.H.JENSEN, S.KOSEKI, N.MATSUNAGA,   *
+          *          K.A.NGUYEN, S.J.SU, T.L.WINDUS,           *
+          *       TOGETHER WITH M.DUPUIS, J.A.MONTGOMERY       *
+          *         J.COMPUT.CHEM.  14, 1347-1363(1993)        *
+          **************** 64 BIT LINUX VERSION ****************
+
+  SINCE 1993, STUDENTS AND POSTDOCS WORKING AT IOWA STATE UNIVERSITY
+  AND ALSO IN THEIR VARIOUS JOBS AFTER LEAVING ISU HAVE MADE IMPORTANT
+  CONTRIBUTIONS TO THE CODE:
+     IVANA ADAMOVIC, CHRISTINE AIKENS, YURI ALEXEEV, POOJA ARORA,
+     ANDREY ASADCHEV, ROB BELL, PRADIPTA BANDYOPADHYAY, JONATHAN BENTZ,
+     BRETT BODE, GALINA CHABAN, WEI CHEN, CHEOL HO CHOI, PAUL DAY, TIM DUDLEY,
+     DMITRI FEDOROV, GRAHAM FLETCHER, MARK FREITAG, KURT GLAESEMANN, DAN KEMP,
+     GRANT MERRILL, JONATHAN MULLIN, TAKESHI NAGATA, SEAN NEDD,
+     HEATHER NETZLOFF, BOSILJKA NJEGIC, RYAN OLSON, MIKE PAK, JIM SHOEMAKER,
+     LYUDMILA SLIPCHENKO, SAROM SOK, JIE SONG, TETSUYA TAKETSUGU,
+     SIMON WEBB, SOOHAENG YOO, FEDERICO ZAHARIEV
+
+  ADDITIONAL CODE HAS BEEN PROVIDED BY COLLABORATORS IN OTHER GROUPS:
+     IOWA STATE UNIVERSITY: JOE IVANIC, KLAUS RUEDENBERG
+     UNIVERSITY OF TOKYO: KIMIHIKO HIRAO, TAKAHITO NAKAJIMA,
+          TAKAO TSUNEDA, MUNEAKI KAMIYA, SUSUMU YANAGISAWA,
+          KIYOSHI YAGI, MAHITO CHIBA, SEIKEN TOKURA, NAOAKI KAWAKAMI
+     UNIVERSITY OF AARHUS: FRANK JENSEN
+     UNIVERSITY OF IOWA: VISVALDAS KAIRYS, HUI LI
+     NATIONAL INST. OF STANDARDS AND TECHNOLOGY: WALT STEVENS, DAVID GARMER
+     UNIVERSITY OF PISA: BENEDETTA MENNUCCI, JACOPO TOMASI
+     UNIVERSITY OF MEMPHIS: HENRY KURTZ, PRAKASHAN KORAMBATH
+     UNIVERSITY OF ALBERTA: MARIUSZ KLOBUKOWSKI
+     UNIVERSITY OF NEW ENGLAND: MARK SPACKMAN
+     MIE UNIVERSITY: HIROAKI UMEDA
+     MICHIGAN STATE UNIVERSITY:
+          KAROL KOWALSKI, MARTA WLOCH, JEFFREY R. GOUR, PIOTR PIECUCH
+     UNIVERSITY OF SILESIA: MONIKA MUSIAL, STANISLAW KUCHARSKI
+     FACULTES UNIVERSITAIRES NOTRE-DAME DE LA PAIX:
+          OLIVIER QUINET, BENOIT CHAMPAGNE
+     UNIVERSITY OF CALIFORNIA - SANTA BARBARA: BERNARD KIRTMAN
+     INSTITUTE FOR MOLECULAR SCIENCE: KAZUYA ISHIMURA AND SHIGERU NAGASE
+     UNIVERSITY OF NOTRE DAME: DAN CHIPMAN
+     KYUSHU UNIVERSITY:
+          HARUYUKI NAKANO,
+          FENG LONG GU, JACEK KORCHOWIEC, MARCIN MAKOWSKI, AND YURIKO AOKI,
+          HIROTOSHI MORI AND EISAKU MIYOSHI
+     PENNSYLVANIA STATE UNIVERSITY:
+          TZVETELIN IORDANOV, CHET SWALINA, JONATHAN SKONE,
+          SHARON HAMMES-SCHIFFER
+     WASEDA UNIVERSITY:
+          MASATO KOBAYASHI, TOMOKO AKAMA, HIROMI NAKAI
+
+ EXECUTION OF GAMESS BEGUN Thu Mar 16 09:17:28 2017
+
+            ECHO OF THE FIRST FEW INPUT CARDS -
+ INPUT CARD> $CONTRL RUNTYP=ENERGY EXETYP=RUN COORD=UNIQUE NORMF=1 UNITS=BOHR MULT=3        
+ INPUT CARD>         ISPHER=1                                                               
+ INPUT CARD>         SCFTYP=NONE CITYP=GUGA MAXIT=200 $END                                  
+ INPUT CARD>#        SCFTYP=MCSCF CITYP=NONE MAXIT=200 $END                                 
+ INPUT CARD>#        SCFTYP=ROHF $END                                                       
+ INPUT CARD> $SYSTEM MWORDS=100 $END                                                        
+ INPUT CARD>#$GUESS  GUESS=HUCKEL PRTMO=.TRUE. $END                                         
+ INPUT CARD> $GUESS  GUESS=MOREAD PRTMO=.TRUE. NORB=23 $END                                 
+ INPUT CARD>#$DFT    DFTTYP=SVWN THRESH=1.0E-15 $END                                        
+ INPUT CARD>#$SCF    MVOQ=0 DIRSCF=.FALSE. RSTRCT=.TRUE. $END                               
+ INPUT CARD>#$SCF    DIIS=.F. SOSCF=.T. $END                                                
+ INPUT CARD>#$MCSCF  CISTEP=GUGA MAXIT=200 $END                                             
+ INPUT CARD>#$DRT    GROUP=D2H IEXCIT=4 NDOC=1 NALP=2 NVAL=10 NMCC=1 NPRT=1                 
+ INPUT CARD>#        NEXT=0 SOCI=.FALSE. $END                                               
+ INPUT CARD> $CIDRT  GROUP=D2H IEXCIT=4 NDOC=1 NALP=2 NVAL=10 NFZC=1 NPRT=2 $END            
+ INPUT CARD> $GUGDIA NSTATE=1 PRTTOL=0.001 KPRINT=2 $END                                    
+ INPUT CARD>                                                                                
+ INPUT CARD> $DATA                                                                          
+ INPUT CARD>C with D2H symmetry and CVB1 basis                                              
+ INPUT CARD>DNH 2                                                                           
+ INPUT CARD>                                                                                
+ INPUT CARD>C 6.  0. 0. 0.                                                                  
+ INPUT CARD>1S   14   8.361682                                                              
+ INPUT CARD>1S   14   5.206173                                                              
+ INPUT CARD>1S   14   10.30548                                                              
+ INPUT CARD>2S   14   4.063249                                                              
+ INPUT CARD>2S   14   2.057774                                                              
+ INPUT CARD>2S   14   1.329176                                                              
+ INPUT CARD>2P   14   3.571537                                                              
+ INPUT CARD>2P   14   1.748226                                                              
+ INPUT CARD>2P   14   1.059707                                                              
+ INPUT CARD>2P   14   8.081902                                                              
+ INPUT CARD>3D   14   1.953933                                                              
+ INPUT CARD>                                                                                
+ INPUT CARD> $END                                                                           
+ INPUT CARD>--- OPEN SHELL ORBITALS --- GENERATED AT Wed Mar 15 21:10:31 2017               
+ INPUT CARD>C with OH symmetry and CVB1 basis                                               
+ INPUT CARD>E(RO-PBE)=      -37.8148991258, E(NUC)=    0.0000000000,   17 ITERS             
+ INPUT CARD> $VEC                                                                           
+ INPUT CARD> 1  1 1.52058277E-01 8.51419336E-01 2.07913919E-03 6.75588026E-03 1.73185243E-03
+ INPUT CARD> 1  2-1.67998193E-03-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00
+ INPUT CARD> 1  3-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00
+ INPUT CARD> 1  4-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00
+ INPUT CARD> 1  5-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00               
+ INPUT CARD> 2  1 2.64210591E-02-2.65283014E-01-1.79961205E-02-3.77567411E-02 5.73891203E-01
+ INPUT CARD> 2  2 5.17940935E-01 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00
+ INPUT CARD> 2  3 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00
+ INPUT CARD> 2  4 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00
+ INPUT CARD> 2  5 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00               
+ INPUT CARD> 3  1-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00
+  100000000 WORDS OF MEMORY AVAILABLE
+
+
+     RUN TITLE
+     ---------
+ C with D2H symmetry and CVB1 basis                                              
+
+ THE POINT GROUP OF THE MOLECULE IS DNH     
+ THE ORDER OF THE PRINCIPAL AXIS IS     2
+
+ ATOM      ATOMIC                      COORDINATES (BOHR)
+           CHARGE         X                   Y                   Z
+ C           6.0     0.0000000000        0.0000000000        0.0000000000
+
+          INTERNUCLEAR DISTANCES (ANGS.)
+          ------------------------------
+
+                1 C     
+
+   1 C       0.0000000  
+
+  * ... LESS THAN  3.000
+
+ ATOMS: STO-NG TYPE BASIS SET
+
+     ATOMIC BASIS SET
+     ----------------
+ THE CONTRACTED PRIMITIVE FUNCTIONS HAVE BEEN UNNORMALIZED
+
+ SHELL TYPE PRIMITIVE    SLATER EXPONENT     EXPONENT          CONTRACTION COEFFICIENTS
+
+ C         
+
+   1   1S      1             8.3616820        150056.7199863      0.000032071854
+   1   1S      2                               27561.7070829      0.000180868723
+   1   1S      3                                7722.9076318      0.000715732866
+   1   1S      4                                2661.7435314      0.002327137394
+   1   1S      5                                1044.3532224      0.006621033419
+   1   1S      6                                 448.8377659      0.016968581825
+   1   1S      7                                 206.5872377      0.039565969259
+   1   1S      8                                 100.3596710      0.083424650133
+   1   1S      9                                  50.9389479      0.155102804303
+   1   1S     10                                  26.8091665      0.241346850991
+   1   1S     11                                  14.5383833      0.286294281483
+   1   1S     12                                   8.0700742      0.220624521375
+   1   1S     13                                   4.5379096      0.083307087421
+   1   1S     14                                   2.5144336      0.008488240652
+
+   2   1S     15             5.2061730         58170.8414755      0.000032071854
+   2   1S     16                               10684.5444420      0.000180868723
+   2   1S     17                                2993.8548278      0.000715732866
+   2   1S     18                                1031.8488971      0.002327137394
+   2   1S     19                                 404.8529499      0.006621033419
+   2   1S     20                                 173.9960099      0.016968581825
+   2   1S     21                                  80.0854068      0.039565969259
+   2   1S     22                                  38.9053320      0.083424650133
+   2   1S     23                                  19.7469428      0.155102804303
+   2   1S     24                                  10.3928153      0.241346850991
+   2   1S     25                                   5.6359355      0.286294281483
+   2   1S     26                                   3.1284371      0.220624521375
+   2   1S     27                                   1.7591616      0.083307087421
+   2   1S     28                                   0.9747429      0.008488240652
+
+   3   1S     29            10.3054800        227931.6344248      0.000032071854
+   3   1S     30                               41865.4022526      0.000180868723
+   3   1S     31                               11730.8638973      0.000715732866
+   3   1S     32                                4043.1081900      0.002327137394
+   3   1S     33                                1586.3410644      0.006621033419
+   3   1S     34                                 681.7710369      0.016968581825
+   3   1S     35                                 313.7997868      0.039565969259
+   3   1S     36                                 152.4433150      0.083424650133
+   3   1S     37                                  77.3747264      0.155102804303
+   3   1S     38                                  40.7223158      0.241346850991
+   3   1S     39                                  22.0833661      0.286294281483
+   3   1S     40                                  12.2581994      0.220624521375
+   3   1S     41                                   6.8929480      0.083307087421
+   3   1S     42                                   3.8193489      0.008488240652
+
+   4   2S     43             4.0632490         48303.7798473     -0.000012553657
+   4   2S     44                                8884.6381945     -0.000070674214
+   4   2S     45                                2490.8791051     -0.000279006257
+   4   2S     46                                 858.6516770     -0.000902551692
+   4   2S     47                                 336.7774190     -0.002539637731
+   4   2S     48                                 144.4905074     -0.006358497776
+   4   2S     49                                  66.1898951     -0.014091245830
+   4   2S     50                                  31.8437686     -0.026247762144
+   4   2S     51                                  15.9275250     -0.033835500479
+   4   2S     52                                   4.4366016      0.136316567659
+   4   2S     53                                   2.4715154      0.346615105867
+   4   2S     54                                   1.4202011      0.394391447306
+   4   2S     55                                   0.8323102      0.179466947913
+   4   2S     56                                   0.4834049      0.019147910178
+
+   5   2S     57             2.0577740         12388.8100216     -0.000012553657
+   5   2S     58                                2278.7056220     -0.000070674214
+   5   2S     59                                 638.8532764     -0.000279006257
+   5   2S     60                                 220.2244324     -0.000902551692
+   5   2S     61                                  86.3756724     -0.002539637731
+   5   2S     62                                  37.0584963     -0.006358497776
+   5   2S     63                                  16.9761878     -0.014091245830
+   5   2S     64                                   8.1671952     -0.026247762144
+   5   2S     65                                   4.0850443     -0.033835500479
+   5   2S     66                                   1.1378864      0.136316567659
+   5   2S     67                                   0.6338869      0.346615105867
+   5   2S     68                                   0.3642490      0.394391447306
+   5   2S     69                                   0.2134685      0.179466947913
+   5   2S     70                                   0.1239822      0.019147910178
+
+   6   2S     71             1.3291760          5168.9130170     -0.000012553657
+   6   2S     72                                 950.7314367     -0.000070674214
+   6   2S     73                                 266.5451331     -0.000279006257
+   6   2S     74                                  91.8829923     -0.000902551692
+   6   2S     75                                  36.0380324     -0.002539637731
+   6   2S     76                                  15.4617065     -0.006358497776
+   6   2S     77                                   7.0828786     -0.014091245830
+   6   2S     78                                   3.4075526     -0.026247762144
+   6   2S     79                                   1.7043799     -0.033835500479
+   6   2S     80                                   0.4747539      0.136316567659
+   6   2S     81                                   0.2644731      0.346615105867
+   6   2S     82                                   0.1519735      0.394391447306
+   6   2S     83                                   0.0890642      0.179466947913
+   6   2S     84                                   0.0517284      0.019147910178
+
+   7   2P     85             3.5715370          2915.8786183      0.000013589949
+   7   2P     86                                 761.8587697      0.000098737859
+   7   2P     87                                 273.6900791      0.000479801849
+   7   2P     88                                 115.3743497      0.001857311814
+   7   2P     89                                  53.8222662      0.006124920677
+   7   2P     90                                  26.9746159      0.017694065347
+   7   2P     91                                  14.2717649      0.045024238527
+   7   2P     92                                   7.8802627      0.099589645863
+   7   2P     93                                   4.5040111      0.185117676854
+   7   2P     94                                   2.6479025      0.272215008736
+   7   2P     95                                   1.5921962      0.287038981915
+   7   2P     96                                   0.9729926      0.185359433293
+   7   2P     97                                   0.5981006      0.055951602757
+   7   2P     98                                   0.3602260      0.004428704269
+
+   8   2P     99             1.7482260           698.6413458      0.000013589949
+   8   2P    100                                 182.5405327      0.000098737859
+   8   2P    101                                  65.5758453      0.000479801849
+   8   2P    102                                  27.6435687      0.001857311814
+   8   2P    103                                  12.8957565      0.006124920677
+   8   2P    104                                   6.4630886      0.017694065347
+   8   2P    105                                   3.4194993      0.045024238527
+   8   2P    106                                   1.8881024      0.099589645863
+   8   2P    107                                   1.0791562      0.185117676854
+   8   2P    108                                   0.6344346      0.272215008736
+   8   2P    109                                   0.3814885      0.287038981915
+   8   2P    110                                   0.2331280      0.185359433293
+   8   2P    111                                   0.1433043      0.055951602757
+   8   2P    112                                   0.0863097      0.004428704269
+
+   9   2P    113             1.0597070           256.7028795      0.000013589949
+   9   2P    114                                  67.0711527      0.000098737859
+   9   2P    115                                  24.0946351      0.000479801849
+   9   2P    116                                  10.1571196      0.001857311814
+   9   2P    117                                   4.7383079      0.006124920677
+   9   2P    118                                   2.3747427      0.017694065347
+   9   2P    119                                   1.2564320      0.045024238527
+   9   2P    120                                   0.6937484      0.099589645863
+   9   2P    121                                   0.3965160      0.185117676854
+   9   2P    122                                   0.2331113      0.272215008736
+   9   2P    123                                   0.1401709      0.287038981915
+   9   2P    124                                   0.0856586      0.185359433293
+   9   2P    125                                   0.0526545      0.055951602757
+   9   2P    126                                   0.0317129      0.004428704269
+
+  10   2P    127             8.0819020         14930.9105587      0.000013589949
+  10   2P    128                                3901.1380918      0.000098737859
+  10   2P    129                                1401.4445136      0.000479801849
+  10   2P    130                                 590.7804546      0.001857311814
+  10   2P    131                                 275.5997585      0.006124920677
+  10   2P    132                                 138.1249463      0.017694065347
+  10   2P    133                                  73.0793263      0.045024238527
+  10   2P    134                                  40.3513015      0.099589645863
+  10   2P    135                                  23.0630267      0.185117676854
+  10   2P    136                                  13.5587246      0.272215008736
+  10   2P    137                                   8.1529249      0.287038981915
+  10   2P    138                                   4.9822599      0.185359433293
+  10   2P    139                                   3.0626060      0.055951602757
+  10   2P    140                                   1.8445561      0.004428704269
+
+  11   3D    141             1.9539330           214.3522735      0.000007211834
+  11   3D    142                                  69.0248952      0.000064571730
+  11   3D    143                                  28.8400973      0.000370632595
+  11   3D    144                                  13.7589123      0.001645715209
+  11   3D    145                                   7.1433105      0.006063213572
+  11   3D    146                                   3.9382335      0.019041368738
+  11   3D    147                                   2.2721520      0.051097955555
+  11   3D    148                                   1.3586212      0.115162923932
+  11   3D    149                                   0.8360653      0.209894374013
+  11   3D    150                                   0.5265355      0.290459603071
+  11   3D    151                                   0.3375961      0.276700109243
+  11   3D    152                                   0.2190230      0.155660867691
+  11   3D    153                                   0.1423611      0.039819180965
+  11   3D    154                                   0.0904241      0.002624443034
+
+ TOTAL NUMBER OF BASIS SET SHELLS             =   11
+ NUMBER OF CARTESIAN GAUSSIAN BASIS FUNCTIONS =   24
+ NOTE: THIS RUN WILL RESTRICT THE MO VARIATION SPACE TO SPHERICAL HARMONICS.
+ THE NUMBER OF ORBITALS KEPT IN THE VARIATIONAL SPACE WILL BE PRINTED LATER.
+ NUMBER OF ELECTRONS                          =    6
+ CHARGE OF MOLECULE                           =    0
+ SPIN MULTIPLICITY                            =    3
+ NUMBER OF OCCUPIED ORBITALS (ALPHA)          =    4
+ NUMBER OF OCCUPIED ORBITALS (BETA )          =    2
+ TOTAL NUMBER OF ATOMS                        =    1
+ THE NUCLEAR REPULSION ENERGY IS        0.0000000000
+
+ THIS MOLECULE IS RECOGNIZED AS BEING LINEAR,
+ ORBITAL LZ DEGENERACY TOLERANCE ETOLLZ= 1.00E-06
+
+     $CONTRL OPTIONS
+     ---------------
+ SCFTYP=NONE         RUNTYP=ENERGY       EXETYP=RUN     
+ MPLEVL=       0     CITYP =GUGA         CCTYP =NONE         VBTYP =NONE    
+ DFTTYP=NONE         TDDFT =NONE    
+ MULT  =       3     ICHARG=       0     NZVAR =       0     COORD =UNIQUE  
+ PP    =NONE         RELWFN=NONE         LOCAL =NONE         NUMGRD=       F
+ ISPHER=       1     NOSYM =       0     MAXIT =     200     UNITS =BOHR    
+ PLTORB=       F     MOLPLT=       F     AIMPAC=       F     FRIEND=        
+ NPRINT=       7     IREST =       0     GEOM  =INPUT   
+ NORMF =       1     NORMP =       0     ITOL  =      20     ICUT  =       9
+ INTTYP=BEST         GRDTYP=BEST         QMTTOL= 1.0E-06
+
+     $SYSTEM OPTIONS
+     ---------------
+  REPLICATED MEMORY=   100000000 WORDS (ON EVERY NODE).
+ DISTRIBUTED MEMDDI=           0 MILLION WORDS IN AGGREGATE,
+ MEMDDI DISTRIBUTED OVER   1 PROCESSORS IS           0 WORDS/PROCESSOR.
+ TOTAL MEMORY REQUESTED ON EACH PROCESSOR=   100000000 WORDS.
+ TIMLIM=      525600.00 MINUTES, OR   365.00 DAYS.
+ PARALL= F  BALTYP=  DLB     KDIAG=    0  COREFL= F
+
+          ----------------
+          PROPERTIES INPUT
+          ----------------
+
+     MOMENTS            FIELD           POTENTIAL          DENSITY
+ IEMOM =       1   IEFLD =       0   IEPOT =       0   IEDEN =       0
+ WHERE =COMASS     WHERE =NUCLEI     WHERE =NUCLEI     WHERE =NUCLEI  
+ OUTPUT=BOTH       OUTPUT=BOTH       OUTPUT=PUNCH      OUTPUT=BOTH    
+ IEMINT=       0   IEFINT=       0                     IEDINT=       0
+                                                       MORB  =       0
+          EXTRAPOLATION IN EFFECT
+          SOSCF IN EFFECT
+ ORBITAL PRINTING OPTION: NPREO=     1    24     2     1
+
+     -------------------------------
+     INTEGRAL TRANSFORMATION OPTIONS
+     -------------------------------
+     NWORD  =         0     CUTOFF = 1.0E-09
+     MPTRAN =         0     DIRTRF =       F
+     AOINTS =DUP     
+
+          ----------------------
+          INTEGRAL INPUT OPTIONS
+          ----------------------
+ NOPK  =       1 NORDER=       0 SCHWRZ=       F
+
+     ------------------------------------------
+     THE POINT GROUP IS DNH, NAXIS= 2, ORDER= 8
+     ------------------------------------------
+
+ -- VARIATIONAL SPACE WILL BE RESTRICTED TO PURE SPHERICAL HARMONICS ONLY --
+ AFTER EXCLUDING CONTAMINANT COMBINATIONS FROM THE CARTESIAN GAUSSIAN BASIS
+ SET, THE NUMBER OF SPHERICAL HARMONICS KEPT IN THE VARIATION SPACE IS   23
+
+     DIMENSIONS OF THE SYMMETRY SUBSPACES ARE
+ AG  =    8     AU  =    0     B3U =    4     B3G =    1     B1G =    1
+ B1U =    4     B2U =    4     B2G =    1
+
+ ..... DONE SETTING UP THE RUN .....
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =        0.0 (    0.0 MIN)
+ TOTAL WALL CLOCK TIME=        0.0 SECONDS, CPU UTILIZATION IS  50.00%
+
+          ********************
+          1 ELECTRON INTEGRALS
+          ********************
+ ...... END OF ONE-ELECTRON INTEGRALS ......
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =        0.0 (    0.0 MIN)
+ TOTAL WALL CLOCK TIME=        0.0 SECONDS, CPU UTILIZATION IS 100.00%
+
+          -------------
+          GUESS OPTIONS
+          -------------
+          GUESS =MOREAD            NORB  =      23          NORDER=       0
+          MIX   =       F          PRTMO =       T          PUNMO =       F
+          TOLZ  = 1.0E-08          TOLE  = 1.0E-05
+          SYMDEN=       F          PURIFY=       F
+
+ INITIAL GUESS ORBITALS GENERATED BY MOREAD   ROUTINE.
+
+ STATISTICS FOR GENERATION OF SYMMETRY ORBITAL -Q- MATRIX
+ NUMBER OF CARTESIAN ATOMIC ORBITALS=         24
+ NUMBER OF SPHERICAL CONTAMINANTS DROPPED=     1
+ NUMBER OF LINEARLY DEPENDENT MOS DROPPED=     0
+ TOTAL NUMBER OF MOS IN VARIATION SPACE=      23
+ EIGENVALUES ARE DIAGONAL OF 1E- H IN MO BASIS
+
+ SYMMETRIES FOR INITIAL GUESS ORBITALS FOLLOW.   BOTH SET(S).
+     4 ORBITALS ARE OCCUPIED (    1 CORE ORBITALS).
+     1=AG       2=AG       3=B3U      4=B2U      5=B1U      6=B2U      7=B3U 
+     8=B1U      9=AG      10=B3G     11=B2G     12=B1G     13=AG      14=AG  
+    15=B3U     16=B2U     17=B1U     18=AG      19=AG      20=B2U     21=B3U 
+    22=B1U     23=AG  
+
+                              ----------------------
+                              INITIAL GUESS ORBITALS
+                              ----------------------
+
+                        1              2              3              4              5
+                  -17.921035049   -3.862999777   -3.440572315   -3.440572315   -3.440572315
+                       AG             AG             B3U            B2U            B1U 
+    1  C  1  S      0.152058277    0.026421059    0.000000000    0.000000000    0.000000000
+    2  C  1  S      0.851419336   -0.265283014    0.000000000    0.000000000    0.000000000
+    3  C  1  S      0.002079139   -0.017996120    0.000000000    0.000000000    0.000000000
+    4  C  1  S      0.006755880   -0.037756741    0.000000000    0.000000000    0.000000000
+    5  C  1  S      0.001731852    0.573891203    0.000000000    0.000000000    0.000000000
+    6  C  1  S     -0.001679982    0.517940935    0.000000000    0.000000000    0.000000000
+    7  C  1  X      0.000000000    0.000000000    0.111112024    0.000000000    0.000000000
+    8  C  1  Y      0.000000000    0.000000000    0.000000000    0.111112024    0.000000000
+    9  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.111112024
+   10  C  1  X      0.000000000    0.000000000    0.475408745    0.000000000    0.000000000
+   11  C  1  Y      0.000000000    0.000000000    0.000000000    0.475408745    0.000000000
+   12  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.475408745
+   13  C  1  X      0.000000000    0.000000000    0.489420282    0.000000000    0.000000000
+   14  C  1  Y      0.000000000    0.000000000    0.000000000    0.489420282    0.000000000
+   15  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.489420282
+   16  C  1  X      0.000000000    0.000000000    0.001511925    0.000000000    0.000000000
+   17  C  1  Y      0.000000000    0.000000000    0.000000000    0.001511925    0.000000000
+   18  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.001511925
+   19  C  1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   20  C  1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  C  1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  C  1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   23  C  1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  C  1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                        6              7              8              9             10
+                   -2.139087546   -2.139087546   -2.139087546   -2.140122842   -1.998938916
+                       B2U            B3U            B1U            AG             B3G 
+    1  C  1  S      0.000000000    0.000000000    0.000000000   -1.592652300    0.000000000
+    2  C  1  S      0.000000000    0.000000000    0.000000000    1.208958994    0.000000000
+    3  C  1  S      0.000000000    0.000000000    0.000000000    0.660519569    0.000000000
+    4  C  1  S      0.000000000    0.000000000    0.000000000   -1.392086810    0.000000000
+    5  C  1  S      0.000000000    0.000000000    0.000000000    3.508636061    0.000000000
+    6  C  1  S      0.000000000    0.000000000    0.000000000   -2.795419070    0.000000000
+    7  C  1  X      0.000000000   -0.227632372    0.000000000    0.000000000    0.000000000
+    8  C  1  Y     -0.227632372    0.000000000    0.000000000    0.000000000    0.000000000
+    9  C  1  Z      0.000000000    0.000000000   -0.227632372    0.000000000    0.000000000
+   10  C  1  X      0.000000000    2.117201203    0.000000000    0.000000000    0.000000000
+   11  C  1  Y      2.117201203    0.000000000    0.000000000    0.000000000    0.000000000
+   12  C  1  Z      0.000000000    0.000000000    2.117201203    0.000000000    0.000000000
+   13  C  1  X      0.000000000   -2.042024604    0.000000000    0.000000000    0.000000000
+   14  C  1  Y     -2.042024604    0.000000000    0.000000000    0.000000000    0.000000000
+   15  C  1  Z      0.000000000    0.000000000   -2.042024604    0.000000000    0.000000000
+   16  C  1  X      0.000000000    0.041705388    0.000000000    0.000000000    0.000000000
+   17  C  1  Y      0.041705388    0.000000000    0.000000000    0.000000000    0.000000000
+   18  C  1  Z      0.000000000    0.000000000    0.041705388    0.000000000    0.000000000
+   19  C  1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   20  C  1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  C  1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  C  1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   23  C  1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  C  1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    1.000000005
+
+                       11             12             13             14             15
+                   -1.998938916   -1.998938916   -1.998938916   -1.998938916   -1.647476120
+                       B2G            B1G            AG             AG             B3U 
+    1  C  1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    2  C  1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    3  C  1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    4  C  1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    5  C  1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    6  C  1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    7  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000   -2.086986207
+    8  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    9  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   10  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000    2.628768974
+   11  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   12  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   13  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000   -1.313154658
+   14  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   15  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   16  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.236616714
+   17  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   18  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   19  C  1 XX      0.000000000    0.000000000    0.866025408   -0.500000003    0.000000000
+   20  C  1 YY      0.000000000    0.000000000   -0.866025408   -0.500000003    0.000000000
+   21  C  1 ZZ      0.000000000    0.000000000    0.000000000    1.000000005    0.000000000
+   22  C  1 XY      0.000000000    1.000000005    0.000000000    0.000000000    0.000000000
+   23  C  1 XZ      1.000000005    0.000000000    0.000000000    0.000000000    0.000000000
+   24  C  1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       16             17             18             19             20
+                   -1.647476120   -1.647476120   -0.674277812   15.524971286   21.459182351
+                       B2U            B1U            AG             AG             B2U 
+    1  C  1  S      0.000000000    0.000000000    8.806074929   25.175558383    0.000000000
+    2  C  1  S      0.000000000    0.000000000   -8.244217378  -17.542509950    0.000000000
+    3  C  1  S      0.000000000    0.000000000   -3.729253155  -11.849123900    0.000000000
+    4  C  1  S      0.000000000    0.000000000    6.111637443    6.970286125    0.000000000
+    5  C  1  S      0.000000000    0.000000000   -4.417626997   -2.976616278    0.000000000
+    6  C  1  S      0.000000000    0.000000000    2.002106765    1.203545814    0.000000000
+    7  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    8  C  1  Y     -2.086986207    0.000000000    0.000000000    0.000000000    1.733849053
+    9  C  1  Z      0.000000000   -2.086986207    0.000000000    0.000000000    0.000000000
+   10  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   11  C  1  Y      2.628768974    0.000000000    0.000000000    0.000000000   -1.396682678
+   12  C  1  Z      0.000000000    2.628768974    0.000000000    0.000000000    0.000000000
+   13  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   14  C  1  Y     -1.313154658    0.000000000    0.000000000    0.000000000    0.646154738
+   15  C  1  Z      0.000000000   -1.313154658    0.000000000    0.000000000    0.000000000
+   16  C  1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   17  C  1  Y      0.236616714    0.000000000    0.000000000    0.000000000   -1.578329613
+   18  C  1  Z      0.000000000    0.236616714    0.000000000    0.000000000    0.000000000
+   19  C  1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   20  C  1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  C  1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  C  1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   23  C  1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  C  1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       21             22             23
+                   21.459182351   21.459182351  146.000386158
+                       B3U            B1U            AG  
+    1  C  1  S      0.000000000    0.000000000   37.717597210
+    2  C  1  S      0.000000000    0.000000000  -18.567340736
+    3  C  1  S      0.000000000    0.000000000  -23.505433127
+    4  C  1  S      0.000000000    0.000000000    5.799972885
+    5  C  1  S      0.000000000    0.000000000   -2.168167475
+    6  C  1  S      0.000000000    0.000000000    0.860172307
+    7  C  1  X      1.733849053    0.000000000    0.000000000
+    8  C  1  Y      0.000000000    0.000000000    0.000000000
+    9  C  1  Z      0.000000000    1.733849053    0.000000000
+   10  C  1  X     -1.396682678    0.000000000    0.000000000
+   11  C  1  Y      0.000000000    0.000000000    0.000000000
+   12  C  1  Z      0.000000000   -1.396682678    0.000000000
+   13  C  1  X      0.646154738    0.000000000    0.000000000
+   14  C  1  Y      0.000000000    0.000000000    0.000000000
+   15  C  1  Z      0.000000000    0.646154738    0.000000000
+   16  C  1  X     -1.578329613    0.000000000    0.000000000
+   17  C  1  Y      0.000000000    0.000000000    0.000000000
+   18  C  1  Z      0.000000000   -1.578329613    0.000000000
+   19  C  1 XX      0.000000000    0.000000000    0.000000000
+   20  C  1 YY      0.000000000    0.000000000    0.000000000
+   21  C  1 ZZ      0.000000000    0.000000000    0.000000000
+   22  C  1 XY      0.000000000    0.000000000    0.000000000
+   23  C  1 XZ      0.000000000    0.000000000    0.000000000
+   24  C  1 YZ      0.000000000    0.000000000    0.000000000
+ ...... END OF INITIAL ORBITAL SELECTION ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =        0.0 (    0.0 MIN)
+ TOTAL WALL CLOCK TIME=        0.0 SECONDS, CPU UTILIZATION IS 100.00%
+
+                    ----------------------
+                    AO INTEGRAL TECHNOLOGY
+                    ----------------------
+     S,P,L SHELL ROTATED AXIS INTEGRALS, REPROGRAMMED BY
+        KAZUYA ISHIMURA (IMS) AND JOSE SIERRA (SYNSTAR).
+     S,P,D,L SHELL ROTATED AXIS INTEGRALS PROGRAMMED BY
+        KAZUYA ISHIMURA (INSTITUTE FOR MOLECULAR SCIENCE).
+     S,P,D,F,G SHELL TO TOTAL QUARTET ANGULAR MOMENTUM SUM 5,
+        ERIC PROGRAM BY GRAHAM FLETCHER (ELORET AND NASA ADVANCED
+        SUPERCOMPUTING DIVISION, AMES RESEARCH CENTER).
+     S,P,D,F,G,L SHELL GENERAL RYS QUADRATURE PROGRAMMED BY
+        MICHEL DUPUIS (PACIFIC NORTHWEST NATIONAL LABORATORY).
+
+          --------------------
+          2 ELECTRON INTEGRALS
+          --------------------
+
+ THE -PK- OPTION IS OFF, THE INTEGRALS ARE NOT IN SUPERMATRIX FORM.
+ STORING   15000 INTEGRALS/RECORD ON DISK, USING 12 BYTES/INTEGRAL.
+ TWO ELECTRON INTEGRAL EVALUATION REQUIRES   90462 WORDS OF MEMORY.
+ II,JST,KST,LST =  1  1  1  1 NREC =         1 INTLOC =    1
+ II,JST,KST,LST =  2  1  1  1 NREC =         1 INTLOC =    2
+ II,JST,KST,LST =  3  1  1  1 NREC =         1 INTLOC =    7
+ II,JST,KST,LST =  4  1  1  1 NREC =         1 INTLOC =   22
+ II,JST,KST,LST =  5  1  1  1 NREC =         1 INTLOC =   56
+ II,JST,KST,LST =  6  1  1  1 NREC =         1 INTLOC =  121
+ II,JST,KST,LST =  7  1  1  1 NREC =         1 INTLOC =  232
+ II,JST,KST,LST =  8  1  1  1 NREC =         1 INTLOC =  367
+ II,JST,KST,LST =  9  1  1  1 NREC =         1 INTLOC =  730
+ II,JST,KST,LST = 10  1  1  1 NREC =         1 INTLOC = 1429
+ II,JST,KST,LST = 11  1  1  1 NREC =         1 INTLOC = 2635
+ TOTAL NUMBER OF NONZERO TWO-ELECTRON INTEGRALS =                7182
+          1 INTEGRAL RECORDS WERE STORED ON DISK FILE  8.
+  ...... END OF TWO-ELECTRON INTEGRALS .....
+ STEP CPU TIME =     3.11 TOTAL CPU TIME =        3.1 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.1 SECONDS, CPU UTILIZATION IS  99.68%
+
+ GUGA CI OPTIONS      NRNFG     NPFLG
+ ------------------------------------
+
+ -DRT- TABLE          1         0
+ TRANSFORMATION       1         0
+ ENERGY MATRIX        1         0
+ DIAGONALIZATION      1         0
+ 1E-DENSITY MATRIX    1         0
+ 2E-DENSITY MATRIX    0         0
+ LAGRANGIAN MATRIX    0         0
+
+          -----------------------     ----------------------------
+          GUGA DISTINCT ROW TABLE     WRITTEN BY B.R.BROOKS,P.SAXE
+          -----------------------     ----------------------------
+
+      GROUP=D2H          NPRT=       2
+       FORS=       F   INTACT=       F
+       FOCI=       F   MXNINT=   50000
+       SOCI=       F   MXNEME=   10000
+     IEXCIT=       4
+
+      -CORE-    -INTERNAL-  -EXTERNAL-
+     NFZC=   1   NDOC=   1   NEXT=   0
+     NMCC=   0   NAOS=   0   NFZV=   0
+                 NBOS=   0
+                 NALP=   2
+                 NVAL=  10
+
+ THE MAXIMUM ELECTRON EXCITATION WILL BE   4
+
+ SYMMETRIES FOR THE   1 CORE,  13 ACTIVE,   0 EXTERNAL MO-S ARE
+     CORE= AG  
+   ACTIVE= AG    B3U   B2U   B1U   B2U   B3U   B1U   AG    B3G   B2G 
+           DOC   ALP   ALP   VAL   VAL   VAL   VAL   VAL   VAL   VAL 
+   ACTIVE= B1G   AG    AG  
+           VAL   VAL   VAL 
+
+ MOLECULAR CHARGE          =    0
+ NUMBER OF ALPHA ELECTRONS =    4
+ NUMBER OF  BETA ELECTRONS =    2
+
+ THE ELECTRONIC STATE IS  3-B1G 
+
+ THE DISTINCT ROW TABLE HAS       156 ROWS.
+  THE WAVEFUNCTION CONTAINS       378 WALKS (CSF-S).
+
+
+          DETERMINANT CONTRIBUTION TO CSF'S (BETA IS MINUS)
+          -------------------------------------------------
+ CASE VECTOR =       1
+ 1111111111422
+
+ FOR MS=S-0
+ CSF      1: C(  1)= 1.000000 :    2 -2  4  3
+ CASE VECTOR =       2
+ 1111111112214
+
+ FOR MS=S-0
+ CSF      2: C(  1)= 1.000000 :   12  2  3 -3
+ CASE VECTOR =       3
+ 1111111112241
+
+ FOR MS=S-0
+ CSF      3: C(  1)= 1.000000 :   12  2  4 -4
+ CASE VECTOR =       4
+ 1111111114122
+
+ FOR MS=S-0
+ CSF      4: C(  1)= 1.000000 :   12-12  4  3
+ CASE VECTOR =       5
+ 1111111141122
+
+ FOR MS=S-0
+ CSF      5: C(  1)= 1.000000 :   10-10  4  3
+ CASE VECTOR =       6
+ 1111111142211
+
+ FOR MS=S-0
+ CSF      6: C(  1)= 1.000000 :   10-10 12  2
+ CASE VECTOR =       7
+ 1111111211142
+
+ FOR MS=S-0
+ CSF      7: C(  1)=-1.000000 :    6  4 -4  3
+ CASE VECTOR =       8
+ 1111111211412
+
+ FOR MS=S-0
+ CSF      8: C(  1)=-1.000000 :    6  2 -2  3
+ CASE VECTOR =       9
+ 1111111212231
+
+ FOR MS=S-0
+ CSF      9: C(  1)=-0.288675 :   -6 12  2  4
+             C(  2)=-0.288675 :    6-12  2  4
+             C(  3)=-0.288675 :    6 12 -2  4
+             C(  4)= 0.866025 :    6 12  2 -4
+ CASE VECTOR =      10
+ 1111111212321
+
+ FOR MS=S-0
+ CSF     10: C(  1)= 0.408248 :   -6 12  2  4
+             C(  2)= 0.408248 :    6-12  2  4
+             C(  3)=-0.816497 :    6 12 -2  4
+ CASE VECTOR =      11
+ 1111111213221
+
+ FOR MS=S-0
+ CSF     11: C(  1)=-0.707107 :   -6 12  2  4
+             C(  2)= 0.707107 :    6-12  2  4
+ CASE VECTOR =      12
+ 1111111214112
+
+ FOR MS=S-0
+ CSF     12: C(  1)=-1.000000 :    6 12-12  3
+ CASE VECTOR =      13
+ 1111111241112
+
+ FOR MS=S-0
+ CSF     13: C(  1)=-1.000000 :    6 10-10  3
+ CASE VECTOR =      14
+ 1111111411122
+
+ FOR MS=S-0
+ CSF     14: C(  1)= 1.000000 :    6 -6  4  3
+ CASE VECTOR =      15
+ 1111111412211
+
+ FOR MS=S-0
+ CSF     15: C(  1)= 1.000000 :    6 -6 12  2
+ CASE VECTOR =      16
+ 1111112121114
+
+ FOR MS=S-0
+ CSF     16: C(  1)= 1.000000 :   11 10  3 -3
+ CASE VECTOR =      17
+ 1111112121141
+
+ FOR MS=S-0
+ CSF     17: C(  1)= 1.000000 :   11 10  4 -4
+ CASE VECTOR =      18
+ 1111112121411
+
+ FOR MS=S-0
+ CSF     18: C(  1)= 1.000000 :   11 10  2 -2
+ CASE VECTOR =      19
+ 1111112124111
+
+ FOR MS=S-0
+ CSF     19: C(  1)= 1.000000 :   11 10 12-12
+ CASE VECTOR =      20
+ 1111112221131
+
+ FOR MS=S-0
+ CSF     20: C(  1)=-0.288675 :  -11  6 10  4
+             C(  2)=-0.288675 :   11 -6 10  4
+             C(  3)=-0.288675 :   11  6-10  4
+             C(  4)= 0.866025 :   11  6 10 -4
+ CASE VECTOR =      21
+ 1111112231121
+
+ FOR MS=S-0
+ CSF     21: C(  1)= 0.408248 :  -11  6 10  4
+             C(  2)= 0.408248 :   11 -6 10  4
+             C(  3)=-0.816497 :   11  6-10  4
+ CASE VECTOR =      22
+ 1111112321121
+
+ FOR MS=S-0
+ CSF     22: C(  1)=-0.707107 :  -11  6 10  4
+             C(  2)= 0.707107 :   11 -6 10  4
+ CASE VECTOR =      23
+ 1111112421111
+
+ FOR MS=S-0
+ CSF     23: C(  1)=-1.000000 :   11  6 -6 10
+ CASE VECTOR =      24
+ 1111114111122
+
+ FOR MS=S-0
+ CSF     24: C(  1)= 1.000000 :   11-11  4  3
+ CASE VECTOR =      25
+ 1111114112211
+
+ FOR MS=S-0
+ CSF     25: C(  1)= 1.000000 :   11-11 12  2
+ CASE VECTOR =      26
+ 1111114211112
+
+ FOR MS=S-0
+ CSF     26: C(  1)= 1.000000 :   11-11  6  3
+ CASE VECTOR =      27
+ 1111121111124
+
+ FOR MS=S-0
+ CSF     27: C(  1)= 1.000000 :    7  4  3 -3
+ CASE VECTOR =      28
+ 1111121111421
+
+ FOR MS=S-0
+ CSF     28: C(  1)=-1.000000 :    7  2 -2  4
+ CASE VECTOR =      29
+ 1111121112213
+
+ FOR MS=S-0
+ CSF     29: C(  1)=-0.288675 :   -7 12  2  3
+             C(  2)=-0.288675 :    7-12  2  3
+             C(  3)=-0.288675 :    7 12 -2  3
+             C(  4)= 0.866025 :    7 12  2 -3
+ CASE VECTOR =      30
+ 1111121112312
+
+ FOR MS=S-0
+ CSF     30: C(  1)= 0.408248 :   -7 12  2  3
+             C(  2)= 0.408248 :    7-12  2  3
+             C(  3)=-0.816497 :    7 12 -2  3
+ CASE VECTOR =      31
+ 1111121113212
+
+ FOR MS=S-0
+ CSF     31: C(  1)=-0.707107 :   -7 12  2  3
+             C(  2)= 0.707107 :    7-12  2  3
+ CASE VECTOR =      32
+ 1111121114121
+
+ FOR MS=S-0
+ CSF     32: C(  1)=-1.000000 :    7 12-12  4
+ CASE VECTOR =      33
+ 1111121141121
+
+ FOR MS=S-0
+ CSF     33: C(  1)=-1.000000 :    7 10-10  4
+ CASE VECTOR =      34
+ 1111121211114
+
+ FOR MS=S-0
+ CSF     34: C(  1)= 1.000000 :    7  6  3 -3
+ CASE VECTOR =      35
+ 1111121211141
+
+ FOR MS=S-0
+ CSF     35: C(  1)= 1.000000 :    7  6  4 -4
+ CASE VECTOR =      36
+ 1111121211411
+
+ FOR MS=S-0
+ CSF     36: C(  1)= 1.000000 :    7  6  2 -2
+ CASE VECTOR =      37
+ 1111121214111
+
+ FOR MS=S-0
+ CSF     37: C(  1)= 1.000000 :    7  6 12-12
+ CASE VECTOR =      38
+ 1111121241111
+
+ FOR MS=S-0
+ CSF     38: C(  1)= 1.000000 :    7  6 10-10
+ CASE VECTOR =      39
+ 1111121411121
+
+ FOR MS=S-0
+ CSF     39: C(  1)=-1.000000 :    7  6 -6  4
+ CASE VECTOR =      40
+ 1111122121113
+
+ FOR MS=S-0
+ CSF     40: C(  1)=-0.288675 :   -7 11 10  3
+             C(  2)=-0.288675 :    7-11 10  3
+             C(  3)=-0.288675 :    7 11-10  3
+             C(  4)= 0.866025 :    7 11 10 -3
+ CASE VECTOR =      41
+ 1111122131112
+
+ FOR MS=S-0
+ CSF     41: C(  1)= 0.408248 :   -7 11 10  3
+             C(  2)= 0.408248 :    7-11 10  3
+             C(  3)=-0.816497 :    7 11-10  3
+ CASE VECTOR =      42
+ 1111123121112
+
+ FOR MS=S-0
+ CSF     42: C(  1)=-0.707107 :   -7 11 10  3
+             C(  2)= 0.707107 :    7-11 10  3
+ CASE VECTOR =      43
+ 1111124111121
+
+ FOR MS=S-0
+ CSF     43: C(  1)=-1.000000 :    7 11-11  4
+ CASE VECTOR =      44
+ 1111124211111
+
+ FOR MS=S-0
+ CSF     44: C(  1)=-1.000000 :    7 11-11  6
+ CASE VECTOR =      45
+ 1111141111122
+
+ FOR MS=S-0
+ CSF     45: C(  1)= 1.000000 :    7 -7  4  3
+ CASE VECTOR =      46
+ 1111141112211
+
+ FOR MS=S-0
+ CSF     46: C(  1)= 1.000000 :    7 -7 12  2
+ CASE VECTOR =      47
+ 1111141211112
+
+ FOR MS=S-0
+ CSF     47: C(  1)= 1.000000 :    7 -7  6  3
+ CASE VECTOR =      48
+ 1111142121111
+
+ FOR MS=S-0
+ CSF     48: C(  1)= 1.000000 :    7 -7 11 10
+ CASE VECTOR =      49
+ 1111211121213
+
+ FOR MS=S-0
+ CSF     49: C(  1)=-0.288675 :   -8 10  2  3
+             C(  2)=-0.288675 :    8-10  2  3
+             C(  3)=-0.288675 :    8 10 -2  3
+             C(  4)= 0.866025 :    8 10  2 -3
+ CASE VECTOR =      50
+ 1111211121312
+
+ FOR MS=S-0
+ CSF     50: C(  1)= 0.408248 :   -8 10  2  3
+             C(  2)= 0.408248 :    8-10  2  3
+             C(  3)=-0.816497 :    8 10 -2  3
+ CASE VECTOR =      51
+ 1111211122131
+
+ FOR MS=S-0
+ CSF     51: C(  1)=-0.288675 :   -8 10 12  4
+             C(  2)=-0.288675 :    8-10 12  4
+             C(  3)=-0.288675 :    8 10-12  4
+             C(  4)= 0.866025 :    8 10 12 -4
+ CASE VECTOR =      52
+ 1111211123121
+
+ FOR MS=S-0
+ CSF     52: C(  1)= 0.408248 :   -8 10 12  4
+             C(  2)= 0.408248 :    8-10 12  4
+             C(  3)=-0.816497 :    8 10-12  4
+ CASE VECTOR =      53
+ 1111211131212
+
+ FOR MS=S-0
+ CSF     53: C(  1)=-0.707107 :   -8 10  2  3
+             C(  2)= 0.707107 :    8-10  2  3
+ CASE VECTOR =      54
+ 1111211132121
+
+ FOR MS=S-0
+ CSF     54: C(  1)=-0.707107 :   -8 10 12  4
+             C(  2)= 0.707107 :    8-10 12  4
+ CASE VECTOR =      55
+ 1111211223111
+
+ FOR MS=S-0
+ CSF     55: C(  1)=-0.288675 :   -8  6 10 12
+             C(  2)=-0.288675 :    8 -6 10 12
+             C(  3)=-0.288675 :    8  6-10 12
+             C(  4)= 0.866025 :    8  6 10-12
+ CASE VECTOR =      56
+ 1111211232111
+
+ FOR MS=S-0
+ CSF     56: C(  1)= 0.408248 :   -8  6 10 12
+             C(  2)= 0.408248 :    8 -6 10 12
+             C(  3)=-0.816497 :    8  6-10 12
+ CASE VECTOR =      57
+ 1111211322111
+
+ FOR MS=S-0
+ CSF     57: C(  1)=-0.707107 :   -8  6 10 12
+             C(  2)= 0.707107 :    8 -6 10 12
+ CASE VECTOR =      58
+ 1111212111231
+
+ FOR MS=S-0
+ CSF     58: C(  1)=-0.288675 :   -8 11  2  4
+             C(  2)=-0.288675 :    8-11  2  4
+             C(  3)=-0.288675 :    8 11 -2  4
+             C(  4)= 0.866025 :    8 11  2 -4
+ CASE VECTOR =      59
+ 1111212111321
+
+ FOR MS=S-0
+ CSF     59: C(  1)= 0.408248 :   -8 11  2  4
+             C(  2)= 0.408248 :    8-11  2  4
+             C(  3)=-0.816497 :    8 11 -2  4
+ CASE VECTOR =      60
+ 1111212112113
+
+ FOR MS=S-0
+ CSF     60: C(  1)=-0.288675 :   -8 11 12  3
+             C(  2)=-0.288675 :    8-11 12  3
+             C(  3)=-0.288675 :    8 11-12  3
+             C(  4)= 0.866025 :    8 11 12 -3
+ CASE VECTOR =      61
+ 1111212113112
+
+ FOR MS=S-0
+ CSF     61: C(  1)= 0.408248 :   -8 11 12  3
+             C(  2)= 0.408248 :    8-11 12  3
+             C(  3)=-0.816497 :    8 11-12  3
+ CASE VECTOR =      62
+ 1111212211311
+
+ FOR MS=S-0
+ CSF     62: C(  1)=-0.288675 :   -8 11  6  2
+             C(  2)=-0.288675 :    8-11  6  2
+             C(  3)=-0.288675 :    8 11 -6  2
+             C(  4)= 0.866025 :    8 11  6 -2
+ CASE VECTOR =      63
+ 1111212311211
+
+ FOR MS=S-0
+ CSF     63: C(  1)= 0.408248 :   -8 11  6  2
+             C(  2)= 0.408248 :    8-11  6  2
+             C(  3)=-0.816497 :    8 11 -6  2
+ CASE VECTOR =      64
+ 1111213111221
+
+ FOR MS=S-0
+ CSF     64: C(  1)=-0.707107 :   -8 11  2  4
+             C(  2)= 0.707107 :    8-11  2  4
+ CASE VECTOR =      65
+ 1111213112112
+
+ FOR MS=S-0
+ CSF     65: C(  1)=-0.707107 :   -8 11 12  3
+             C(  2)= 0.707107 :    8-11 12  3
+ CASE VECTOR =      66
+ 1111213211211
+
+ FOR MS=S-0
+ CSF     66: C(  1)=-0.707107 :   -8 11  6  2
+             C(  2)= 0.707107 :    8-11  6  2
+ CASE VECTOR =      67
+ 1111221121311
+
+ FOR MS=S-0
+ CSF     67: C(  1)=-0.288675 :   -8  7 10  2
+             C(  2)=-0.288675 :    8 -7 10  2
+             C(  3)=-0.288675 :    8  7-10  2
+             C(  4)= 0.866025 :    8  7 10 -2
+ CASE VECTOR =      68
+ 1111221131211
+
+ FOR MS=S-0
+ CSF     68: C(  1)= 0.408248 :   -8  7 10  2
+             C(  2)= 0.408248 :    8 -7 10  2
+             C(  3)=-0.816497 :    8  7-10  2
+ CASE VECTOR =      69
+ 1111222113111
+
+ FOR MS=S-0
+ CSF     69: C(  1)=-0.288675 :   -8  7 11 12
+             C(  2)=-0.288675 :    8 -7 11 12
+             C(  3)=-0.288675 :    8  7-11 12
+             C(  4)= 0.866025 :    8  7 11-12
+ CASE VECTOR =      70
+ 1111223112111
+
+ FOR MS=S-0
+ CSF     70: C(  1)= 0.408248 :   -8  7 11 12
+             C(  2)= 0.408248 :    8 -7 11 12
+             C(  3)=-0.816497 :    8  7-11 12
+ CASE VECTOR =      71
+ 1111231121211
+
+ FOR MS=S-0
+ CSF     71: C(  1)=-0.707107 :   -8  7 10  2
+             C(  2)= 0.707107 :    8 -7 10  2
+ CASE VECTOR =      72
+ 1111232112111
+
+ FOR MS=S-0
+ CSF     72: C(  1)=-0.707107 :   -8  7 11 12
+             C(  2)= 0.707107 :    8 -7 11 12
+ CASE VECTOR =      73
+ 1111411111122
+
+ FOR MS=S-0
+ CSF     73: C(  1)= 1.000000 :    8 -8  4  3
+ CASE VECTOR =      74
+ 1111411112211
+
+ FOR MS=S-0
+ CSF     74: C(  1)= 1.000000 :    8 -8 12  2
+ CASE VECTOR =      75
+ 1111411211112
+
+ FOR MS=S-0
+ CSF     75: C(  1)= 1.000000 :    8 -8  6  3
+ CASE VECTOR =      76
+ 1111412121111
+
+ FOR MS=S-0
+ CSF     76: C(  1)= 1.000000 :    8 -8 11 10
+ CASE VECTOR =      77
+ 1111421111121
+
+ FOR MS=S-0
+ CSF     77: C(  1)= 1.000000 :    8 -8  7  4
+ CASE VECTOR =      78
+ 1111421211111
+
+ FOR MS=S-0
+ CSF     78: C(  1)= 1.000000 :    8 -8  7  6
+ CASE VECTOR =      79
+ 1112111121213
+
+ FOR MS=S-0
+ CSF     79: C(  1)=-0.288675 :   -5 10  2  3
+             C(  2)=-0.288675 :    5-10  2  3
+             C(  3)=-0.288675 :    5 10 -2  3
+             C(  4)= 0.866025 :    5 10  2 -3
+ CASE VECTOR =      80
+ 1112111121312
+
+ FOR MS=S-0
+ CSF     80: C(  1)= 0.408248 :   -5 10  2  3
+             C(  2)= 0.408248 :    5-10  2  3
+             C(  3)=-0.816497 :    5 10 -2  3
+ CASE VECTOR =      81
+ 1112111122131
+
+ FOR MS=S-0
+ CSF     81: C(  1)=-0.288675 :   -5 10 12  4
+             C(  2)=-0.288675 :    5-10 12  4
+             C(  3)=-0.288675 :    5 10-12  4
+             C(  4)= 0.866025 :    5 10 12 -4
+ CASE VECTOR =      82
+ 1112111123121
+
+ FOR MS=S-0
+ CSF     82: C(  1)= 0.408248 :   -5 10 12  4
+             C(  2)= 0.408248 :    5-10 12  4
+             C(  3)=-0.816497 :    5 10-12  4
+ CASE VECTOR =      83
+ 1112111131212
+
+ FOR MS=S-0
+ CSF     83: C(  1)=-0.707107 :   -5 10  2  3
+             C(  2)= 0.707107 :    5-10  2  3
+ CASE VECTOR =      84
+ 1112111132121
+
+ FOR MS=S-0
+ CSF     84: C(  1)=-0.707107 :   -5 10 12  4
+             C(  2)= 0.707107 :    5-10 12  4
+ CASE VECTOR =      85
+ 1112111223111
+
+ FOR MS=S-0
+ CSF     85: C(  1)=-0.288675 :   -5  6 10 12
+             C(  2)=-0.288675 :    5 -6 10 12
+             C(  3)=-0.288675 :    5  6-10 12
+             C(  4)= 0.866025 :    5  6 10-12
+ CASE VECTOR =      86
+ 1112111232111
+
+ FOR MS=S-0
+ CSF     86: C(  1)= 0.408248 :   -5  6 10 12
+             C(  2)= 0.408248 :    5 -6 10 12
+             C(  3)=-0.816497 :    5  6-10 12
+ CASE VECTOR =      87
+ 1112111322111
+
+ FOR MS=S-0
+ CSF     87: C(  1)=-0.707107 :   -5  6 10 12
+             C(  2)= 0.707107 :    5 -6 10 12
+ CASE VECTOR =      88
+ 1112112111231
+
+ FOR MS=S-0
+ CSF     88: C(  1)=-0.288675 :   -5 11  2  4
+             C(  2)=-0.288675 :    5-11  2  4
+             C(  3)=-0.288675 :    5 11 -2  4
+             C(  4)= 0.866025 :    5 11  2 -4
+ CASE VECTOR =      89
+ 1112112111321
+
+ FOR MS=S-0
+ CSF     89: C(  1)= 0.408248 :   -5 11  2  4
+             C(  2)= 0.408248 :    5-11  2  4
+             C(  3)=-0.816497 :    5 11 -2  4
+ CASE VECTOR =      90
+ 1112112112113
+
+ FOR MS=S-0
+ CSF     90: C(  1)=-0.288675 :   -5 11 12  3
+             C(  2)=-0.288675 :    5-11 12  3
+             C(  3)=-0.288675 :    5 11-12  3
+             C(  4)= 0.866025 :    5 11 12 -3
+ CASE VECTOR =      91
+ 1112112113112
+
+ FOR MS=S-0
+ CSF     91: C(  1)= 0.408248 :   -5 11 12  3
+             C(  2)= 0.408248 :    5-11 12  3
+             C(  3)=-0.816497 :    5 11-12  3
+ CASE VECTOR =      92
+ 1112112211311
+
+ FOR MS=S-0
+ CSF     92: C(  1)=-0.288675 :   -5 11  6  2
+             C(  2)=-0.288675 :    5-11  6  2
+             C(  3)=-0.288675 :    5 11 -6  2
+             C(  4)= 0.866025 :    5 11  6 -2
+ CASE VECTOR =      93
+ 1112112311211
+
+ FOR MS=S-0
+ CSF     93: C(  1)= 0.408248 :   -5 11  6  2
+             C(  2)= 0.408248 :    5-11  6  2
+             C(  3)=-0.816497 :    5 11 -6  2
+ CASE VECTOR =      94
+ 1112113111221
+
+ FOR MS=S-0
+ CSF     94: C(  1)=-0.707107 :   -5 11  2  4
+             C(  2)= 0.707107 :    5-11  2  4
+ CASE VECTOR =      95
+ 1112113112112
+
+ FOR MS=S-0
+ CSF     95: C(  1)=-0.707107 :   -5 11 12  3
+             C(  2)= 0.707107 :    5-11 12  3
+ CASE VECTOR =      96
+ 1112113211211
+
+ FOR MS=S-0
+ CSF     96: C(  1)=-0.707107 :   -5 11  6  2
+             C(  2)= 0.707107 :    5-11  6  2
+ CASE VECTOR =      97
+ 1112121121311
+
+ FOR MS=S-0
+ CSF     97: C(  1)=-0.288675 :   -5  7 10  2
+             C(  2)=-0.288675 :    5 -7 10  2
+             C(  3)=-0.288675 :    5  7-10  2
+             C(  4)= 0.866025 :    5  7 10 -2
+ CASE VECTOR =      98
+ 1112121131211
+
+ FOR MS=S-0
+ CSF     98: C(  1)= 0.408248 :   -5  7 10  2
+             C(  2)= 0.408248 :    5 -7 10  2
+             C(  3)=-0.816497 :    5  7-10  2
+ CASE VECTOR =      99
+ 1112122113111
+
+ FOR MS=S-0
+ CSF     99: C(  1)=-0.288675 :   -5  7 11 12
+             C(  2)=-0.288675 :    5 -7 11 12
+             C(  3)=-0.288675 :    5  7-11 12
+             C(  4)= 0.866025 :    5  7 11-12
+ CASE VECTOR =     100
+ 1112123112111
+
+ FOR MS=S-0
+ CSF    100: C(  1)= 0.408248 :   -5  7 11 12
+             C(  2)= 0.408248 :    5 -7 11 12
+             C(  3)=-0.816497 :    5  7-11 12
+ CASE VECTOR =     101
+ 1112131121211
+
+ FOR MS=S-0
+ CSF    101: C(  1)=-0.707107 :   -5  7 10  2
+             C(  2)= 0.707107 :    5 -7 10  2
+ CASE VECTOR =     102
+ 1112132112111
+
+ FOR MS=S-0
+ CSF    102: C(  1)=-0.707107 :   -5  7 11 12
+             C(  2)= 0.707107 :    5 -7 11 12
+ CASE VECTOR =     103
+ 1112211111123
+
+ FOR MS=S-0
+ CSF    103: C(  1)=-0.288675 :   -5  8  4  3
+             C(  2)=-0.288675 :    5 -8  4  3
+             C(  3)=-0.288675 :    5  8 -4  3
+             C(  4)= 0.866025 :    5  8  4 -3
+ CASE VECTOR =     104
+ 1112211111132
+
+ FOR MS=S-0
+ CSF    104: C(  1)= 0.408248 :   -5  8  4  3
+             C(  2)= 0.408248 :    5 -8  4  3
+             C(  3)=-0.816497 :    5  8 -4  3
+ CASE VECTOR =     105
+ 1112211112311
+
+ FOR MS=S-0
+ CSF    105: C(  1)=-0.288675 :   -5  8 12  2
+             C(  2)=-0.288675 :    5 -8 12  2
+             C(  3)=-0.288675 :    5  8-12  2
+             C(  4)= 0.866025 :    5  8 12 -2
+ CASE VECTOR =     106
+ 1112211113211
+
+ FOR MS=S-0
+ CSF    106: C(  1)= 0.408248 :   -5  8 12  2
+             C(  2)= 0.408248 :    5 -8 12  2
+             C(  3)=-0.816497 :    5  8-12  2
+ CASE VECTOR =     107
+ 1112211211113
+
+ FOR MS=S-0
+ CSF    107: C(  1)=-0.288675 :   -5  8  6  3
+             C(  2)=-0.288675 :    5 -8  6  3
+             C(  3)=-0.288675 :    5  8 -6  3
+             C(  4)= 0.866025 :    5  8  6 -3
+ CASE VECTOR =     108
+ 1112211311112
+
+ FOR MS=S-0
+ CSF    108: C(  1)= 0.408248 :   -5  8  6  3
+             C(  2)= 0.408248 :    5 -8  6  3
+             C(  3)=-0.816497 :    5  8 -6  3
+ CASE VECTOR =     109
+ 1112212131111
+
+ FOR MS=S-0
+ CSF    109: C(  1)=-0.288675 :   -5  8 11 10
+             C(  2)=-0.288675 :    5 -8 11 10
+             C(  3)=-0.288675 :    5  8-11 10
+             C(  4)= 0.866025 :    5  8 11-10
+ CASE VECTOR =     110
+ 1112213121111
+
+ FOR MS=S-0
+ CSF    110: C(  1)= 0.408248 :   -5  8 11 10
+             C(  2)= 0.408248 :    5 -8 11 10
+             C(  3)=-0.816497 :    5  8-11 10
+ CASE VECTOR =     111
+ 1112221111131
+
+ FOR MS=S-0
+ CSF    111: C(  1)=-0.288675 :   -5  8  7  4
+             C(  2)=-0.288675 :    5 -8  7  4
+             C(  3)=-0.288675 :    5  8 -7  4
+             C(  4)= 0.866025 :    5  8  7 -4
+ CASE VECTOR =     112
+ 1112221311111
+
+ FOR MS=S-0
+ CSF    112: C(  1)=-0.288675 :   -5  8  7  6
+             C(  2)=-0.288675 :    5 -8  7  6
+             C(  3)=-0.288675 :    5  8 -7  6
+             C(  4)= 0.866025 :    5  8  7 -6
+ CASE VECTOR =     113
+ 1112231111121
+
+ FOR MS=S-0
+ CSF    113: C(  1)= 0.408248 :   -5  8  7  4
+             C(  2)= 0.408248 :    5 -8  7  4
+             C(  3)=-0.816497 :    5  8 -7  4
+ CASE VECTOR =     114
+ 1112231211111
+
+ FOR MS=S-0
+ CSF    114: C(  1)= 0.408248 :   -5  8  7  6
+             C(  2)= 0.408248 :    5 -8  7  6
+             C(  3)=-0.816497 :    5  8 -7  6
+ CASE VECTOR =     115
+ 1112311111122
+
+ FOR MS=S-0
+ CSF    115: C(  1)=-0.707107 :   -5  8  4  3
+             C(  2)= 0.707107 :    5 -8  4  3
+ CASE VECTOR =     116
+ 1112311112211
+
+ FOR MS=S-0
+ CSF    116: C(  1)=-0.707107 :   -5  8 12  2
+             C(  2)= 0.707107 :    5 -8 12  2
+ CASE VECTOR =     117
+ 1112311211112
+
+ FOR MS=S-0
+ CSF    117: C(  1)=-0.707107 :   -5  8  6  3
+             C(  2)= 0.707107 :    5 -8  6  3
+ CASE VECTOR =     118
+ 1112312121111
+
+ FOR MS=S-0
+ CSF    118: C(  1)=-0.707107 :   -5  8 11 10
+             C(  2)= 0.707107 :    5 -8 11 10
+ CASE VECTOR =     119
+ 1112321111121
+
+ FOR MS=S-0
+ CSF    119: C(  1)=-0.707107 :   -5  8  7  4
+             C(  2)= 0.707107 :    5 -8  7  4
+ CASE VECTOR =     120
+ 1112321211111
+
+ FOR MS=S-0
+ CSF    120: C(  1)=-0.707107 :   -5  8  7  6
+             C(  2)= 0.707107 :    5 -8  7  6
+ CASE VECTOR =     121
+ 1114111111122
+
+ FOR MS=S-0
+ CSF    121: C(  1)= 1.000000 :    5 -5  4  3
+ CASE VECTOR =     122
+ 1114111112211
+
+ FOR MS=S-0
+ CSF    122: C(  1)= 1.000000 :    5 -5 12  2
+ CASE VECTOR =     123
+ 1114111211112
+
+ FOR MS=S-0
+ CSF    123: C(  1)= 1.000000 :    5 -5  6  3
+ CASE VECTOR =     124
+ 1114112121111
+
+ FOR MS=S-0
+ CSF    124: C(  1)= 1.000000 :    5 -5 11 10
+ CASE VECTOR =     125
+ 1114121111121
+
+ FOR MS=S-0
+ CSF    125: C(  1)= 1.000000 :    5 -5  7  4
+ CASE VECTOR =     126
+ 1114121211111
+
+ FOR MS=S-0
+ CSF    126: C(  1)= 1.000000 :    5 -5  7  6
+ CASE VECTOR =     127
+ 1121111111223
+
+ FOR MS=S-0
+ CSF    127: C(  1)=-0.288675 :  -14  2  4  3
+             C(  2)=-0.288675 :   14 -2  4  3
+             C(  3)=-0.288675 :   14  2 -4  3
+             C(  4)= 0.866025 :   14  2  4 -3
+ CASE VECTOR =     128
+ 1121111111232
+
+ FOR MS=S-0
+ CSF    128: C(  1)= 0.408248 :  -14  2  4  3
+             C(  2)= 0.408248 :   14 -2  4  3
+             C(  3)=-0.816497 :   14  2 -4  3
+ CASE VECTOR =     129
+ 1121111111322
+
+ FOR MS=S-0
+ CSF    129: C(  1)=-0.707107 :  -14  2  4  3
+             C(  2)= 0.707107 :   14 -2  4  3
+ CASE VECTOR =     130
+ 1121111112114
+
+ FOR MS=S-0
+ CSF    130: C(  1)= 1.000000 :   14 12  3 -3
+ CASE VECTOR =     131
+ 1121111112141
+
+ FOR MS=S-0
+ CSF    131: C(  1)= 1.000000 :   14 12  4 -4
+ CASE VECTOR =     132
+ 1121111112411
+
+ FOR MS=S-0
+ CSF    132: C(  1)= 1.000000 :   14 12  2 -2
+ CASE VECTOR =     133
+ 1121111142111
+
+ FOR MS=S-0
+ CSF    133: C(  1)=-1.000000 :   14 10-10 12
+ CASE VECTOR =     134
+ 1121111211213
+
+ FOR MS=S-0
+ CSF    134: C(  1)=-0.288675 :  -14  6  2  3
+             C(  2)=-0.288675 :   14 -6  2  3
+             C(  3)=-0.288675 :   14  6 -2  3
+             C(  4)= 0.866025 :   14  6  2 -3
+ CASE VECTOR =     135
+ 1121111211312
+
+ FOR MS=S-0
+ CSF    135: C(  1)= 0.408248 :  -14  6  2  3
+             C(  2)= 0.408248 :   14 -6  2  3
+             C(  3)=-0.816497 :   14  6 -2  3
+ CASE VECTOR =     136
+ 1121111212131
+
+ FOR MS=S-0
+ CSF    136: C(  1)=-0.288675 :  -14  6 12  4
+             C(  2)=-0.288675 :   14 -6 12  4
+             C(  3)=-0.288675 :   14  6-12  4
+             C(  4)= 0.866025 :   14  6 12 -4
+ CASE VECTOR =     137
+ 1121111213121
+
+ FOR MS=S-0
+ CSF    137: C(  1)= 0.408248 :  -14  6 12  4
+             C(  2)= 0.408248 :   14 -6 12  4
+             C(  3)=-0.816497 :   14  6-12  4
+ CASE VECTOR =     138
+ 1121111311212
+
+ FOR MS=S-0
+ CSF    138: C(  1)=-0.707107 :  -14  6  2  3
+             C(  2)= 0.707107 :   14 -6  2  3
+ CASE VECTOR =     139
+ 1121111312121
+
+ FOR MS=S-0
+ CSF    139: C(  1)=-0.707107 :  -14  6 12  4
+             C(  2)= 0.707107 :   14 -6 12  4
+ CASE VECTOR =     140
+ 1121111412111
+
+ FOR MS=S-0
+ CSF    140: C(  1)=-1.000000 :   14  6 -6 12
+ CASE VECTOR =     141
+ 1121112121311
+
+ FOR MS=S-0
+ CSF    141: C(  1)=-0.288675 :  -14 11 10  2
+             C(  2)=-0.288675 :   14-11 10  2
+             C(  3)=-0.288675 :   14 11-10  2
+             C(  4)= 0.866025 :   14 11 10 -2
+ CASE VECTOR =     142
+ 1121112131211
+
+ FOR MS=S-0
+ CSF    142: C(  1)= 0.408248 :  -14 11 10  2
+             C(  2)= 0.408248 :   14-11 10  2
+             C(  3)=-0.816497 :   14 11-10  2
+ CASE VECTOR =     143
+ 1121113121211
+
+ FOR MS=S-0
+ CSF    143: C(  1)=-0.707107 :  -14 11 10  2
+             C(  2)= 0.707107 :   14-11 10  2
+ CASE VECTOR =     144
+ 1121114112111
+
+ FOR MS=S-0
+ CSF    144: C(  1)=-1.000000 :   14 11-11 12
+ CASE VECTOR =     145
+ 1121121111231
+
+ FOR MS=S-0
+ CSF    145: C(  1)=-0.288675 :  -14  7  2  4
+             C(  2)=-0.288675 :   14 -7  2  4
+             C(  3)=-0.288675 :   14  7 -2  4
+             C(  4)= 0.866025 :   14  7  2 -4
+ CASE VECTOR =     146
+ 1121121111321
+
+ FOR MS=S-0
+ CSF    146: C(  1)= 0.408248 :  -14  7  2  4
+             C(  2)= 0.408248 :   14 -7  2  4
+             C(  3)=-0.816497 :   14  7 -2  4
+ CASE VECTOR =     147
+ 1121121112113
+
+ FOR MS=S-0
+ CSF    147: C(  1)=-0.288675 :  -14  7 12  3
+             C(  2)=-0.288675 :   14 -7 12  3
+             C(  3)=-0.288675 :   14  7-12  3
+             C(  4)= 0.866025 :   14  7 12 -3
+ CASE VECTOR =     148
+ 1121121113112
+
+ FOR MS=S-0
+ CSF    148: C(  1)= 0.408248 :  -14  7 12  3
+             C(  2)= 0.408248 :   14 -7 12  3
+             C(  3)=-0.816497 :   14  7-12  3
+ CASE VECTOR =     149
+ 1121121211311
+
+ FOR MS=S-0
+ CSF    149: C(  1)=-0.288675 :  -14  7  6  2
+             C(  2)=-0.288675 :   14 -7  6  2
+             C(  3)=-0.288675 :   14  7 -6  2
+             C(  4)= 0.866025 :   14  7  6 -2
+ CASE VECTOR =     150
+ 1121121311211
+
+ FOR MS=S-0
+ CSF    150: C(  1)= 0.408248 :  -14  7  6  2
+             C(  2)= 0.408248 :   14 -7  6  2
+             C(  3)=-0.816497 :   14  7 -6  2
+ CASE VECTOR =     151
+ 1121131111221
+
+ FOR MS=S-0
+ CSF    151: C(  1)=-0.707107 :  -14  7  2  4
+             C(  2)= 0.707107 :   14 -7  2  4
+ CASE VECTOR =     152
+ 1121131112112
+
+ FOR MS=S-0
+ CSF    152: C(  1)=-0.707107 :  -14  7 12  3
+             C(  2)= 0.707107 :   14 -7 12  3
+ CASE VECTOR =     153
+ 1121131211211
+
+ FOR MS=S-0
+ CSF    153: C(  1)=-0.707107 :  -14  7  6  2
+             C(  2)= 0.707107 :   14 -7  6  2
+ CASE VECTOR =     154
+ 1121141112111
+
+ FOR MS=S-0
+ CSF    154: C(  1)=-1.000000 :   14  7 -7 12
+ CASE VECTOR =     155
+ 1121211121113
+
+ FOR MS=S-0
+ CSF    155: C(  1)=-0.288675 :  -14  8 10  3
+             C(  2)=-0.288675 :   14 -8 10  3
+             C(  3)=-0.288675 :   14  8-10  3
+             C(  4)= 0.866025 :   14  8 10 -3
+ CASE VECTOR =     156
+ 1121211131112
+
+ FOR MS=S-0
+ CSF    156: C(  1)= 0.408248 :  -14  8 10  3
+             C(  2)= 0.408248 :   14 -8 10  3
+             C(  3)=-0.816497 :   14  8-10  3
+ CASE VECTOR =     157
+ 1121212111131
+
+ FOR MS=S-0
+ CSF    157: C(  1)=-0.288675 :  -14  8 11  4
+             C(  2)=-0.288675 :   14 -8 11  4
+             C(  3)=-0.288675 :   14  8-11  4
+             C(  4)= 0.866025 :   14  8 11 -4
+ CASE VECTOR =     158
+ 1121212311111
+
+ FOR MS=S-0
+ CSF    158: C(  1)=-0.288675 :  -14  8 11  6
+             C(  2)=-0.288675 :   14 -8 11  6
+             C(  3)=-0.288675 :   14  8-11  6
+             C(  4)= 0.866025 :   14  8 11 -6
+ CASE VECTOR =     159
+ 1121213111121
+
+ FOR MS=S-0
+ CSF    159: C(  1)= 0.408248 :  -14  8 11  4
+             C(  2)= 0.408248 :   14 -8 11  4
+             C(  3)=-0.816497 :   14  8-11  4
+ CASE VECTOR =     160
+ 1121213211111
+
+ FOR MS=S-0
+ CSF    160: C(  1)= 0.408248 :  -14  8 11  6
+             C(  2)= 0.408248 :   14 -8 11  6
+             C(  3)=-0.816497 :   14  8-11  6
+ CASE VECTOR =     161
+ 1121221131111
+
+ FOR MS=S-0
+ CSF    161: C(  1)=-0.288675 :  -14  8  7 10
+             C(  2)=-0.288675 :   14 -8  7 10
+             C(  3)=-0.288675 :   14  8 -7 10
+             C(  4)= 0.866025 :   14  8  7-10
+ CASE VECTOR =     162
+ 1121231121111
+
+ FOR MS=S-0
+ CSF    162: C(  1)= 0.408248 :  -14  8  7 10
+             C(  2)= 0.408248 :   14 -8  7 10
+             C(  3)=-0.816497 :   14  8 -7 10
+ CASE VECTOR =     163
+ 1121311121112
+
+ FOR MS=S-0
+ CSF    163: C(  1)=-0.707107 :  -14  8 10  3
+             C(  2)= 0.707107 :   14 -8 10  3
+ CASE VECTOR =     164
+ 1121312111121
+
+ FOR MS=S-0
+ CSF    164: C(  1)=-0.707107 :  -14  8 11  4
+             C(  2)= 0.707107 :   14 -8 11  4
+ CASE VECTOR =     165
+ 1121312211111
+
+ FOR MS=S-0
+ CSF    165: C(  1)=-0.707107 :  -14  8 11  6
+             C(  2)= 0.707107 :   14 -8 11  6
+ CASE VECTOR =     166
+ 1121321121111
+
+ FOR MS=S-0
+ CSF    166: C(  1)=-0.707107 :  -14  8  7 10
+             C(  2)= 0.707107 :   14 -8  7 10
+ CASE VECTOR =     167
+ 1121411112111
+
+ FOR MS=S-0
+ CSF    167: C(  1)=-1.000000 :   14  8 -8 12
+ CASE VECTOR =     168
+ 1122111121113
+
+ FOR MS=S-0
+ CSF    168: C(  1)=-0.288675 :  -14  5 10  3
+             C(  2)=-0.288675 :   14 -5 10  3
+             C(  3)=-0.288675 :   14  5-10  3
+             C(  4)= 0.866025 :   14  5 10 -3
+ CASE VECTOR =     169
+ 1122111131112
+
+ FOR MS=S-0
+ CSF    169: C(  1)= 0.408248 :  -14  5 10  3
+             C(  2)= 0.408248 :   14 -5 10  3
+             C(  3)=-0.816497 :   14  5-10  3
+ CASE VECTOR =     170
+ 1122112111131
+
+ FOR MS=S-0
+ CSF    170: C(  1)=-0.288675 :  -14  5 11  4
+             C(  2)=-0.288675 :   14 -5 11  4
+             C(  3)=-0.288675 :   14  5-11  4
+             C(  4)= 0.866025 :   14  5 11 -4
+ CASE VECTOR =     171
+ 1122112311111
+
+ FOR MS=S-0
+ CSF    171: C(  1)=-0.288675 :  -14  5 11  6
+             C(  2)=-0.288675 :   14 -5 11  6
+             C(  3)=-0.288675 :   14  5-11  6
+             C(  4)= 0.866025 :   14  5 11 -6
+ CASE VECTOR =     172
+ 1122113111121
+
+ FOR MS=S-0
+ CSF    172: C(  1)= 0.408248 :  -14  5 11  4
+             C(  2)= 0.408248 :   14 -5 11  4
+             C(  3)=-0.816497 :   14  5-11  4
+ CASE VECTOR =     173
+ 1122113211111
+
+ FOR MS=S-0
+ CSF    173: C(  1)= 0.408248 :  -14  5 11  6
+             C(  2)= 0.408248 :   14 -5 11  6
+             C(  3)=-0.816497 :   14  5-11  6
+ CASE VECTOR =     174
+ 1122121131111
+
+ FOR MS=S-0
+ CSF    174: C(  1)=-0.288675 :  -14  5  7 10
+             C(  2)=-0.288675 :   14 -5  7 10
+             C(  3)=-0.288675 :   14  5 -7 10
+             C(  4)= 0.866025 :   14  5  7-10
+ CASE VECTOR =     175
+ 1122131121111
+
+ FOR MS=S-0
+ CSF    175: C(  1)= 0.408248 :  -14  5  7 10
+             C(  2)= 0.408248 :   14 -5  7 10
+             C(  3)=-0.816497 :   14  5 -7 10
+ CASE VECTOR =     176
+ 1122211113111
+
+ FOR MS=S-0
+ CSF    176: C(  1)=-0.288675 :  -14  5  8 12
+             C(  2)=-0.288675 :   14 -5  8 12
+             C(  3)=-0.288675 :   14  5 -8 12
+             C(  4)= 0.866025 :   14  5  8-12
+ CASE VECTOR =     177
+ 1122311112111
+
+ FOR MS=S-0
+ CSF    177: C(  1)= 0.408248 :  -14  5  8 12
+             C(  2)= 0.408248 :   14 -5  8 12
+             C(  3)=-0.816497 :   14  5 -8 12
+ CASE VECTOR =     178
+ 1123111121112
+
+ FOR MS=S-0
+ CSF    178: C(  1)=-0.707107 :  -14  5 10  3
+             C(  2)= 0.707107 :   14 -5 10  3
+ CASE VECTOR =     179
+ 1123112111121
+
+ FOR MS=S-0
+ CSF    179: C(  1)=-0.707107 :  -14  5 11  4
+             C(  2)= 0.707107 :   14 -5 11  4
+ CASE VECTOR =     180
+ 1123112211111
+
+ FOR MS=S-0
+ CSF    180: C(  1)=-0.707107 :  -14  5 11  6
+             C(  2)= 0.707107 :   14 -5 11  6
+ CASE VECTOR =     181
+ 1123121121111
+
+ FOR MS=S-0
+ CSF    181: C(  1)=-0.707107 :  -14  5  7 10
+             C(  2)= 0.707107 :   14 -5  7 10
+ CASE VECTOR =     182
+ 1123211112111
+
+ FOR MS=S-0
+ CSF    182: C(  1)=-0.707107 :  -14  5  8 12
+             C(  2)= 0.707107 :   14 -5  8 12
+ CASE VECTOR =     183
+ 1124111112111
+
+ FOR MS=S-0
+ CSF    183: C(  1)=-1.000000 :   14  5 -5 12
+ CASE VECTOR =     184
+ 1141111111122
+
+ FOR MS=S-0
+ CSF    184: C(  1)= 1.000000 :   14-14  4  3
+ CASE VECTOR =     185
+ 1141111112211
+
+ FOR MS=S-0
+ CSF    185: C(  1)= 1.000000 :   14-14 12  2
+ CASE VECTOR =     186
+ 1141111211112
+
+ FOR MS=S-0
+ CSF    186: C(  1)= 1.000000 :   14-14  6  3
+ CASE VECTOR =     187
+ 1141112121111
+
+ FOR MS=S-0
+ CSF    187: C(  1)= 1.000000 :   14-14 11 10
+ CASE VECTOR =     188
+ 1141121111121
+
+ FOR MS=S-0
+ CSF    188: C(  1)= 1.000000 :   14-14  7  4
+ CASE VECTOR =     189
+ 1141121211111
+
+ FOR MS=S-0
+ CSF    189: C(  1)= 1.000000 :   14-14  7  6
+ CASE VECTOR =     190
+ 1211111111223
+
+ FOR MS=S-0
+ CSF    190: C(  1)=-0.288675 :  -13  2  4  3
+             C(  2)=-0.288675 :   13 -2  4  3
+             C(  3)=-0.288675 :   13  2 -4  3
+             C(  4)= 0.866025 :   13  2  4 -3
+ CASE VECTOR =     191
+ 1211111111232
+
+ FOR MS=S-0
+ CSF    191: C(  1)= 0.408248 :  -13  2  4  3
+             C(  2)= 0.408248 :   13 -2  4  3
+             C(  3)=-0.816497 :   13  2 -4  3
+ CASE VECTOR =     192
+ 1211111111322
+
+ FOR MS=S-0
+ CSF    192: C(  1)=-0.707107 :  -13  2  4  3
+             C(  2)= 0.707107 :   13 -2  4  3
+ CASE VECTOR =     193
+ 1211111112114
+
+ FOR MS=S-0
+ CSF    193: C(  1)= 1.000000 :   13 12  3 -3
+ CASE VECTOR =     194
+ 1211111112141
+
+ FOR MS=S-0
+ CSF    194: C(  1)= 1.000000 :   13 12  4 -4
+ CASE VECTOR =     195
+ 1211111112411
+
+ FOR MS=S-0
+ CSF    195: C(  1)= 1.000000 :   13 12  2 -2
+ CASE VECTOR =     196
+ 1211111142111
+
+ FOR MS=S-0
+ CSF    196: C(  1)=-1.000000 :   13 10-10 12
+ CASE VECTOR =     197
+ 1211111211213
+
+ FOR MS=S-0
+ CSF    197: C(  1)=-0.288675 :  -13  6  2  3
+             C(  2)=-0.288675 :   13 -6  2  3
+             C(  3)=-0.288675 :   13  6 -2  3
+             C(  4)= 0.866025 :   13  6  2 -3
+ CASE VECTOR =     198
+ 1211111211312
+
+ FOR MS=S-0
+ CSF    198: C(  1)= 0.408248 :  -13  6  2  3
+             C(  2)= 0.408248 :   13 -6  2  3
+             C(  3)=-0.816497 :   13  6 -2  3
+ CASE VECTOR =     199
+ 1211111212131
+
+ FOR MS=S-0
+ CSF    199: C(  1)=-0.288675 :  -13  6 12  4
+             C(  2)=-0.288675 :   13 -6 12  4
+             C(  3)=-0.288675 :   13  6-12  4
+             C(  4)= 0.866025 :   13  6 12 -4
+ CASE VECTOR =     200
+ 1211111213121
+
+ FOR MS=S-0
+ CSF    200: C(  1)= 0.408248 :  -13  6 12  4
+             C(  2)= 0.408248 :   13 -6 12  4
+             C(  3)=-0.816497 :   13  6-12  4
+ CASE VECTOR =     201
+ 1211111311212
+
+ FOR MS=S-0
+ CSF    201: C(  1)=-0.707107 :  -13  6  2  3
+             C(  2)= 0.707107 :   13 -6  2  3
+ CASE VECTOR =     202
+ 1211111312121
+
+ FOR MS=S-0
+ CSF    202: C(  1)=-0.707107 :  -13  6 12  4
+             C(  2)= 0.707107 :   13 -6 12  4
+ CASE VECTOR =     203
+ 1211111412111
+
+ FOR MS=S-0
+ CSF    203: C(  1)=-1.000000 :   13  6 -6 12
+ CASE VECTOR =     204
+ 1211112121311
+
+ FOR MS=S-0
+ CSF    204: C(  1)=-0.288675 :  -13 11 10  2
+             C(  2)=-0.288675 :   13-11 10  2
+             C(  3)=-0.288675 :   13 11-10  2
+             C(  4)= 0.866025 :   13 11 10 -2
+ CASE VECTOR =     205
+ 1211112131211
+
+ FOR MS=S-0
+ CSF    205: C(  1)= 0.408248 :  -13 11 10  2
+             C(  2)= 0.408248 :   13-11 10  2
+             C(  3)=-0.816497 :   13 11-10  2
+ CASE VECTOR =     206
+ 1211113121211
+
+ FOR MS=S-0
+ CSF    206: C(  1)=-0.707107 :  -13 11 10  2
+             C(  2)= 0.707107 :   13-11 10  2
+ CASE VECTOR =     207
+ 1211114112111
+
+ FOR MS=S-0
+ CSF    207: C(  1)=-1.000000 :   13 11-11 12
+ CASE VECTOR =     208
+ 1211121111231
+
+ FOR MS=S-0
+ CSF    208: C(  1)=-0.288675 :  -13  7  2  4
+             C(  2)=-0.288675 :   13 -7  2  4
+             C(  3)=-0.288675 :   13  7 -2  4
+             C(  4)= 0.866025 :   13  7  2 -4
+ CASE VECTOR =     209
+ 1211121111321
+
+ FOR MS=S-0
+ CSF    209: C(  1)= 0.408248 :  -13  7  2  4
+             C(  2)= 0.408248 :   13 -7  2  4
+             C(  3)=-0.816497 :   13  7 -2  4
+ CASE VECTOR =     210
+ 1211121112113
+
+ FOR MS=S-0
+ CSF    210: C(  1)=-0.288675 :  -13  7 12  3
+             C(  2)=-0.288675 :   13 -7 12  3
+             C(  3)=-0.288675 :   13  7-12  3
+             C(  4)= 0.866025 :   13  7 12 -3
+ CASE VECTOR =     211
+ 1211121113112
+
+ FOR MS=S-0
+ CSF    211: C(  1)= 0.408248 :  -13  7 12  3
+             C(  2)= 0.408248 :   13 -7 12  3
+             C(  3)=-0.816497 :   13  7-12  3
+ CASE VECTOR =     212
+ 1211121211311
+
+ FOR MS=S-0
+ CSF    212: C(  1)=-0.288675 :  -13  7  6  2
+             C(  2)=-0.288675 :   13 -7  6  2
+             C(  3)=-0.288675 :   13  7 -6  2
+             C(  4)= 0.866025 :   13  7  6 -2
+ CASE VECTOR =     213
+ 1211121311211
+
+ FOR MS=S-0
+ CSF    213: C(  1)= 0.408248 :  -13  7  6  2
+             C(  2)= 0.408248 :   13 -7  6  2
+             C(  3)=-0.816497 :   13  7 -6  2
+ CASE VECTOR =     214
+ 1211131111221
+
+ FOR MS=S-0
+ CSF    214: C(  1)=-0.707107 :  -13  7  2  4
+             C(  2)= 0.707107 :   13 -7  2  4
+ CASE VECTOR =     215
+ 1211131112112
+
+ FOR MS=S-0
+ CSF    215: C(  1)=-0.707107 :  -13  7 12  3
+             C(  2)= 0.707107 :   13 -7 12  3
+ CASE VECTOR =     216
+ 1211131211211
+
+ FOR MS=S-0
+ CSF    216: C(  1)=-0.707107 :  -13  7  6  2
+             C(  2)= 0.707107 :   13 -7  6  2
+ CASE VECTOR =     217
+ 1211141112111
+
+ FOR MS=S-0
+ CSF    217: C(  1)=-1.000000 :   13  7 -7 12
+ CASE VECTOR =     218
+ 1211211121113
+
+ FOR MS=S-0
+ CSF    218: C(  1)=-0.288675 :  -13  8 10  3
+             C(  2)=-0.288675 :   13 -8 10  3
+             C(  3)=-0.288675 :   13  8-10  3
+             C(  4)= 0.866025 :   13  8 10 -3
+ CASE VECTOR =     219
+ 1211211131112
+
+ FOR MS=S-0
+ CSF    219: C(  1)= 0.408248 :  -13  8 10  3
+             C(  2)= 0.408248 :   13 -8 10  3
+             C(  3)=-0.816497 :   13  8-10  3
+ CASE VECTOR =     220
+ 1211212111131
+
+ FOR MS=S-0
+ CSF    220: C(  1)=-0.288675 :  -13  8 11  4
+             C(  2)=-0.288675 :   13 -8 11  4
+             C(  3)=-0.288675 :   13  8-11  4
+             C(  4)= 0.866025 :   13  8 11 -4
+ CASE VECTOR =     221
+ 1211212311111
+
+ FOR MS=S-0
+ CSF    221: C(  1)=-0.288675 :  -13  8 11  6
+             C(  2)=-0.288675 :   13 -8 11  6
+             C(  3)=-0.288675 :   13  8-11  6
+             C(  4)= 0.866025 :   13  8 11 -6
+ CASE VECTOR =     222
+ 1211213111121
+
+ FOR MS=S-0
+ CSF    222: C(  1)= 0.408248 :  -13  8 11  4
+             C(  2)= 0.408248 :   13 -8 11  4
+             C(  3)=-0.816497 :   13  8-11  4
+ CASE VECTOR =     223
+ 1211213211111
+
+ FOR MS=S-0
+ CSF    223: C(  1)= 0.408248 :  -13  8 11  6
+             C(  2)= 0.408248 :   13 -8 11  6
+             C(  3)=-0.816497 :   13  8-11  6
+ CASE VECTOR =     224
+ 1211221131111
+
+ FOR MS=S-0
+ CSF    224: C(  1)=-0.288675 :  -13  8  7 10
+             C(  2)=-0.288675 :   13 -8  7 10
+             C(  3)=-0.288675 :   13  8 -7 10
+             C(  4)= 0.866025 :   13  8  7-10
+ CASE VECTOR =     225
+ 1211231121111
+
+ FOR MS=S-0
+ CSF    225: C(  1)= 0.408248 :  -13  8  7 10
+             C(  2)= 0.408248 :   13 -8  7 10
+             C(  3)=-0.816497 :   13  8 -7 10
+ CASE VECTOR =     226
+ 1211311121112
+
+ FOR MS=S-0
+ CSF    226: C(  1)=-0.707107 :  -13  8 10  3
+             C(  2)= 0.707107 :   13 -8 10  3
+ CASE VECTOR =     227
+ 1211312111121
+
+ FOR MS=S-0
+ CSF    227: C(  1)=-0.707107 :  -13  8 11  4
+             C(  2)= 0.707107 :   13 -8 11  4
+ CASE VECTOR =     228
+ 1211312211111
+
+ FOR MS=S-0
+ CSF    228: C(  1)=-0.707107 :  -13  8 11  6
+             C(  2)= 0.707107 :   13 -8 11  6
+ CASE VECTOR =     229
+ 1211321121111
+
+ FOR MS=S-0
+ CSF    229: C(  1)=-0.707107 :  -13  8  7 10
+             C(  2)= 0.707107 :   13 -8  7 10
+ CASE VECTOR =     230
+ 1211411112111
+
+ FOR MS=S-0
+ CSF    230: C(  1)=-1.000000 :   13  8 -8 12
+ CASE VECTOR =     231
+ 1212111121113
+
+ FOR MS=S-0
+ CSF    231: C(  1)=-0.288675 :  -13  5 10  3
+             C(  2)=-0.288675 :   13 -5 10  3
+             C(  3)=-0.288675 :   13  5-10  3
+             C(  4)= 0.866025 :   13  5 10 -3
+ CASE VECTOR =     232
+ 1212111131112
+
+ FOR MS=S-0
+ CSF    232: C(  1)= 0.408248 :  -13  5 10  3
+             C(  2)= 0.408248 :   13 -5 10  3
+             C(  3)=-0.816497 :   13  5-10  3
+ CASE VECTOR =     233
+ 1212112111131
+
+ FOR MS=S-0
+ CSF    233: C(  1)=-0.288675 :  -13  5 11  4
+             C(  2)=-0.288675 :   13 -5 11  4
+             C(  3)=-0.288675 :   13  5-11  4
+             C(  4)= 0.866025 :   13  5 11 -4
+ CASE VECTOR =     234
+ 1212112311111
+
+ FOR MS=S-0
+ CSF    234: C(  1)=-0.288675 :  -13  5 11  6
+             C(  2)=-0.288675 :   13 -5 11  6
+             C(  3)=-0.288675 :   13  5-11  6
+             C(  4)= 0.866025 :   13  5 11 -6
+ CASE VECTOR =     235
+ 1212113111121
+
+ FOR MS=S-0
+ CSF    235: C(  1)= 0.408248 :  -13  5 11  4
+             C(  2)= 0.408248 :   13 -5 11  4
+             C(  3)=-0.816497 :   13  5-11  4
+ CASE VECTOR =     236
+ 1212113211111
+
+ FOR MS=S-0
+ CSF    236: C(  1)= 0.408248 :  -13  5 11  6
+             C(  2)= 0.408248 :   13 -5 11  6
+             C(  3)=-0.816497 :   13  5-11  6
+ CASE VECTOR =     237
+ 1212121131111
+
+ FOR MS=S-0
+ CSF    237: C(  1)=-0.288675 :  -13  5  7 10
+             C(  2)=-0.288675 :   13 -5  7 10
+             C(  3)=-0.288675 :   13  5 -7 10
+             C(  4)= 0.866025 :   13  5  7-10
+ CASE VECTOR =     238
+ 1212131121111
+
+ FOR MS=S-0
+ CSF    238: C(  1)= 0.408248 :  -13  5  7 10
+             C(  2)= 0.408248 :   13 -5  7 10
+             C(  3)=-0.816497 :   13  5 -7 10
+ CASE VECTOR =     239
+ 1212211113111
+
+ FOR MS=S-0
+ CSF    239: C(  1)=-0.288675 :  -13  5  8 12
+             C(  2)=-0.288675 :   13 -5  8 12
+             C(  3)=-0.288675 :   13  5 -8 12
+             C(  4)= 0.866025 :   13  5  8-12
+ CASE VECTOR =     240
+ 1212311112111
+
+ FOR MS=S-0
+ CSF    240: C(  1)= 0.408248 :  -13  5  8 12
+             C(  2)= 0.408248 :   13 -5  8 12
+             C(  3)=-0.816497 :   13  5 -8 12
+ CASE VECTOR =     241
+ 1213111121112
+
+ FOR MS=S-0
+ CSF    241: C(  1)=-0.707107 :  -13  5 10  3
+             C(  2)= 0.707107 :   13 -5 10  3
+ CASE VECTOR =     242
+ 1213112111121
+
+ FOR MS=S-0
+ CSF    242: C(  1)=-0.707107 :  -13  5 11  4
+             C(  2)= 0.707107 :   13 -5 11  4
+ CASE VECTOR =     243
+ 1213112211111
+
+ FOR MS=S-0
+ CSF    243: C(  1)=-0.707107 :  -13  5 11  6
+             C(  2)= 0.707107 :   13 -5 11  6
+ CASE VECTOR =     244
+ 1213121121111
+
+ FOR MS=S-0
+ CSF    244: C(  1)=-0.707107 :  -13  5  7 10
+             C(  2)= 0.707107 :   13 -5  7 10
+ CASE VECTOR =     245
+ 1213211112111
+
+ FOR MS=S-0
+ CSF    245: C(  1)=-0.707107 :  -13  5  8 12
+             C(  2)= 0.707107 :   13 -5  8 12
+ CASE VECTOR =     246
+ 1214111112111
+
+ FOR MS=S-0
+ CSF    246: C(  1)=-1.000000 :   13  5 -5 12
+ CASE VECTOR =     247
+ 1221111111123
+
+ FOR MS=S-0
+ CSF    247: C(  1)=-0.288675 :  -13 14  4  3
+             C(  2)=-0.288675 :   13-14  4  3
+             C(  3)=-0.288675 :   13 14 -4  3
+             C(  4)= 0.866025 :   13 14  4 -3
+ CASE VECTOR =     248
+ 1221111111132
+
+ FOR MS=S-0
+ CSF    248: C(  1)= 0.408248 :  -13 14  4  3
+             C(  2)= 0.408248 :   13-14  4  3
+             C(  3)=-0.816497 :   13 14 -4  3
+ CASE VECTOR =     249
+ 1221111112311
+
+ FOR MS=S-0
+ CSF    249: C(  1)=-0.288675 :  -13 14 12  2
+             C(  2)=-0.288675 :   13-14 12  2
+             C(  3)=-0.288675 :   13 14-12  2
+             C(  4)= 0.866025 :   13 14 12 -2
+ CASE VECTOR =     250
+ 1221111113211
+
+ FOR MS=S-0
+ CSF    250: C(  1)= 0.408248 :  -13 14 12  2
+             C(  2)= 0.408248 :   13-14 12  2
+             C(  3)=-0.816497 :   13 14-12  2
+ CASE VECTOR =     251
+ 1221111211113
+
+ FOR MS=S-0
+ CSF    251: C(  1)=-0.288675 :  -13 14  6  3
+             C(  2)=-0.288675 :   13-14  6  3
+             C(  3)=-0.288675 :   13 14 -6  3
+             C(  4)= 0.866025 :   13 14  6 -3
+ CASE VECTOR =     252
+ 1221111311112
+
+ FOR MS=S-0
+ CSF    252: C(  1)= 0.408248 :  -13 14  6  3
+             C(  2)= 0.408248 :   13-14  6  3
+             C(  3)=-0.816497 :   13 14 -6  3
+ CASE VECTOR =     253
+ 1221112131111
+
+ FOR MS=S-0
+ CSF    253: C(  1)=-0.288675 :  -13 14 11 10
+             C(  2)=-0.288675 :   13-14 11 10
+             C(  3)=-0.288675 :   13 14-11 10
+             C(  4)= 0.866025 :   13 14 11-10
+ CASE VECTOR =     254
+ 1221113121111
+
+ FOR MS=S-0
+ CSF    254: C(  1)= 0.408248 :  -13 14 11 10
+             C(  2)= 0.408248 :   13-14 11 10
+             C(  3)=-0.816497 :   13 14-11 10
+ CASE VECTOR =     255
+ 1221121111131
+
+ FOR MS=S-0
+ CSF    255: C(  1)=-0.288675 :  -13 14  7  4
+             C(  2)=-0.288675 :   13-14  7  4
+             C(  3)=-0.288675 :   13 14 -7  4
+             C(  4)= 0.866025 :   13 14  7 -4
+ CASE VECTOR =     256
+ 1221121311111
+
+ FOR MS=S-0
+ CSF    256: C(  1)=-0.288675 :  -13 14  7  6
+             C(  2)=-0.288675 :   13-14  7  6
+             C(  3)=-0.288675 :   13 14 -7  6
+             C(  4)= 0.866025 :   13 14  7 -6
+ CASE VECTOR =     257
+ 1221131111121
+
+ FOR MS=S-0
+ CSF    257: C(  1)= 0.408248 :  -13 14  7  4
+             C(  2)= 0.408248 :   13-14  7  4
+             C(  3)=-0.816497 :   13 14 -7  4
+ CASE VECTOR =     258
+ 1221131211111
+
+ FOR MS=S-0
+ CSF    258: C(  1)= 0.408248 :  -13 14  7  6
+             C(  2)= 0.408248 :   13-14  7  6
+             C(  3)=-0.816497 :   13 14 -7  6
+ CASE VECTOR =     259
+ 1231111111122
+
+ FOR MS=S-0
+ CSF    259: C(  1)=-0.707107 :  -13 14  4  3
+             C(  2)= 0.707107 :   13-14  4  3
+ CASE VECTOR =     260
+ 1231111112211
+
+ FOR MS=S-0
+ CSF    260: C(  1)=-0.707107 :  -13 14 12  2
+             C(  2)= 0.707107 :   13-14 12  2
+ CASE VECTOR =     261
+ 1231111211112
+
+ FOR MS=S-0
+ CSF    261: C(  1)=-0.707107 :  -13 14  6  3
+             C(  2)= 0.707107 :   13-14  6  3
+ CASE VECTOR =     262
+ 1231112121111
+
+ FOR MS=S-0
+ CSF    262: C(  1)=-0.707107 :  -13 14 11 10
+             C(  2)= 0.707107 :   13-14 11 10
+ CASE VECTOR =     263
+ 1231121111121
+
+ FOR MS=S-0
+ CSF    263: C(  1)=-0.707107 :  -13 14  7  4
+             C(  2)= 0.707107 :   13-14  7  4
+ CASE VECTOR =     264
+ 1231121211111
+
+ FOR MS=S-0
+ CSF    264: C(  1)=-0.707107 :  -13 14  7  6
+             C(  2)= 0.707107 :   13-14  7  6
+ CASE VECTOR =     265
+ 1241111112111
+
+ FOR MS=S-0
+ CSF    265: C(  1)=-1.000000 :   13 14-14 12
+ CASE VECTOR =     266
+ 1411111111122
+
+ FOR MS=S-0
+ CSF    266: C(  1)= 1.000000 :   13-13  4  3
+ CASE VECTOR =     267
+ 1411111112211
+
+ FOR MS=S-0
+ CSF    267: C(  1)= 1.000000 :   13-13 12  2
+ CASE VECTOR =     268
+ 1411111211112
+
+ FOR MS=S-0
+ CSF    268: C(  1)= 1.000000 :   13-13  6  3
+ CASE VECTOR =     269
+ 1411112121111
+
+ FOR MS=S-0
+ CSF    269: C(  1)= 1.000000 :   13-13 11 10
+ CASE VECTOR =     270
+ 1411121111121
+
+ FOR MS=S-0
+ CSF    270: C(  1)= 1.000000 :   13-13  7  4
+ CASE VECTOR =     271
+ 1411121211111
+
+ FOR MS=S-0
+ CSF    271: C(  1)= 1.000000 :   13-13  7  6
+ CASE VECTOR =     272
+ 1421111112111
+
+ FOR MS=S-0
+ CSF    272: C(  1)= 1.000000 :   13-13 14 12
+ CASE VECTOR =     273
+ 2111111111223
+
+ FOR MS=S-0
+ CSF    273: C(  1)=-0.288675 :   -9  2  4  3
+             C(  2)=-0.288675 :    9 -2  4  3
+             C(  3)=-0.288675 :    9  2 -4  3
+             C(  4)= 0.866025 :    9  2  4 -3
+ CASE VECTOR =     274
+ 2111111111232
+
+ FOR MS=S-0
+ CSF    274: C(  1)= 0.408248 :   -9  2  4  3
+             C(  2)= 0.408248 :    9 -2  4  3
+             C(  3)=-0.816497 :    9  2 -4  3
+ CASE VECTOR =     275
+ 2111111111322
+
+ FOR MS=S-0
+ CSF    275: C(  1)=-0.707107 :   -9  2  4  3
+             C(  2)= 0.707107 :    9 -2  4  3
+ CASE VECTOR =     276
+ 2111111112114
+
+ FOR MS=S-0
+ CSF    276: C(  1)= 1.000000 :    9 12  3 -3
+ CASE VECTOR =     277
+ 2111111112141
+
+ FOR MS=S-0
+ CSF    277: C(  1)= 1.000000 :    9 12  4 -4
+ CASE VECTOR =     278
+ 2111111112411
+
+ FOR MS=S-0
+ CSF    278: C(  1)= 1.000000 :    9 12  2 -2
+ CASE VECTOR =     279
+ 2111111142111
+
+ FOR MS=S-0
+ CSF    279: C(  1)=-1.000000 :    9 10-10 12
+ CASE VECTOR =     280
+ 2111111211213
+
+ FOR MS=S-0
+ CSF    280: C(  1)=-0.288675 :   -9  6  2  3
+             C(  2)=-0.288675 :    9 -6  2  3
+             C(  3)=-0.288675 :    9  6 -2  3
+             C(  4)= 0.866025 :    9  6  2 -3
+ CASE VECTOR =     281
+ 2111111211312
+
+ FOR MS=S-0
+ CSF    281: C(  1)= 0.408248 :   -9  6  2  3
+             C(  2)= 0.408248 :    9 -6  2  3
+             C(  3)=-0.816497 :    9  6 -2  3
+ CASE VECTOR =     282
+ 2111111212131
+
+ FOR MS=S-0
+ CSF    282: C(  1)=-0.288675 :   -9  6 12  4
+             C(  2)=-0.288675 :    9 -6 12  4
+             C(  3)=-0.288675 :    9  6-12  4
+             C(  4)= 0.866025 :    9  6 12 -4
+ CASE VECTOR =     283
+ 2111111213121
+
+ FOR MS=S-0
+ CSF    283: C(  1)= 0.408248 :   -9  6 12  4
+             C(  2)= 0.408248 :    9 -6 12  4
+             C(  3)=-0.816497 :    9  6-12  4
+ CASE VECTOR =     284
+ 2111111311212
+
+ FOR MS=S-0
+ CSF    284: C(  1)=-0.707107 :   -9  6  2  3
+             C(  2)= 0.707107 :    9 -6  2  3
+ CASE VECTOR =     285
+ 2111111312121
+
+ FOR MS=S-0
+ CSF    285: C(  1)=-0.707107 :   -9  6 12  4
+             C(  2)= 0.707107 :    9 -6 12  4
+ CASE VECTOR =     286
+ 2111111412111
+
+ FOR MS=S-0
+ CSF    286: C(  1)=-1.000000 :    9  6 -6 12
+ CASE VECTOR =     287
+ 2111112121311
+
+ FOR MS=S-0
+ CSF    287: C(  1)=-0.288675 :   -9 11 10  2
+             C(  2)=-0.288675 :    9-11 10  2
+             C(  3)=-0.288675 :    9 11-10  2
+             C(  4)= 0.866025 :    9 11 10 -2
+ CASE VECTOR =     288
+ 2111112131211
+
+ FOR MS=S-0
+ CSF    288: C(  1)= 0.408248 :   -9 11 10  2
+             C(  2)= 0.408248 :    9-11 10  2
+             C(  3)=-0.816497 :    9 11-10  2
+ CASE VECTOR =     289
+ 2111113121211
+
+ FOR MS=S-0
+ CSF    289: C(  1)=-0.707107 :   -9 11 10  2
+             C(  2)= 0.707107 :    9-11 10  2
+ CASE VECTOR =     290
+ 2111114112111
+
+ FOR MS=S-0
+ CSF    290: C(  1)=-1.000000 :    9 11-11 12
+ CASE VECTOR =     291
+ 2111121111231
+
+ FOR MS=S-0
+ CSF    291: C(  1)=-0.288675 :   -9  7  2  4
+             C(  2)=-0.288675 :    9 -7  2  4
+             C(  3)=-0.288675 :    9  7 -2  4
+             C(  4)= 0.866025 :    9  7  2 -4
+ CASE VECTOR =     292
+ 2111121111321
+
+ FOR MS=S-0
+ CSF    292: C(  1)= 0.408248 :   -9  7  2  4
+             C(  2)= 0.408248 :    9 -7  2  4
+             C(  3)=-0.816497 :    9  7 -2  4
+ CASE VECTOR =     293
+ 2111121112113
+
+ FOR MS=S-0
+ CSF    293: C(  1)=-0.288675 :   -9  7 12  3
+             C(  2)=-0.288675 :    9 -7 12  3
+             C(  3)=-0.288675 :    9  7-12  3
+             C(  4)= 0.866025 :    9  7 12 -3
+ CASE VECTOR =     294
+ 2111121113112
+
+ FOR MS=S-0
+ CSF    294: C(  1)= 0.408248 :   -9  7 12  3
+             C(  2)= 0.408248 :    9 -7 12  3
+             C(  3)=-0.816497 :    9  7-12  3
+ CASE VECTOR =     295
+ 2111121211311
+
+ FOR MS=S-0
+ CSF    295: C(  1)=-0.288675 :   -9  7  6  2
+             C(  2)=-0.288675 :    9 -7  6  2
+             C(  3)=-0.288675 :    9  7 -6  2
+             C(  4)= 0.866025 :    9  7  6 -2
+ CASE VECTOR =     296
+ 2111121311211
+
+ FOR MS=S-0
+ CSF    296: C(  1)= 0.408248 :   -9  7  6  2
+             C(  2)= 0.408248 :    9 -7  6  2
+             C(  3)=-0.816497 :    9  7 -6  2
+ CASE VECTOR =     297
+ 2111131111221
+
+ FOR MS=S-0
+ CSF    297: C(  1)=-0.707107 :   -9  7  2  4
+             C(  2)= 0.707107 :    9 -7  2  4
+ CASE VECTOR =     298
+ 2111131112112
+
+ FOR MS=S-0
+ CSF    298: C(  1)=-0.707107 :   -9  7 12  3
+             C(  2)= 0.707107 :    9 -7 12  3
+ CASE VECTOR =     299
+ 2111131211211
+
+ FOR MS=S-0
+ CSF    299: C(  1)=-0.707107 :   -9  7  6  2
+             C(  2)= 0.707107 :    9 -7  6  2
+ CASE VECTOR =     300
+ 2111141112111
+
+ FOR MS=S-0
+ CSF    300: C(  1)=-1.000000 :    9  7 -7 12
+ CASE VECTOR =     301
+ 2111211121113
+
+ FOR MS=S-0
+ CSF    301: C(  1)=-0.288675 :   -9  8 10  3
+             C(  2)=-0.288675 :    9 -8 10  3
+             C(  3)=-0.288675 :    9  8-10  3
+             C(  4)= 0.866025 :    9  8 10 -3
+ CASE VECTOR =     302
+ 2111211131112
+
+ FOR MS=S-0
+ CSF    302: C(  1)= 0.408248 :   -9  8 10  3
+             C(  2)= 0.408248 :    9 -8 10  3
+             C(  3)=-0.816497 :    9  8-10  3
+ CASE VECTOR =     303
+ 2111212111131
+
+ FOR MS=S-0
+ CSF    303: C(  1)=-0.288675 :   -9  8 11  4
+             C(  2)=-0.288675 :    9 -8 11  4
+             C(  3)=-0.288675 :    9  8-11  4
+             C(  4)= 0.866025 :    9  8 11 -4
+ CASE VECTOR =     304
+ 2111212311111
+
+ FOR MS=S-0
+ CSF    304: C(  1)=-0.288675 :   -9  8 11  6
+             C(  2)=-0.288675 :    9 -8 11  6
+             C(  3)=-0.288675 :    9  8-11  6
+             C(  4)= 0.866025 :    9  8 11 -6
+ CASE VECTOR =     305
+ 2111213111121
+
+ FOR MS=S-0
+ CSF    305: C(  1)= 0.408248 :   -9  8 11  4
+             C(  2)= 0.408248 :    9 -8 11  4
+             C(  3)=-0.816497 :    9  8-11  4
+ CASE VECTOR =     306
+ 2111213211111
+
+ FOR MS=S-0
+ CSF    306: C(  1)= 0.408248 :   -9  8 11  6
+             C(  2)= 0.408248 :    9 -8 11  6
+             C(  3)=-0.816497 :    9  8-11  6
+ CASE VECTOR =     307
+ 2111221131111
+
+ FOR MS=S-0
+ CSF    307: C(  1)=-0.288675 :   -9  8  7 10
+             C(  2)=-0.288675 :    9 -8  7 10
+             C(  3)=-0.288675 :    9  8 -7 10
+             C(  4)= 0.866025 :    9  8  7-10
+ CASE VECTOR =     308
+ 2111231121111
+
+ FOR MS=S-0
+ CSF    308: C(  1)= 0.408248 :   -9  8  7 10
+             C(  2)= 0.408248 :    9 -8  7 10
+             C(  3)=-0.816497 :    9  8 -7 10
+ CASE VECTOR =     309
+ 2111311121112
+
+ FOR MS=S-0
+ CSF    309: C(  1)=-0.707107 :   -9  8 10  3
+             C(  2)= 0.707107 :    9 -8 10  3
+ CASE VECTOR =     310
+ 2111312111121
+
+ FOR MS=S-0
+ CSF    310: C(  1)=-0.707107 :   -9  8 11  4
+             C(  2)= 0.707107 :    9 -8 11  4
+ CASE VECTOR =     311
+ 2111312211111
+
+ FOR MS=S-0
+ CSF    311: C(  1)=-0.707107 :   -9  8 11  6
+             C(  2)= 0.707107 :    9 -8 11  6
+ CASE VECTOR =     312
+ 2111321121111
+
+ FOR MS=S-0
+ CSF    312: C(  1)=-0.707107 :   -9  8  7 10
+             C(  2)= 0.707107 :    9 -8  7 10
+ CASE VECTOR =     313
+ 2111411112111
+
+ FOR MS=S-0
+ CSF    313: C(  1)=-1.000000 :    9  8 -8 12
+ CASE VECTOR =     314
+ 2112111121113
+
+ FOR MS=S-0
+ CSF    314: C(  1)=-0.288675 :   -9  5 10  3
+             C(  2)=-0.288675 :    9 -5 10  3
+             C(  3)=-0.288675 :    9  5-10  3
+             C(  4)= 0.866025 :    9  5 10 -3
+ CASE VECTOR =     315
+ 2112111131112
+
+ FOR MS=S-0
+ CSF    315: C(  1)= 0.408248 :   -9  5 10  3
+             C(  2)= 0.408248 :    9 -5 10  3
+             C(  3)=-0.816497 :    9  5-10  3
+ CASE VECTOR =     316
+ 2112112111131
+
+ FOR MS=S-0
+ CSF    316: C(  1)=-0.288675 :   -9  5 11  4
+             C(  2)=-0.288675 :    9 -5 11  4
+             C(  3)=-0.288675 :    9  5-11  4
+             C(  4)= 0.866025 :    9  5 11 -4
+ CASE VECTOR =     317
+ 2112112311111
+
+ FOR MS=S-0
+ CSF    317: C(  1)=-0.288675 :   -9  5 11  6
+             C(  2)=-0.288675 :    9 -5 11  6
+             C(  3)=-0.288675 :    9  5-11  6
+             C(  4)= 0.866025 :    9  5 11 -6
+ CASE VECTOR =     318
+ 2112113111121
+
+ FOR MS=S-0
+ CSF    318: C(  1)= 0.408248 :   -9  5 11  4
+             C(  2)= 0.408248 :    9 -5 11  4
+             C(  3)=-0.816497 :    9  5-11  4
+ CASE VECTOR =     319
+ 2112113211111
+
+ FOR MS=S-0
+ CSF    319: C(  1)= 0.408248 :   -9  5 11  6
+             C(  2)= 0.408248 :    9 -5 11  6
+             C(  3)=-0.816497 :    9  5-11  6
+ CASE VECTOR =     320
+ 2112121131111
+
+ FOR MS=S-0
+ CSF    320: C(  1)=-0.288675 :   -9  5  7 10
+             C(  2)=-0.288675 :    9 -5  7 10
+             C(  3)=-0.288675 :    9  5 -7 10
+             C(  4)= 0.866025 :    9  5  7-10
+ CASE VECTOR =     321
+ 2112131121111
+
+ FOR MS=S-0
+ CSF    321: C(  1)= 0.408248 :   -9  5  7 10
+             C(  2)= 0.408248 :    9 -5  7 10
+             C(  3)=-0.816497 :    9  5 -7 10
+ CASE VECTOR =     322
+ 2112211113111
+
+ FOR MS=S-0
+ CSF    322: C(  1)=-0.288675 :   -9  5  8 12
+             C(  2)=-0.288675 :    9 -5  8 12
+             C(  3)=-0.288675 :    9  5 -8 12
+             C(  4)= 0.866025 :    9  5  8-12
+ CASE VECTOR =     323
+ 2112311112111
+
+ FOR MS=S-0
+ CSF    323: C(  1)= 0.408248 :   -9  5  8 12
+             C(  2)= 0.408248 :    9 -5  8 12
+             C(  3)=-0.816497 :    9  5 -8 12
+ CASE VECTOR =     324
+ 2113111121112
+
+ FOR MS=S-0
+ CSF    324: C(  1)=-0.707107 :   -9  5 10  3
+             C(  2)= 0.707107 :    9 -5 10  3
+ CASE VECTOR =     325
+ 2113112111121
+
+ FOR MS=S-0
+ CSF    325: C(  1)=-0.707107 :   -9  5 11  4
+             C(  2)= 0.707107 :    9 -5 11  4
+ CASE VECTOR =     326
+ 2113112211111
+
+ FOR MS=S-0
+ CSF    326: C(  1)=-0.707107 :   -9  5 11  6
+             C(  2)= 0.707107 :    9 -5 11  6
+ CASE VECTOR =     327
+ 2113121121111
+
+ FOR MS=S-0
+ CSF    327: C(  1)=-0.707107 :   -9  5  7 10
+             C(  2)= 0.707107 :    9 -5  7 10
+ CASE VECTOR =     328
+ 2113211112111
+
+ FOR MS=S-0
+ CSF    328: C(  1)=-0.707107 :   -9  5  8 12
+             C(  2)= 0.707107 :    9 -5  8 12
+ CASE VECTOR =     329
+ 2114111112111
+
+ FOR MS=S-0
+ CSF    329: C(  1)=-1.000000 :    9  5 -5 12
+ CASE VECTOR =     330
+ 2121111111123
+
+ FOR MS=S-0
+ CSF    330: C(  1)=-0.288675 :   -9 14  4  3
+             C(  2)=-0.288675 :    9-14  4  3
+             C(  3)=-0.288675 :    9 14 -4  3
+             C(  4)= 0.866025 :    9 14  4 -3
+ CASE VECTOR =     331
+ 2121111111132
+
+ FOR MS=S-0
+ CSF    331: C(  1)= 0.408248 :   -9 14  4  3
+             C(  2)= 0.408248 :    9-14  4  3
+             C(  3)=-0.816497 :    9 14 -4  3
+ CASE VECTOR =     332
+ 2121111112311
+
+ FOR MS=S-0
+ CSF    332: C(  1)=-0.288675 :   -9 14 12  2
+             C(  2)=-0.288675 :    9-14 12  2
+             C(  3)=-0.288675 :    9 14-12  2
+             C(  4)= 0.866025 :    9 14 12 -2
+ CASE VECTOR =     333
+ 2121111113211
+
+ FOR MS=S-0
+ CSF    333: C(  1)= 0.408248 :   -9 14 12  2
+             C(  2)= 0.408248 :    9-14 12  2
+             C(  3)=-0.816497 :    9 14-12  2
+ CASE VECTOR =     334
+ 2121111211113
+
+ FOR MS=S-0
+ CSF    334: C(  1)=-0.288675 :   -9 14  6  3
+             C(  2)=-0.288675 :    9-14  6  3
+             C(  3)=-0.288675 :    9 14 -6  3
+             C(  4)= 0.866025 :    9 14  6 -3
+ CASE VECTOR =     335
+ 2121111311112
+
+ FOR MS=S-0
+ CSF    335: C(  1)= 0.408248 :   -9 14  6  3
+             C(  2)= 0.408248 :    9-14  6  3
+             C(  3)=-0.816497 :    9 14 -6  3
+ CASE VECTOR =     336
+ 2121112131111
+
+ FOR MS=S-0
+ CSF    336: C(  1)=-0.288675 :   -9 14 11 10
+             C(  2)=-0.288675 :    9-14 11 10
+             C(  3)=-0.288675 :    9 14-11 10
+             C(  4)= 0.866025 :    9 14 11-10
+ CASE VECTOR =     337
+ 2121113121111
+
+ FOR MS=S-0
+ CSF    337: C(  1)= 0.408248 :   -9 14 11 10
+             C(  2)= 0.408248 :    9-14 11 10
+             C(  3)=-0.816497 :    9 14-11 10
+ CASE VECTOR =     338
+ 2121121111131
+
+ FOR MS=S-0
+ CSF    338: C(  1)=-0.288675 :   -9 14  7  4
+             C(  2)=-0.288675 :    9-14  7  4
+             C(  3)=-0.288675 :    9 14 -7  4
+             C(  4)= 0.866025 :    9 14  7 -4
+ CASE VECTOR =     339
+ 2121121311111
+
+ FOR MS=S-0
+ CSF    339: C(  1)=-0.288675 :   -9 14  7  6
+             C(  2)=-0.288675 :    9-14  7  6
+             C(  3)=-0.288675 :    9 14 -7  6
+             C(  4)= 0.866025 :    9 14  7 -6
+ CASE VECTOR =     340
+ 2121131111121
+
+ FOR MS=S-0
+ CSF    340: C(  1)= 0.408248 :   -9 14  7  4
+             C(  2)= 0.408248 :    9-14  7  4
+             C(  3)=-0.816497 :    9 14 -7  4
+ CASE VECTOR =     341
+ 2121131211111
+
+ FOR MS=S-0
+ CSF    341: C(  1)= 0.408248 :   -9 14  7  6
+             C(  2)= 0.408248 :    9-14  7  6
+             C(  3)=-0.816497 :    9 14 -7  6
+ CASE VECTOR =     342
+ 2131111111122
+
+ FOR MS=S-0
+ CSF    342: C(  1)=-0.707107 :   -9 14  4  3
+             C(  2)= 0.707107 :    9-14  4  3
+ CASE VECTOR =     343
+ 2131111112211
+
+ FOR MS=S-0
+ CSF    343: C(  1)=-0.707107 :   -9 14 12  2
+             C(  2)= 0.707107 :    9-14 12  2
+ CASE VECTOR =     344
+ 2131111211112
+
+ FOR MS=S-0
+ CSF    344: C(  1)=-0.707107 :   -9 14  6  3
+             C(  2)= 0.707107 :    9-14  6  3
+ CASE VECTOR =     345
+ 2131112121111
+
+ FOR MS=S-0
+ CSF    345: C(  1)=-0.707107 :   -9 14 11 10
+             C(  2)= 0.707107 :    9-14 11 10
+ CASE VECTOR =     346
+ 2131121111121
+
+ FOR MS=S-0
+ CSF    346: C(  1)=-0.707107 :   -9 14  7  4
+             C(  2)= 0.707107 :    9-14  7  4
+ CASE VECTOR =     347
+ 2131121211111
+
+ FOR MS=S-0
+ CSF    347: C(  1)=-0.707107 :   -9 14  7  6
+             C(  2)= 0.707107 :    9-14  7  6
+ CASE VECTOR =     348
+ 2141111112111
+
+ FOR MS=S-0
+ CSF    348: C(  1)=-1.000000 :    9 14-14 12
+ CASE VECTOR =     349
+ 2211111111123
+
+ FOR MS=S-0
+ CSF    349: C(  1)=-0.288675 :   -9 13  4  3
+             C(  2)=-0.288675 :    9-13  4  3
+             C(  3)=-0.288675 :    9 13 -4  3
+             C(  4)= 0.866025 :    9 13  4 -3
+ CASE VECTOR =     350
+ 2211111111132
+
+ FOR MS=S-0
+ CSF    350: C(  1)= 0.408248 :   -9 13  4  3
+             C(  2)= 0.408248 :    9-13  4  3
+             C(  3)=-0.816497 :    9 13 -4  3
+ CASE VECTOR =     351
+ 2211111112311
+
+ FOR MS=S-0
+ CSF    351: C(  1)=-0.288675 :   -9 13 12  2
+             C(  2)=-0.288675 :    9-13 12  2
+             C(  3)=-0.288675 :    9 13-12  2
+             C(  4)= 0.866025 :    9 13 12 -2
+ CASE VECTOR =     352
+ 2211111113211
+
+ FOR MS=S-0
+ CSF    352: C(  1)= 0.408248 :   -9 13 12  2
+             C(  2)= 0.408248 :    9-13 12  2
+             C(  3)=-0.816497 :    9 13-12  2
+ CASE VECTOR =     353
+ 2211111211113
+
+ FOR MS=S-0
+ CSF    353: C(  1)=-0.288675 :   -9 13  6  3
+             C(  2)=-0.288675 :    9-13  6  3
+             C(  3)=-0.288675 :    9 13 -6  3
+             C(  4)= 0.866025 :    9 13  6 -3
+ CASE VECTOR =     354
+ 2211111311112
+
+ FOR MS=S-0
+ CSF    354: C(  1)= 0.408248 :   -9 13  6  3
+             C(  2)= 0.408248 :    9-13  6  3
+             C(  3)=-0.816497 :    9 13 -6  3
+ CASE VECTOR =     355
+ 2211112131111
+
+ FOR MS=S-0
+ CSF    355: C(  1)=-0.288675 :   -9 13 11 10
+             C(  2)=-0.288675 :    9-13 11 10
+             C(  3)=-0.288675 :    9 13-11 10
+             C(  4)= 0.866025 :    9 13 11-10
+ CASE VECTOR =     356
+ 2211113121111
+
+ FOR MS=S-0
+ CSF    356: C(  1)= 0.408248 :   -9 13 11 10
+             C(  2)= 0.408248 :    9-13 11 10
+             C(  3)=-0.816497 :    9 13-11 10
+ CASE VECTOR =     357
+ 2211121111131
+
+ FOR MS=S-0
+ CSF    357: C(  1)=-0.288675 :   -9 13  7  4
+             C(  2)=-0.288675 :    9-13  7  4
+             C(  3)=-0.288675 :    9 13 -7  4
+             C(  4)= 0.866025 :    9 13  7 -4
+ CASE VECTOR =     358
+ 2211121311111
+
+ FOR MS=S-0
+ CSF    358: C(  1)=-0.288675 :   -9 13  7  6
+             C(  2)=-0.288675 :    9-13  7  6
+             C(  3)=-0.288675 :    9 13 -7  6
+             C(  4)= 0.866025 :    9 13  7 -6
+ CASE VECTOR =     359
+ 2211131111121
+
+ FOR MS=S-0
+ CSF    359: C(  1)= 0.408248 :   -9 13  7  4
+             C(  2)= 0.408248 :    9-13  7  4
+             C(  3)=-0.816497 :    9 13 -7  4
+ CASE VECTOR =     360
+ 2211131211111
+
+ FOR MS=S-0
+ CSF    360: C(  1)= 0.408248 :   -9 13  7  6
+             C(  2)= 0.408248 :    9-13  7  6
+             C(  3)=-0.816497 :    9 13 -7  6
+ CASE VECTOR =     361
+ 2221111113111
+
+ FOR MS=S-0
+ CSF    361: C(  1)=-0.288675 :   -9 13 14 12
+             C(  2)=-0.288675 :    9-13 14 12
+             C(  3)=-0.288675 :    9 13-14 12
+             C(  4)= 0.866025 :    9 13 14-12
+ CASE VECTOR =     362
+ 2231111112111
+
+ FOR MS=S-0
+ CSF    362: C(  1)= 0.408248 :   -9 13 14 12
+             C(  2)= 0.408248 :    9-13 14 12
+             C(  3)=-0.816497 :    9 13-14 12
+ CASE VECTOR =     363
+ 2311111111122
+
+ FOR MS=S-0
+ CSF    363: C(  1)=-0.707107 :   -9 13  4  3
+             C(  2)= 0.707107 :    9-13  4  3
+ CASE VECTOR =     364
+ 2311111112211
+
+ FOR MS=S-0
+ CSF    364: C(  1)=-0.707107 :   -9 13 12  2
+             C(  2)= 0.707107 :    9-13 12  2
+ CASE VECTOR =     365
+ 2311111211112
+
+ FOR MS=S-0
+ CSF    365: C(  1)=-0.707107 :   -9 13  6  3
+             C(  2)= 0.707107 :    9-13  6  3
+ CASE VECTOR =     366
+ 2311112121111
+
+ FOR MS=S-0
+ CSF    366: C(  1)=-0.707107 :   -9 13 11 10
+             C(  2)= 0.707107 :    9-13 11 10
+ CASE VECTOR =     367
+ 2311121111121
+
+ FOR MS=S-0
+ CSF    367: C(  1)=-0.707107 :   -9 13  7  4
+             C(  2)= 0.707107 :    9-13  7  4
+ CASE VECTOR =     368
+ 2311121211111
+
+ FOR MS=S-0
+ CSF    368: C(  1)=-0.707107 :   -9 13  7  6
+             C(  2)= 0.707107 :    9-13  7  6
+ CASE VECTOR =     369
+ 2321111112111
+
+ FOR MS=S-0
+ CSF    369: C(  1)=-0.707107 :   -9 13 14 12
+             C(  2)= 0.707107 :    9-13 14 12
+ CASE VECTOR =     370
+ 2411111112111
+
+ FOR MS=S-0
+ CSF    370: C(  1)=-1.000000 :    9 13-13 12
+ CASE VECTOR =     371
+ 4111111111122
+
+ FOR MS=S-0
+ CSF    371: C(  1)= 1.000000 :    9 -9  4  3
+ CASE VECTOR =     372
+ 4111111112211
+
+ FOR MS=S-0
+ CSF    372: C(  1)= 1.000000 :    9 -9 12  2
+ CASE VECTOR =     373
+ 4111111211112
+
+ FOR MS=S-0
+ CSF    373: C(  1)= 1.000000 :    9 -9  6  3
+ CASE VECTOR =     374
+ 4111112121111
+
+ FOR MS=S-0
+ CSF    374: C(  1)= 1.000000 :    9 -9 11 10
+ CASE VECTOR =     375
+ 4111121111121
+
+ FOR MS=S-0
+ CSF    375: C(  1)= 1.000000 :    9 -9  7  4
+ CASE VECTOR =     376
+ 4111121211111
+
+ FOR MS=S-0
+ CSF    376: C(  1)= 1.000000 :    9 -9  7  6
+ CASE VECTOR =     377
+ 4121111112111
+
+ FOR MS=S-0
+ CSF    377: C(  1)= 1.000000 :    9 -9 14 12
+ CASE VECTOR =     378
+ 4211111112111
+
+ FOR MS=S-0
+ CSF    378: C(  1)= 1.000000 :    9 -9 13 12
+
+ TOTAL NUMBER OF INTEGRALS =        745
+ NUMBER OF INTEGRALS/GROUP =        745
+ NUMBER OF INTEGRAL GROUPS =          1
+ MAXIMUM RECORD SIZES ARE     624 FOR UNIT 11     378 FOR UNIT 12
+                            30001 FOR UNIT 15   30001 FOR UNIT 16
+ ...... END OF -DRT- GENERATION ...... 
+ STEP CPU TIME =     0.25 TOTAL CPU TIME =        3.4 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.4 SECONDS, CPU UTILIZATION IS  99.12%
+
+     --------------------------------------------
+     PARTIAL TWO ELECTRON INTEGRAL TRANSFORMATION
+     --------------------------------------------
+
+ NUMBER OF CORE MOLECULAR ORBITALS     =    1
+ NUMBER OF OCCUPIED MOLECULAR ORBITALS =   14
+ TOTAL NUMBER OF MOLECULAR ORBITALS    =   14
+ TOTAL NUMBER OF ATOMIC ORBITALS       =   24
+ THRESHOLD FOR KEEPING TRANSFORMED 2E- INTEGRALS = 1.000E-09
+ AO INTEGRALS WILL BE READ IN FROM DISK...
+ EVALUATING THE FROZEN CORE ENERGY...
+ ----- FROZEN CORE ENERGY =       -32.3553916148
+ # OF WORDS AVAILABLE =  100000000
+ # OF WORDS NEEDED    =     156530 FOR IN MEMORY TRANSFORMATION
+
+ CHOOSING IN MEMORY PARTIAL TRANSFORMATION...
+ TOTAL NUMBER OF TRANSFORMED 2E- INTEGRALS KEPT =       584
+ ... END OF INTEGRAL TRANSFORMATION ...
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =        3.4 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.4 SECONDS, CPU UTILIZATION IS  99.41%
+
+          ------------------------
+          GUGA-CI INTEGRAL SORTING
+          ------------------------
+
+     80573 WORDS NEEDED TO SORT            745 GUGA INTEGRALS IN MEMORY
+ 100000000 WORDS ARE AVAILABLE
+ CHOOSING IN-MEMORY SORTING...
+ IN CORE ALGORITHM SORTED             22 NON-ZERO 1E- INTEGRALS
+ IN CORE ALGORITHM SORTED            584 NON-ZERO 2E- INTEGRALS
+ ...... END OF INTEGRAL SORTING ...... 
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =        3.4 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.4 SECONDS, CPU UTILIZATION IS  99.41%
+
+ -------------------------     ---------------------------------------
+ ENERGY MATRIX CALCULATION     WRITTEN BY B.R.BROOKS,W.D.LAIDIG,P.SAXE
+ -------------------------     ---------------------------------------
+
+ COMPUTING THE HAMILTONIAN FOR THE       378 CSF-S...
+
+       17220 IS THE TOTAL NUMBER OF GENERATED LOOPS
+       17220 WERE CREATED BY THE LOOP-DRIVEN ALGORITHM
+           0 WERE CREATED IMPLICITLY
+
+       15483 IS THE TOTAL NUMBER OF PROCESSED LOOPS
+        1291     DIAGONAL LOOPS ARE STORED ON WORK15 IN     1 BUFFERS OF  10000 ELEMENTS.
+       14192 OFF DIAGONAL LOOPS ARE STORED ON WORK16 IN     2 BUFFERS OF  10000 ELEMENTS.
+ ...... END OF ENERGY MATRIX CALCULATION ...... 
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =        3.4 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.4 SECONDS, CPU UTILIZATION IS  99.41%
+
+          -----------------------------------------
+          DAVIDSON METHOD CI-MATRIX DIAGONALIZATION
+                   WRITTEN BY STEVE ELBERT
+          -----------------------------------------
+ NUMBER OF STATES REQUESTED =     1
+ MAX. NUMB. OF EXPAN. VEC   =    30
+ MAX. NUMB. IMPROVED STATES =     1
+ MAX. NUMB. OF ITERATIONS   =    50
+ CONVERGENCE CRITERION      =    1.0E-06
+
+ CHOOSING TO SOLVE SECULAR EQUATION IN MEMORY
+ NUMBER OF WORDS AVAILABLE =  100000000
+ NUMBER OF WORDS USED      =     130971
+ ENERGY MATRIX BUFFER SIZE =      10000
+ CONVERGENCE TOLS       1  5.44E-14
+ SOLUTION FOUND WITH INDIRECT METHOD
+
+ STATE #    1  ENERGY =     -37.767515024
+
+      CSF      COEF    OCCUPANCY (IGNORING CORE)
+      ---      ----    --------- --------- -----
+        1    0.972287017  2110000000000
+        2    0.046911401  1200000000100
+        3   -0.046911401  1020000000100
+        4   -0.017169183  0110000000200
+        5   -0.013884731  0110000020000
+        6    0.002369365  1000000020100
+        7   -0.025523304  0120100000000
+        8   -0.009284590  2100100000000
+       10    0.005693184  1010100000100
+       11   -0.010414814  1010100000100
+       13    0.001407735  0100100020000
+       14   -0.014337089  0110200000000
+       15    0.002593372  1000200000100
+       18    0.015566497  2000000011000
+       24   -0.013884730  0110000002000
+       25   -0.002369366  1000000002100
+       27   -0.025523305  0210010000000
+       28    0.009284590  2010010000000
+       30   -0.005693184  1100010000100
+       31    0.010414813  1100010000100
+       34   -0.001658954  0200110000000
+       35   -0.001658955  0020110000000
+       36    0.044961091  2000110000000
+       43   -0.001407734  0010010002000
+       45   -0.014337088  0110020000000
+       46   -0.002593372  1000020000100
+       50   -0.005804944  1100001010000
+       53    0.010867068  1100001010000
+       59    0.005804944  1010001001000
+       64   -0.010867069  1010001001000
+       66   -0.002276685  1000101001000
+       68    0.001570150  1000011010000
+       71   -0.001833790  1000011010000
+       73   -0.007926458  0110002000000
+       75    0.001411729  0100102000000
+       77   -0.001411727  0010012000000
+       79   -0.001489157  1101000010000
+       80   -0.022021105  1101000010000
+       81    0.001217877  0011000010100
+       83    0.056060635  1101000010000
+       84   -0.003827000  0011000010100
+       88    0.001489156  1011000001000
+       89    0.022021104  1011000001000
+       90   -0.001217877  0101000001100
+       94   -0.056060634  1011000001000
+       95    0.003827000  0101000001100
+      103   -0.001010439  0111001000000
+      104    0.001428978  0111001000000
+      108    0.001032023  0101101000000
+      113   -0.001032024  0011011000000
+      115   -0.032777463  0111001000000
+      117    0.007278484  0101101000000
+      118   -0.001215109  0001001011000
+      119   -0.007278483  0011011000000
+      120   -0.002669780  0001111000000
+      121   -0.135746522  0112000000000
+      124   -0.004648263  0002000011000
+      126   -0.006482412  0002110000000
+      127    0.032993805  1110000000001
+      128   -0.046660286  1110000000001
+      129    0.010345524  1110000000001
+      130    0.001272749  0200000000101
+      131   -0.001272749  0020000000101
+      135   -0.003416013  1100100000001
+      138   -0.006535214  1100100000001
+      146    0.003416013  1010010000001
+      151    0.006535215  1010010000001
+      153    0.001570151  1000110000001
+      163    0.001346543  0100001010001
+      164   -0.001346543  0010001001001
+      169    0.002543734  0101000010001
+      172   -0.002543734  0011000001001
+      178    0.007087625  0101000010001
+      179   -0.007087625  0011000001001
+      184   -0.012789911  0110000000002
+      190   -0.054168613  1110000000010
+      191   -0.038302993  1110000000010
+      195    0.031133006  2000000000110
+      198   -0.005693186  1100100000010
+      199    0.001700858  0010100000110
+      201   -0.010414816  1100100000010
+      205   -0.002901867  1000000011010
+      206   -0.001675394  1000000011010
+      209   -0.005693186  1010010000010
+      210    0.001700858  0100010000110
+      213   -0.003176213  1000110000010
+      214   -0.010414817  1010010000010
+      216   -0.001833788  1000110000010
+      231    0.001217876  0101000010010
+      232    0.003550391  0101000010010
+      233    0.001217876  0011000001010
+      235    0.003550391  0011000001010
+      241    0.001504537  0101000010010
+      242    0.001504537  0011000001010
+      246    0.004887592  0002000000110
+      247    0.001469644  0110000000011
+      248    0.001039195  0110000000011
+      250    0.002233858  1000000000111
+      260    0.003869157  1000000000111
+      266   -0.017169182  0110000000020
+      273   -0.022246314  1110000100000
+      274    0.031461036  1110000100000
+      275   -0.003207920  1110000100000
+      281   -0.030652160  1100100100000
+      282    0.001417978  0010100100100
+      284    0.041102875  1100100100000
+      285   -0.001027555  0010100100100
+      289   -0.001172436  1000000111000
+      292    0.030652159  1010010100000
+      293   -0.001417978  0100010100100
+      295    0.005355727  1000110100000
+      296   -0.002695704  1000110100000
+      297   -0.041102875  1010010100000
+      298    0.001027556  0100010100100
+      299    0.004669099  1000110100000
+      309    0.001951626  0100001110000
+      310   -0.001951627  0010001101000
+      315   -0.002766317  0101000110000
+      318    0.002766316  0011000101000
+      320    0.001034228  0001010110000
+      324    0.001356228  0101000110000
+      325   -0.001356227  0011000101000
+      326   -0.001587059  0001100101000
+      327   -0.001587058  0001010110000
+      335   -0.001633056  0100100100001
+      340    0.001633057  0010010100001
+      342    0.003549335  0110000100001
+      352    0.001353813  1000000100110
+      353   -0.001417977  0100100100010
+      357   -0.001417976  0010010100010
+      364   -0.002344871  1000000100110
+      371   -0.030716852  0110000200000
+      373   -0.004632247  0100100200000
+      375    0.004632246  0010010200000
+      376   -0.002771128  0000110200000
+      378   -0.001089593  0000000200110
+ ...... END OF CI-MATRIX DIAGONALIZATION ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =        3.4 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.4 SECONDS, CPU UTILIZATION IS  99.12%
+
+          --------------------------------------
+          CI DENSITY MATRIX AND NATURAL ORBITALS
+          --------------------------------------
+ PROPERTIES WILL BE COMPUTED FOR STATE -IROOT-   1 WITH E=      -37.7675150240
+ NFLGDM=   1
+ NWORD=         0  IBLOCK=   0
+ NUMBER OF STATES         =      1
+ NUMBER OF CONFIGURATIONS =    378
+
+          CI EIGENSTATE    1 TOTAL ENERGY =      -37.7675150240
+          DENSITY MATRIX OF STATE   1 SAVED FOR PROPERTY ANALYSIS
+
+          NATURAL ORBITALS IN ATOMIC ORBITAL BASIS
+          ----------------------------------------
+
+                        1              2              3              4              5
+                    2.000000000    1.924915845    0.990226013    0.990226013    0.047193730
+                       AG             AG             B3U            B2U            B1U 
+    1  C  1  S      0.152058277    0.030056919   -0.000000000   -0.000000000   -0.000000000
+    2  C  1  S      0.851419336   -0.268036777   -0.000000000   -0.000000000   -0.000000000
+    3  C  1  S      0.002079139   -0.019503841   -0.000000000   -0.000000000   -0.000000000
+    4  C  1  S      0.006755880   -0.034577221   -0.000000000   -0.000000000   -0.000000000
+    5  C  1  S      0.001731852    0.565865458   -0.000000000   -0.000000000   -0.000000000
+    6  C  1  S     -0.001679982    0.524310731   -0.000000000   -0.000000000   -0.000000000
+    7  C  1  X      0.000000000    0.000000000    0.108520591   -0.000000000   -0.000000000
+    8  C  1  Y      0.000000000    0.000000000   -0.000000000    0.108520591   -0.000000000
+    9  C  1  Z      0.000000000    0.000000000   -0.000000000   -0.000000000    0.068681728
+   10  C  1  X      0.000000000    0.000000000    0.499414337   -0.000000000   -0.000000000
+   11  C  1  Y      0.000000000    0.000000000   -0.000000000    0.499414337   -0.000000000
+   12  C  1  Z      0.000000000    0.000000000   -0.000000000   -0.000000000    0.845804281
+   13  C  1  X      0.000000000    0.000000000    0.466205978   -0.000000000   -0.000000000
+   14  C  1  Y      0.000000000    0.000000000   -0.000000000    0.466205978   -0.000000000
+   15  C  1  Z      0.000000000    0.000000000   -0.000000000   -0.000000000    0.116943109
+   16  C  1  X      0.000000000    0.000000000    0.001985302   -0.000000000   -0.000000000
+   17  C  1  Y      0.000000000    0.000000000   -0.000000000    0.001985302   -0.000000000
+   18  C  1  Z      0.000000000    0.000000000   -0.000000000   -0.000000000    0.008934304
+   19  C  1 XX      0.000000000   -0.003356681   -0.000000000   -0.000000000   -0.000000000
+   20  C  1 YY      0.000000000   -0.003356683   -0.000000000   -0.000000000   -0.000000000
+   21  C  1 ZZ      0.000000000    0.006713364   -0.000000000   -0.000000000   -0.000000000
+   22  C  1 XY      0.000000000    0.000000000   -0.000000000   -0.000000000   -0.000000000
+   23  C  1 XZ      0.000000000    0.000000000   -0.000000000   -0.000000000   -0.000000000
+   24  C  1 YZ      0.000000000    0.000000000   -0.000000000   -0.000000000   -0.000000000
+
+                        6              7              8              9             10
+                    0.010102483    0.006383872    0.006383871    0.006277270    0.006277270
+                       AG             B1G            AG             B3U            B2U 
+    1  C  1  S     -1.455012178    0.000000000   -0.000000067    0.000000000    0.000000000
+    2  C  1  S      1.103297635    0.000000000    0.000000047    0.000000000    0.000000000
+    3  C  1  S      0.603402288    0.000000000    0.000000030    0.000000000    0.000000000
+    4  C  1  S     -1.272072944    0.000000000   -0.000000046    0.000000000    0.000000000
+    5  C  1  S      3.208456413    0.000000000    0.000000108    0.000000000    0.000000000
+    6  C  1  S     -2.551562915    0.000000000   -0.000000085    0.000000000    0.000000000
+    7  C  1  X      0.000000000    0.000000000    0.000000000   -0.228879138    0.000000000
+    8  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -0.228879138
+    9  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   10  C  1  X      0.000000000    0.000000000    0.000000000    2.111667523    0.000000000
+   11  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000    2.111667523
+   12  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   13  C  1  X      0.000000000    0.000000000    0.000000000   -2.047449311    0.000000000
+   14  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -2.047449311
+   15  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   16  C  1  X      0.000000000    0.000000000    0.000000000    0.041685535    0.000000000
+   17  C  1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.041685535
+   18  C  1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   19  C  1 XX      0.203227743    0.000000000   -0.866025400    0.000000000    0.000000000
+   20  C  1 YY      0.203227684    0.000000000    0.866025416    0.000000000    0.000000000
+   21  C  1 ZZ     -0.406455427    0.000000000   -0.000000016    0.000000000    0.000000000
+   22  C  1 XY      0.000000000    1.000000005    0.000000000    0.000000000    0.000000000
+   23  C  1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  C  1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       11             12             13             14
+                    0.004587669    0.004587669    0.002675285    0.000163013
+                       B3G            B2G            AG             B1U 
+    1  C  1  S      0.000000000    0.000000000   -0.647514913   -0.000000000
+    2  C  1  S      0.000000000    0.000000000    0.492795638   -0.000000000
+    3  C  1  S      0.000000000    0.000000000    0.268580045   -0.000000000
+    4  C  1  S      0.000000000    0.000000000   -0.565655460   -0.000000000
+    5  C  1  S      0.000000000    0.000000000    1.423194243   -0.000000000
+    6  C  1  S      0.000000000    0.000000000   -1.138971261   -0.000000000
+    7  C  1  X      0.000000000    0.000000000   -0.000000000   -0.000000000
+    8  C  1  Y      0.000000000    0.000000000   -0.000000000   -0.000000000
+    9  C  1  Z      0.000000000    0.000000000   -0.000000000    0.243813861
+   10  C  1  X      0.000000000    0.000000000   -0.000000000   -0.000000000
+   11  C  1  Y      0.000000000    0.000000000   -0.000000000   -0.000000000
+   12  C  1  Z      0.000000000    0.000000000   -0.000000000   -1.998291652
+   13  C  1  X      0.000000000    0.000000000   -0.000000000   -0.000000000
+   14  C  1  Y      0.000000000    0.000000000   -0.000000000   -0.000000000
+   15  C  1  Z      0.000000000    0.000000000   -0.000000000    2.096597483
+   16  C  1  X      0.000000000    0.000000000   -0.000000000   -0.000000000
+   17  C  1  Y      0.000000000    0.000000000   -0.000000000   -0.000000000
+   18  C  1  Z      0.000000000    0.000000000   -0.000000000   -0.040765224
+   19  C  1 XX      0.000000000    0.000000000   -0.456822978   -0.000000000
+   20  C  1 YY      0.000000000    0.000000000   -0.456822974   -0.000000000
+   21  C  1 ZZ      0.000000000    0.000000000    0.913645953   -0.000000000
+   22  C  1 XY      0.000000000    0.000000000   -0.000000000   -0.000000000
+   23  C  1 XZ      0.000000000    1.000000005   -0.000000000   -0.000000000
+   24  C  1 YZ      1.000000005    0.000000000   -0.000000000   -0.000000000
+ ...... END OF DENSITY MATRIX CALCULATION ...... 
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =        3.4 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.4 SECONDS, CPU UTILIZATION IS  99.13%
+
+     --------------------------------------------------------
+     GUGA  CI PROPERTIES...FOR THE WAVEFUNCTION OF STATE    1
+               USING THE EXPECTATION VALUE DENSITY
+     --------------------------------------------------------
+
+          -----------------
+          ENERGY COMPONENTS
+          -----------------
+
+         WAVEFUNCTION NORMALIZATION =       1.0000000000
+
+                ONE ELECTRON ENERGY =     -50.4036020066
+                TWO ELECTRON ENERGY =      12.6360869826
+           NUCLEAR REPULSION ENERGY =       0.0000000000
+                                      ------------------
+                       TOTAL ENERGY =     -37.7675150240
+
+ ELECTRON-ELECTRON POTENTIAL ENERGY =      12.6360869826
+  NUCLEUS-ELECTRON POTENTIAL ENERGY =     -88.1113726566
+   NUCLEUS-NUCLEUS POTENTIAL ENERGY =       0.0000000000
+                                      ------------------
+             TOTAL POTENTIAL ENERGY =     -75.4752856740
+               TOTAL KINETIC ENERGY =      37.7077706501
+                 VIRIAL RATIO (V/T) =       2.0015844048
+
+          ---------------------------------------
+          MULLIKEN AND LOWDIN POPULATION ANALYSES
+          ---------------------------------------
+
+               ----- POPULATIONS IN EACH AO -----
+                             MULLIKEN      LOWDIN
+              1  C  1  S      0.28083     0.56328
+              2  C  1  S      1.69141     0.81550
+              3  C  1  S      0.00800     0.35990
+              4  C  1  S     -0.02411     0.35589
+              5  C  1  S      1.00160     0.51883
+              6  C  1  S      0.97598     0.51108
+              7  C  1  X      0.07134     0.12360
+              8  C  1  Y      0.07134     0.12360
+              9  C  1  Z      0.00239     0.00826
+             10  C  1  X      0.48662     0.42959
+             11  C  1  Y      0.48662     0.42959
+             12  C  1  Z      0.03987     0.02546
+             13  C  1  X      0.43798     0.43688
+             14  C  1  Y      0.43798     0.43688
+             15  C  1  Z      0.00497     0.01327
+             16  C  1  X      0.00056     0.00644
+             17  C  1  Y      0.00056     0.00644
+             18  C  1  Z      0.00012     0.00037
+             19  C  1 XX      0.00399     0.26943
+             20  C  1 YY      0.00638     0.26943
+             21  C  1 ZZ      0.00638     0.28075
+             22  C  1 XY      0.00459     0.00638
+             23  C  1 XZ      0.00459     0.00459
+             24  C  1 YZ      0.00000     0.00459
+
+          ----- MULLIKEN ATOMIC OVERLAP POPULATIONS -----
+          (OFF-DIAGONAL ELEMENTS NEED TO BE MULTIPLIED BY 2)
+
+             1
+
+    1    6.0000000
+
+          TOTAL MULLIKEN AND LOWDIN ATOMIC POPULATIONS
+       ATOM         MULL.POP.    CHARGE          LOW.POP.     CHARGE
+    1 C             6.000000    0.000000         6.000000    0.000000
+
+          MULLIKEN SPHERICAL HARMONIC POPULATIONS
+       ATOM           S       P       D      F      G      H      I    TOTAL
+    1 C             3.93    2.04    0.03   0.00   0.00   0.00   0.00    6.00
+
+          ---------------------
+          ELECTROSTATIC MOMENTS
+          ---------------------
+
+ POINT   1           X           Y           Z (BOHR)    CHARGE
+                 0.000000    0.000000    0.000000       -0.00 (A.U.)
+         DX          DY          DZ         /D/  (DEBYE)
+     0.000000    0.000000    0.000000    0.000000
+ ...... END OF PROPERTY EVALUATION ......
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =        3.4 (    0.1 MIN)
+ TOTAL WALL CLOCK TIME=        3.4 SECONDS, CPU UTILIZATION IS  98.84%
+               440000  WORDS OF DYNAMIC MEMORY USED
+ EXECUTION OF GAMESS TERMINATED NORMALLY Thu Mar 16 09:17:31 2017
+ DDI: 263016 bytes (0.3 MB / 0 MWords) used by master data server.
+
+ ----------------------------------------
+ CPU timing information for all processes
+ ========================================
+ 0: 3.240980 + 0.175537 = 3.416517
+ ----------------------------------------
+ ddikick.x: exited gracefully.
+----- accounting info -----
+Files used on the master node qmc4 were:
+-rw-r--r-- 1 cyrus cyrus    6296 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.dat
+-rw-r----- 1 cyrus cyrus   11035 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F05
+-rw-r--r-- 1 cyrus cyrus  180016 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F08
+-rw-r--r-- 1 cyrus cyrus  180752 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F09
+-rw-r--r-- 1 cyrus cyrus 1014320 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F10
+-rw-r--r-- 1 cyrus cyrus  298152 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F11
+-rw-r--r-- 1 cyrus cyrus    3216 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F12
+-rw-r--r-- 1 cyrus cyrus  400008 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F14
+-rw-r--r-- 1 cyrus cyrus  163248 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F15
+-rw-r--r-- 1 cyrus cyrus  400232 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.F16
+-rw-r----- 1 cyrus cyrus   11035 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.inp
+-rw-r--r-- 1 cyrus cyrus  125087 Mar 16 09:17 ./ci_pbe_oh_orbs_cas4-13.out
+Thu Mar 16 09:17:34 EDT 2017
+0.144u 0.083s 0:06.68 3.2%	0+0k 0+40io 0pf+0w

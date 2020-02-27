@@ -1,17 +1,19 @@
 import sys
 import re
+import numpy as np
 
-from vec import Det, Vec, Config
+from shci4qmc.src.ham import Ham
+from shci4qmc.src.vec import Det, Vec, Config
 
 def input_from_cache(cache_filename, csf_tol):
     qmc_filename = 'qmc_tol%7.1e'%csf_tol + '.in'
     qmc_file = open(qmc_filename, 'w+')
     with open(cache_filename, 'r') as qmc_cache:
         before_csfs = copy_before_csfs(qmc_cache, qmc_file)
-        ncsf, ndet, csf_section = \
+        wf_energy, ncsf, ndet, csf_section = \
             write_csf_section(qmc_cache, qmc_file, csf_tol, reduce_csfs = False)
         after_csfs = copy_after_csfs(qmc_cache, qmc_file)
-        before_csfs = update_before_csfs(before_csfs, ncsf, ndet)
+        before_csfs = update_before_csfs(before_csfs, ncsf, ndet, wf_energy)
 #        qmc_file.write("\'ncsf=%d ndet=%d norb=%d\'\t\t\t\ttitle\n"% (ncsf, ndet, norb))
         qmc_file.write(''.join(before_csfs))
         qmc_file.write(''.join(csf_section))
@@ -26,13 +28,15 @@ def copy_before_csfs(qmc_cache, qmc_file):
             break
     return output_lines
 
-def update_before_csfs(before_csfs, ncsf, ndet):
+def update_before_csfs(before_csfs, ncsf, ndet, wf_energy):
     updated_before_csfs = []
     for n, line in enumerate(before_csfs):
         if n == 0:
             norb = int(re.search("\'ncsf=(.*) ndet=(.*) norb=(.*)\'(.*)", line).group(3))
             updated_before_csfs.append(
                 "\'ncsf=%d ndet=%d norb=%d\'\t\t\ttitle\n"% (ncsf, ndet, norb))
+        elif n == 3:
+            updated_before_csfs.append("0.5    %.4f  'Hartrees'\t\t\thb,etrial,eunit\n"% wf_energy)
         elif line.split() and line.split().pop() == 'norb':
             match = re.search("([0-9]+) ([0-9]+) ([0-9]+)([ ]+)ndet, nbasis, norb", line)
             nbasis, norb = int(match.group(2)), int(match.group(3))
@@ -66,7 +70,7 @@ def write_csf_section(qmc_cache, qmc_file, csf_tol, reduce_csfs):
     config_csfs = {}
     for line in qmc_cache:
         det_str, empty, index, config_label = line.strip().split('\t')
-        up_det_string, dn_det_string = det_str.strip().split('        ')
+        up_det_string, dn_det_string = det_str.strip().split('      ')
         up_det = [int(orb) for orb in up_det_string.split()]
         dn_det = [int(orb) for orb in dn_det_string.split()]
         det = Det(up_det, dn_det)
@@ -96,8 +100,7 @@ def write_csf_section(qmc_cache, qmc_file, csf_tol, reduce_csfs):
             break
         det_line = qmc_cache.readline()
         coef_line = qmc_cache.readline()
-    ncsf, ndet, csf_section = write_csfs(qmc_file, config_csfs, config_labels, csf_tol, reduce_csfs)
-    return ncsf, ndet, csf_section
+    return write_csfs(qmc_file, config_csfs, config_labels, csf_tol, reduce_csfs)
 
 def det_row_str(det, n, config_label):
     return (det.qmc_str() + '\t\t' + str(n+1) + '\t' + str(config_label+1))
@@ -107,7 +110,9 @@ def write_csfs(qmc_file, config_csfs, config_labels, csf_tol, reduce_csfs):
     output_lines = []
     for config, csfs in config_csfs.items():
         config_sum = add_csfs([coef for coef, csf in csfs], [csf for coef, csf in csfs])
-        if (config_sum.norm() < csf_tol): continue
+        n_dets = len(config_sum.dets)
+        #n_dets = 1
+        if (config_sum.norm()/np.sqrt(n_dets) < csf_tol): continue
         for coef, csf in csfs:
 #            for det in csf.dets:
 #                if det not in det_indices:
@@ -138,6 +143,7 @@ def write_csfs(qmc_file, config_csfs, config_labels, csf_tol, reduce_csfs):
     output_lines.append(str(len(sorted_csfs)) + ' ncsf\n')
     output_lines.append(csf_coeffs_str + ' (csf_coef(icsf), icsf=1, ncsf)\n')
     output_lines.append(ndets_str + ' (ndet_in_csf(icsf), icsf=1, ncsf)\n')
+    wf = Vec.zero()
     for coef, csf in sorted_csfs:
         index_str = (' '.join([str(det_indices[det] + 1) for det, coef in csf.dets.items()]) +
             ' (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
@@ -145,7 +151,9 @@ def write_csfs(qmc_file, config_csfs, config_labels, csf_tol, reduce_csfs):
             ' (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))\n')
         output_lines.append(index_str)
         output_lines.append(coeff_str)
-    return len(sorted_csfs), len(sorted_dets), output_lines
+        wf += coef*csf
+    wf_energy = Ham("FCIDUMP_real_orbs").expectation(wf)
+    return wf_energy, len(sorted_csfs), len(sorted_dets), output_lines
 
 def copy_after_csfs(qmc_cache, qmc_file):
     output_lines = []

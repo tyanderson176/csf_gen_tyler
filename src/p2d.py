@@ -74,6 +74,7 @@ class atomic_orb():
         self.bvec = bvec
         self.mo_coeffs = mo_coeffs
         self.d_key = {0:0, 2:1, -2:2, 1:3, -1:4}
+        self.p_key = {1:0, -1:1, 0:2} 
 
     def slater_exp(self):
         return self.bvec.slater_exp
@@ -89,6 +90,8 @@ class atomic_orb():
         elif self.l != other.l:
             return self.l < other.l
         elif self.m != other.m:
+            if (self.l == 1):
+                return self.p_key[self.m] < self.p_key[other.m]
             if (self.l == 2):
                 return self.d_key[self.m] < self.d_key[other.m]
             return self.m < other.m
@@ -99,6 +102,7 @@ class atomic_orb():
 
 def mol2aos(mol, mf, basis = None):
     assert(not mol.cart)
+    p_lz = [1, -1, 0] #m for orbitals in p shell (X, Y, Z = 1, -1, 0)
     bv_ids, aos = {}, []
     orb_id = 0
     count = numpy.zeros((mol.natm, 9), dtype=int)
@@ -108,7 +112,7 @@ def mol2aos(mol, mf, basis = None):
         nc = mol.bas_nctr(ib)
         atom = mol.atom_symbol(ia)
         bv_coeffs, bv_exps = mol.bas_ctr_coeff(ib), mol.bas_exp(ib)
-        sto = basis.find(atom, l, bv_coeffs, bv_exps) if basis else None
+        sto = basis.find(atom.upper(), l, bv_coeffs, bv_exps) if basis else None
         if ia not in bv_ids:
             bv_ids[ia] = 0
         nelec_ecp = mol.atom_nelec_core(ia)
@@ -136,7 +140,8 @@ def mol2aos(mol, mf, basis = None):
             bv_ids[ia] += 1
             for m in range(-l, l+1):
                 mo_coeffs = mf.mo_coeff[orb_id]
-                aos.append(atomic_orb(mol, n, l, m, ia, bvec, mo_coeffs))
+                lz = m if l != 1 else p_lz[m+1]
+                aos.append(atomic_orb(mol, n, l, lz, ia, bvec, mo_coeffs))
                 orb_id += 1
     assert(len(aos) == len(mol.ao_labels()))
     return sorted(aos)

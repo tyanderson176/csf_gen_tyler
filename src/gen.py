@@ -1,16 +1,22 @@
 import sys
 import os
 import subprocess
-sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
+#sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
+
 from pyscf import symm
 import numpy as np
-import vec
-import symm as sy
-from vec import Det, Vec, Config
+import shci4qmc.src.vec as vec
+import shci4qmc.src.symm as sy
+from shci4qmc.src.vec import Det, Vec, Config
+from shci4qmc.src.proj_l2 import L2Projector
 
 class GenMethods():
     def __init__(self):
-        pass
+        if self.config['project_l2']:
+            assert(self.mol.is_atomic_system and self.symmetry == 'DOOH')
+            #TODO: Add some tolerance options here? prune tol + mol matrix tol 
+            self.L2projector = L2Projector(self.mol, self.mf)
+            self.target_l2 = self.config['target_l2']
 
     def parse_csf_file(self, num_open_shells_max, twice_s, csf_file_contents):
         lines = csf_file_contents.split('\n')
@@ -115,18 +121,27 @@ class GenMethods():
             configs = self.symm_configs(configs)
         for n, config in enumerate(configs):
             config_csfs = list(self.config2csfs(csf_cache, config))
+            for csf in config_csfs:
+                csf.config_label = n
             csfs += config_csfs
-            config_labels += [n for csf in config_csfs]
-        assert(len(csfs) == len(config_labels))
-        return csfs, config_labels
+        print('Init csfs:')
+        for csf in csfs:
+            print('--------')
+            for det, coef in csf.dets.items():
+                print(det, "%12.8f"% coef)
+        csfs = Vec.gram_schmidt(csfs, len(csfs), tol=1e-4)
+        print('After GS csfs:')
+        for csf in csfs:
+            print('--------')
+            for det, coef in csf.dets.items():
+                print(det, "%12.8f"% coef)
+        return csfs
 
     def config2csfs(self, csf_cache, config):
         nopen = len([orb for orb in config.occs if config.occs[orb] == 1])
         csfs_coefs, index2occs = csf_cache[nopen]
         dets = [self.make_det(occs, config) for occs in index2occs]
         csfs = []
-#        print('--------')
-#        print('CONFIG: ', config)
         for coefs in csfs_coefs:
             csf = Vec.zero()
             for n, coef in enumerate(coefs):
@@ -134,12 +149,24 @@ class GenMethods():
                 if self.symmetry in ('DOOH', 'COOV'):
                     det = self.convert_det(det)
                 csf += coef*det
-            if csf.norm() != 0: # and self.orthogonal_to_prev(csf/csf.norm(), csfs): 
-                csfs.append(csf/csf.norm())
-        csfs = Vec.gram_schmidt(csfs, len(csfs), tol=1e-10)
-        self.check_orthogonal(csfs)
-#        for csf in csfs:
-#            print(csf, '\n>>>')
+            if self.config['project_l2']:
+                start = csf
+                csf = self.L2projector.project(self.target_l2, csf)
+                err = self.L2projector.eigen_error(self.target_l2, csf)
+                #if l2_error is too large, skip this csf
+                if err > 1e-1 or csf.norm() < 1e-2:
+                    if csf.norm() > 1e-2:
+                        print('WARNING! Rejecting bad projection.')
+                        print('l2_error: ', err, '; l2_proj norm: ', csf.norm())
+                        for det, coef in csf.dets.items():
+                            print(det, ": ", coef)
+                        print("\nStarting det:")
+                        for det, coef in start.dets.items():
+                            print(det, ": ", coef)
+                        print()
+                    continue
+            if csf.norm() != 0:
+                csfs.append(csf)
         return np.array(csfs)
 
     def check_orthogonal(self, csfs):
@@ -149,16 +176,6 @@ class GenMethods():
                     continue
                 if (csf1.dot(csf2) > 1e-2):
                     print('Not orthogonal: ', csf1.dot(csf2)) 
-
-    def orthogonal_to_prev(self, csf, csfs):
-        #csf_cache only printed to 6 decimal places
-        #errors l.t. 1e-6 considered unimportant
-        tol = 1e-6 
-        for prev_csf in csfs:
-            if abs(csf.dot(prev_csf)) > tol:
-                print('CSF Rejected: abs(dot(csf1, csf2)) = %e' % abs(csf.dot(prev_csf)))
-                return False
-        return True
 
     def make_det(self, occ_str, config):
         up_occs, dn_occs, orbs, is_open = [], [], [], {}
@@ -196,7 +213,4 @@ class GenMethods():
 #    assert(alt_sum > -1)
 #    return (1 if alt_sum%2 == 0 else -1)
 
-if __name__ == "__main__":
-    meth = GenMethods()
-    
-    meth.make_csf_file(4, 2)
+#if __name__ == "__main__":

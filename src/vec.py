@@ -13,18 +13,19 @@ class Vec:
     def __init__(self, det_dict={}):
         self.dets = {key: det_dict[key] for key in det_dict 
                 if abs(det_dict[key]) > tol}
+        self.config_label = None
 
     def norm(self):
         if (not self.dets): 
             return 0.
         coeffs = numpy.array([self.dets[det] for det in self.dets])
-        return numpy.sqrt(numpy.dot(coeffs, coeffs))
+        return numpy.sqrt(numpy.vdot(coeffs, coeffs))
 
     def dot(self, other):
         scalar_product = 0
         for det, coef in self.dets.items():
             if det in other.dets:
-                scalar_product += coef*other.dets[det]
+                scalar_product += numpy.conj(coef)*other.dets[det]
         return scalar_product
 
     @staticmethod
@@ -44,6 +45,7 @@ class Vec:
             if new_vec.norm() <= tol:
                 continue
             new_vec /= new_vec.norm()
+            new_vec.config_label = vec.config_label
             orthonormal_basis.append(new_vec)
         return orthonormal_basis
 
@@ -58,26 +60,25 @@ class Vec:
         return '' if coeff == 1 else "%14.4e"%coeff
 
     def __iadd__(self, other):
-        for det in other.dets:
-            if det in self.dets:
-                self.dets[det] += other.dets[det]
-                if (abs(self.dets[det]) < tol): 
-                    del self.dets[det]
-            else:
-                self.dets[det] = other.dets[det]
-        return self
+        if isinstance(other, Vec):
+            for det in other.dets:
+                if det in self.dets:
+                    self.dets[det] += other.dets[det]
+                    if (abs(self.dets[det]) < tol): 
+                        del self.dets[det]
+                else:
+                    self.dets[det] = other.dets[det]
+            return self
+        elif isinstance(other, Det):
+            self += 1*other
+            return self
+        else:
+            raise TypeError("Cannot add type " + str(type(other)) + " to Vec")
 
-#    def __add__(self, other):
-#        sum_dets = copy.deepcopy(self.dets)
-#        for det in other.dets:
-#            if det in sum_dets:
-#                sum_dets[det] += other.dets[det]
-#            else:
-#                sum_dets[det] = other.dets[det]
-#        return Vec(sum_dets)
-
-#    def __sub__(self, other):
-#        return self + (-1)*other
+    def __imul__(self, scalar):
+        for det, coef in self.dets.items():
+            self.dets[det] *= scalar
+        return self 
 
     def __rmul__(self, scalar):
         mul_dict = {}
@@ -95,16 +96,10 @@ class Det:
     def __init__(self, up_occ, dn_occ):
         self.up_occ = sorted(up_occ)
         self.dn_occ = sorted(dn_occ)
-        self.my_hash = self._get_hash()
+        self.my_hash = None #self._get_hash()
 
     def get_Sz(self):
         return (len(self.up_occ) - len(self.dn_occ))/2
-
-#    @property
-#    def parity(self):
-#        if not self._parity:
-#            self._parity = self._compute_parity()
-#        return self._parity
 
     def qmc_str(self):
         qmc_str = ['%4d' % orb for orb in self.up_occ]
@@ -113,52 +108,21 @@ class Det:
         return "".join(qmc_str)
 
     def __mul__(self, other):
-        if isinstance(other, (int, float, numpy.int64, numpy.float64)):
+        if isinstance(other, (int, float, numpy.int64, numpy.float64, complex)):
             return Vec({self: other})
         raise Exception("Unknown type \'" + str(type(other)) +
                 "\' in Det.__mul__")
 
     __rmul__ = __mul__
 
-#    def _parity_rel(self, occ1, occ2):
-#        #Computes relative parity of occ1 and occ2
-#        occ1, occ2 = copy.deepcopy(occ1), copy.deepcopy(occ2)
-#        num_perms = 0
-#        for n, orb in enumerate(occ1):
-#            index = occ2.index(orb)
-#            if index == -1:
-#                raise Exception(
-#                        "Occupation strings not permutations in _parity")
-#            if index != n:
-#                occ2[index], occ2[n] = occ2[n], occ2[index]
-#                num_perms += 1
-#        return (-2)*num_perms%2 + 1 
-#
-#    def _compute_parity(self):
-#        #computes parity relative to ordering s.t. up/down spins for the same
-#        #spacial orbital are adjacent
-#        up_occ, dn_occ = self.up_occ, self.dn_occ
-#        if len(up_occ) == 0 or len(dn_occ) == 0:
-#            return 1
-#        up_ptr, dn_ptr = len(up_occ)-1, len(dn_occ)-1
-#        alt_sum, count = 0, 0
-#        while -1 < dn_ptr:
-#            dn = dn_occ[dn_ptr]
-#            if up_ptr != -1 and up_occ[up_ptr] > dn:
-#                count += 1
-#                up_ptr += -1
-#            else:
-#                alt_sum = count - alt_sum 
-#                dn_ptr += -1
-#        assert(alt_sum > -1)
-#        return (1 if alt_sum%2 == 0 else -1)
-
     def __hash__(self):
+        if not self.my_hash:
+            self.my_hash = self._get_hash()
         return self.my_hash
 
     def _get_hash(self):
-        return hash(self.__repr__())
-        # return hash((tuple(self.up_occs), tuple(self.dn_occs)))
+        #return hash(self.__repr__())
+        return hash((tuple(self.up_occ), tuple(self.dn_occ)))
 
     def __eq__(self, other):
         return (self.up_occ == other.up_occ 

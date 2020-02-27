@@ -3,12 +3,13 @@ import numpy
 import subprocess
 from decimal import Decimal
 
-import p2d
-import gamess
-import vec
-from symm import SymMethods
-from gen import GenMethods
-from csf import CsfMethods
+import shci4qmc.src.p2d as p2d
+import shci4qmc.src.gamess as gamess
+import shci4qmc.src.vec as vec
+import shci4qmc.src.sym_rhf as sym_rhf
+from shci4qmc.src.symm import SymMethods
+from shci4qmc.src.gen import GenMethods
+from shci4qmc.src.csf import CsfMethods
 
 from pyscf.tools import fcidump
 from pyscf import scf, ao2mo, gto, symm
@@ -30,11 +31,14 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         self.basis = gamess.get_basis(basis_path) if basis_path else None
         if self.basis:
             self.mol.basis = self.basis.get_pyscf_basis()
-            self.mol.build()
+        self.mol.build()
+        self.mol.is_atomic_system = self.mol.natm == 1
+        print("Atomic System: ", self.mol.is_atomic_system)
 
         #Calculate molecular orbitals
         print("Starting RHF...")
-        self.mf = scf.RHF(self.mol).run()
+        self.mf = sym_rhf.RHF(self.mol).run()
+        #self.mf = scf.RHF(self.mol).run()
         print("Finished RHF.") 
 
         #Get atomic orbitals
@@ -47,6 +51,9 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         self.optimize_orbs = optimize_orbs
         self.rotation_matrix = []
         print('HF ENERGY: ' + str(self.hf_energy))
+        print('MO ENERGY: ')
+        for n, energy in enumerate(self.mf.mo_energy):
+            print(n, "%10.5f"%energy)
 
         #Initialize symmetry vars
         SymMethods.__init__(self)
@@ -55,12 +62,6 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         #Initialize csf projection/formatting vars
         CsfMethods.__init__(self)
         
-#        #SHCI variables & output data
-#        self.wf_csf_coeffs = None
-#        self.csf_data = None
-#        self.config_data = None
-#        self.det_data = None
-
     def make_cache(self, filename):
         #Updates wf_csfs_coeffs, csf_data, and det_data
         self.get_shci_output()
@@ -269,13 +270,14 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         orbsym = getattr(mo_coeff, 'orbsym', None) 
         if self.symmetry in ('DOOH', 'COOV'):
             self.writeComplexOrbIntegrals(
-                h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, 
-                self.partner_orbs)
+                h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, self.partner_orbs)
+            fcidump.from_integrals(
+                "FCIDUMP_real_orbs", h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym)
         else:
             orbsym = [sym+1 for sym in orbsym]
             fcidump.from_integrals(
-                filename, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
-                tol=1e-15, float_format=' %.16g')
+                filename, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym, tol=1e-15, 
+                float_format=' %.16g')
 
     def test_fcidump(self, filename):
         mo_coeff = self.mf.mo_coeff
@@ -315,6 +317,7 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         self.write_config_var(config, 'n_dn', n_dn)
         self.write_config_var(config, 'var_only', 'true')
         self.write_config_var(config, 'reorder_orbs', 'false')
+        self.write_config_var(config, 'target_error', 1e-12)
         self.write_config_var(config, 'eps_vars', eps_vars)
         self.write_config_var(config, 'eps_vars_schedule', eps_vars_sched)
 

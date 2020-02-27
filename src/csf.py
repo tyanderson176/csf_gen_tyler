@@ -4,13 +4,14 @@ import math
 from scipy.sparse import csr_matrix
 import scipy.sparse as sparse
 
-import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
+#import sys, os
+#sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
 
-import vec
-import gen
-import symm as sy
-import load_wf
+import shci4qmc.src.vec as vec
+import shci4qmc.src.gen as gen
+import shci4qmc.src.symm as sy
+import shci4qmc.lib.load_wf as load_wf
+from shci4qmc.src.ham import Ham
 
 class CsfMethods():
     def __init__(self):
@@ -34,24 +35,10 @@ class CsfMethods():
         trunc_wf = [(coef, vec.Det([orb+1 for orb in up], [orb+1 for orb in dn]))
                     for coef, [up, dn] in zip(wfn['coefs'], wfn['dets']) if abs(coef) > wf_tol]
         dets, wf_coeffs = [det for coef, det in trunc_wf], [coef for coef, det in trunc_wf]
-#        self.print_related_configs(dets, wf_coeffs)
-#        wf_coeffs = self.normalize(wf_coeffs)
-
-#        lz_dict = {}
-#        for det in dets:
-#            lz = self.tot_lz(det)
-#            if lz not in lz_dict:
-#                lz_dict[lz] = []
-#            lz_dict[lz].append(det)
-#        for lz, dets in lz_dict.items():
-#            print(lz)
-#            for det in dets:
-#                print(det)
-         
         if self.symmetry in ('DOOH', 'COOV'):
             self.real_or_imag_part(dets[0])
-
         csfs, config_labels = self.get_csfs(dets)
+
 #       Convert to real wf if molecule has linear symm
         if self.symmetry in ('DOOH', 'COOV'):
             dets, wf_coeffs = self.convert_wf(dets, wf_coeffs)
@@ -59,31 +46,9 @@ class CsfMethods():
         wf_det_coeffs = self.reindex_det_coeffs(det_indices, wf_coeffs, dets)
         wf_csf_coeffs = self.matrix_mul(ovlp, wf_det_coeffs)
 
-#        coef_array = [coef for [coef] in wf_det_coeffs.toarray()]
-#        assert(len(det_indices) == len(coef_array))
-#        print("Det coefs, original:\n")
-#        sorted_dets = sorted([(det, coef_array[n]) for det, n in det_indices.indices.items()],
-#                             key = lambda det_coef : -abs(det_coef[1]))
-#        for det, coef in sorted_dets:
-#            if (abs(coef) > 1e-10):
-#                print(det, ": ", coef) 
-#        shci_wf = vec.Vec.zero()
-#        for csf, coef in zip(csfs, wf_csf_coeffs):
-#            shci_wf += coef*csf
-#        sorted_dets_wf = sorted([(det, coef) for det, coef in shci_wf.dets.items()],
-#                                key = lambda det_coef : -abs(det_coef[1]))
-#        print("Det coefs, after projection:")
-#        for det, coef in sorted_dets_wf:
-#            if (abs(coef) > 1e-10):
-#                print(det, ": ", coef) 
-#        print('CSFS, wf_csf_coeffs:')
-#        for csf, coef, row in zip(csfs, wf_csf_coeffs, ovlp.toarray()):
-#            if (abs(coef) > 1e-10):
-#                print('--------\n', csf, '\n', coef)
-#                print('row: ', ' '.join([str(elem) for elem in row]))
-#                print('\n')
-
         #Sort/Rotate CSFS
+        csfs, config_labels, wf_csf_coeffs = self.truncate_csfs(
+            csfs, config_labels, wf_csf_coeffs)
         print("num csfs before rotate: ", len(csfs))
         csfs, config_labels, wf_csf_coeffs = self.rotate_csfs(
             csfs, config_labels, wf_csf_coeffs, reduce_csfs = self.reduce_csfs)
@@ -93,33 +58,30 @@ class CsfMethods():
 
         det_indices = self.det_indices_from_csfs(csfs, IndexList([]))
 
-#        shci_wf = vec.Vec.zero()
-#        for coef, det in zip(wf_coeffs, dets):
-#            shci_wf += coef*det
-#        csfs = [shci_wf]
-#        wf_csf_coeffs = [1.]
-#        config_labels = [0]
-
-#        shci_wf = vec.Vec.zero()
-#        for csf, coef in zip(csfs, wf_csf_coeffs):
-#            shci_wf += coef*csf
-#        sorted_dets_wf = sorted([(det, coef) for det, coef in shci_wf.dets.items()],
-#                                key = lambda det_coef : -abs(det_coef[1]))
-#        print("Det coefs, after rotation:")
-#        for det, coef in sorted_dets_wf:
-#            if (abs(coef) > 1e-10):
-#                print(det, ": ", coef) 
-#    
-
         #Find Error
         perr = self.get_proj_error(ovlp, wf_det_coeffs)
         err = self.get_error(dets, wf_coeffs, csfs, wf_csf_coeffs)
-        print('perr: %.10f, err: %.10f' % (perr, err))
-#        print('ON Error: ' + str(self.check_orthonormal(csfs)))
-#        if self.proj_matrix_rep == 'sparse':
-#            wf_csf_coeffs = wf_csf_coeffs.toarray()
+        print('projection err: %.10f' % perr)
+        print('total err: %.10f'% err, ' (includes proj. err + csf_tol err + rotation err)')
+        if self.config['project_l2']:
+            self.print_important_dets(dets, wf_coeffs, csfs, wf_csf_coeffs)
+            err_shci, err_proj = self.get_eigen_error(dets, wf_coeffs, csfs, wf_csf_coeffs)
+            print('SHCI eigen err: %.10f'% err_shci)
+            print('Proj eigen err: %.10f'% err_proj)
+            l2_shci, l2_proj = self.l2_expectation(dets, wf_coeffs, csfs, wf_csf_coeffs)
+            print('SHCI l2: %.10f'% l2_shci)
+            print('Proj l2: %.10f'% l2_proj)
         csfs_data = [
             [(det_indices.index(d), csf.dets[d]) for d in csf.dets] for csf in csfs]
+
+        filename = "FCIDUMP" if self.symmetry not in ('DOOH', 'COOV') else "FCIDUMP_real_orbs"
+        self.ham = Ham(filename) 
+        init_wf = self.sum_states(dets, wf_coeffs)
+        init_e = self.ham.expectation(init_wf)
+        print("Init_energy: %12.8f"% init_e)
+        csfs_wf = self.sum_states(csfs, wf_csf_coeffs)
+        csfs_e = self.ham.expectation(csfs_wf)
+        print("Csfs_energy: %12.8f"% csfs_e)
 
         self.det_config_labels = self.get_det_energy_labels(det_indices)
         self.wf_csf_coeffs = wf_csf_coeffs
@@ -130,8 +92,23 @@ class CsfMethods():
         return
 #        return wf_csf_coeffs, csfs_info, config_labels, det_indices, err
 
+    def sum_states(self, states, coefs):
+        res = vec.Vec.zero()
+        for state, coef in zip(states, coefs):
+            res += coef*state
+        return res
+
+#    def det_to_list(self, det):
+#        up_orbs = [orb - 1 for orb in det.up_occ]
+#        dn_orbs = [orb - 1 + self.ham.nbasis for orb in det.dn_occ] 
+#        return up_orbs + dn_orbs
+#
+#    def h_expectation(self, wf):
+#        dets = [self.det_to_list(det) for det in wf.dets.keys()]
+#        coefs = [coef for coef in wf.dets.values()]
+#        return self.ham.energy_of(dets, coefs)
+
     def sorted_csfs(self, csfs, config_labels, wf_csf_coeffs):
-        csf_tol = self.config['csf_tol']
         sorted_csf_wf = sorted(
             [(coef, label, csf) for coef, label, csf in zip(wf_csf_coeffs, config_labels, csfs)],
              key = lambda triple: -abs(triple[0]))
@@ -147,8 +124,10 @@ class CsfMethods():
         orig_csfs = [csf for coef, csf in original_csfs]
         det_indices = self.det_indices_from_csfs(orig_csfs, IndexList([]))
         if len(not_orthog) != 0:
+            print('\nDetected non-orthogonal csfs after rotation\n.')
             print("ORIGINAL CSF MATRIX:")
             matrix = numpy.array([self.get_coeffs(csf, det_indices) for coef, csf in original_csfs])
+            print('Coefs: ', ''.join(["%12.8e"%c for c, csf in original_csfs]))
             for row in matrix:
                 for elem in row:
                     print("%8.4e\t" % elem, end = '')
@@ -159,22 +138,6 @@ class CsfMethods():
                 for elem in row:
                     print("%8.4e\t" % elem, end = '')
                 print()
-            print("NOT ORTHOG:")
-        for n1, csf1, n2, csf2 in not_orthog:
-            print('----------  ' + str(csf1.dot(csf2)))
-            print(n1, ' and ', n2)
-#            print(csf1)
-            print('........AND........')
-#            print(csf2)
-            print('DETS: ')
-            dets = set([det for det in csf1.dets.keys()] + [det for det in csf2.dets.keys()])
-            for det in dets:
-                coef1 = csf1.dets[det] if det in csf1.dets else 0.
-                coef2 = csf2.dets[det] if det in csf2.dets else 0.
-                print(str(det) + ': ' + str(coef1) + ", " + str(coef2))
-#            print('DOT MATRIX:')
-#            print("[ %10.4f , %10.4f ]" % (csf1.dot(csf1), csf1.dot(csf2)))
-#            print("[ %10.4f , %10.4f ]" % (csf2.dot(csf1), csf2.dot(csf2)))
         return la.norm(overlap_matrix - numpy.eye(len(csfs)))
 
     def reindex_labels(self, labels):
@@ -206,8 +169,16 @@ class CsfMethods():
         print("Loading CSF data...\n");
         csf_data = self.load_csf_file(max_open, twice_s)
         print("Converting configs...\n");
-        csfs, config_labels = self.configs2csfs(csf_data, configs)
+        csfs = self.configs2csfs(csf_data, configs)
+        config_labels = [csf.config_label for csf in csfs]
+        #self.save_l2_matrix(csfs)
         return csfs, config_labels
+
+    def save_l2_matrix(self, csfs):
+        l2matrix = self.L2projector.L2_matrix(csfs)
+        with open('l2_matrix.txt', 'w') as mat_file:
+            for row in l2matrix:
+                mat_file.write('\t'.join([str(c) for c in row]) + '\n')
 
     def get_2sz(self, dets):
         _2sz_vals = set(round(2*det.get_Sz()) for det in dets)
@@ -228,14 +199,39 @@ class CsfMethods():
         if self.proj_matrix_rep == 'dense':
             err_op = numpy.identity(len(wf_det_coeffs)) - numpy.dot(ovlp.T, ovlp)
             err_vec = numpy.dot(err_op, wf_det_coeffs)
-            return numpy.sqrt(numpy.dot(err_vec, err_vec)/numpy.dot(wf_det_coeffs, wf_det_coeffs))
+            return numpy.dot(err_vec, err_vec)/numpy.dot(wf_det_coeffs, wf_det_coeffs)
         elif self.proj_matrix_rep == 'sparse':
             err_op = sparse.identity(wf_det_coeffs.shape[0]) - ovlp.T*ovlp 
             err_vec = err_op*wf_det_coeffs
             err = err_vec.T*err_vec/(wf_det_coeffs.T*wf_det_coeffs)
-            return numpy.sqrt(err[0,0])
+            return err[0,0]
         else:
             raise Exception('Unknown matrix rep \''+ self.proj_matrix_rep + '\' in get_proj_error')
+
+    def print_important_dets(self, dets, det_coeffs, csfs, csf_coeffs):
+        wf_shci, wf_proj = vec.Vec.zero(), vec.Vec.zero()
+        for det, coef in zip(dets, det_coeffs):
+            wf_shci += coef*det
+        for csf, coef in zip(csfs, csf_coeffs):
+            wf_proj += coef*csf
+        raw_proj = self.L2projector.project(self.target_l2, wf_shci)
+        larger_proj_coef = lambda det, coef: -abs(coef)
+        all_dets = set(list(wf_proj.dets.keys()) + list(wf_shci.dets.keys()))
+        important_dets = sorted(all_dets, key = lambda det: -abs(wf_proj.dets.get(det, 0.)))
+        print('\nPrinting most important dets:')
+        print("Det:\t\t\tProjected Coef\tSHCI Coef\tDiff1\t Raw SHCI Proj Coef\t Diff2")
+        for det in important_dets:
+            coef = wf_proj.dets.get(det, 0.)
+            shci_coef = wf_shci.dets.get(det, 0.)
+            proj_coef = raw_proj.dets.get(det, 0.)
+            diff1 = abs(coef - shci_coef)
+            diff2 = abs(proj_coef - shci_coef)
+            print(det, ": %12.8f\t %12.8f\t %12.8f\t %12.8f\t %12.8f"% 
+                  (coef, shci_coef, diff1, proj_coef, diff2))
+        wf_proj += -1*wf_shci
+        print("WF Norm diff: %12.8f"% wf_proj.norm())
+        print()
+        return
 
     def get_error(self, dets, det_coeffs, csfs, csf_coeffs):
         wf_diff = vec.Vec.zero()
@@ -244,7 +240,42 @@ class CsfMethods():
         wf_norm = wf_diff.norm()
         for csf, coef in zip(csfs, csf_coeffs):
             wf_diff += -1*coef*csf
-        return wf_diff.norm()/wf_norm
+        return (wf_diff.norm()/wf_norm)**2
+
+    def get_eigen_error(self, dets, det_coeffs, csfs, csf_coeffs):
+        wf_shci, wf_proj = vec.Vec.zero(), vec.Vec.zero()
+        for csf, coef in zip(csfs, csf_coeffs):
+            #csf_eig_err = self.L2projector.eigen_error(self.target_l2, csf)
+            #print('CSF eigen err: %10.8f'% csf_eig_err)
+            wf_proj += coef*csf
+        for det, coef in zip(dets, det_coeffs):
+            wf_shci += coef*det
+        #proj_wf = self.L2projector.project(self.target_l2, wf_shci)
+        #l2_error = self.L2projector.eigen_error(self.target_l2, proj_wf)
+        #diff = vec.Vec.zero()
+        #diff += proj_wf
+        #diff += -1*wf_shci
+        #print("proj.norm()/shci.norm(): %.8f"% (proj_wf.norm().real/wf_shci.norm()))
+        #print("Diff.norm(): %.8f"% diff.norm())
+        #print("\nProj * shci_wf: (err = %.8f)"% l2_error)
+        #coef_mag = lambda det, coef: -abs(coef)
+        #for det, coef in sorted(proj_wf.dets.items(), key = lambda p : coef_mag(*p)):
+        #    print(
+        #        det, "%12.8f"%coef.real, "%12.8f"%wf_shci.dets.get(det, 0.), 
+        #        "%12.8f"%wf_proj.dets.get(det, 0.))
+        shci_eigen_error = self.L2projector.eigen_error(self.target_l2, wf_shci)
+        proj_eigen_error = self.L2projector.eigen_error(self.target_l2, wf_proj)
+        return shci_eigen_error, proj_eigen_error
+    
+    def l2_expectation(self, dets, det_coeffs, csfs, csf_coeffs):
+        wf_shci, wf_proj = vec.Vec.zero(), vec.Vec.zero()
+        for csf, coef in zip(csfs, csf_coeffs):
+            wf_proj += coef*csf
+        for det, coef in zip(dets, det_coeffs):
+            wf_shci += coef*det
+        shci_l2 = self.L2projector.L2_expectation(wf_shci)
+        proj_l2 = self.L2projector.L2_expectation(wf_proj)
+        return shci_l2, proj_l2
 
     def det_indices_from_csfs(self, csfs, det_indices):
         for csf in csfs:
@@ -286,8 +317,22 @@ class CsfMethods():
             index = det_indices.index(det)
             coeffs[index] = coeff
         return coeffs/csf.norm()
+    
+    def truncate_csfs(self, csfs, config_labels, wf_csf_coeffs):
+        csf_tol = self.config['csf_tol']
+        idx = set(n for n, coef in enumerate(wf_csf_coeffs) if abs(coef) > csf_tol)
+        trunc_csfs = [csf for n, csf in enumerate(csfs) if n in idx]
+        trunc_labels = [label for n, label in enumerate(config_labels) if n in idx]
+        trunc_coeffs = [coef for n, coef in enumerate(wf_csf_coeffs) if n in idx]
+        print('Trunc csfs:')
+        for csf, coef in zip(trunc_csfs, trunc_coeffs):
+            print('--------')
+            print('Coef: ', coef)
+            for det, coef in csf.dets.items():
+                print(det, "%12.8f"% coef)
+        return trunc_csfs, trunc_labels, trunc_coeffs
 
-    def rotate_csfs(self, csfs, config_labels, wf_csf_coeffs, reduce_csfs = True, tol=1e-16):
+    def rotate_csfs(self, csfs, config_labels, wf_csf_coeffs, reduce_csfs = True):
         '''
         config2csfs = {}
         for csf, coef in zip(csfs, wf_csf_coeffs):
@@ -317,12 +362,11 @@ class CsfMethods():
             dim = 1 if reduce_csfs else len(config_csfs)
             rotated_csfs = vec.Vec.gram_schmidt(csf_subspace, dim)
             rotated_coefs = [rotated_coef if n == 0 else 0. for n, csf in enumerate(rotated_csfs)]
-            if abs(rotated_coef) > csf_tol:
-                if len(config_csfs) != len(rotated_csfs):
-                    print('Warning: len(in_csfs) = %d != len(rot_csfs) = %d'% (len(config_csfs), len(rotated_csfs)))
-                csfs += rotated_csfs
-                wf_csf_coeffs += rotated_coefs
-                config_labels += [label for csf in rotated_csfs]
+            if len(config_csfs) != len(rotated_csfs):
+                print('Warning: len(in_csfs) = %d != len(rot_csfs) = %d'% (len(config_csfs), len(rotated_csfs)))
+            csfs += rotated_csfs
+            wf_csf_coeffs += rotated_coefs
+            config_labels += [label for csf in rotated_csfs]
             orth_err += self.check_orthonormal(rotated_csfs, config_csfs)
         print('ORTHONORMAL ERROR: ' + str(orth_err)) 
         return csfs, config_labels, wf_csf_coeffs

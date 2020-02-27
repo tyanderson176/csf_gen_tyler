@@ -1,0 +1,1651 @@
+Reading guga                                                                             mode input
+Cutoffs in gamess2qmc and dets2csf are  0.0010  0.0100
+This program is far from foolproof since it looks for near equalities
+You can play with eps in a range something like 1.d-7 to 1.d-5
+ndet,nelec,nup,norb,nbasis,eps=  51   6   4  23  23 1.00D-08
+cdet= 0.971444-0.138095-0.101452 0.101452 0.045735-0.045735-0.038532 0.034866 0.032274-0.032247-0.030130 0.030130 0.029792-0.025393 0.022525-0.022525 0.021966 0.021966-0.021280 0.021280
+cdet=-0.016349-0.016349-0.014503 0.014503-0.010618-0.010292-0.007525-0.006867 0.006867 0.005424 0.003052 0.003052 0.002965-0.002965 0.002949-0.002598-0.002598-0.001930 0.001930-0.001765
+cdet= 0.001765 0.001383-0.001383-0.001377-0.001377 0.001241-0.001241 0.001200-0.001200 0.001061-0.001061
+eigs(i)=-17.942884 -3.838431 -3.220237 -3.220237 -3.201804 -2.676684 -2.676684 -2.353168 -2.759039 -1.996982 -1.998939 -1.998939 -1.998939 -1.998939 -1.207410 -1.307083 -1.307083 -0.435122 15.507011 21.400299
+eigs(i)= 21.436050 21.436050145.987558
+   1   2   3   4   1   2
+   1   3   4   5   1   5
+   1   2   3   7   1   2
+   1   2   4   6   1   2
+   1   2   3   7   1   8
+   1   2   4   6   1   8
+   1   2   6   7   1   2
+   1   3   4   8   1   2
+   1   3   4   9   1   5
+   1   3   4   8   1   8
+   1   2   3   8   1   4
+   1   2   4   8   1   3
+   1   3   4   5   1   9
+   1   2   3   4   1   8
+   1   2   3   8   1   7
+   1   2   4   8   1   6
+   1   3   4   7   1   4
+   1   3   4   6   1   3
+   1   4   6   8   1   2
+   1   3   7   8   1   2
+   1   3   4   6   1   6
+   1   3   4   7   1   7
+   1   3   5   7   1   5
+   1   4   5   6   1   5
+   1   3   4   9   1   9
+   1   2   6   7   1   8
+   1   6   7   8   1   2
+   1   4   6   8   1   8
+   1   3   7   8   1   8
+   1   5   6   7   1   5
+   1   4   6   7   1   4
+   1   3   6   7   1   3
+   1   4   5   6   1   9
+   1   3   5   7   1   9
+   1   6   7   8   1   8
+   1   6   7   9   1   5
+   1   5   6   7   1   9
+   1   2   7   8   1   3
+   1   2   6   8   1   4
+   1   4   6   9   1   5
+   1   3   7   9   1   5
+   1   2   7   8   1   6
+   1   2   6   8   1   7
+   1   3   6   7   1   6
+   1   4   6   7   1   7
+   1   3   5   9   1   4
+   1   4   5   9   1   3
+   1   4   5   9   1   6
+   1   3   5   9   1   7
+   1   4   6   9   1   9
+   1   3   7   9   1   9
+
+Only determinants with orbitals whose eigs are within 0.1*eps of each other can be combined into CSFs
+This helps in choosing eps
+sorted eigs-17.942884303 -3.838430822 -3.220236610 -3.220236610 -3.201803568 -2.759038630 -2.676683996 -2.676683996 -2.353167844 -1.998938916 -1.998938916 -1.998938916 -1.998938916 -1.996981514 -1.307083331 -1.307083331 -1.207409987 -0.435122011 15.507011175 21.400298556 21.436050307 21.436050307145.987558367
+
+Only determinants with orbitals whose eigs are within 0.1*eps of each other can be combined into CSFs
+sorted eigs   1-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -3.220236610
+sorted eigs   2-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -3.201803568
+sorted eigs   3-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -2.676683996
+sorted eigs   4-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -2.676683996
+sorted eigs   5-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs   6-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs   7-17.942884303-17.942884303 -3.838430822 -3.838430822 -2.676683996 -2.676683996
+sorted eigs   8-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs   9-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  10-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.353167844 -2.353167844
+sorted eigs  11-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  12-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  13-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  14-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  15-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  16-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  17-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.220236610 -2.676683996
+sorted eigs  18-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.220236610 -2.676683996
+sorted eigs  19-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  20-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  21-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  22-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  23-17.942884303-17.942884303 -3.220236610 -3.201803568 -3.201803568 -2.676683996
+sorted eigs  24-17.942884303-17.942884303 -3.220236610 -3.201803568 -3.201803568 -2.676683996
+sorted eigs  25-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.759038630 -2.759038630
+sorted eigs  26-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  27-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  28-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.353167844 -2.353167844
+sorted eigs  29-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.353167844 -2.353167844
+sorted eigs  30-17.942884303-17.942884303 -3.201803568 -3.201803568 -2.676683996 -2.676683996
+sorted eigs  31-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  32-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  33-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  34-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  35-17.942884303-17.942884303 -2.676683996 -2.676683996 -2.353167844 -2.353167844
+sorted eigs  36-17.942884303-17.942884303 -3.201803568 -2.759038630 -2.676683996 -2.676683996
+sorted eigs  37-17.942884303-17.942884303 -3.201803568 -2.759038630 -2.676683996 -2.676683996
+sorted eigs  38-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  39-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  40-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  41-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  42-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  43-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  44-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.676683996 -2.676683996
+sorted eigs  45-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.676683996 -2.676683996
+sorted eigs  46-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  47-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  48-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  49-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  50-17.942884303-17.942884303 -3.220236610 -2.759038630 -2.759038630 -2.676683996
+sorted eigs  51-17.942884303-17.942884303 -3.220236610 -2.759038630 -2.759038630 -2.676683996
+nlabel,label_det(idet)= 20    1  2  3  3  4  4  5  6  7  8  6  6  7  6  4  4  9  9  4  4 10 10 11 11 12 13 13 14 14 15 10 10 16 16 17 18 18  4  4 16 16 13 13 19 19  7  7 16 16 20 20
+No of CSFs read in=  43
+Input csf_coef=  0.9714  0.0220  0.1015 -0.0163  0.0220 -0.1015 -0.0031 -0.0031  0.0385  0.0014 -0.0163  0.0014 -0.0106 -0.0011  0.0011  0.0014 -0.0020  0.0015 -0.0015  0.0439  0.0033 -0.0033  0.0037 -0.1381  0.0145 -0.0145 -0.0054 -0.0348  0.0492  0.0067 -0.0022  0.0269 -0.0483  0.0022 -0.0269  0.0087 -0.0048  0.0483  0.0083 -0.0322  0.0069 -0.0069 -0.0029
+Input  ndet_in_csf   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   4   3   3   3   2   2   2   2   1   1   1   1   4   3   2   4   3   2   4   3   4   3   2   2   1   1   1   1
+nlabel,iflag_det(idet)= 20    1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+nlabel,iflag_label_det(ilabel)= 20    1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0
+For csfs selected by gamess2qmc and read in here, csf_sum=1.000000
+
+Only determinants in CSFs whose abs(csf_coef) are within eps*sqrt(abs(csf_coef(icsf))) of each other can be combined into CSFs
+This helps in choosing eps
+sorted abs(csf_coef)  52  0.001061  0.001061  0.001377  0.001377  0.001433  0.001470  0.001470  0.002026  0.002229  0.002229  0.002949  0.003052  0.003052  0.003345  0.003345  0.003674  0.004766  0.005424  0.006699  0.006867  0.006867  0.008256  0.008689  0.010618  0.014503  0.014503  0.016349  0.016349  0.021966  0.021966  0.026850  0.026850  0.032247  0.034791  0.038532  0.043887  0.048267  0.048267  0.049201  0.101452  0.101452  0.138095  0.971444
+   0 abs(csf_coef) diffs are
+
+abs(csf_coef) diffs
+And the corresponding abs(csf_coef) are
+abs(csf_coef)      
+
+   1 abs(csf_coef) diffs are
+abs(csf_coef) diffs  0.001061
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     3     4
+Match: inum,iden     1     6
+Match: inum,iden     1     6
+Match: inum,iden     2     3
+Match: inum,iden     1     6
+Match: inum,iden     1     6
+Match: inum,iden     2     3
+Match: inum,iden     1     6
+Match: inum,iden     1     6
+Match: inum,iden     2     3
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     3     4
+Match: inum,iden     1     6
+Match: inum,iden     1     6
+Match: inum,iden     2     3
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     3     4
+Match: inum,iden     1     6
+Match: inum,iden     1     6
+Match: inum,iden     2     3
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     3     4
+Match: inum,iden     1     6
+Match: inum,iden     1     6
+Match: inum,iden     2     3
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     1    12
+Match: inum,iden     3     4
+Match: inum,iden     1     6
+Match: inum,iden     1     6
+Match: inum,iden     2     3
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     2
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+Match: inum,iden     1     1
+
+1Inputs for new version of CHAMP
+   43 ncsf
+  0.97144413  0.02196622  0.10145214 -0.01634930  0.02196622 -0.10145214 -0.00305195 -0.00305195  0.03853175  0.00137705 -0.01634930  0.00137705 -0.01061831 -0.00106102  0.00106102  0.00143257 -0.00202596  0.00147000 -0.00147000  0.04388731  0.00334512 -0.00334512  0.00367421 -0.13809507  0.01450260 -0.01450260 -0.00542359 -0.03479058  0.04920132  0.00669867 -0.00222914  0.02685020 -0.04826725  0.00222914 -0.02685020  0.00868878 -0.00476633  0.04826725  0.00825552 -0.03224661  0.00686694 -0.00686694 -0.00294890 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  4  3  3  3  2  2  2  2  1  1  1  1  4  3  2  4  3  2  4  3  4  3  2  2  1  1  1  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3 -0.3 -0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4  0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4 -0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4 -0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3 -0.3 -0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4  0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4 -0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4 -0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3 -0.3  0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4  0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    1    2    1  0.971444
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    2    2    9  0.021966
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    3    2    3  0.101452
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    4    2   10 -0.016349
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    5    2    9  0.021966
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    6    2    3 -0.101452
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    7    1   10 -0.003052
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    8    1   10 -0.003052
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    9    2    5  0.038532
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   10    0   19  0.001377
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   11    2   10 -0.016349
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   12    0   19  0.001377
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   13    2   12 -0.010618
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   14    0   20 -0.001061
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   15    0   20  0.001061
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   16    1    7  0.001433
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   17    1    7 -0.002026
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   18    0   16  0.001470
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   19    0   16 -0.001470
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   20    2    7  0.043887
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   21    0   16  0.003345
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   22    0   16 -0.003345
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   23    0   18  0.003674
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   24    2    2 -0.138095
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   25    2   11  0.014503
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   26    2   11 -0.014503
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   27    0   15 -0.005424
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   28    2    6 -0.034791
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   29    2    6  0.049201
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   30    1    6  0.006699
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   31    1    4 -0.002229
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   32    2    4  0.026850
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   33    2    4 -0.048267
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   34    1    4  0.002229
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   35    2    4 -0.026850
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   36    0   13  0.008689
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   37    0   13 -0.004766
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   38    2    4  0.048267
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   39    0   13  0.008256
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   40    2    8 -0.032247
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   41    0   14  0.006867
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   42    0   14 -0.006867
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   43    0   17 -0.002949
+cdets before sorting  0.9714 -0.1381 -0.1015  0.1015  0.0457 -0.0457 -0.0385  0.0349  0.0323 -0.0322 -0.0301  0.0301  0.0298 -0.0254  0.0225 -0.0225  0.0220  0.0220 -0.0213  0.0213 -0.0163 -0.0163 -0.0145  0.0145 -0.0106 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000  0.0031  0.0031 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0019  0.0019 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000  0.0012 -0.0012 -0.0000 -0.0000 -0.0000 -0.0000
+
+2Inputs for new version of CHAMP
+   43 ncsf
+  0.97144413  0.02196622  0.10145214 -0.01634930  0.02196622 -0.10145214 -0.00305195 -0.00305195  0.03853175  0.00137705 -0.01634930  0.00137705 -0.01061831 -0.00106102  0.00106102  0.00143257 -0.00202596  0.00147000 -0.00147000  0.04388731  0.00334512 -0.00334512  0.00367421 -0.13809507  0.01450260 -0.01450260 -0.00542359 -0.03479058  0.04920132  0.00669867 -0.00222914  0.02685020 -0.04826725  0.00222914 -0.02685020  0.00868878 -0.00476633  0.04826725  0.00825552 -0.03224661  0.00686694 -0.00686694 -0.00294890 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  4  3  3  3  2  2  2  2  1  1  1  1  4  3  2  4  3  2  4  3  4  3  2  2  1  1  1  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3 -0.3 -0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4  0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4 -0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4 -0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3 -0.3 -0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4  0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4 -0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4 -0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3 -0.3  0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4  0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+label_det   1       2       3       3       4       4       5       6       7       8       6       6       7       6       4       4       9       9       4       4      10      10      11      11      12      13      13      14      14      15      10      10      16      16      17      18      18       4       4      16      16      13      13      19      19       7       7      16      16      20      20
+
+3Inputs for new version of CHAMP
+   43 ncsf
+  0.97144413  0.02196622  0.10145214 -0.01634930  0.02196622 -0.10145214 -0.00305195 -0.00305195  0.03853175  0.00137705 -0.01634930  0.00137705 -0.01061831 -0.00106102  0.00106102  0.00143257 -0.00202596  0.00147000 -0.00147000  0.04388731  0.00334512 -0.00334512  0.00367421 -0.13809507  0.01450260 -0.01450260 -0.00542359 -0.03479058  0.04920132  0.00669867 -0.00222914  0.02685020 -0.04826725  0.00222914 -0.02685020  0.00868878 -0.00476633  0.04826725  0.00825552 -0.03224661  0.00686694 -0.00686694 -0.00294890 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  4  3  3  3  2  2  2  2  1  1  1  1  4  3  2  4  3  2  4  3  4  3  2  2  1  1  1  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3 -0.3 -0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4  0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4 -0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4 -0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3 -0.3 -0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.4  0.4 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4 -0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4 -0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3 -0.3  0.3 -0.9 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.4  0.4  0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.7  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+sorted eigs   1-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -3.220236610
+sorted eigs   2-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -3.201803568
+sorted eigs   3-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -2.676683996
+sorted eigs   4-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -2.676683996
+sorted eigs   5-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs   6-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs   7-17.942884303-17.942884303 -3.838430822 -3.838430822 -2.676683996 -2.676683996
+sorted eigs   8-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs   9-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  10-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.353167844 -2.353167844
+sorted eigs  11-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  12-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  13-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  14-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  15-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  16-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  17-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.220236610 -2.676683996
+sorted eigs  18-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.220236610 -2.676683996
+sorted eigs  19-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  20-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  21-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  22-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  23-17.942884303-17.942884303 -3.220236610 -3.201803568 -3.201803568 -2.676683996
+sorted eigs  24-17.942884303-17.942884303 -3.220236610 -3.201803568 -3.201803568 -2.676683996
+sorted eigs  25-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.759038630 -2.759038630
+sorted eigs  26-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  27-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  28-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.353167844 -2.353167844
+sorted eigs  29-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.353167844 -2.353167844
+sorted eigs  30-17.942884303-17.942884303 -3.201803568 -3.201803568 -2.676683996 -2.676683996
+sorted eigs  31-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  32-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  33-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  34-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  35-17.942884303-17.942884303 -2.676683996 -2.676683996 -2.353167844 -2.353167844
+sorted eigs  36-17.942884303-17.942884303 -3.201803568 -2.759038630 -2.676683996 -2.676683996
+sorted eigs  37-17.942884303-17.942884303 -3.201803568 -2.759038630 -2.676683996 -2.676683996
+sorted eigs  38-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  39-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  40-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  41-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  42-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  43-17.942884303-17.942884303 -3.838430822 -2.676683996 -2.676683996 -2.353167844
+sorted eigs  44-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.676683996 -2.676683996
+sorted eigs  45-17.942884303-17.942884303 -3.220236610 -2.676683996 -2.676683996 -2.676683996
+sorted eigs  46-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  47-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  48-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  49-17.942884303-17.942884303 -3.220236610 -3.201803568 -2.759038630 -2.676683996
+sorted eigs  50-17.942884303-17.942884303 -3.220236610 -2.759038630 -2.759038630 -2.676683996
+sorted eigs  51-17.942884303-17.942884303 -3.220236610 -2.759038630 -2.759038630 -2.676683996
+nlabel,label_det(idet)= 20    1  2  3  3  4  4  5  6  7  8  6  6  7  6  4  4  9  9  4  4 10 10 11 11 12 13 13 14 14 15 10 10 16 16 17 18 18  4  4 16 16 13 13 19 19  7  7 16 16 20 20
+
+4Inputs for new version of CHAMP
+   43 ncsf
+  0.97144413  0.02196622 -0.10145214 -0.01634930  0.02196622  0.10145214  0.00305195  0.00305195 -0.03853175 -0.00137705 -0.01634930 -0.00137705 -0.01061831 -0.00106102  0.00106102 -0.00124064  0.00165419 -0.00120025  0.00120025  0.03103301  0.00236536 -0.00236536 -0.00259806 -0.13809507 -0.01450260  0.01450260  0.00542359  0.03012953 -0.04017271  0.00473667 -0.00193049  0.02192309  0.03413010  0.00193049 -0.02192309 -0.00752470 -0.00389169 -0.03413010 -0.00583753 -0.03224661  0.00686694 -0.00686694  0.00294890 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  4  3  3  3  2  2  2  2  1  1  1  1  4  3  2  4  3  2  4  3  4  3  2  2  1  1  1  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3  0.3 -0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+before shell_abs_csf_coef
+cutoff in shell_abs_csf_coef  0.1000D-02
+ncsf,ncsf_new=   43   43
+csf_coef=  0.9714 -0.1381 -0.1015  0.1015 -0.0402 -0.0341  0.0341  0.0310 -0.0385  0.0301 -0.0322  0.0219 -0.0219  0.0220  0.0220 -0.0163 -0.0163 -0.0145  0.0145 -0.0106 -0.0075 -0.0058 -0.0069  0.0069  0.0047  0.0054 -0.0039 -0.0026 -0.0024  0.0024  0.0031  0.0031  0.0029 -0.0019  0.0019  0.0017  0.0012 -0.0012 -0.0012 -0.0014 -0.0014 -0.0011  0.0011
+after shell_abs_csf_coef
+
+5Inputs for new version of CHAMP
+   43 ncsf
+  0.97144413 -0.13809507 -0.10145214  0.10145214 -0.04017271 -0.03413010  0.03413010  0.03103301 -0.03853175  0.03012953 -0.03224661  0.02192309 -0.02192309  0.02196622  0.02196622 -0.01634930 -0.01634930 -0.01450260  0.01450260 -0.01061831 -0.00752470 -0.00583753 -0.00686694  0.00686694  0.00473667  0.00542359 -0.00389169 -0.00259806 -0.00236536  0.00236536  0.00305195  0.00305195  0.00294890 -0.00193049  0.00193049  0.00165419  0.00120025 -0.00120025 -0.00124064 -0.00137705 -0.00137705 -0.00106102  0.00106102 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  1  1  3  2  2  2  1  4  1  3  3  1  1  1  1  1  1  1  4  2  1  1  2  1  3  2  2  2  1  1  1  4  4  3  3  3  4  1  1  1  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3  0.3 -0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2    3    4 -0.10145214  0.10145214
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  4  3    4    9 -0.04017271  0.03012953
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2    5    6 -0.03413010  0.03413010
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2    9   10  0.02192309 -0.02192309
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   10   11  0.02196622  0.02196622
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   11   12 -0.01634930 -0.01634930
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   12   13 -0.01450260  0.01450260
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  3  2   15   20 -0.00583753 -0.00389169
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   16   17 -0.00686694  0.00686694
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   20   21 -0.00236536  0.00236536
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   21   22  0.00305195  0.00305195
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   23   24 -0.00193049  0.00193049
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  4  3   24   27  0.00165419 -0.00124064
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   25   26  0.00120025 -0.00120025
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   26   27 -0.00137705 -0.00137705
+inum,iden,icsf,jcsf,csf_coef(icsf),csf_coef(jcsf)=  2  2   27   28 -0.00106102  0.00106102
+
+6Inputs for new version of CHAMP
+   27 ncsf
+  0.97144413 -0.13809507 -0.10145214 -0.04017271 -0.03413010  0.03103301 -0.03853175 -0.03224661  0.02192309  0.02196622 -0.01634930 -0.01450260 -0.01061831 -0.00752470 -0.00583753 -0.00686694  0.00473667  0.00542359 -0.00259806 -0.00236536  0.00305195  0.00294890 -0.00193049  0.00165419  0.00120025 -0.00137705 -0.00106102 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  2  7  4  2  1  1  6  2  2  2  1  4  5  2  2  1  2  4  2  1  8  7  6  2  2 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0  0.3 -0.3 -0.3 -0.8 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 -1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 -0.5  0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3  0.3 -0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0  0.3  0.3  0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 -1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0  0.3 -0.3 -0.3 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0  0.2 -0.2 -0.2 -0.7 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 -0.5 -0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+iwdet_in_csf(jdet_in_csf,icsf),    3    3    4 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    4   14    8 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    4   14   11  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    4    8   11  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    4   14   14  0.250000
+iwdet_in_csf(jdet_in_csf,icsf),    4   14    8 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),    4    8    8 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),    4   14   11 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),    4    8   11 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),    4   11   11 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),    4   14   12 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),    4    8   12 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),    4   11   12 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),    4   14   12 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),    4    8   12 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),    4   11   12 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),    5    6   16  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    5    6    5 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    5   16    5 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    5    6   15 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    5   16   15 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    5    5   15 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    6    9   13  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    9    5   15 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9    5   20  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    9   15   20  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    9    5    6 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9   15    6 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9   20    6 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9    5   16  0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9   15   16  0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9   20   16  0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9    6   16  0.500000
+iwdet_in_csf(jdet_in_csf,icsf),    9    5   19 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    9   15   19 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    9   20   19 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    9    6   19 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),    9   16   19 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   10   18   17  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   11   21   22  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   12   23   24 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   14   26   42  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   14   26   43 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   14   42   43 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   14   26   27  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   14   42   27  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   14   43   27  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   15   26   42 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   15   26   26  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   15   26   42  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   15   42   42  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   15   26   43  0.666667
+iwdet_in_csf(jdet_in_csf,icsf),   15   42   43  0.666667
+iwdet_in_csf(jdet_in_csf,icsf),   15   26   43  0.666667
+iwdet_in_csf(jdet_in_csf,icsf),   15   42   43  0.666667
+iwdet_in_csf(jdet_in_csf,icsf),   16   28   29 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   17   14    8  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   19   36   37  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   20   40   33 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   20   40   41 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   20   33   41 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   20   40   34  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   20   33   34  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   20   41   34  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   21   32   31  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23    5   15  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23    5   20  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   15   20  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23    5   38  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23   15   38  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23   20   38  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23    5    6  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   15    6  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   20    6  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   38    6  0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23    5   16 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   15   16 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   20   16 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   38   16 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23    6   16 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23    5   19 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   15   19 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   20   19 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   38   19 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23    6   19 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23   16   19 -0.333333
+iwdet_in_csf(jdet_in_csf,icsf),   23    5   39 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23   15   39 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23   20   39 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23   38   39 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23    6   39 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23   16   39 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   23   19   39 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   24    9   13 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   24    9   46  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   24   13   46  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   24    9    9  0.250000
+iwdet_in_csf(jdet_in_csf,icsf),   24    9   13 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),   24   13   13 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),   24    9   46 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),   24   13   46 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),   24   46   46 -0.250000
+iwdet_in_csf(jdet_in_csf,icsf),   24    9   47 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),   24   13   47 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),   24   46   47 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),   24    9   47 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),   24   13   47 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),   24   46   47 -0.750000
+iwdet_in_csf(jdet_in_csf,icsf),   25   40   33  0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   40   48  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   25   33   48  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   25   40   41 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   33   41 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   48   41 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   40   34 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   33   34 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   48   34 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   41   34 -0.500000
+iwdet_in_csf(jdet_in_csf,icsf),   25   40   49 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   25   33   49 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   25   48   49 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   25   41   49 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   25   34   49 -1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   26   45   44  1.000000
+iwdet_in_csf(jdet_in_csf,icsf),   27   51   50 -1.000000
+
+7Inputs for new version of CHAMP
+   27 ncsf
+  0.97144413 -0.13809507 -0.10145214  0.03012953 -0.03413010  0.03103301 -0.03853175 -0.03224661  0.02192309  0.02196622 -0.01634930 -0.01450260 -0.01061831 -0.00752470 -0.00778338 -0.00686694  0.00473667  0.00542359 -0.00259806 -0.00236536  0.00305195  0.00294890 -0.00193049  0.00124064  0.00120025 -0.00137705 -0.00106102 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  2  7  4  2  1  1  6  2  2  2  1  4  5  2  2  1  2  4  2  1  8  7  6  2  2 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0  1.0 -1.0 -0.0 -0.0 -0.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 -1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 -0.5  0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3  0.3 -0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -0.5  0.0  0.0  0.5 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 -1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0  0.3 -0.3 -0.3 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0  1.0  0.0  0.0  0.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 -0.5 -0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+
+7aInputs for new version of CHAMP
+   27 ncsf
+  0.97144413 -0.13809507 -0.10145214  0.03012953 -0.03413010  0.03103301 -0.03853175 -0.03224661  0.02192309  0.02196622 -0.01634930 -0.01450260 -0.01061831 -0.00752470 -0.00778338 -0.00686694  0.00473667  0.00542359 -0.00259806 -0.00236536  0.00305195  0.00294890 -0.00193049  0.00124064  0.00120025 -0.00137705 -0.00106102 (csf_coef(icsf),icsf=1,ncsf)
+  1  1  2  4  4  2  1  1  6  2  2  2  1  4  3  2  2  1  2  4  2  1  8  4  6  2  2 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8   11   12 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0  1.0 -1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16    5   15 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 -1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20    6   16   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 -0.5  0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   21   22 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43   27 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.3  0.3 -0.3  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   26   42   43 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -0.5  0.5 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   28   29 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   14    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   30 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   36   37 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   41   34 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 -1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   32   31 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   35 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15   20   38    6   16   19   39 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -0.3  0.3  0.3  1.0  0.3 -0.3 -0.3 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   13   46   47 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   40   33   48   41   34   49 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5  0.5  1.0 -0.5 -0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   45   44 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   51   50 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+
+If any of the foll. numbers look rational then there was a failure in recognizing a relationship
+icsf,jcsf,ratio=   1   2   49.485656    0.020208
+icsf,jcsf,ratio=   1   3   91.688159    0.010907
+icsf,jcsf,ratio=   1   4 1039.563284    0.000962
+icsf,jcsf,ratio=   1   5  810.140770    0.001234
+icsf,jcsf,ratio=   1   6  979.913609    0.001020
+icsf,jcsf,ratio=   1   7  635.621064    0.001573
+icsf,jcsf,ratio=   1   8  907.543831    0.001102
+icsf,jcsf,ratio=   1   9 1963.504788    0.000509
+icsf,jcsf,ratio=   1  10 1955.802695    0.000511
+icsf,jcsf,ratio=   1  11 3530.508647    0.000283
+icsf,jcsf,ratio=   1  12 4486.877581    0.000223
+icsf,jcsf,ratio=   1  13 8369.982127    0.000119
+icsf,jcsf,ratio=   1  1416666.983023    0.000060
+icsf,jcsf,ratio=   1  1515577.559680    0.000064
+icsf,jcsf,ratio=   1  1620012.848147    0.000050
+icsf,jcsf,ratio=   1  1742061.873892    0.000024
+icsf,jcsf,ratio=   1  1832082.026688    0.000031
+icsf,jcsf,ratio=   1  19************    0.000007
+icsf,jcsf,ratio=   1  20************    0.000006
+icsf,jcsf,ratio=   1  21************    0.000010
+icsf,jcsf,ratio=   1  22************    0.000009
+icsf,jcsf,ratio=   1  23************    0.000004
+icsf,jcsf,ratio=   1  24************    0.000002
+icsf,jcsf,ratio=   1  25************    0.000002
+icsf,jcsf,ratio=   1  26************    0.000002
+icsf,jcsf,ratio=   1  27************    0.000001
+icsf,jcsf,ratio=   2   3    1.852823    0.539717
+icsf,jcsf,ratio=   2   4   21.007366    0.047602
+icsf,jcsf,ratio=   2   5   16.371224    0.061083
+icsf,jcsf,ratio=   2   6   19.801973    0.050500
+icsf,jcsf,ratio=   2   7   12.844552    0.077854
+icsf,jcsf,ratio=   2   8   18.339533    0.054527
+icsf,jcsf,ratio=   2   9   39.678261    0.025203
+icsf,jcsf,ratio=   2  10   39.522618    0.025302
+icsf,jcsf,ratio=   2  11   71.344080    0.014017
+icsf,jcsf,ratio=   2  12   90.670265    0.011029
+icsf,jcsf,ratio=   2  13  169.139560    0.005912
+icsf,jcsf,ratio=   2  14  336.804324    0.002969
+icsf,jcsf,ratio=   2  15  314.789392    0.003177
+icsf,jcsf,ratio=   2  16  404.417151    0.002473
+icsf,jcsf,ratio=   2  17  849.981126    0.001176
+icsf,jcsf,ratio=   2  18  648.309613    0.001542
+icsf,jcsf,ratio=   2  19 2825.261207    0.000354
+icsf,jcsf,ratio=   2  20 3408.488846    0.000293
+icsf,jcsf,ratio=   2  21 2047.390300    0.000488
+icsf,jcsf,ratio=   2  22 2192.993837    0.000456
+icsf,jcsf,ratio=   2  23 5117.044592    0.000195
+icsf,jcsf,ratio=   2  2412389.771934    0.000081
+icsf,jcsf,ratio=   2  2513237.729557    0.000076
+icsf,jcsf,ratio=   2  2610056.688828    0.000099
+icsf,jcsf,ratio=   2  2716939.835288    0.000059
+icsf,jcsf,ratio=   3   4   11.338032    0.088199
+icsf,jcsf,ratio=   3   5    8.835828    0.113176
+icsf,jcsf,ratio=   3   6   10.687461    0.093568
+icsf,jcsf,ratio=   3   7    6.932423    0.144250
+icsf,jcsf,ratio=   3   8    9.898157    0.101029
+icsf,jcsf,ratio=   3   9   21.415031    0.046696
+icsf,jcsf,ratio=   3  10   21.331028    0.046880
+icsf,jcsf,ratio=   3  11   38.505612    0.025970
+icsf,jcsf,ratio=   3  12   48.936282    0.020435
+icsf,jcsf,ratio=   3  13   91.287493    0.010954
+icsf,jcsf,ratio=   3  14  181.779013    0.005501
+icsf,jcsf,ratio=   3  15  169.897181    0.005886
+icsf,jcsf,ratio=   3  16  218.270804    0.004581
+icsf,jcsf,ratio=   3  17  458.749249    0.002180
+icsf,jcsf,ratio=   3  18  349.903708    0.002858
+icsf,jcsf,ratio=   3  19 1524.841453    0.000656
+icsf,jcsf,ratio=   3  20 1839.619315    0.000544
+icsf,jcsf,ratio=   3  21 1105.011315    0.000905
+icsf,jcsf,ratio=   3  22 1183.596016    0.000845
+icsf,jcsf,ratio=   3  23 2761.755867    0.000362
+icsf,jcsf,ratio=   3  24 6686.970323    0.000150
+icsf,jcsf,ratio=   3  25 7144.627453    0.000140
+icsf,jcsf,ratio=   3  26 5427.765749    0.000184
+icsf,jcsf,ratio=   3  27 9142.716787    0.000109
+icsf,jcsf,ratio=   4   5    0.779309    1.283188
+icsf,jcsf,ratio=   4   6    0.942620    1.060872
+icsf,jcsf,ratio=   4   7    0.611431    1.635508
+icsf,jcsf,ratio=   4   8    0.873005    1.145469
+icsf,jcsf,ratio=   4   9    1.888779    0.529443
+icsf,jcsf,ratio=   4  10    1.881370    0.531528
+icsf,jcsf,ratio=   4  11    3.396146    0.294451
+icsf,jcsf,ratio=   4  12    4.316118    0.231690
+icsf,jcsf,ratio=   4  13    8.051441    0.124201
+icsf,jcsf,ratio=   4  14   16.032678    0.062373
+icsf,jcsf,ratio=   4  15   14.984715    0.066735
+icsf,jcsf,ratio=   4  16   19.251207    0.051945
+icsf,jcsf,ratio=   4  17   40.461100    0.024715
+icsf,jcsf,ratio=   4  18   30.861062    0.032403
+icsf,jcsf,ratio=   4  19  134.489076    0.007436
+icsf,jcsf,ratio=   4  20  162.252082    0.006163
+icsf,jcsf,ratio=   4  21   97.460592    0.010261
+icsf,jcsf,ratio=   4  22  104.391662    0.009579
+icsf,jcsf,ratio=   4  23  243.583353    0.004105
+icsf,jcsf,ratio=   4  24  589.782272    0.001696
+icsf,jcsf,ratio=   4  25  630.147049    0.001587
+icsf,jcsf,ratio=   4  26  478.722032    0.002089
+icsf,jcsf,ratio=   4  27  806.375985    0.001240
+icsf,jcsf,ratio=   5   6    1.209560    0.826747
+icsf,jcsf,ratio=   5   7    0.784581    1.274566
+icsf,jcsf,ratio=   5   8    1.120230    0.892674
+icsf,jcsf,ratio=   5   9    2.423659    0.412599
+icsf,jcsf,ratio=   5  10    2.414152    0.414224
+icsf,jcsf,ratio=   5  11    4.357895    0.229469
+icsf,jcsf,ratio=   5  12    5.538393    0.180558
+icsf,jcsf,ratio=   5  13   10.331516    0.096791
+icsf,jcsf,ratio=   5  14   20.572947    0.048608
+icsf,jcsf,ratio=   5  15   19.228213    0.052007
+icsf,jcsf,ratio=   5  16   24.702927    0.040481
+icsf,jcsf,ratio=   5  17   51.919216    0.019261
+icsf,jcsf,ratio=   5  18   39.600558    0.025252
+icsf,jcsf,ratio=   5  19  172.574829    0.005795
+icsf,jcsf,ratio=   5  20  208.199999    0.004803
+icsf,jcsf,ratio=   5  21  125.060306    0.007996
+icsf,jcsf,ratio=   5  22  133.954176    0.007465
+icsf,jcsf,ratio=   5  23  312.563346    0.003199
+icsf,jcsf,ratio=   5  24  756.801803    0.001321
+icsf,jcsf,ratio=   5  25  808.597418    0.001237
+icsf,jcsf,ratio=   5  26  614.290584    0.001628
+icsf,jcsf,ratio=   5  27 1034.732355    0.000966
+icsf,jcsf,ratio=   6   7    0.648650    1.541663
+icsf,jcsf,ratio=   6   8    0.926147    1.079742
+icsf,jcsf,ratio=   6   9    2.003753    0.499064
+icsf,jcsf,ratio=   6  10    1.995893    0.501029
+icsf,jcsf,ratio=   6  11    3.602877    0.277556
+icsf,jcsf,ratio=   6  12    4.578850    0.218395
+icsf,jcsf,ratio=   6  13    8.541551    0.117075
+icsf,jcsf,ratio=   6  14   17.008625    0.058794
+icsf,jcsf,ratio=   6  15   15.896870    0.062905
+icsf,jcsf,ratio=   6  16   20.423074    0.048964
+icsf,jcsf,ratio=   6  17   42.924063    0.023297
+icsf,jcsf,ratio=   6  18   32.739648    0.030544
+icsf,jcsf,ratio=   6  19  142.675746    0.007009
+icsf,jcsf,ratio=   6  20  172.128753    0.005810
+icsf,jcsf,ratio=   6  21  103.393250    0.009672
+icsf,jcsf,ratio=   6  22  110.746231    0.009030
+icsf,jcsf,ratio=   6  23  258.410852    0.003870
+icsf,jcsf,ratio=   6  24  625.683724    0.001598
+icsf,jcsf,ratio=   6  25  668.505601    0.001496
+icsf,jcsf,ratio=   6  26  507.862982    0.001969
+icsf,jcsf,ratio=   6  27  855.462012    0.001169
+icsf,jcsf,ratio=   7   8    1.427806    0.700375
+icsf,jcsf,ratio=   7   9    3.089112    0.323718
+icsf,jcsf,ratio=   7  10    3.076995    0.324992
+icsf,jcsf,ratio=   7  11    5.554424    0.180037
+icsf,jcsf,ratio=   7  12    7.059045    0.141662
+icsf,jcsf,ratio=   7  13   13.168195    0.075941
+icsf,jcsf,ratio=   7  14   26.221571    0.038137
+icsf,jcsf,ratio=   7  15   24.507620    0.040804
+icsf,jcsf,ratio=   7  16   31.485502    0.031761
+icsf,jcsf,ratio=   7  17   66.174449    0.015112
+icsf,jcsf,ratio=   7  18   50.473511    0.019812
+icsf,jcsf,ratio=   7  19  219.957948    0.004546
+icsf,jcsf,ratio=   7  20  265.364566    0.003768
+icsf,jcsf,ratio=   7  21  159.397570    0.006274
+icsf,jcsf,ratio=   7  22  170.733390    0.005857
+icsf,jcsf,ratio=   7  23  398.382502    0.002510
+icsf,jcsf,ratio=   7  24  964.593577    0.001037
+icsf,jcsf,ratio=   7  25 1030.610489    0.000970
+icsf,jcsf,ratio=   7  26  782.953674    0.001277
+icsf,jcsf,ratio=   7  27 1318.834310    0.000758
+icsf,jcsf,ratio=   8   9    2.163537    0.462206
+icsf,jcsf,ratio=   8  10    2.155050    0.464026
+icsf,jcsf,ratio=   8  11    3.890180    0.257058
+icsf,jcsf,ratio=   8  12    4.943979    0.202266
+icsf,jcsf,ratio=   8  13    9.222675    0.108428
+icsf,jcsf,ratio=   8  14   18.364935    0.054452
+icsf,jcsf,ratio=   8  15   17.164526    0.058260
+icsf,jcsf,ratio=   8  16   22.051660    0.045348
+icsf,jcsf,ratio=   8  17   46.346934    0.021576
+icsf,jcsf,ratio=   8  18   35.350388    0.028288
+icsf,jcsf,ratio=   8  19  154.053061    0.006491
+icsf,jcsf,ratio=   8  20  185.854723    0.005381
+icsf,jcsf,ratio=   8  21  111.638082    0.008958
+icsf,jcsf,ratio=   8  22  119.577408    0.008363
+icsf,jcsf,ratio=   8  23  279.017169    0.003584
+icsf,jcsf,ratio=   8  24  675.577283    0.001480
+icsf,jcsf,ratio=   8  25  721.813882    0.001385
+icsf,jcsf,ratio=   8  26  548.361225    0.001824
+icsf,jcsf,ratio=   8  27  923.678657    0.001083
+icsf,jcsf,ratio=   9  10    0.996077    1.003938
+icsf,jcsf,ratio=   9  11    1.798065    0.556154
+icsf,jcsf,ratio=   9  12    2.285137    0.437611
+icsf,jcsf,ratio=   9  13    4.262777    0.234589
+icsf,jcsf,ratio=   9  14    8.488384    0.117808
+icsf,jcsf,ratio=   9  15    7.933548    0.126047
+icsf,jcsf,ratio=   9  16   10.192411    0.098112
+icsf,jcsf,ratio=   9  17   21.421834    0.046681
+icsf,jcsf,ratio=   9  18   16.339164    0.061203
+icsf,jcsf,ratio=   9  19   71.204260    0.014044
+icsf,jcsf,ratio=   9  20   85.903181    0.011641
+icsf,jcsf,ratio=   9  21   51.599799    0.019380
+icsf,jcsf,ratio=   9  22   55.269404    0.018093
+icsf,jcsf,ratio=   9  23  128.963429    0.007754
+icsf,jcsf,ratio=   9  24  312.255921    0.003203
+icsf,jcsf,ratio=   9  25  333.626757    0.002997
+icsf,jcsf,ratio=   9  26  253.455887    0.003945
+icsf,jcsf,ratio=   9  27  426.929882    0.002342
+icsf,jcsf,ratio=  10  11    1.805146    0.553972
+icsf,jcsf,ratio=  10  12    2.294136    0.435894
+icsf,jcsf,ratio=  10  13    4.279564    0.233669
+icsf,jcsf,ratio=  10  14    8.521812    0.117346
+icsf,jcsf,ratio=  10  15    7.964791    0.125553
+icsf,jcsf,ratio=  10  16   10.232550    0.097727
+icsf,jcsf,ratio=  10  17   21.506195    0.046498
+icsf,jcsf,ratio=  10  18   16.403509    0.060963
+icsf,jcsf,ratio=  10  19   71.484667    0.013989
+icsf,jcsf,ratio=  10  20   86.241474    0.011595
+icsf,jcsf,ratio=  10  21   51.803003    0.019304
+icsf,jcsf,ratio=  10  22   55.487059    0.018022
+icsf,jcsf,ratio=  10  23  129.471296    0.007724
+icsf,jcsf,ratio=  10  24  313.485607    0.003190
+icsf,jcsf,ratio=  10  25  334.940604    0.002986
+icsf,jcsf,ratio=  10  26  254.454014    0.003930
+icsf,jcsf,ratio=  10  27  428.611163    0.002333
+icsf,jcsf,ratio=  11  12    1.270887    0.786852
+icsf,jcsf,ratio=  11  13    2.370758    0.421806
+icsf,jcsf,ratio=  11  14    4.720845    0.211826
+icsf,jcsf,ratio=  11  15    4.412271    0.226641
+icsf,jcsf,ratio=  11  16    5.668545    0.176412
+icsf,jcsf,ratio=  11  17   11.913828    0.083936
+icsf,jcsf,ratio=  11  18    9.087083    0.110046
+icsf,jcsf,ratio=  11  19   39.600499    0.025252
+icsf,jcsf,ratio=  11  20   47.775356    0.020931
+icsf,jcsf,ratio=  11  21   28.697410    0.034846
+icsf,jcsf,ratio=  11  22   30.738273    0.032533
+icsf,jcsf,ratio=  11  23   71.723464    0.013942
+icsf,jcsf,ratio=  11  24  173.662228    0.005758
+icsf,jcsf,ratio=  11  25  185.547693    0.005389
+icsf,jcsf,ratio=  11  26  140.960382    0.007094
+icsf,jcsf,ratio=  11  27  237.438554    0.004212
+icsf,jcsf,ratio=  12  13    1.865436    0.536068
+icsf,jcsf,ratio=  12  14    3.714606    0.269208
+icsf,jcsf,ratio=  12  15    3.471804    0.288035
+icsf,jcsf,ratio=  12  16    4.460306    0.224200
+icsf,jcsf,ratio=  12  17    9.374420    0.106673
+icsf,jcsf,ratio=  12  18    7.150190    0.139856
+icsf,jcsf,ratio=  12  19   31.159732    0.032093
+icsf,jcsf,ratio=  12  20   37.592135    0.026601
+icsf,jcsf,ratio=  12  21   22.580614    0.044286
+icsf,jcsf,ratio=  12  22   24.186472    0.041345
+icsf,jcsf,ratio=  12  23   56.435752    0.017719
+icsf,jcsf,ratio=  12  24  136.646473    0.007318
+icsf,jcsf,ratio=  12  25  145.998576    0.006849
+icsf,jcsf,ratio=  12  26  110.914960    0.009016
+icsf,jcsf,ratio=  12  27  186.829003    0.005352
+icsf,jcsf,ratio=  13  14    1.991281    0.502189
+icsf,jcsf,ratio=  13  15    1.861122    0.537310
+icsf,jcsf,ratio=  13  16    2.391026    0.418230
+icsf,jcsf,ratio=  13  17    5.025324    0.198992
+icsf,jcsf,ratio=  13  18    3.832986    0.260893
+icsf,jcsf,ratio=  13  19   16.703728    0.059867
+icsf,jcsf,ratio=  13  20   20.151932    0.049623
+icsf,jcsf,ratio=  13  21   12.104739    0.082612
+icsf,jcsf,ratio=  13  22   12.965588    0.077127
+icsf,jcsf,ratio=  13  23   30.253387    0.033054
+icsf,jcsf,ratio=  13  24   73.251769    0.013652
+icsf,jcsf,ratio=  13  25   78.265130    0.012777
+icsf,jcsf,ratio=  13  26   59.457934    0.016819
+icsf,jcsf,ratio=  13  27  100.153006    0.009985
+icsf,jcsf,ratio=  14  15    0.934636    1.069935
+icsf,jcsf,ratio=  14  16    1.200748    0.832814
+icsf,jcsf,ratio=  14  17    2.523665    0.396249
+icsf,jcsf,ratio=  14  18    1.924885    0.519512
+icsf,jcsf,ratio=  14  19    8.388435    0.119212
+icsf,jcsf,ratio=  14  20   10.120086    0.098813
+icsf,jcsf,ratio=  14  21    6.078872    0.164504
+icsf,jcsf,ratio=  14  22    6.511181    0.153582
+icsf,jcsf,ratio=  14  23   15.192930    0.065820
+icsf,jcsf,ratio=  14  24   36.786261    0.027184
+icsf,jcsf,ratio=  14  25   39.303918    0.025443
+icsf,jcsf,ratio=  14  26   29.859144    0.033491
+icsf,jcsf,ratio=  14  27   50.295777    0.019882
+icsf,jcsf,ratio=  15  16    1.284723    0.778378
+icsf,jcsf,ratio=  15  17    2.700158    0.370349
+icsf,jcsf,ratio=  15  18    2.059503    0.485554
+icsf,jcsf,ratio=  15  19    8.975084    0.111420
+icsf,jcsf,ratio=  15  20   10.827839    0.092355
+icsf,jcsf,ratio=  15  21    6.504000    0.153752
+icsf,jcsf,ratio=  15  22    6.966543    0.143543
+icsf,jcsf,ratio=  15  23   16.255454    0.061518
+icsf,jcsf,ratio=  15  24   39.358925    0.025407
+icsf,jcsf,ratio=  15  25   42.052655    0.023780
+icsf,jcsf,ratio=  15  26   31.947356    0.031301
+icsf,jcsf,ratio=  15  27   53.813234    0.018583
+icsf,jcsf,ratio=  16  17    2.101744    0.475795
+icsf,jcsf,ratio=  16  18    1.603072    0.623802
+icsf,jcsf,ratio=  16  19    6.986007    0.143143
+icsf,jcsf,ratio=  16  20    8.428151    0.118650
+icsf,jcsf,ratio=  16  21    5.062570    0.197528
+icsf,jcsf,ratio=  16  22    5.422603    0.184413
+icsf,jcsf,ratio=  16  23   12.652887    0.079033
+icsf,jcsf,ratio=  16  24   30.636119    0.032641
+icsf,jcsf,ratio=  16  25   32.732859    0.030550
+icsf,jcsf,ratio=  16  26   24.867118    0.040214
+icsf,jcsf,ratio=  16  27   41.887035    0.023874
+icsf,jcsf,ratio=  17  18    0.762734    1.311073
+icsf,jcsf,ratio=  17  19    3.323911    0.300850
+icsf,jcsf,ratio=  17  20    4.010076    0.249372
+icsf,jcsf,ratio=  17  21    2.408748    0.415153
+icsf,jcsf,ratio=  17  22    2.580050    0.387589
+icsf,jcsf,ratio=  17  23    6.020186    0.166108
+icsf,jcsf,ratio=  17  24   14.576526    0.068603
+icsf,jcsf,ratio=  17  25   15.574145    0.064209
+icsf,jcsf,ratio=  17  26   11.831661    0.084519
+icsf,jcsf,ratio=  17  27   19.929661    0.050176
+icsf,jcsf,ratio=  18  19    4.357889    0.229469
+icsf,jcsf,ratio=  18  20    5.257502    0.190204
+icsf,jcsf,ratio=  18  21    3.158044    0.316652
+icsf,jcsf,ratio=  18  22    3.382634    0.295628
+icsf,jcsf,ratio=  18  23    7.892903    0.126696
+icsf,jcsf,ratio=  18  24   19.110887    0.052326
+icsf,jcsf,ratio=  18  25   20.418839    0.048974
+icsf,jcsf,ratio=  18  26   15.512170    0.064466
+icsf,jcsf,ratio=  18  27   26.129237    0.038271
+icsf,jcsf,ratio=  19  20    1.206433    0.828890
+icsf,jcsf,ratio=  19  21    0.724673    1.379933
+icsf,jcsf,ratio=  19  22    0.776209    1.288312
+icsf,jcsf,ratio=  19  23    1.811176    0.552128
+icsf,jcsf,ratio=  19  24    4.385354    0.228032
+icsf,jcsf,ratio=  19  25    4.685489    0.213425
+icsf,jcsf,ratio=  19  26    3.559561    0.280934
+icsf,jcsf,ratio=  19  27    5.995847    0.166782
+icsf,jcsf,ratio=  20  21    0.600674    1.664797
+icsf,jcsf,ratio=  20  22    0.643392    1.554263
+icsf,jcsf,ratio=  20  23    1.501265    0.666105
+icsf,jcsf,ratio=  20  24    3.634975    0.275105
+icsf,jcsf,ratio=  20  25    3.883753    0.257483
+icsf,jcsf,ratio=  20  26    2.950483    0.338928
+icsf,jcsf,ratio=  20  27    4.969896    0.201211
+icsf,jcsf,ratio=  21  22    1.071117    0.933605
+icsf,jcsf,ratio=  21  23    2.499301    0.400112
+icsf,jcsf,ratio=  21  24    6.051495    0.165248
+icsf,jcsf,ratio=  21  25    6.465660    0.154663
+icsf,jcsf,ratio=  21  26    4.911955    0.203585
+icsf,jcsf,ratio=  21  27    8.273867    0.120862
+icsf,jcsf,ratio=  22  23    2.333360    0.428566
+icsf,jcsf,ratio=  22  24    5.649707    0.177000
+icsf,jcsf,ratio=  22  25    6.036373    0.165662
+icsf,jcsf,ratio=  22  26    4.585826    0.218063
+icsf,jcsf,ratio=  22  27    7.724525    0.129458
+icsf,jcsf,ratio=  23  24    2.421275    0.413006
+icsf,jcsf,ratio=  23  25    2.586987    0.386550
+icsf,jcsf,ratio=  23  26    1.965331    0.508820
+icsf,jcsf,ratio=  23  27    3.310472    0.302072
+icsf,jcsf,ratio=  24  25    1.068440    0.935944
+icsf,jcsf,ratio=  24  26    0.811693    1.231993
+icsf,jcsf,ratio=  24  27    1.367244    0.731399
+icsf,jcsf,ratio=  25  26    0.759699    1.316311
+icsf,jcsf,ratio=  25  27    1.279663    0.781456
+icsf,jcsf,ratio=  26  27    1.684435    0.593671
+before shell_abs_csf_coef
+cutoff in shell_abs_csf_coef  0.1000D-01
+ncsf,ncsf_new=   27   13
+csf_coef=  0.9714 -0.1015 -0.1381 -0.0341  0.0301  0.0310 -0.0385  0.0219 -0.0322  0.0220 -0.0163 -0.0145 -0.0106
+after shell_abs_csf_coef
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    1    2    1  0.971444
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    2    2    3 -0.101452
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    3    2    2 -0.138095
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    4    2    4 -0.034130
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    5    2    6  0.030130
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    6    2    7  0.031033
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    7    1    5 -0.038532
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    8    1    4  0.021923
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)    9    2    8 -0.032247
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   10    0    9  0.021966
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   11    2   10 -0.016349
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   12    0   11 -0.014503
+icsf,iflag_csf(icsf),label_det(iwdet_in_csf(1,icsf)),csf_coef(icsf)   13    2   12 -0.010618
+cdets before sorting  0.9714 -0.1381 -0.1015  0.1015  0.0451 -0.0451 -0.0385  0.0301  0.0310 -0.0322 -0.0301  0.0301  0.0310 -0.0301  0.0232 -0.0232  0.0220  0.0220 -0.0219  0.0219 -0.0163 -0.0163 -0.0145  0.0145 -0.0106 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000 -0.0000
+switched l to i   14    8
+switched i to l    8   14
+switched l to i   14   11
+switched i to l   11   14
+switched l to i    6    5
+switched i to l    5    6
+switched i to l    5    6
+switched l to i    6    5
+switched i to l    8    9
+switched l to i    9    8
+switched i to l    9   10
+switched l to i   10    9
+switched i to l    8    9
+switched l to i    9    8
+switched i to l   11   12
+switched l to i   12   11
+switched i to l   10   11
+switched l to i   11   10
+switched i to l   12   13
+switched l to i   13   12
+switched i to l   11   12
+switched l to i   12   11
+switched i to l   10   11
+switched l to i   11   10
+switched l to i   16   15
+switched i to l   15   16
+switched i to l   15   16
+switched l to i   16   15
+switched i to l   21   22
+switched l to i   22   21
+ndet,ndet with abs coefs. > 1.d-8   51   25
+cdets after sorting  0.9714 -0.1381 -0.1015  0.1015 -0.0451  0.0451 -0.0385 -0.0322  0.0310  0.0310  0.0301 -0.0301  0.0301 -0.0301 -0.0232  0.0232  0.0220  0.0220 -0.0219  0.0219 -0.0163 -0.0163 -0.0145  0.0145 -0.0106
+label_det   1       2       3       3       4       4       5       6       7       8       6       6       7       6       4       4       9       9       4       4      10      10      11      11      12
+used ndet=   25
+
+8Inputs for new version of CHAMP
+   13 ncsf
+  0.97144413 -0.10145214 -0.13809507 -0.03413010  0.03012953  0.03103301 -0.03853175  0.02192309 -0.03224661  0.02196622 -0.01634930 -0.01450260 -0.01061831 (csf_coef(icsf),icsf=1,ncsf)
+  1  2  1  4  4  2  1  6  1  2  2  2  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15    6   16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 -1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   12   13   14   11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0  1.0 -1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   20    5   15   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 -0.5  0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   22   21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+sorted eigs   1-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -3.220236610
+sorted eigs   2-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -3.201803568
+sorted eigs   3-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -2.676683996
+sorted eigs   4-17.942884303-17.942884303 -3.838430822 -3.838430822 -3.220236610 -2.676683996
+sorted eigs   5-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs   6-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs   7-17.942884303-17.942884303 -3.838430822 -3.838430822 -2.676683996 -2.676683996
+sorted eigs   8-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.353167844 -2.353167844
+sorted eigs   9-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  10-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.201803568 -2.759038630
+sorted eigs  11-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  12-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  13-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  14-17.942884303-17.942884303 -3.838430822 -3.220236610 -3.220236610 -2.353167844
+sorted eigs  15-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  16-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  17-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.220236610 -2.676683996
+sorted eigs  18-17.942884303-17.942884303 -3.220236610 -3.220236610 -3.220236610 -2.676683996
+sorted eigs  19-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  20-17.942884303-17.942884303 -3.838430822 -3.220236610 -2.676683996 -2.353167844
+sorted eigs  21-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  22-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.676683996 -2.676683996
+sorted eigs  23-17.942884303-17.942884303 -3.220236610 -3.201803568 -3.201803568 -2.676683996
+sorted eigs  24-17.942884303-17.942884303 -3.220236610 -3.201803568 -3.201803568 -2.676683996
+sorted eigs  25-17.942884303-17.942884303 -3.220236610 -3.220236610 -2.759038630 -2.759038630
+nlabel,label_det(idet)= 12    1  2  3  3  4  4  5  6  7  7  8  8  8  8  4  4  9  9  4  4 10 10 11 11 12
+
+9Inputs for new version of CHAMP
+   13 ncsf
+  0.97144413 -0.10145214 -0.13809507 -0.03413010  0.03012953  0.03103301 -0.03853175  0.02192309 -0.03224661  0.02196622 -0.01634930 -0.01450260 -0.01061831 (csf_coef(icsf),icsf=1,ncsf)
+  1  2  1  4  4  2  1  6  1  2  2  2  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+    1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    3    4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    5   15    6   16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 -1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   12   13   14   11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ -1.0  1.0 -1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    9   10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    6   16   20    5   15   19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  0.5 -0.5  1.0 -0.5  0.5 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+    8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   18   17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   22   21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   23   24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 -1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  1.0 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+ndet=   25
+csf_sum=0.999788
+
+Inputs for new version of CHAMP with linear relations recognized
+'ncsf= 13 ndet=  25 norb= 23 csf_sum=0.999788 cutoff_g2q=0.0010 cutoff_d2c=0.010 eps=1.0E-08'  title
+  25  23  23                             ndet,nbasis,norb
+1000  36 -1 1 5 1000 21101 1 NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr
+0  4  5  15  0  12 0 0  nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmg
+MCSCF->CI natural orbs with cutoff_g2q=0.001, cutoff_d2c=0.010
+ 2 3 4 5 6 7 8 9 10 11 12 13 (iwcsf(iparm),iparm=1,nparmcsf)
+  1   2   3   4      1   2    1
+  1   3   4   5      1   5    2
+  1   2   3   7      1   2    3
+  1   2   4   6      1   2    3
+  1   2   4   6      1   8    4
+  1   2   3   7      1   8    4
+  1   2   6   7      1   2    5
+  1   3   4   8      1   8    6
+  1   3   4   9      1   5    7
+  1   3   4   5      1   9    7
+  1   2   4   8      1   3    8
+  1   2   3   4      1   8    8
+  1   3   4   8      1   2    8
+  1   2   3   8      1   4    8
+  1   2   4   8      1   6    4
+  1   2   3   8      1   7    4
+  1   3   4   7      1   4    9
+  1   3   4   6      1   3    9
+  1   4   6   8      1   2    4
+  1   3   7   8      1   2    4
+  1   3   4   7      1   7   10
+  1   3   4   6      1   6   10
+  1   3   5   7      1   5   11
+  1   4   5   6      1   5   11
+  1   3   4   9      1   9   12 (iworbd(iel,idet),iel=1,nelec), label_det(idet)
+   13 ncsf
+  0.97144413 -0.14347499 -0.13809507 -0.06826020  0.06025906  0.04388731 -0.03853175  0.03797191 -0.03224661  0.03106492 -0.02312140 -0.02050977 -0.01061831 (csf_coef(icsf),icsf=1,ncsf)
+  1  2  1  4  4  2  1  6  1  2  2  2  1 (ndet_in_csf(icsf),icsf=1,ncsf)
+   1 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   3   4 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1  -1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   2 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   5  15   6  16 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1   1  -1  -1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  12  13  14  11 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  -1   1  -1   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   9  10 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   7 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   6  16  20   5  15  19 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1  -1   2  -1   1  -2 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   8 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  18  17 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  22  21 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  23  24 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1  -1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+  25 (iwdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+   1 (cdet_in_csf(idet_in_csf,icsf),idet_in_csf=1,ndet_in_csf(icsf))
+Reduce nparm and nparm_csf by   -30

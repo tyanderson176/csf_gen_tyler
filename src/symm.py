@@ -1,12 +1,13 @@
 import numpy
 import ctypes
 import math
-import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
-
-from rel_parity import rel_parity
-import vec
 from functools import reduce
+#import sys, os
+#sys.path.append(os.path.join(os.path.dirname(__file__), '../lib'))
+
+from shci4qmc.lib.rel_parity import rel_parity
+import shci4qmc.src.vec as vec
+
 import pyscf
 from pyscf import symm
 from pyscf.lib import load_library

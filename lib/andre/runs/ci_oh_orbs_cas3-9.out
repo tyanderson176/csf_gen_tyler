@@ -1,0 +1,2136 @@
+----- GAMESS execution script -----
+This job is running on host qmc4
+under operating system Linux at Sat Apr 1 11:57:58 EDT 2017
+Available scratch disk space (Kbyte units) at beginning of the job is
+Filesystem      1K-blocks       Used Available Use% Mounted on
+/dev/sda7      1515619644 1041100568 397507012  73% /
+
+ Distributed Data Interface kickoff program.
+ Initiating 1 compute processes on 1 nodes to run the following command:
+ /home/cyrus/qmc_setup/gamess09_modified/gamess.00.x ci_oh_orbs_cas3-9 
+
+          ******************************************************
+          *         GAMESS VERSION = 12 JAN 2009 (R3)          *
+          *             FROM IOWA STATE UNIVERSITY             *
+          * M.W.SCHMIDT, K.K.BALDRIDGE, J.A.BOATZ, S.T.ELBERT, *
+          *   M.S.GORDON, J.H.JENSEN, S.KOSEKI, N.MATSUNAGA,   *
+          *          K.A.NGUYEN, S.J.SU, T.L.WINDUS,           *
+          *       TOGETHER WITH M.DUPUIS, J.A.MONTGOMERY       *
+          *         J.COMPUT.CHEM.  14, 1347-1363(1993)        *
+          **************** 64 BIT LINUX VERSION ****************
+
+  SINCE 1993, STUDENTS AND POSTDOCS WORKING AT IOWA STATE UNIVERSITY
+  AND ALSO IN THEIR VARIOUS JOBS AFTER LEAVING ISU HAVE MADE IMPORTANT
+  CONTRIBUTIONS TO THE CODE:
+     IVANA ADAMOVIC, CHRISTINE AIKENS, YURI ALEXEEV, POOJA ARORA,
+     ANDREY ASADCHEV, ROB BELL, PRADIPTA BANDYOPADHYAY, JONATHAN BENTZ,
+     BRETT BODE, GALINA CHABAN, WEI CHEN, CHEOL HO CHOI, PAUL DAY, TIM DUDLEY,
+     DMITRI FEDOROV, GRAHAM FLETCHER, MARK FREITAG, KURT GLAESEMANN, DAN KEMP,
+     GRANT MERRILL, JONATHAN MULLIN, TAKESHI NAGATA, SEAN NEDD,
+     HEATHER NETZLOFF, BOSILJKA NJEGIC, RYAN OLSON, MIKE PAK, JIM SHOEMAKER,
+     LYUDMILA SLIPCHENKO, SAROM SOK, JIE SONG, TETSUYA TAKETSUGU,
+     SIMON WEBB, SOOHAENG YOO, FEDERICO ZAHARIEV
+
+  ADDITIONAL CODE HAS BEEN PROVIDED BY COLLABORATORS IN OTHER GROUPS:
+     IOWA STATE UNIVERSITY: JOE IVANIC, KLAUS RUEDENBERG
+     UNIVERSITY OF TOKYO: KIMIHIKO HIRAO, TAKAHITO NAKAJIMA,
+          TAKAO TSUNEDA, MUNEAKI KAMIYA, SUSUMU YANAGISAWA,
+          KIYOSHI YAGI, MAHITO CHIBA, SEIKEN TOKURA, NAOAKI KAWAKAMI
+     UNIVERSITY OF AARHUS: FRANK JENSEN
+     UNIVERSITY OF IOWA: VISVALDAS KAIRYS, HUI LI
+     NATIONAL INST. OF STANDARDS AND TECHNOLOGY: WALT STEVENS, DAVID GARMER
+     UNIVERSITY OF PISA: BENEDETTA MENNUCCI, JACOPO TOMASI
+     UNIVERSITY OF MEMPHIS: HENRY KURTZ, PRAKASHAN KORAMBATH
+     UNIVERSITY OF ALBERTA: MARIUSZ KLOBUKOWSKI
+     UNIVERSITY OF NEW ENGLAND: MARK SPACKMAN
+     MIE UNIVERSITY: HIROAKI UMEDA
+     MICHIGAN STATE UNIVERSITY:
+          KAROL KOWALSKI, MARTA WLOCH, JEFFREY R. GOUR, PIOTR PIECUCH
+     UNIVERSITY OF SILESIA: MONIKA MUSIAL, STANISLAW KUCHARSKI
+     FACULTES UNIVERSITAIRES NOTRE-DAME DE LA PAIX:
+          OLIVIER QUINET, BENOIT CHAMPAGNE
+     UNIVERSITY OF CALIFORNIA - SANTA BARBARA: BERNARD KIRTMAN
+     INSTITUTE FOR MOLECULAR SCIENCE: KAZUYA ISHIMURA AND SHIGERU NAGASE
+     UNIVERSITY OF NOTRE DAME: DAN CHIPMAN
+     KYUSHU UNIVERSITY:
+          HARUYUKI NAKANO,
+          FENG LONG GU, JACEK KORCHOWIEC, MARCIN MAKOWSKI, AND YURIKO AOKI,
+          HIROTOSHI MORI AND EISAKU MIYOSHI
+     PENNSYLVANIA STATE UNIVERSITY:
+          TZVETELIN IORDANOV, CHET SWALINA, JONATHAN SKONE,
+          SHARON HAMMES-SCHIFFER
+     WASEDA UNIVERSITY:
+          MASATO KOBAYASHI, TOMOKO AKAMA, HIROMI NAKAI
+
+ EXECUTION OF GAMESS BEGUN Sat Apr  1 11:57:58 2017
+
+            ECHO OF THE FIRST FEW INPUT CARDS -
+ INPUT CARD> $CONTRL RUNTYP=ENERGY EXETYP=RUN COORD=UNIQUE NORMF=1 UNITS=BOHR MULT=2        
+ INPUT CARD>         ISPHER=1                                                               
+ INPUT CARD>         SCFTYP=NONE CITYP=GUGA MAXIT=200 $END                                  
+ INPUT CARD>#        SCFTYP=MCSCF CITYP=NONE MAXIT=200 $END                                 
+ INPUT CARD>#        SCFTYP=ROHF $END                                                       
+ INPUT CARD> $SYSTEM MWORDS=100 $END                                                        
+ INPUT CARD>#$GUESS  GUESS=HUCKEL PRTMO=.TRUE. $END                                         
+ INPUT CARD> $GUESS  GUESS=MOREAD PRTMO=.TRUE. NORB=57 $END                                 
+ INPUT CARD>#        NORDER=1 IORDER(7)=8,7 IORDER(13)=16,15,14,17,18,19,13 $END            
+ INPUT CARD>#$DFT    DFTTYP=SVWN THRESH=1.0E-15 $END                                        
+ INPUT CARD>#$SCF    MVOQ=0 DIRSCF=.FALSE. RSTRCT=.TRUE. $END                               
+ INPUT CARD>#$MCSCF  CISTEP=GUGA MAXIT=200 $END                                             
+ INPUT CARD># Active space 3d,4s,4p                                                         
+ INPUT CARD>#$DRT    GROUP=D2H IEXCIT=3 NDOC=1 NALP=1 NVAL=7  NMCC=9 NPRT=1                 
+ INPUT CARD>#        NEXT=0 SOCI=.FALSE. $END                                               
+ INPUT CARD> $CIDRT  GROUP=D2H IEXCIT=3 NDOC=1 NALP=1 NVAL=7  NFZC=9 NPRT=2 $END            
+ INPUT CARD> $GUGDIA NSTATE=1 PRTTOL=0.001 KPRINT=2 $END                                    
+ INPUT CARD>                                                                                
+ INPUT CARD> $DATA                                                                          
+ INPUT CARD>Sc ROHF with D4H symmetry and Bunge basis                                       
+ INPUT CARD>DNH 2                                                                           
+ INPUT CARD>                                                                                
+ INPUT CARD>Sc 21.0      0.0        0.0        0.0                                          
+ INPUT CARD>  1S  10    21.7237                                                             
+ INPUT CARD>  2S  10    18.5964                                                             
+ INPUT CARD>  2S  10     8.5331                                                             
+ INPUT CARD>  3S  10    26.6635                                                             
+ INPUT CARD>  3S  10     6.3629                                                             
+ INPUT CARD>  3S  10     4.4087                                                             
+ INPUT CARD>  3S  10     2.9836                                                             
+ INPUT CARD>  4S  10    10.0558                                                             
+ INPUT CARD>  4S  10     1.7339                                                             
+ INPUT CARD>  4S  10     1.1548                                                             
+ INPUT CARD>  4S  10     0.8074                                                             
+ INPUT CARD>  2P  10    31.2091                                                             
+ INPUT CARD>  2P  10    12.6896                                                             
+ INPUT CARD>  2P  10     6.5469                                                             
+ INPUT CARD>  2P  10     2.7945                                                             
+ INPUT CARD>  3P  10    10.0778                                                             
+ INPUT CARD>  3P  10     2.3661                                                             
+ INPUT CARD>  3P  10     1.4540                                                             
+ INPUT CARD>  3D  10     9.8549                                                             
+ INPUT CARD>  3D  10     4.8498                                                             
+ INPUT CARD>  3D  10     2.9200                                                             
+ INPUT CARD>  3D  10     1.7389                                                             
+ INPUT CARD>  3D  10     1.0594                                                             
+ INPUT CARD>                                                                                
+ INPUT CARD> $END                                                                           
+ INPUT CARD>--- OPEN SHELL ORBITALS --- GENERATED AT Sat Apr  1 11:49:57 2017               
+ INPUT CARD>Sc ROHF with D4H symmetry and Bunge basis                                       
+  100000000 WORDS OF MEMORY AVAILABLE
+
+
+     RUN TITLE
+     ---------
+ Sc ROHF with D4H symmetry and Bunge basis                                       
+
+ THE POINT GROUP OF THE MOLECULE IS DNH     
+ THE ORDER OF THE PRINCIPAL AXIS IS     2
+
+ ATOM      ATOMIC                      COORDINATES (BOHR)
+           CHARGE         X                   Y                   Z
+ SC         21.0     0.0000000000        0.0000000000        0.0000000000
+
+          INTERNUCLEAR DISTANCES (ANGS.)
+          ------------------------------
+
+                1 SC    
+
+   1 SC      0.0000000  
+
+  * ... LESS THAN  3.000
+
+ ATOMS: STO-NG TYPE BASIS SET
+
+     ATOMIC BASIS SET
+     ----------------
+ THE CONTRACTED PRIMITIVE FUNCTIONS HAVE BEEN UNNORMALIZED
+
+ SHELL TYPE PRIMITIVE    SLATER EXPONENT     EXPONENT          CONTRACTION COEFFICIENTS
+
+ SC        
+
+   1   1S      1            21.7237000        128644.2103843      0.000423192570
+   1   1S      2                               23592.2288109      0.002381039318
+   1   1S      3                                6606.0187258      0.009323817678
+   1   1S      4                                2275.6035650      0.029449066147
+   1   1S      5                                 892.3330101      0.078182257712
+   1   1S      6                                 383.1596834      0.172173917294
+   1   1S      7                                 176.0358939      0.293804943562
+   1   1S      8                                  85.1223987      0.335431635380
+   1   1S      9                                  42.6127520      0.193156674504
+   1   1S     10                                  21.3721828      0.030650811270
+
+   2   2S     11            18.5964000        131436.3948651     -0.000161084288
+   2   2S     12                               24107.1223880     -0.000902043073
+   2   2S     13                                6746.9978937     -0.003484545043
+   2   2S     14                                2318.3144021     -0.010623130016
+   2   2S     15                                 902.2916793     -0.025615792722
+   2   2S     16                                 382.0156052     -0.040985733271
+   2   2S     17                                  83.3303539      0.203561156988
+   2   2S     18                                  42.5291127      0.460497528315
+   2   2S     19                                  22.6505496      0.350348800421
+   2   2S     20                                  12.1621639      0.058966025710
+
+   3   2S     21             8.5331000         27673.9754063     -0.000161084288
+   3   2S     22                                5075.7624079     -0.000902043073
+   3   2S     23                                1420.5825865     -0.003484545043
+   3   2S     24                                 488.1218464     -0.010623130016
+   3   2S     25                                 189.9778046     -0.025615792722
+   3   2S     26                                  80.4335091     -0.040985733271
+   3   2S     27                                  17.5452329      0.203561156988
+   3   2S     28                                   8.9545184      0.460497528315
+   3   2S     29                                   4.7690805      0.350348800421
+   3   2S     30                                   2.5607475      0.058966025710
+
+   4   3S     31            26.6635000         16197.6836690     -0.000096246098
+   4   3S     32                                4531.5180416     -0.001095804386
+   4   3S     33                                1743.4711464     -0.006813541055
+   4   3S     34                                 785.1698834     -0.028354806826
+   4   3S     35                                 390.8621250     -0.078944660723
+   4   3S     36                                 209.2216472     -0.122064769268
+   4   3S     37                                  70.1549352      0.357812821865
+   4   3S     38                                  42.9325694      0.524196505547
+   4   3S     39                                  26.7692794      0.238117516041
+   4   3S     40                                  16.5253114      0.022446893156
+
+   5   3S     41             6.3629000           922.4201798     -0.000096246098
+   5   3S     42                                 258.0593480     -0.001095804386
+   5   3S     43                                  99.2866018     -0.006813541055
+   5   3S     44                                  44.7135874     -0.028354806826
+   5   3S     45                                  22.2586833     -0.078944660723
+   5   3S     46                                  11.9146832     -0.122064769268
+   5   3S     47                                   3.9951594      0.357812821865
+   5   3S     48                                   2.4449094      0.524196505547
+   5   3S     49                                   1.5244478      0.238117516041
+   5   3S     50                                   0.9410778      0.022446893156
+
+   6   3S     51             4.4087000           442.8327116     -0.000096246098
+   6   3S     52                                 123.8883573     -0.001095804386
+   6   3S     53                                  47.6652138     -0.006813541055
+   6   3S     54                                  21.4659649     -0.028354806826
+   6   3S     55                                  10.6858819     -0.078944660723
+   6   3S     56                                   5.7199654     -0.122064769268
+   6   3S     57                                   1.9179841      0.357812821865
+   6   3S     58                                   1.1737447      0.524196505547
+   6   3S     59                                   0.7318523      0.238117516041
+   6   3S     60                                   0.4517898      0.022446893156
+
+   7   3S     61             2.9836000           202.8148715     -0.000096246098
+   7   3S     62                                  56.7401653     -0.001095804386
+   7   3S     63                                  21.8303977     -0.006813541055
+   7   3S     64                                   9.8312902     -0.028354806826
+   7   3S     65                                   4.8940733     -0.078944660723
+   7   3S     66                                   2.6197117     -0.122064769268
+   7   3S     67                                   0.8784259      0.357812821865
+   7   3S     68                                   0.5375684      0.524196505547
+   7   3S     69                                   0.3351842      0.238117516041
+   7   3S     70                                   0.2069172      0.022446893156
+
+   8   4S     71            10.0558000          1862.2819599      0.007863318548
+   8   4S     72                                 521.5892152      0.029725709930
+   8   4S     73                                 201.5991063      0.058898489922
+   8   4S     74                                  46.6649570     -0.385557293892
+   8   4S     75                                  25.7028947     -1.142555117607
+   8   4S     76                                  15.0680592     -1.365504026413
+   8   4S     77                                   5.9347938      1.478232502937
+   8   4S     78                                   3.9020347      1.090389013290
+   8   4S     79                                   2.6017039      0.220208153129
+   8   4S     80                                   1.7130431      0.007728016004
+
+   9   4S     81             1.7339000            55.3681835      0.007863318548
+   9   4S     82                                  15.5075590      0.029725709930
+   9   4S     83                                   5.9938165      0.058898489922
+   9   4S     84                                   1.3874128     -0.385557293892
+   9   4S     85                                   0.7641821     -1.142555117607
+   9   4S     86                                   0.4479940     -1.365504026413
+   9   4S     87                                   0.1764495      1.478232502937
+   9   4S     88                                   0.1160128      1.090389013290
+   9   4S     89                                   0.0773522      0.220208153129
+   9   4S     90                                   0.0509311      0.007728016004
+
+  10   4S     91             1.1548000            24.5598513      0.007863318548
+  10   4S     92                                   6.8787401      0.029725709930
+  10   4S     93                                   2.6586973      0.058898489922
+  10   4S     94                                   0.6154194     -0.385557293892
+  10   4S     95                                   0.3389708     -1.142555117607
+  10   4S     96                                   0.1987182     -1.365504026413
+  10   4S     97                                   0.0782683      1.478232502937
+  10   4S     98                                   0.0514602      1.090389013290
+  10   4S     99                                   0.0343114      0.220208153129
+  10   4S    100                                   0.0225917      0.007728016004
+
+  11   4S    101             0.8074000            12.0057604      0.007863318548
+  11   4S    102                                   3.3625817      0.029725709930
+  11   4S    103                                   1.2996692      0.058898489922
+  11   4S    104                                   0.3008397     -0.385557293892
+  11   4S    105                                   0.1657014     -1.142555117607
+  11   4S    106                                   0.0971408     -1.365504026413
+  11   4S    107                                   0.0382604      1.478232502937
+  11   4S    108                                   0.0251556      1.090389013290
+  11   4S    109                                   0.0167727      0.220208153129
+  11   4S    110                                   0.0110436      0.007728016004
+
+  12   2P    111            31.2091000         41575.1356749      0.000255017076
+  12   2P    112                               10860.2121188      0.001829099841
+  12   2P    113                                3899.7667432      0.008612751029
+  12   2P    114                                1642.7330539      0.031150894240
+  12   2P    115                                 765.3547387      0.089759565890
+  12   2P    116                                 382.7008528      0.201379358768
+  12   2P    117                                 201.5956653      0.325596928596
+  12   2P    118                                 110.3032862      0.326958388090
+  12   2P    119                                  61.7272332      0.155687600374
+  12   2P    120                                  34.2467730      0.019753307104
+
+  13   2P    121            12.6896000          6873.3277062      0.000255017076
+  13   2P    122                                1795.4432533      0.001829099841
+  13   2P    123                                 644.7212828      0.008612751029
+  13   2P    124                                 271.5816180      0.031150894240
+  13   2P    125                                 126.5307700      0.089759565890
+  13   2P    126                                  63.2692674      0.201379358768
+  13   2P    127                                  33.3284077      0.325596928596
+  13   2P    128                                  18.2356743      0.326958388090
+  13   2P    129                                  10.2049337      0.155687600374
+  13   2P    130                                   5.6617805      0.019753307104
+
+  14   2P    131             6.5469000          1829.5429122      0.000255017076
+  14   2P    132                                 477.9112271      0.001829099841
+  14   2P    133                                 171.6119620      0.008612751029
+  14   2P    134                                  72.2896165      0.031150894240
+  14   2P    135                                  33.6799704      0.089759565890
+  14   2P    136                                  16.8410186      0.201379358768
+  14   2P    137                                   8.8713582      0.325596928596
+  14   2P    138                                   4.8539732      0.326958388090
+  14   2P    139                                   2.7163501      0.155687600374
+  14   2P    140                                   1.5070532      0.019753307104
+
+  15   2P    141             2.7945000           333.3338462      0.000255017076
+  15   2P    142                                  87.0731079      0.001829099841
+  15   2P    143                                  31.2668672      0.008612751029
+  15   2P    144                                  13.1708176      0.031150894240
+  15   2P    145                                   6.1363273      0.089759565890
+  15   2P    146                                   3.0683519      0.201379358768
+  15   2P    147                                   1.6163184      0.325596928596
+  15   2P    148                                   0.8843704      0.326958388090
+  15   2P    149                                   0.4949058      0.155687600374
+  15   2P    150                                   0.2745778      0.019753307104
+
+  16   3P    151            10.0778000          5831.2279739     -0.000055044660
+  16   3P    152                                1521.2146048     -0.000388204760
+  16   3P    153                                 543.7301635     -0.001755956793
+  16   3P    154                                 226.4682216     -0.005718931556
+  16   3P    155                                 103.5681212     -0.011714054272
+  16   3P    156                                  26.4621949      0.094200424850
+  16   3P    157                                  14.5447963      0.305869162083
+  16   3P    158                                   8.3383516      0.423610746861
+  16   3P    159                                   4.9065071      0.227436304092
+  16   3P    160                                   2.8713226      0.028353035450
+
+  17   3P    161             2.3661000           321.4361674     -0.000055044660
+  17   3P    162                                  83.8542747     -0.000388204760
+  17   3P    163                                  29.9721672     -0.001755956793
+  17   3P    164                                  12.4836617     -0.005718931556
+  17   3P    165                                   5.7090102     -0.011714054272
+  17   3P    166                                   1.4586819      0.094200424850
+  17   3P    167                                   0.8017563      0.305869162083
+  17   3P    168                                   0.4596369      0.423610746861
+  17   3P    169                                   0.2704626      0.227436304092
+  17   3P    170                                   0.1582766      0.028353035450
+
+  18   3P    171             1.4540000           121.3828592     -0.000055044660
+  18   3P    172                                  31.6656078     -0.000388204760
+  18   3P    173                                  11.3182887     -0.001755956793
+  18   3P    174                                   4.7141632     -0.005718931556
+  18   3P    175                                   2.1558743     -0.011714054272
+  18   3P    176                                   0.5508371      0.094200424850
+  18   3P    177                                   0.3027645      0.305869162083
+  18   3P    178                                   0.1735712      0.423610746861
+  18   3P    179                                   0.1021339      0.227436304092
+  18   3P    180                                   0.0597695      0.028353035450
+
+  19   3D    181             9.8549000          1300.7931644      0.000178817631
+  19   3D    182                                 418.6404027      0.001556501375
+  19   3D    183                                 174.7541591      0.008423312567
+  19   3D    184                                  83.2486206      0.033440444618
+  19   3D    185                                  43.1197809      0.100887432694
+  19   3D    186                                  23.6812722      0.225321233273
+  19   3D    187                                  13.5716096      0.344351470470
+  19   3D    188                                   8.0140184      0.311593115330
+  19   3D    189                                   4.8059268      0.128915205598
+  19   3D    190                                   2.8420273      0.013938680291
+
+  20   3D    191             4.8498000           315.0296719      0.000178817631
+  20   3D    192                                 101.3874860      0.001556501375
+  20   3D    193                                  42.3224437      0.008423312567
+  20   3D    194                                  20.1613803      0.033440444618
+  20   3D    195                                  10.4428673      0.100887432694
+  20   3D    196                                   5.7351957      0.225321233273
+  20   3D    197                                   3.2868098      0.344351470470
+  20   3D    198                                   1.9408570      0.311593115330
+  20   3D    199                                   1.1639126      0.128915205598
+  20   3D    200                                   0.6882900      0.013938680291
+
+  21   3D    201             2.9200000           114.2008945      0.000178817631
+  21   3D    202                                  36.7538128      0.001556501375
+  21   3D    203                                  15.3422403      0.008423312567
+  21   3D    204                                   7.3086692      0.033440444618
+  21   3D    205                                   3.7856269      0.100887432694
+  21   3D    206                                   2.0790565      0.225321233273
+  21   3D    207                                   1.1914961      0.344351470470
+  21   3D    208                                   0.7035769      0.311593115330
+  21   3D    209                                   0.4219281      0.128915205598
+  21   3D    210                                   0.2495109      0.013938680291
+
+  22   3D    211             1.7389000            40.4998130      0.000178817631
+  22   3D    212                                  13.0342459      0.001556501375
+  22   3D    213                                   5.4409194      0.008423312567
+  22   3D    214                                   2.5919213      0.033440444618
+  22   3D    215                                   1.3425217      0.100887432694
+  22   3D    216                                   0.7373095      0.225321233273
+  22   3D    217                                   0.4225481      0.344351470470
+  22   3D    218                                   0.2495141      0.311593115330
+  22   3D    219                                   0.1496311      0.128915205598
+  22   3D    220                                   0.0884857      0.013938680291
+
+  23   3D    221             1.0594000            15.0322413      0.000178817631
+  23   3D    222                                   4.8378972      0.001556501375
+  23   3D    223                                   2.0194961      0.008423312567
+  23   3D    224                                   0.9620387      0.033440444618
+  23   3D    225                                   0.4983013      0.100887432694
+  23   3D    226                                   0.2736658      0.225321233273
+  23   3D    227                                   0.1568364      0.344351470470
+  23   3D    228                                   0.0926117      0.311593115330
+  23   3D    229                                   0.0555383      0.128915205598
+  23   3D    230                                   0.0328431      0.013938680291
+
+ TOTAL NUMBER OF BASIS SET SHELLS             =   23
+ NUMBER OF CARTESIAN GAUSSIAN BASIS FUNCTIONS =   62
+ NOTE: THIS RUN WILL RESTRICT THE MO VARIATION SPACE TO SPHERICAL HARMONICS.
+ THE NUMBER OF ORBITALS KEPT IN THE VARIATIONAL SPACE WILL BE PRINTED LATER.
+ NUMBER OF ELECTRONS                          =   21
+ CHARGE OF MOLECULE                           =    0
+ SPIN MULTIPLICITY                            =    2
+ NUMBER OF OCCUPIED ORBITALS (ALPHA)          =   11
+ NUMBER OF OCCUPIED ORBITALS (BETA )          =   10
+ TOTAL NUMBER OF ATOMS                        =    1
+ THE NUCLEAR REPULSION ENERGY IS        0.0000000000
+
+ THIS MOLECULE IS RECOGNIZED AS BEING LINEAR,
+ ORBITAL LZ DEGENERACY TOLERANCE ETOLLZ= 1.00E-06
+
+     $CONTRL OPTIONS
+     ---------------
+ SCFTYP=NONE         RUNTYP=ENERGY       EXETYP=RUN     
+ MPLEVL=       0     CITYP =GUGA         CCTYP =NONE         VBTYP =NONE    
+ DFTTYP=NONE         TDDFT =NONE    
+ MULT  =       2     ICHARG=       0     NZVAR =       0     COORD =UNIQUE  
+ PP    =NONE         RELWFN=NONE         LOCAL =NONE         NUMGRD=       F
+ ISPHER=       1     NOSYM =       0     MAXIT =     200     UNITS =BOHR    
+ PLTORB=       F     MOLPLT=       F     AIMPAC=       F     FRIEND=        
+ NPRINT=       7     IREST =       0     GEOM  =INPUT   
+ NORMF =       1     NORMP =       0     ITOL  =      20     ICUT  =       9
+ INTTYP=BEST         GRDTYP=BEST         QMTTOL= 1.0E-06
+
+     $SYSTEM OPTIONS
+     ---------------
+  REPLICATED MEMORY=   100000000 WORDS (ON EVERY NODE).
+ DISTRIBUTED MEMDDI=           0 MILLION WORDS IN AGGREGATE,
+ MEMDDI DISTRIBUTED OVER   1 PROCESSORS IS           0 WORDS/PROCESSOR.
+ TOTAL MEMORY REQUESTED ON EACH PROCESSOR=   100000000 WORDS.
+ TIMLIM=      525600.00 MINUTES, OR   365.00 DAYS.
+ PARALL= F  BALTYP=  DLB     KDIAG=    0  COREFL= F
+
+          ----------------
+          PROPERTIES INPUT
+          ----------------
+
+     MOMENTS            FIELD           POTENTIAL          DENSITY
+ IEMOM =       1   IEFLD =       0   IEPOT =       0   IEDEN =       0
+ WHERE =COMASS     WHERE =NUCLEI     WHERE =NUCLEI     WHERE =NUCLEI  
+ OUTPUT=BOTH       OUTPUT=BOTH       OUTPUT=PUNCH      OUTPUT=BOTH    
+ IEMINT=       0   IEFINT=       0                     IEDINT=       0
+                                                       MORB  =       0
+          EXTRAPOLATION IN EFFECT
+          SOSCF IN EFFECT
+ ORBITAL PRINTING OPTION: NPREO=     1    62     2     1
+
+     -------------------------------
+     INTEGRAL TRANSFORMATION OPTIONS
+     -------------------------------
+     NWORD  =         0     CUTOFF = 1.0E-09
+     MPTRAN =         0     DIRTRF =       F
+     AOINTS =DUP     
+
+          ----------------------
+          INTEGRAL INPUT OPTIONS
+          ----------------------
+ NOPK  =       1 NORDER=       0 SCHWRZ=       F
+
+     ------------------------------------------
+     THE POINT GROUP IS DNH, NAXIS= 2, ORDER= 8
+     ------------------------------------------
+
+ -- VARIATIONAL SPACE WILL BE RESTRICTED TO PURE SPHERICAL HARMONICS ONLY --
+ AFTER EXCLUDING CONTAMINANT COMBINATIONS FROM THE CARTESIAN GAUSSIAN BASIS
+ SET, THE NUMBER OF SPHERICAL HARMONICS KEPT IN THE VARIATION SPACE IS   57
+
+     DIMENSIONS OF THE SYMMETRY SUBSPACES ARE
+ AG  =   21     AU  =    0     B3U =    7     B3G =    5     B1G =    5
+ B1U =    7     B2U =    7     B2G =    5
+
+ ..... DONE SETTING UP THE RUN .....
+ STEP CPU TIME =     0.02 TOTAL CPU TIME =        0.0 (    0.0 MIN)
+ TOTAL WALL CLOCK TIME=        0.0 SECONDS, CPU UTILIZATION IS 100.00%
+
+          ********************
+          1 ELECTRON INTEGRALS
+          ********************
+ ...... END OF ONE-ELECTRON INTEGRALS ......
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =        0.0 (    0.0 MIN)
+ TOTAL WALL CLOCK TIME=        0.0 SECONDS, CPU UTILIZATION IS  75.00%
+
+          -------------
+          GUESS OPTIONS
+          -------------
+          GUESS =MOREAD            NORB  =      57          NORDER=       0
+          MIX   =       F          PRTMO =       T          PUNMO =       F
+          TOLZ  = 1.0E-08          TOLE  = 1.0E-05
+          SYMDEN=       F          PURIFY=       F
+
+ INITIAL GUESS ORBITALS GENERATED BY MOREAD   ROUTINE.
+
+ STATISTICS FOR GENERATION OF SYMMETRY ORBITAL -Q- MATRIX
+ NUMBER OF CARTESIAN ATOMIC ORBITALS=         62
+ NUMBER OF SPHERICAL CONTAMINANTS DROPPED=     5
+ NUMBER OF LINEARLY DEPENDENT MOS DROPPED=     0
+ TOTAL NUMBER OF MOS IN VARIATION SPACE=      57
+ EIGENVALUES ARE DIAGONAL OF 1E- H IN MO BASIS
+
+ SYMMETRIES FOR INITIAL GUESS ORBITALS FOLLOW.   BOTH SET(S).
+    11 ORBITALS ARE OCCUPIED (    9 CORE ORBITALS).
+     1=AG       2=AG       3=B3U      4=B2U      5=B1U      6=AG       7=B3U 
+     8=B2U      9=B1U     10=AG      11=AG      12=AG      13=B1G     14=B2G 
+    15=B3G     16=B3U     17=B2U     18=B1U     19=AG      20=AG      21=AG  
+    22=B1G     23=B2G     24=B3G     25=AG      26=AG      27=AG      28=B1G 
+    29=B2G     30=B3G     31=B3U     32=B2U     33=B1U     34=AG      35=AG  
+    36=AG      37=B1G     38=B2G     39=B3G     40=B3U     41=B2U     42=B1U 
+    43=AG      44=AG      45=AG      46=B1G     47=B2G     48=B3G     49=AG  
+    50=B2U     51=B3U     52=B1U     53=AG      54=B3U     55=B2U     56=B1U 
+    57=AG  
+
+                              ----------------------
+                              INITIAL GUESS ORBITALS
+                              ----------------------
+
+                        1              2              3              4              5
+                 -220.362886132  -53.451796016  -52.753626519  -52.753626519  -52.753626519
+                       AG             AG             B3U            B2U            B1U 
+    1  SC 1  S      0.929226267   -0.270646407    0.000000000    0.000000000    0.000000000
+    2  SC 1  S      0.076947027   -0.163569993    0.000000000    0.000000000    0.000000000
+    3  SC 1  S      0.001476017    1.031828254    0.000000000    0.000000000    0.000000000
+    4  SC 1  S      0.010168224    0.002040830    0.000000000    0.000000000    0.000000000
+    5  SC 1  S      0.000126055    0.133337296    0.000000000    0.000000000    0.000000000
+    6  SC 1  S     -0.000210622   -0.037107645    0.000000000    0.000000000    0.000000000
+    7  SC 1  S      0.000047820    0.013151108    0.000000000    0.000000000    0.000000000
+    8  SC 1  S     -0.000142403    0.011623176    0.000000000    0.000000000    0.000000000
+    9  SC 1  S     -0.000007753   -0.001613345    0.000000000    0.000000000    0.000000000
+   10  SC 1  S      0.000005416    0.001182313    0.000000000    0.000000000    0.000000000
+   11  SC 1  S     -0.000002115   -0.000458188    0.000000000    0.000000000    0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.001165833    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.001165833    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.001165833
+   15  SC 1  X      0.000000000    0.000000000    0.341578660    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.341578660    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.341578660
+   18  SC 1  X      0.000000000    0.000000000    0.415673956    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.415673956    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.415673956
+   21  SC 1  X      0.000000000    0.000000000    0.002818062    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.002818062    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.002818062
+   24  SC 1  X      0.000000000    0.000000000    0.296869707    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.296869707    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.296869707
+   27  SC 1  X      0.000000000    0.000000000   -0.001047050    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000   -0.001047050    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000   -0.001047050
+   30  SC 1  X      0.000000000    0.000000000    0.000086792    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000086792    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000086792
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                        6              7              8              9             10
+                  -19.989872913  -18.402316130  -18.402316130  -18.402316130   -6.267140837
+                       AG             B3U            B2U            B1U            AG  
+    1  SC 1  S      0.094258382    0.000000000    0.000000000    0.000000000   -0.018273918
+    2  SC 1  S      0.064020114    0.000000000    0.000000000    0.000000000   -0.010210995
+    3  SC 1  S     -0.439180081    0.000000000    0.000000000    0.000000000    0.152194363
+    4  SC 1  S     -0.002620664    0.000000000    0.000000000    0.000000000   -0.001930543
+    5  SC 1  S     -0.188655173    0.000000000    0.000000000    0.000000000    0.226627475
+    6  SC 1  S      0.629864141    0.000000000    0.000000000    0.000000000   -0.227522152
+    7  SC 1  S      0.614084809    0.000000000    0.000000000    0.000000000    0.696790062
+    8  SC 1  S     -0.012798422    0.000000000    0.000000000    0.000000000   -0.001914656
+    9  SC 1  S      0.004515980    0.000000000    0.000000000    0.000000000    0.316178963
+   10  SC 1  S     -0.002575855    0.000000000    0.000000000    0.000000000    0.194840416
+   11  SC 1  S      0.000603675    0.000000000    0.000000000    0.000000000    0.157248447
+   12  SC 1  X      0.000000000   -0.000254534    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000   -0.000254534    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.000254534    0.000000000
+   15  SC 1  X      0.000000000   -0.073759236    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000   -0.073759236    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.073759236    0.000000000
+   18  SC 1  X      0.000000000   -0.467082452    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000   -0.467082452    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.467082452    0.000000000
+   21  SC 1  X      0.000000000    0.903412723    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.903412723    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.903412723    0.000000000
+   24  SC 1  X      0.000000000   -0.010150271    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000   -0.010150271    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.010150271    0.000000000
+   27  SC 1  X      0.000000000    0.301488439    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.301488439    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.301488439    0.000000000
+   30  SC 1  X      0.000000000    0.018848745    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.018848745    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.018848745    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       11             12             13             14             15
+                  -12.235281874  -12.235281876  -10.066507126  -10.066507126  -10.066507126
+                       AG             AG             B1G            B2G            B3G 
+    1  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    2  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    3  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    4  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    5  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    6  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    7  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    8  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    9  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   10  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   11  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   15  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   18  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   27  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   30  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   33  SC 1 XX     -0.007197577    0.012466569    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY     -0.007197577   -0.012466569    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.014395154    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000    0.015212762    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.015212762    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.015212762
+   39  SC 1 XX     -0.062186099    0.107709483    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY     -0.062186099   -0.107709483    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.124372198    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.062626253    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.062626253    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.062626253
+   45  SC 1 XX     -0.174364344    0.302007903    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY     -0.174364344   -0.302007903    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.348728688    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000    0.388408994    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.388408994    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.388408994
+   51  SC 1 XX     -0.134568205    0.233078968    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY     -0.134568205   -0.233078968    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.269136410    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000   -0.075189015    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000   -0.075189015    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.075189015
+   57  SC 1 XX     -0.221954414    0.384436322    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY     -0.221954414   -0.384436322    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.443908828    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000    0.813563038    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.813563038    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.813563038
+
+                       16             17             18             19             20
+                   -7.297054487   -7.297054487   -7.297054487   -3.899421958   -7.193549893
+                       B3U            B2U            B1U            AG             AG  
+    1  SC 1  S      0.000000000    0.000000000    0.000000000    0.023381692    0.000000000
+    2  SC 1  S      0.000000000    0.000000000    0.000000000    0.011614653    0.000000000
+    3  SC 1  S      0.000000000    0.000000000    0.000000000    0.054633557    0.000000000
+    4  SC 1  S      0.000000000    0.000000000    0.000000000    0.011189694    0.000000000
+    5  SC 1  S      0.000000000    0.000000000    0.000000000   -0.413477348    0.000000000
+    6  SC 1  S      0.000000000    0.000000000    0.000000000    0.951865371    0.000000000
+    7  SC 1  S      0.000000000    0.000000000    0.000000000   -0.292287594    0.000000000
+    8  SC 1  S      0.000000000    0.000000000    0.000000000    0.026684054    0.000000000
+    9  SC 1  S      0.000000000    0.000000000    0.000000000    0.416156548    0.000000000
+   10  SC 1  S      0.000000000    0.000000000    0.000000000   -0.877346850    0.000000000
+   11  SC 1  S      0.000000000    0.000000000    0.000000000    0.979359970    0.000000000
+   12  SC 1  X      0.003174661    0.000000000    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.003174661    0.000000000    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.003174661    0.000000000    0.000000000
+   15  SC 1  X      0.134095817    0.000000000    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.134095817    0.000000000    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.134095817    0.000000000    0.000000000
+   18  SC 1  X     -0.584667802    0.000000000    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000   -0.584667802    0.000000000    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000   -0.584667802    0.000000000    0.000000000
+   21  SC 1  X      0.475160748    0.000000000    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.475160748    0.000000000    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.475160748    0.000000000    0.000000000
+   24  SC 1  X      0.395540350    0.000000000    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.395540350    0.000000000    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.395540350    0.000000000    0.000000000
+   27  SC 1  X     -1.625916729    0.000000000    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000   -1.625916729    0.000000000    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000   -1.625916729    0.000000000    0.000000000
+   30  SC 1  X      1.849632529    0.000000000    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    1.849632529    0.000000000    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    1.849632529    0.000000000    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.005500070
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.005500070
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.011000139
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.137206515
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.137206515
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.274413031
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.194757628
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.194757628
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.389515256
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.863941255
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.863941255
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000   -1.727882509
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.894488059
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.894488059
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    1.788976119
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       21             22             23             24             25
+                   -7.193549896   -8.914584156   -8.914584156   -8.914584156   -6.891476492
+                       AG             B1G            B2G            B3G            AG  
+    1  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000   -0.012660967
+    2  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000   -0.024691539
+    3  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.645896952
+    4  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.041544672
+    5  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000   -1.295339157
+    6  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    2.705949714
+    7  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000   -1.961290389
+    8  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.111848752
+    9  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    1.444273721
+   10  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000   -1.738304767
+   11  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.831556851
+   12  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   15  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   18  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   27  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   30  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   33  SC 1 XX      0.009526400    0.000000000    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY     -0.009526400    0.000000000    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000   -0.010512026    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000   -0.010512026    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000   -0.010512026    0.000000000
+   39  SC 1 XX     -0.237648656    0.000000000    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY      0.237648656    0.000000000    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.305421788    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.305421788    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.305421788    0.000000000
+   45  SC 1 XX      0.337330107    0.000000000    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY     -0.337330107    0.000000000    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000   -0.390615002    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000   -0.390615002    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000   -0.390615002    0.000000000
+   51  SC 1 XX     -1.496390147    0.000000000    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY      1.496390147    0.000000000    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    1.861212638    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    1.861212638    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    1.861212638    0.000000000
+   57  SC 1 XX      1.549298765    0.000000000    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY     -1.549298765    0.000000000    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000   -1.692643835    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000   -1.692643835    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000   -1.692643835    0.000000000
+
+                       26             27             28             29             30
+                  -11.434149242  -11.434149238  -11.815100324  -11.815100324  -11.815100324
+                       AG             AG             B1G            B2G            B3G 
+    1  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    2  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    3  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    4  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    5  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    6  SC 1  S      0.000000018    0.000000000    0.000000000    0.000000000    0.000000000
+    7  SC 1  S     -0.000000012    0.000000000    0.000000000    0.000000000    0.000000000
+    8  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    9  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   10  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   11  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   15  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   18  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   27  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   30  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   33  SC 1 XX      0.044704264   -0.077430056    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY      0.044704264    0.077430056    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ     -0.089408527    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000   -0.090438775    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000   -0.090438775    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.090438775
+   39  SC 1 XX     -0.195602573    0.338793595    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY     -0.195602573   -0.338793595    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.391205147    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.391845472    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.391845472    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.391845472
+   45  SC 1 XX      1.257471924   -2.178005262    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY      1.257471924    2.178005262    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ     -2.514943849    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000   -2.527370169    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000   -2.527370169    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -2.527370169
+   51  SC 1 XX     -1.599985537    2.771256243    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY     -1.599985537   -2.771256243    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      3.199971075    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000    3.144813302    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    3.144813302    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    3.144813302
+   57  SC 1 XX      0.681387603   -1.180197949    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY      0.681387603    1.180197949    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ     -1.362775207    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000   -1.317415885    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000   -1.317415885    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -1.317415885
+
+                       31             32             33             34             35
+                  -11.956196982  -11.956196982  -11.956196982  -10.988562587  -15.807442754
+                       B3U            B2U            B1U            AG             AG  
+    1  SC 1  S      0.000000000    0.000000000    0.000000000    0.162914950    0.000000000
+    2  SC 1  S      0.000000000    0.000000000    0.000000000    0.049230056    0.000000000
+    3  SC 1  S      0.000000000    0.000000000    0.000000000    1.150103084    0.000000000
+    4  SC 1  S      0.000000000    0.000000000    0.000000000    0.162400889    0.000000000
+    5  SC 1  S      0.000000000    0.000000000    0.000000000   -6.179004845    0.000000011
+    6  SC 1  S      0.000000000    0.000000000    0.000000000   11.571316301   -0.000000012
+    7  SC 1  S      0.000000000    0.000000000    0.000000000   -7.003412336    0.000000000
+    8  SC 1  S      0.000000000    0.000000000    0.000000000    0.411520708    0.000000000
+    9  SC 1  S      0.000000000    0.000000000    0.000000000    1.583555820    0.000000000
+   10  SC 1  S      0.000000000    0.000000000    0.000000000   -1.238416641    0.000000000
+   11  SC 1  S      0.000000000    0.000000000    0.000000000    0.497416314    0.000000000
+   12  SC 1  X     -0.014233012    0.000000000    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000   -0.014233012    0.000000000    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000   -0.014233012    0.000000000    0.000000000
+   15  SC 1  X     -0.466410537    0.000000000    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000   -0.466410537    0.000000000    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000   -0.466410537    0.000000000    0.000000000
+   18  SC 1  X      4.151782089    0.000000000    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    4.151782089    0.000000000    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    4.151782089    0.000000000    0.000000000
+   21  SC 1  X     -4.927195719    0.000000000    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000   -4.927195719    0.000000000    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000   -4.927195719    0.000000000    0.000000000
+   24  SC 1  X     -1.899750229    0.000000000    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000   -1.899750229    0.000000000    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000   -1.899750229    0.000000000    0.000000000
+   27  SC 1  X      5.054460257    0.000000000    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    5.054460257    0.000000000    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    5.054460257    0.000000000    0.000000000
+   30  SC 1  X     -1.805271975    0.000000000    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000   -1.805271975    0.000000000    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000   -1.805271975    0.000000000    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.098479583
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.098479583
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.196959165
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    1.304689707
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    1.304689707
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000   -2.609379413
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -1.839160622
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -1.839160622
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    3.678321243
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    1.217746085
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    1.217746085
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000   -2.435492170
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.420153911
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.420153911
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.840307821
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       36             37             38             39             40
+                  -15.807442750  -15.872734954  -15.872734954  -15.872734954  -15.057427500
+                       AG             B1G            B2G            B3G            B3U 
+    1  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    2  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    3  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    4  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    5  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    6  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    7  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    8  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+    9  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   10  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   11  SC 1  S      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000   -0.070594541
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   15  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000   -2.270989483
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   18  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000   12.757149331
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000   -5.706455280
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000   -8.187845267
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   27  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    3.788428104
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   30  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000   -1.006610638
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   33  SC 1 XX      0.170571641    0.000000000    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY     -0.170571641    0.000000000    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.196719544    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.196719544    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.196719544    0.000000000
+   39  SC 1 XX     -2.259788861    0.000000000    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY      2.259788861    0.000000000    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000   -2.608379375    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000   -2.608379375    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000   -2.608379375    0.000000000
+   45  SC 1 XX      3.185519641    0.000000000    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY     -3.185519641    0.000000000    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    3.666089902    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    3.666089902    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    3.666089902    0.000000000
+   51  SC 1 XX     -2.109198090    0.000000000    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY      2.109198090    0.000000000    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000   -2.423046532    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000   -2.423046532    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000   -2.423046532    0.000000000
+   57  SC 1 XX      0.727727920    0.000000000    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY     -0.727727920    0.000000000    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.835708600    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.835708600    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.835708600    0.000000000
+
+                       41             42             43             44             45
+                  -15.057427500  -15.057427500  -11.309648140   -4.616419382   -4.616419387
+                       B2U            B1U            AG             AG             AG  
+    1  SC 1  S      0.000000000    0.000000000    0.055925601    0.000000000    0.000000000
+    2  SC 1  S      0.000000000    0.000000000   -0.170792556    0.000000000    0.000000000
+    3  SC 1  S      0.000000000    0.000000000    5.577672376    0.000000000    0.000000000
+    4  SC 1  S      0.000000000    0.000000000    0.576046010    0.000000000    0.000000000
+    5  SC 1  S      0.000000000    0.000000000  -16.122229925    0.000000000    0.000000000
+    6  SC 1  S      0.000000000    0.000000000   16.501633015    0.000000000    0.000000000
+    7  SC 1  S      0.000000000    0.000000000   -6.964969772    0.000000000    0.000000000
+    8  SC 1  S      0.000000000    0.000000000    1.453656841    0.000000000    0.000000000
+    9  SC 1  S      0.000000000    0.000000000    1.037574743    0.000000000    0.000000000
+   10  SC 1  S      0.000000000    0.000000000   -0.747508684    0.000000000    0.000000000
+   11  SC 1  S      0.000000000    0.000000000    0.294934266    0.000000000    0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y     -0.070594541    0.000000000    0.000000000    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000   -0.070594541    0.000000000    0.000000000    0.000000000
+   15  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y     -2.270989483    0.000000000    0.000000000    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000   -2.270989483    0.000000000    0.000000000    0.000000000
+   18  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y     12.757149331    0.000000000    0.000000000    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000   12.757149331    0.000000000    0.000000000    0.000000000
+   21  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y     -5.706455280    0.000000000    0.000000000    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000   -5.706455280    0.000000000    0.000000000    0.000000000
+   24  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y     -8.187845267    0.000000000    0.000000000    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000   -8.187845267    0.000000000    0.000000000    0.000000000
+   27  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      3.788428104    0.000000000    0.000000000    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    3.788428104    0.000000000    0.000000000    0.000000000
+   30  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y     -1.006610638    0.000000000    0.000000000    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000   -1.006610638    0.000000000    0.000000000    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.832767086   -1.442394903
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.832767086    1.442394903
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000   -1.665534172    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000   -1.206035568    2.088914878
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000   -1.206035568   -2.088914878
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    2.412071135    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    1.146450298   -1.985710163
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    1.146450298    1.985710163
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000   -2.292900595    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000   -0.679519806    1.176962829
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000   -0.679519806   -1.176962829
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    1.359039613    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.232737241   -0.403112726
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.232737241    0.403112726
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000   -0.465474481    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       46             47             48             49             50
+                   -4.617916586   -4.617916586   -4.617916586   13.669698515   18.844120048
+                       B1G            B2G            B3G            AG             B2U 
+    1  SC 1  S      0.000000000    0.000000000    0.000000000   -0.931024805    0.000000000
+    2  SC 1  S      0.000000000    0.000000000    0.000000000   -0.474006766    0.000000000
+    3  SC 1  S      0.000000000    0.000000000    0.000000000   -4.566641677    0.000000000
+    4  SC 1  S      0.000000000    0.000000000    0.000000000   -1.855671997    0.000000000
+    5  SC 1  S      0.000000000    0.000000000    0.000000000   16.444690525    0.000000000
+    6  SC 1  S      0.000000000    0.000000000    0.000000000  -12.748124334    0.000000000
+    7  SC 1  S      0.000000000    0.000000000    0.000000000    4.739069086    0.000000000
+    8  SC 1  S      0.000000000    0.000000000    0.000000000   -3.279722386    0.000000000
+    9  SC 1  S      0.000000000    0.000000000    0.000000000   -0.651207270    0.000000000
+   10  SC 1  S      0.000000000    0.000000000    0.000000000    0.465729805    0.000000000
+   11  SC 1  S      0.000000000    0.000000000    0.000000000   -0.184233878    0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -0.322471246
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   15  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    0.514567011
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   18  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   12.468879947
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   21  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -3.650737928
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   24  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000  -11.192896347
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   27  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    2.251417172
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   30  SC 1  X      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -0.578307306
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY     -1.665502752    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000   -1.665502752    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000   -1.665502752    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      2.411715188    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    2.411715188    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    2.411715188    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY     -2.292260879    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000   -2.292260879    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000   -2.292260879    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      1.358553259    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    1.358553259    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    1.358553259    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY     -0.465305433    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000   -0.465305433    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000   -0.465305433    0.000000000    0.000000000
+
+                       51             52             53             54             55
+                   18.844120048   18.844120048  217.393944232  424.961766703  424.961766703
+                       B3U            B1U            AG             B3U            B2U 
+    1  SC 1  S      0.000000000    0.000000000    0.399538088    0.000000000    0.000000000
+    2  SC 1  S      0.000000000    0.000000000    3.051305696    0.000000000    0.000000000
+    3  SC 1  S      0.000000000    0.000000000   -1.548517913    0.000000000    0.000000000
+    4  SC 1  S      0.000000000    0.000000000   -6.870117244    0.000000000    0.000000000
+    5  SC 1  S      0.000000000    0.000000000    9.448790304    0.000000000    0.000000000
+    6  SC 1  S      0.000000000    0.000000000   -7.028835089    0.000000000    0.000000000
+    7  SC 1  S      0.000000000    0.000000000    2.584031172    0.000000000    0.000000000
+    8  SC 1  S      0.000000000    0.000000000   -2.349235787    0.000000000    0.000000000
+    9  SC 1  S      0.000000000    0.000000000   -0.356713880    0.000000000    0.000000000
+   10  SC 1  S      0.000000000    0.000000000    0.256619911    0.000000000    0.000000000
+   11  SC 1  S      0.000000000    0.000000000   -0.101999915    0.000000000    0.000000000
+   12  SC 1  X     -0.322471246    0.000000000    0.000000000   -1.821259604    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -1.821259604
+   14  SC 1  Z      0.000000000   -0.322471246    0.000000000    0.000000000    0.000000000
+   15  SC 1  X      0.514567011    0.000000000    0.000000000    1.540682637    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    1.540682637
+   17  SC 1  Z      0.000000000    0.514567011    0.000000000    0.000000000    0.000000000
+   18  SC 1  X     12.468879947    0.000000000    0.000000000    7.201627064    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    7.201627064
+   20  SC 1  Z      0.000000000   12.468879947    0.000000000    0.000000000    0.000000000
+   21  SC 1  X     -3.650737928    0.000000000    0.000000000   -1.994833908    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -1.994833908
+   23  SC 1  Z      0.000000000   -3.650737928    0.000000000    0.000000000    0.000000000
+   24  SC 1  X    -11.192896347    0.000000000    0.000000000   -7.021478492    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -7.021478492
+   26  SC 1  Z      0.000000000  -11.192896347    0.000000000    0.000000000    0.000000000
+   27  SC 1  X      2.251417172    0.000000000    0.000000000    1.230644210    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000    1.230644210
+   29  SC 1  Z      0.000000000    2.251417172    0.000000000    0.000000000    0.000000000
+   30  SC 1  X     -0.578307306    0.000000000    0.000000000   -0.318093151    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000000000   -0.318093151
+   32  SC 1  Z      0.000000000   -0.578307306    0.000000000    0.000000000    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       56             57
+                  424.961766703 2322.976674312
+                       B1U            AG  
+    1  SC 1  S      0.000000000   -5.902870660
+    2  SC 1  S      0.000000000   38.905061325
+    3  SC 1  S      0.000000000   -7.925631226
+    4  SC 1  S      0.000000000  -24.978344568
+    5  SC 1  S      0.000000000   -3.443784088
+    6  SC 1  S      0.000000000    1.841698931
+    7  SC 1  S      0.000000000   -0.550277543
+    8  SC 1  S      0.000000000    2.916510744
+    9  SC 1  S      0.000000000    0.059009330
+   10  SC 1  S      0.000000000   -0.038725206
+   11  SC 1  S      0.000000000    0.014576200
+   12  SC 1  X      0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000
+   14  SC 1  Z     -1.821259604    0.000000000
+   15  SC 1  X      0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000
+   17  SC 1  Z      1.540682637    0.000000000
+   18  SC 1  X      0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000
+   20  SC 1  Z      7.201627064    0.000000000
+   21  SC 1  X      0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000
+   23  SC 1  Z     -1.994833908    0.000000000
+   24  SC 1  X      0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000
+   26  SC 1  Z     -7.021478492    0.000000000
+   27  SC 1  X      0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000
+   29  SC 1  Z      1.230644210    0.000000000
+   30  SC 1  X      0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000
+   32  SC 1  Z     -0.318093151    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000
+   34  SC 1 YY      0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000
+   40  SC 1 YY      0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000
+   46  SC 1 YY      0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000
+   52  SC 1 YY      0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000
+   58  SC 1 YY      0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000
+ ...... END OF INITIAL ORBITAL SELECTION ......
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =        0.0 (    0.0 MIN)
+ TOTAL WALL CLOCK TIME=        0.0 SECONDS, CPU UTILIZATION IS 100.00%
+
+                    ----------------------
+                    AO INTEGRAL TECHNOLOGY
+                    ----------------------
+     S,P,L SHELL ROTATED AXIS INTEGRALS, REPROGRAMMED BY
+        KAZUYA ISHIMURA (IMS) AND JOSE SIERRA (SYNSTAR).
+     S,P,D,L SHELL ROTATED AXIS INTEGRALS PROGRAMMED BY
+        KAZUYA ISHIMURA (INSTITUTE FOR MOLECULAR SCIENCE).
+     S,P,D,F,G SHELL TO TOTAL QUARTET ANGULAR MOMENTUM SUM 5,
+        ERIC PROGRAM BY GRAHAM FLETCHER (ELORET AND NASA ADVANCED
+        SUPERCOMPUTING DIVISION, AMES RESEARCH CENTER).
+     S,P,D,F,G,L SHELL GENERAL RYS QUADRATURE PROGRAMMED BY
+        MICHEL DUPUIS (PACIFIC NORTHWEST NATIONAL LABORATORY).
+
+          --------------------
+          2 ELECTRON INTEGRALS
+          --------------------
+
+ THE -PK- OPTION IS OFF, THE INTEGRALS ARE NOT IN SUPERMATRIX FORM.
+ STORING   15000 INTEGRALS/RECORD ON DISK, USING 12 BYTES/INTEGRAL.
+ TWO ELECTRON INTEGRAL EVALUATION REQUIRES   90672 WORDS OF MEMORY.
+ II,JST,KST,LST =  1  1  1  1 NREC =         1 INTLOC =    1
+ II,JST,KST,LST =  2  1  1  1 NREC =         1 INTLOC =    2
+ II,JST,KST,LST =  3  1  1  1 NREC =         1 INTLOC =    7
+ II,JST,KST,LST =  4  1  1  1 NREC =         1 INTLOC =   22
+ II,JST,KST,LST =  5  1  1  1 NREC =         1 INTLOC =   56
+ II,JST,KST,LST =  6  1  1  1 NREC =         1 INTLOC =  121
+ II,JST,KST,LST =  7  1  1  1 NREC =         1 INTLOC =  232
+ II,JST,KST,LST =  8  1  1  1 NREC =         1 INTLOC =  407
+ II,JST,KST,LST =  9  1  1  1 NREC =         1 INTLOC =  667
+ II,JST,KST,LST = 10  1  1  1 NREC =         1 INTLOC = 1036
+ II,JST,KST,LST = 11  1  1  1 NREC =         1 INTLOC = 1541
+ II,JST,KST,LST = 12  1  1  1 NREC =         1 INTLOC = 2212
+ II,JST,KST,LST = 13  1  1  1 NREC =         1 INTLOC = 2617
+ II,JST,KST,LST = 14  1  1  1 NREC =         1 INTLOC = 3640
+ II,JST,KST,LST = 15  1  1  1 NREC =         1 INTLOC = 5389
+ II,JST,KST,LST = 16  1  1  1 NREC =         1 INTLOC = 8035
+ II,JST,KST,LST = 17  1  1  1 NREC =         1 INTLOC =11812
+ II,JST,KST,LST = 18  1  1  1 NREC =         2 INTLOC = 2017
+ II,JST,KST,LST = 19  1  1  1 NREC =         2 INTLOC = 9010
+ II,JST,KST,LST = 20  1  1  1 NREC =         3 INTLOC =13984
+ II,JST,KST,LST = 21  1  1  1 NREC =         6 INTLOC =  403
+ II,JST,KST,LST = 22  1  1  1 NREC =         9 INTLOC = 1867
+ II,JST,KST,LST = 23  1  1  1 NREC =        13 INTLOC = 7984
+ TOTAL NUMBER OF NONZERO TWO-ELECTRON INTEGRALS =              279369
+         19 INTEGRAL RECORDS WERE STORED ON DISK FILE  8.
+  ...... END OF TWO-ELECTRON INTEGRALS .....
+ STEP CPU TIME =    21.64 TOTAL CPU TIME =       21.7 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       21.7 SECONDS, CPU UTILIZATION IS 100.00%
+
+ GUGA CI OPTIONS      NRNFG     NPFLG
+ ------------------------------------
+
+ -DRT- TABLE          1         0
+ TRANSFORMATION       1         0
+ ENERGY MATRIX        1         0
+ DIAGONALIZATION      1         0
+ 1E-DENSITY MATRIX    1         0
+ 2E-DENSITY MATRIX    0         0
+ LAGRANGIAN MATRIX    0         0
+
+          -----------------------     ----------------------------
+          GUGA DISTINCT ROW TABLE     WRITTEN BY B.R.BROOKS,P.SAXE
+          -----------------------     ----------------------------
+
+      GROUP=D2H          NPRT=       2
+       FORS=       F   INTACT=       F
+       FOCI=       F   MXNINT=   50000
+       SOCI=       F   MXNEME=   10000
+     IEXCIT=       3
+
+      -CORE-    -INTERNAL-  -EXTERNAL-
+     NFZC=   9   NDOC=   1   NEXT=   0
+     NMCC=   0   NAOS=   0   NFZV=   0
+                 NBOS=   0
+                 NALP=   1
+                 NVAL=   7
+
+ THE MAXIMUM ELECTRON EXCITATION WILL BE   3
+
+ SYMMETRIES FOR THE   9 CORE,   9 ACTIVE,   0 EXTERNAL MO-S ARE
+     CORE= AG    AG    B3U   B2U   B1U   AG    B3U   B2U   B1U 
+   ACTIVE= AG    AG    AG    B1G   B2G   B3G   B3U   B2U   B1U 
+           DOC   ALP   VAL   VAL   VAL   VAL   VAL   VAL   VAL 
+
+ MOLECULAR CHARGE          =    0
+ NUMBER OF ALPHA ELECTRONS =   11
+ NUMBER OF  BETA ELECTRONS =   10
+
+ THE ELECTRONIC STATE IS  2-AG  
+
+ THE DISTINCT ROW TABLE HAS        48 ROWS.
+  THE WAVEFUNCTION CONTAINS        34 WALKS (CSF-S).
+
+
+          DETERMINANT CONTRIBUTION TO CSF'S (BETA IS MINUS)
+          -------------------------------------------------
+ CASE VECTOR =       1
+ 111111124
+
+ FOR MS=S-0
+ CSF      1: C(  1)=-1.000000 :   10 11-11
+ CASE VECTOR =       2
+ 111111142
+
+ FOR MS=S-0
+ CSF      2: C(  1)= 1.000000 :   10-10 11
+ CASE VECTOR =       3
+ 111111412
+
+ FOR MS=S-0
+ CSF      3: C(  1)= 1.000000 :   14-14 11
+ CASE VECTOR =       4
+ 111111421
+
+ FOR MS=S-0
+ CSF      4: C(  1)= 1.000000 :   14-14 10
+ CASE VECTOR =       5
+ 111114112
+
+ FOR MS=S-0
+ CSF      5: C(  1)= 1.000000 :   15-15 11
+ CASE VECTOR =       6
+ 111114121
+
+ FOR MS=S-0
+ CSF      6: C(  1)= 1.000000 :   15-15 10
+ CASE VECTOR =       7
+ 111141112
+
+ FOR MS=S-0
+ CSF      7: C(  1)= 1.000000 :   18-18 11
+ CASE VECTOR =       8
+ 111141121
+
+ FOR MS=S-0
+ CSF      8: C(  1)= 1.000000 :   18-18 10
+ CASE VECTOR =       9
+ 111212311
+
+ FOR MS=S-0
+ CSF      9: C(  1)= 0.408248 :  -13 15 14
+             C(  2)= 0.408248 :   13-15 14
+             C(  3)=-0.816497 :   13 15-14
+ CASE VECTOR =      10
+ 111213211
+
+ FOR MS=S-0
+ CSF     10: C(  1)=-0.707107 :  -13 15 14
+             C(  2)= 0.707107 :   13-15 14
+ CASE VECTOR =      11
+ 111411112
+
+ FOR MS=S-0
+ CSF     11: C(  1)= 1.000000 :   13-13 11
+ CASE VECTOR =      12
+ 111411121
+
+ FOR MS=S-0
+ CSF     12: C(  1)= 1.000000 :   13-13 10
+ CASE VECTOR =      13
+ 112123111
+
+ FOR MS=S-0
+ CSF     13: C(  1)= 0.408248 :  -17 18 15
+             C(  2)= 0.408248 :   17-18 15
+             C(  3)=-0.816497 :   17 18-15
+ CASE VECTOR =      14
+ 112132111
+
+ FOR MS=S-0
+ CSF     14: C(  1)=-0.707107 :  -17 18 15
+             C(  2)= 0.707107 :   17-18 15
+ CASE VECTOR =      15
+ 114111112
+
+ FOR MS=S-0
+ CSF     15: C(  1)= 1.000000 :   17-17 11
+ CASE VECTOR =      16
+ 114111121
+
+ FOR MS=S-0
+ CSF     16: C(  1)= 1.000000 :   17-17 10
+ CASE VECTOR =      17
+ 121121311
+
+ FOR MS=S-0
+ CSF     17: C(  1)= 0.408248 :  -16 18 14
+             C(  2)= 0.408248 :   16-18 14
+             C(  3)=-0.816497 :   16 18-14
+ CASE VECTOR =      18
+ 121131211
+
+ FOR MS=S-0
+ CSF     18: C(  1)=-0.707107 :  -16 18 14
+             C(  2)= 0.707107 :   16-18 14
+ CASE VECTOR =      19
+ 122311111
+
+ FOR MS=S-0
+ CSF     19: C(  1)= 0.408248 :  -16 17 13
+             C(  2)= 0.408248 :   16-17 13
+             C(  3)=-0.816497 :   16 17-13
+ CASE VECTOR =      20
+ 123211111
+
+ FOR MS=S-0
+ CSF     20: C(  1)=-0.707107 :  -16 17 13
+             C(  2)= 0.707107 :   16-17 13
+ CASE VECTOR =      21
+ 141111112
+
+ FOR MS=S-0
+ CSF     21: C(  1)= 1.000000 :   16-16 11
+ CASE VECTOR =      22
+ 141111121
+
+ FOR MS=S-0
+ CSF     22: C(  1)= 1.000000 :   16-16 10
+ CASE VECTOR =      23
+ 211111114
+
+ FOR MS=S-0
+ CSF     23: C(  1)=-1.000000 :   12 11-11
+ CASE VECTOR =      24
+ 211111123
+
+ FOR MS=S-0
+ CSF     24: C(  1)= 0.408248 :  -12 10 11
+             C(  2)= 0.408248 :   12-10 11
+             C(  3)=-0.816497 :   12 10-11
+ CASE VECTOR =      25
+ 211111132
+
+ FOR MS=S-0
+ CSF     25: C(  1)=-0.707107 :  -12 10 11
+             C(  2)= 0.707107 :   12-10 11
+ CASE VECTOR =      26
+ 211111141
+
+ FOR MS=S-0
+ CSF     26: C(  1)=-1.000000 :   12 10-10
+ CASE VECTOR =      27
+ 211111411
+
+ FOR MS=S-0
+ CSF     27: C(  1)=-1.000000 :   12 14-14
+ CASE VECTOR =      28
+ 211114111
+
+ FOR MS=S-0
+ CSF     28: C(  1)=-1.000000 :   12 15-15
+ CASE VECTOR =      29
+ 211141111
+
+ FOR MS=S-0
+ CSF     29: C(  1)=-1.000000 :   12 18-18
+ CASE VECTOR =      30
+ 211411111
+
+ FOR MS=S-0
+ CSF     30: C(  1)=-1.000000 :   12 13-13
+ CASE VECTOR =      31
+ 214111111
+
+ FOR MS=S-0
+ CSF     31: C(  1)=-1.000000 :   12 17-17
+ CASE VECTOR =      32
+ 241111111
+
+ FOR MS=S-0
+ CSF     32: C(  1)=-1.000000 :   12 16-16
+ CASE VECTOR =      33
+ 411111112
+
+ FOR MS=S-0
+ CSF     33: C(  1)= 1.000000 :   12-12 11
+ CASE VECTOR =      34
+ 411111121
+
+ FOR MS=S-0
+ CSF     34: C(  1)= 1.000000 :   12-12 10
+
+ TOTAL NUMBER OF INTEGRALS =        200
+ NUMBER OF INTEGRALS/GROUP =        200
+ NUMBER OF INTEGRAL GROUPS =          1
+ MAXIMUM RECORD SIZES ARE     500 FOR UNIT 11      34 FOR UNIT 12
+                            30001 FOR UNIT 15   30001 FOR UNIT 16
+ ...... END OF -DRT- GENERATION ...... 
+ STEP CPU TIME =     0.25 TOTAL CPU TIME =       21.9 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       21.9 SECONDS, CPU UTILIZATION IS  99.91%
+
+     --------------------------------------------
+     PARTIAL TWO ELECTRON INTEGRAL TRANSFORMATION
+     --------------------------------------------
+
+ NUMBER OF CORE MOLECULAR ORBITALS     =    9
+ NUMBER OF OCCUPIED MOLECULAR ORBITALS =   18
+ TOTAL NUMBER OF MOLECULAR ORBITALS    =   18
+ TOTAL NUMBER OF ATOMIC ORBITALS       =   62
+ THRESHOLD FOR KEEPING TRANSFORMED 2E- INTEGRALS = 1.000E-09
+ AO INTEGRALS WILL BE READ IN FROM DISK...
+ EVALUATING THE FROZEN CORE ENERGY...
+ ----- FROZEN CORE ENERGY =      -758.1861196198
+ # OF WORDS AVAILABLE =  100000000
+ # OF WORDS NEEDED    =    1169120 FOR IN MEMORY TRANSFORMATION
+
+ CHOOSING IN MEMORY PARTIAL TRANSFORMATION...
+ TOTAL NUMBER OF TRANSFORMED 2E- INTEGRALS KEPT =       155
+ ... END OF INTEGRAL TRANSFORMATION ...
+ STEP CPU TIME =     0.03 TOTAL CPU TIME =       22.0 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       22.0 SECONDS, CPU UTILIZATION IS  99.77%
+
+          ------------------------
+          GUGA-CI INTEGRAL SORTING
+          ------------------------
+
+     80325 WORDS NEEDED TO SORT            200 GUGA INTEGRALS IN MEMORY
+ 100000000 WORDS ARE AVAILABLE
+ CHOOSING IN-MEMORY SORTING...
+ IN CORE ALGORITHM SORTED             12 NON-ZERO 1E- INTEGRALS
+ IN CORE ALGORITHM SORTED            155 NON-ZERO 2E- INTEGRALS
+ ...... END OF INTEGRAL SORTING ...... 
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =       22.0 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       22.0 SECONDS, CPU UTILIZATION IS  99.77%
+
+ -------------------------     ---------------------------------------
+ ENERGY MATRIX CALCULATION     WRITTEN BY B.R.BROOKS,W.D.LAIDIG,P.SAXE
+ -------------------------     ---------------------------------------
+
+ COMPUTING THE HAMILTONIAN FOR THE        34 CSF-S...
+
+         394 IS THE TOTAL NUMBER OF GENERATED LOOPS
+         394 WERE CREATED BY THE LOOP-DRIVEN ALGORITHM
+           0 WERE CREATED IMPLICITLY
+
+         329 IS THE TOTAL NUMBER OF PROCESSED LOOPS
+          94     DIAGONAL LOOPS ARE STORED ON WORK15 IN     1 BUFFERS OF  10000 ELEMENTS.
+         235 OFF DIAGONAL LOOPS ARE STORED ON WORK16 IN     1 BUFFERS OF  10000 ELEMENTS.
+ ...... END OF ENERGY MATRIX CALCULATION ...... 
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =       22.0 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       22.0 SECONDS, CPU UTILIZATION IS  99.77%
+
+          -----------------------------------------
+          DAVIDSON METHOD CI-MATRIX DIAGONALIZATION
+                   WRITTEN BY STEVE ELBERT
+          -----------------------------------------
+ NUMBER OF STATES REQUESTED =     1
+ MAX. NUMB. OF EXPAN. VEC   =    30
+ MAX. NUMB. IMPROVED STATES =     1
+ MAX. NUMB. OF ITERATIONS   =    50
+ CONVERGENCE CRITERION      =    1.0E-06
+
+ CHOOSING TO SOLVE SECULAR EQUATION IN MEMORY
+ NUMBER OF WORDS AVAILABLE =  100000000
+ NUMBER OF WORDS USED      =      32035
+ ENERGY MATRIX BUFFER SIZE =      10000
+ SOLUTION FOUND WITH DIRECT METHOD
+
+ STATE #    1  ENERGY =    -759.746241766
+
+      CSF      COEF    OCCUPANCY (IGNORING CORE)
+      ---      ----    --------- --------- -----
+        3    0.003631766  010020000
+        4   -0.055856100  100020000
+        5   -0.003631232  010002000
+        6    0.055855565  100002000
+        9    0.003133567  000111000
+       10   -0.005427601  000111000
+       13   -0.008706085  000001011
+       14    0.006892538  000001011
+       15   -0.005532441  010000020
+       16    0.060604997  100000020
+       17    0.008705835  000010101
+       18   -0.006892604  000010101
+       19    0.017411920  000100110
+       21    0.005534145  010000200
+       22   -0.060604417  100000200
+       23   -0.019649423  021000000
+       24    0.069338485  111000000
+       25   -0.040032593  111000000
+       26    0.972397352  201000000
+       27   -0.036420779  001020000
+       28   -0.036420719  001002000
+       29   -0.105992742  001000002
+       30   -0.030130808  001200000
+       31   -0.096408752  001000020
+       32   -0.096408843  001000200
+ ...... END OF CI-MATRIX DIAGONALIZATION ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =       22.0 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       22.0 SECONDS, CPU UTILIZATION IS  99.77%
+
+          --------------------------------------
+          CI DENSITY MATRIX AND NATURAL ORBITALS
+          --------------------------------------
+ PROPERTIES WILL BE COMPUTED FOR STATE -IROOT-   1 WITH E=     -759.7462417658
+ NFLGDM=   1
+ NWORD=         0  IBLOCK=   0
+ NUMBER OF STATES         =      1
+ NUMBER OF CONFIGURATIONS =     34
+
+          CI EIGENSTATE    1 TOTAL ENERGY =     -759.7462417658
+          DENSITY MATRIX OF STATE   1 SAVED FOR PROPERTY ANALYSIS
+
+          NATURAL ORBITALS IN ATOMIC ORBITAL BASIS
+          ----------------------------------------
+
+                        1              2              3              4              5
+                    2.000000000    2.000000000    2.000000000    2.000000000    2.000000000
+                       AG             AG             B3U            B2U            B1U 
+    1  SC 1  S      0.929226267   -0.270646407    0.000000000    0.000000000    0.000000000
+    2  SC 1  S      0.076947027   -0.163569993    0.000000000    0.000000000    0.000000000
+    3  SC 1  S      0.001476017    1.031828254    0.000000000    0.000000000    0.000000000
+    4  SC 1  S      0.010168224    0.002040830    0.000000000    0.000000000    0.000000000
+    5  SC 1  S      0.000126055    0.133337296    0.000000000    0.000000000    0.000000000
+    6  SC 1  S     -0.000210622   -0.037107645    0.000000000    0.000000000    0.000000000
+    7  SC 1  S      0.000047820    0.013151108    0.000000000    0.000000000    0.000000000
+    8  SC 1  S     -0.000142403    0.011623176    0.000000000    0.000000000    0.000000000
+    9  SC 1  S     -0.000007753   -0.001613345    0.000000000    0.000000000    0.000000000
+   10  SC 1  S      0.000005416    0.001182313    0.000000000    0.000000000    0.000000000
+   11  SC 1  S     -0.000002115   -0.000458188    0.000000000    0.000000000    0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.001165833    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000    0.000000000    0.001165833    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.001165833
+   15  SC 1  X      0.000000000    0.000000000    0.341578660    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000    0.000000000    0.341578660    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.341578660
+   18  SC 1  X      0.000000000    0.000000000    0.415673956    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000    0.000000000    0.415673956    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.415673956
+   21  SC 1  X      0.000000000    0.000000000    0.002818062    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.000000000    0.002818062    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.002818062
+   24  SC 1  X      0.000000000    0.000000000    0.296869707    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000    0.000000000    0.296869707    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.296869707
+   27  SC 1  X      0.000000000    0.000000000   -0.001047050    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.000000000   -0.001047050    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000   -0.001047050
+   30  SC 1  X      0.000000000    0.000000000    0.000086792    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.000000000    0.000086792    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.000000000    0.000086792
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                        6              7              8              9             10
+                    2.000000000    2.000000000    2.000000000    2.000000000    1.912575961
+                       AG             B3U            B2U            B1U            AG  
+    1  SC 1  S      0.094258382    0.000000000    0.000000000    0.000000000   -0.018266888
+    2  SC 1  S      0.064020114    0.000000000    0.000000000    0.000000000   -0.010207068
+    3  SC 1  S     -0.439180081    0.000000000    0.000000000    0.000000000    0.152135818
+    4  SC 1  S     -0.002620664    0.000000000    0.000000000    0.000000000   -0.001929800
+    5  SC 1  S     -0.188655173    0.000000000    0.000000000    0.000000000    0.226540296
+    6  SC 1  S      0.629864141    0.000000000    0.000000000    0.000000000   -0.227434630
+    7  SC 1  S      0.614084809    0.000000000    0.000000000    0.000000000    0.696522023
+    8  SC 1  S     -0.012798422    0.000000000    0.000000000    0.000000000   -0.001913919
+    9  SC 1  S      0.004515980    0.000000000    0.000000000    0.000000000    0.316057336
+   10  SC 1  S     -0.002575855    0.000000000    0.000000000    0.000000000    0.194765465
+   11  SC 1  S      0.000603675    0.000000000    0.000000000    0.000000000    0.157187957
+   12  SC 1  X      0.000000000   -0.000254534    0.000000000    0.000000000    0.000000000
+   13  SC 1  Y      0.000000000    0.000000000   -0.000254534    0.000000000    0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.000254534    0.000000000
+   15  SC 1  X      0.000000000   -0.073759236    0.000000000    0.000000000    0.000000000
+   16  SC 1  Y      0.000000000    0.000000000   -0.073759236    0.000000000    0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.073759236    0.000000000
+   18  SC 1  X      0.000000000   -0.467082452    0.000000000    0.000000000    0.000000000
+   19  SC 1  Y      0.000000000    0.000000000   -0.467082452    0.000000000    0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.467082452    0.000000000
+   21  SC 1  X      0.000000000    0.903412723    0.000000000    0.000000000    0.000000000
+   22  SC 1  Y      0.000000000    0.000000000    0.903412723    0.000000000    0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.903412723    0.000000000
+   24  SC 1  X      0.000000000   -0.010150271    0.000000000    0.000000000    0.000000000
+   25  SC 1  Y      0.000000000    0.000000000   -0.010150271    0.000000000    0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.010150271    0.000000000
+   27  SC 1  X      0.000000000    0.301488439    0.000000000    0.000000000    0.000000000
+   28  SC 1  Y      0.000000000    0.000000000    0.301488439    0.000000000    0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000    0.301488439    0.000000000
+   30  SC 1  X      0.000000000    0.018848745    0.000000000    0.000000000    0.000000000
+   31  SC 1  Y      0.000000000    0.000000000    0.018848745    0.000000000    0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    0.018848745    0.000000000
+   33  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.000199607
+   34  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.000199636
+   35  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000399243
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   39  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.001724575
+   40  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.001724831
+   41  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.003449405
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   45  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.004835556
+   46  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.004836273
+   47  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.009671829
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   51  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.003731910
+   52  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.003732464
+   53  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.007464374
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   57  SC 1 XX      0.000000000    0.000000000    0.000000000    0.000000000   -0.006155346
+   58  SC 1 YY      0.000000000    0.000000000    0.000000000    0.000000000   -0.006156260
+   59  SC 1 ZZ      0.000000000    0.000000000    0.000000000    0.000000000    0.012311606
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000    0.000000000
+
+                       11             12             13             14             15
+                    0.985737725    0.026422920    0.026422849    0.022715525    0.009081711
+                       AG             B2U            B3U            B1U            B2G 
+    1  SC 1  S     -0.000000026    0.000000000    0.000000000    0.000000000   -0.000000000
+    2  SC 1  S     -0.000000014    0.000000000    0.000000000    0.000000000   -0.000000000
+    3  SC 1  S      0.000000216    0.000000000    0.000000000    0.000000000   -0.000000000
+    4  SC 1  S     -0.000000003    0.000000000    0.000000000    0.000000000   -0.000000000
+    5  SC 1  S      0.000000321    0.000000000    0.000000000    0.000000000   -0.000000000
+    6  SC 1  S     -0.000000322    0.000000000    0.000000000    0.000000000   -0.000000000
+    7  SC 1  S      0.000000987    0.000000000    0.000000000    0.000000000   -0.000000000
+    8  SC 1  S     -0.000000003    0.000000000    0.000000000    0.000000000   -0.000000000
+    9  SC 1  S      0.000000448    0.000000000    0.000000000    0.000000000   -0.000000000
+   10  SC 1  S      0.000000276    0.000000000    0.000000000    0.000000000   -0.000000000
+   11  SC 1  S      0.000000223    0.000000000    0.000000000    0.000000000   -0.000000000
+   12  SC 1  X      0.000000000    0.000000000    0.003174661    0.000000000   -0.000000000
+   13  SC 1  Y      0.000000000    0.003174661    0.000000000    0.000000000   -0.000000000
+   14  SC 1  Z      0.000000000    0.000000000    0.000000000    0.003174661   -0.000000000
+   15  SC 1  X      0.000000000    0.000000000    0.134095817    0.000000000   -0.000000000
+   16  SC 1  Y      0.000000000    0.134095817    0.000000000    0.000000000   -0.000000000
+   17  SC 1  Z      0.000000000    0.000000000    0.000000000    0.134095817   -0.000000000
+   18  SC 1  X      0.000000000    0.000000000   -0.584667802    0.000000000   -0.000000000
+   19  SC 1  Y      0.000000000   -0.584667802    0.000000000    0.000000000   -0.000000000
+   20  SC 1  Z      0.000000000    0.000000000    0.000000000   -0.584667802   -0.000000000
+   21  SC 1  X      0.000000000    0.000000000    0.475160748    0.000000000   -0.000000000
+   22  SC 1  Y      0.000000000    0.475160748    0.000000000    0.000000000   -0.000000000
+   23  SC 1  Z      0.000000000    0.000000000    0.000000000    0.475160748   -0.000000000
+   24  SC 1  X      0.000000000    0.000000000    0.395540350    0.000000000   -0.000000000
+   25  SC 1  Y      0.000000000    0.395540350    0.000000000    0.000000000   -0.000000000
+   26  SC 1  Z      0.000000000    0.000000000    0.000000000    0.395540350   -0.000000000
+   27  SC 1  X      0.000000000    0.000000000   -1.625916729    0.000000000   -0.000000000
+   28  SC 1  Y      0.000000000   -1.625916729    0.000000000    0.000000000   -0.000000000
+   29  SC 1  Z      0.000000000    0.000000000    0.000000000   -1.625916729   -0.000000000
+   30  SC 1  X      0.000000000    0.000000000    1.849632529    0.000000000   -0.000000000
+   31  SC 1  Y      0.000000000    1.849632529    0.000000000    0.000000000   -0.000000000
+   32  SC 1  Z      0.000000000    0.000000000    0.000000000    1.849632529   -0.000000000
+   33  SC 1 XX     -0.012466510    0.000000000    0.000000000    0.000000000   -0.000000000
+   34  SC 1 YY      0.012466628    0.000000000    0.000000000    0.000000000   -0.000000000
+   35  SC 1 ZZ     -0.000000118    0.000000000    0.000000000    0.000000000   -0.000000000
+   36  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   37  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.015212762
+   38  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   39  SC 1 XX     -0.107708972    0.000000000    0.000000000    0.000000000   -0.000000000
+   40  SC 1 YY      0.107709994    0.000000000    0.000000000    0.000000000   -0.000000000
+   41  SC 1 ZZ     -0.000001022    0.000000000    0.000000000    0.000000000   -0.000000000
+   42  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   43  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.062626253
+   44  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   45  SC 1 XX     -0.302006471    0.000000000    0.000000000    0.000000000   -0.000000000
+   46  SC 1 YY      0.302009335    0.000000000    0.000000000    0.000000000   -0.000000000
+   47  SC 1 ZZ     -0.000002864    0.000000000    0.000000000    0.000000000   -0.000000000
+   48  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   49  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.388408994
+   50  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   51  SC 1 XX     -0.233077863    0.000000000    0.000000000    0.000000000   -0.000000000
+   52  SC 1 YY      0.233080073    0.000000000    0.000000000    0.000000000   -0.000000000
+   53  SC 1 ZZ     -0.000002211    0.000000000    0.000000000    0.000000000   -0.000000000
+   54  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   55  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.075189015
+   56  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   57  SC 1 XX     -0.384434499    0.000000000    0.000000000    0.000000000   -0.000000000
+   58  SC 1 YY      0.384438145    0.000000000    0.000000000    0.000000000   -0.000000000
+   59  SC 1 ZZ     -0.000003646    0.000000000    0.000000000    0.000000000   -0.000000000
+   60  SC 1 XY      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+   61  SC 1 XZ      0.000000000    0.000000000    0.000000000    0.000000000    0.813563038
+   62  SC 1 YZ      0.000000000    0.000000000    0.000000000    0.000000000   -0.000000000
+
+                       16             17             18
+                    0.009081579    0.005803546    0.002158184
+                       B3G            AG             B1G 
+    1  SC 1  S     -0.000000000    0.000506819   -0.000000000
+    2  SC 1  S     -0.000000000    0.000283197   -0.000000000
+    3  SC 1  S     -0.000000000   -0.004221040   -0.000000000
+    4  SC 1  S     -0.000000000    0.000053543   -0.000000000
+    5  SC 1  S     -0.000000000   -0.006285408   -0.000000000
+    6  SC 1  S     -0.000000000    0.006310222   -0.000000000
+    7  SC 1  S     -0.000000000   -0.019325151   -0.000000000
+    8  SC 1  S     -0.000000000    0.000053102   -0.000000000
+    9  SC 1  S     -0.000000000   -0.008769078   -0.000000000
+   10  SC 1  S     -0.000000000   -0.005403809   -0.000000000
+   11  SC 1  S     -0.000000000   -0.004361213   -0.000000000
+   12  SC 1  X     -0.000000000    0.000000000   -0.000000000
+   13  SC 1  Y     -0.000000000    0.000000000   -0.000000000
+   14  SC 1  Z     -0.000000000    0.000000000   -0.000000000
+   15  SC 1  X     -0.000000000    0.000000000   -0.000000000
+   16  SC 1  Y     -0.000000000    0.000000000   -0.000000000
+   17  SC 1  Z     -0.000000000    0.000000000   -0.000000000
+   18  SC 1  X     -0.000000000    0.000000000   -0.000000000
+   19  SC 1  Y     -0.000000000    0.000000000   -0.000000000
+   20  SC 1  Z     -0.000000000    0.000000000   -0.000000000
+   21  SC 1  X     -0.000000000    0.000000000   -0.000000000
+   22  SC 1  Y     -0.000000000    0.000000000   -0.000000000
+   23  SC 1  Z     -0.000000000    0.000000000   -0.000000000
+   24  SC 1  X     -0.000000000    0.000000000   -0.000000000
+   25  SC 1  Y     -0.000000000    0.000000000   -0.000000000
+   26  SC 1  Z     -0.000000000    0.000000000   -0.000000000
+   27  SC 1  X     -0.000000000    0.000000000   -0.000000000
+   28  SC 1  Y     -0.000000000    0.000000000   -0.000000000
+   29  SC 1  Z     -0.000000000    0.000000000   -0.000000000
+   30  SC 1  X     -0.000000000    0.000000000   -0.000000000
+   31  SC 1  Y     -0.000000000    0.000000000   -0.000000000
+   32  SC 1  Z     -0.000000000    0.000000000   -0.000000000
+   33  SC 1 XX     -0.000000000   -0.007194911   -0.000000000
+   34  SC 1 YY     -0.000000000   -0.007194705   -0.000000000
+   35  SC 1 ZZ     -0.000000000    0.014389616   -0.000000000
+   36  SC 1 XY     -0.000000000    0.000000000    0.015212762
+   37  SC 1 XZ     -0.000000000    0.000000000   -0.000000000
+   38  SC 1 YZ      0.015212762    0.000000000   -0.000000000
+   39  SC 1 XX     -0.000000000   -0.062163066   -0.000000000
+   40  SC 1 YY     -0.000000000   -0.062161289   -0.000000000
+   41  SC 1 ZZ     -0.000000000    0.124324355   -0.000000000
+   42  SC 1 XY     -0.000000000    0.000000000    0.062626253
+   43  SC 1 XZ     -0.000000000    0.000000000   -0.000000000
+   44  SC 1 YZ      0.062626253    0.000000000   -0.000000000
+   45  SC 1 XX     -0.000000000   -0.174299762   -0.000000000
+   46  SC 1 YY     -0.000000000   -0.174294779   -0.000000000
+   47  SC 1 ZZ     -0.000000000    0.348594540   -0.000000000
+   48  SC 1 XY     -0.000000000    0.000000000    0.388408994
+   49  SC 1 XZ     -0.000000000    0.000000000   -0.000000000
+   50  SC 1 YZ      0.388408994    0.000000000   -0.000000000
+   51  SC 1 XX     -0.000000000   -0.134518363   -0.000000000
+   52  SC 1 YY     -0.000000000   -0.134514517   -0.000000000
+   53  SC 1 ZZ     -0.000000000    0.269032880   -0.000000000
+   54  SC 1 XY     -0.000000000    0.000000000   -0.075189015
+   55  SC 1 XZ     -0.000000000    0.000000000   -0.000000000
+   56  SC 1 YZ     -0.075189015    0.000000000   -0.000000000
+   57  SC 1 XX     -0.000000000   -0.221872205   -0.000000000
+   58  SC 1 YY     -0.000000000   -0.221865862   -0.000000000
+   59  SC 1 ZZ     -0.000000000    0.443738067   -0.000000000
+   60  SC 1 XY     -0.000000000    0.000000000    0.813563038
+   61  SC 1 XZ     -0.000000000    0.000000000   -0.000000000
+   62  SC 1 YZ      0.813563038    0.000000000   -0.000000000
+ ...... END OF DENSITY MATRIX CALCULATION ...... 
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =       22.0 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       22.0 SECONDS, CPU UTILIZATION IS  99.73%
+
+     --------------------------------------------------------
+     GUGA  CI PROPERTIES...FOR THE WAVEFUNCTION OF STATE    1
+               USING THE EXPECTATION VALUE DENSITY
+     --------------------------------------------------------
+
+          -----------------
+          ENERGY COMPONENTS
+          -----------------
+
+         WAVEFUNCTION NORMALIZATION =       1.0000000000
+
+                ONE ELECTRON ENERGY =   -1039.4276304697
+                TWO ELECTRON ENERGY =     279.6813887039
+           NUCLEAR REPULSION ENERGY =       0.0000000000
+                                      ------------------
+                       TOTAL ENERGY =    -759.7462417658
+
+ ELECTRON-ELECTRON POTENTIAL ENERGY =     279.6813887039
+  NUCLEUS-ELECTRON POTENTIAL ENERGY =   -1799.0859026653
+   NUCLEUS-NUCLEUS POTENTIAL ENERGY =       0.0000000000
+                                      ------------------
+             TOTAL POTENTIAL ENERGY =   -1519.4045139614
+               TOTAL KINETIC ENERGY =     759.6582721956
+                 VIRIAL RATIO (V/T) =       2.0001158015
+
+          ---------------------------------------
+          MULLIKEN AND LOWDIN POPULATION ANALYSES
+          ---------------------------------------
+
+               ----- POPULATIONS IN EACH AO -----
+                             MULLIKEN      LOWDIN
+              1  SC 1  S      1.87597     1.35609
+              2  SC 1  S     -0.00252     0.32208
+              3  SC 1  S      1.94025     0.59359
+              4  SC 1  S      0.01776     0.22328
+              5  SC 1  S      0.02673     0.18686
+              6  SC 1  S      0.98094     0.22099
+              7  SC 1  S      1.24373     0.30357
+              8  SC 1  S      0.00896     0.37659
+              9  SC 1  S      0.98522     0.69332
+             10  SC 1  S      0.59471     0.63547
+             11  SC 1  S      0.23936     0.25807
+             12  SC 1  X      0.00094     0.05311
+             13  SC 1  Y      0.00094     0.05311
+             14  SC 1  Z      0.00094     0.05311
+             15  SC 1  X      0.63632     0.62952
+             16  SC 1  Y      0.63632     0.62952
+             17  SC 1  Z      0.63629     0.62950
+             18  SC 1  X      0.68804     0.62880
+             19  SC 1  Y      0.68804     0.62880
+             20  SC 1  Z      0.68795     0.62880
+             21  SC 1  X      1.50912     1.00170
+             22  SC 1  Y      1.50912     1.00170
+             23  SC 1  Z      1.50930     1.00149
+             24  SC 1  X      0.57864     0.68776
+             25  SC 1  Y      0.57864     0.68776
+             26  SC 1  Z      0.57865     0.68776
+             27  SC 1  X      0.55320     0.82960
+             28  SC 1  Y      0.55320     0.82960
+             29  SC 1  Z      0.55441     0.82950
+             30  SC 1  X      0.06016     0.19594
+             31  SC 1  Y      0.06016     0.19594
+             32  SC 1  Z      0.05518     0.19255
+             33  SC 1 XX      0.00002     0.32413
+             34  SC 1 YY      0.00333     0.32413
+             35  SC 1 ZZ      0.00001     0.32093
+             36  SC 1 XY      0.00003     0.00001
+             37  SC 1 XZ      0.00003     0.00004
+             38  SC 1 YZ      0.00000     0.00004
+             39  SC 1 XX      0.00054     0.14936
+             40  SC 1 YY      0.07277     0.14936
+             41  SC 1 ZZ      0.00006     0.10290
+             42  SC 1 XY      0.00027     0.00013
+             43  SC 1 XZ      0.00027     0.00054
+             44  SC 1 YZ      0.00000     0.00054
+             45  SC 1 XX      0.00216     0.28816
+             46  SC 1 YY      0.29323     0.28816
+             47  SC 1 ZZ      0.00061     0.17190
+             48  SC 1 XY      0.00256     0.00033
+             49  SC 1 XZ      0.00256     0.00139
+             50  SC 1 YZ      0.00000     0.00139
+             51  SC 1 XX      0.00187     0.30469
+             52  SC 1 YY      0.25394     0.30469
+             53  SC 1 ZZ     -0.00015     0.15472
+             54  SC 1 XY     -0.00063     0.00053
+             55  SC 1 XZ     -0.00063     0.00224
+             56  SC 1 YZ      0.00000     0.00224
+             57  SC 1 XX      0.00267     0.32833
+             58  SC 1 YY      0.36247     0.32833
+             59  SC 1 ZZ      0.00163     0.19441
+             60  SC 1 XY      0.00685     0.00116
+             61  SC 1 XZ      0.00685     0.00487
+             62  SC 1 YZ      0.00000     0.00487
+
+          ----- MULLIKEN ATOMIC OVERLAP POPULATIONS -----
+          (OFF-DIAGONAL ELEMENTS NEED TO BE MULTIPLIED BY 2)
+
+             1
+
+    1   21.0000000
+
+          TOTAL MULLIKEN AND LOWDIN ATOMIC POPULATIONS
+       ATOM         MULL.POP.    CHARGE          LOW.POP.     CHARGE
+    1 SC           21.000000   -0.000000        21.000000    0.000000
+
+          MULLIKEN SPHERICAL HARMONIC POPULATIONS
+       ATOM           S       P       D      F      G      H      I    TOTAL
+    1 SC            7.91   12.08    1.01   0.00   0.00   0.00   0.00   21.00
+
+          ---------------------
+          ELECTROSTATIC MOMENTS
+          ---------------------
+
+ POINT   1           X           Y           Z (BOHR)    CHARGE
+                 0.000000    0.000000    0.000000        0.00 (A.U.)
+         DX          DY          DZ         /D/  (DEBYE)
+     0.000000    0.000000    0.000000    0.000000
+ ...... END OF PROPERTY EVALUATION ......
+ STEP CPU TIME =     0.01 TOTAL CPU TIME =       22.0 (    0.4 MIN)
+ TOTAL WALL CLOCK TIME=       22.0 SECONDS, CPU UTILIZATION IS  99.73%
+              1169120  WORDS OF DYNAMIC MEMORY USED
+ EXECUTION OF GAMESS TERMINATED NORMALLY Sat Apr  1 11:58:20 2017
+ DDI: 263016 bytes (0.3 MB / 0 MWords) used by master data server.
+
+ ----------------------------------------
+ CPU timing information for all processes
+ ========================================
+ 0: 21.783964 + 0.260067 = 22.044031
+ ----------------------------------------
+ ddikick.x: exited gracefully.
+----- accounting info -----
+Files used on the master node qmc4 were:
+-rw-r--r-- 1 cyrus cyrus   19201 Apr  1 11:58 ./ci_oh_orbs_cas3-9.dat
+-rw-r----- 1 cyrus cyrus   59789 Apr  1 11:57 ./ci_oh_orbs_cas3-9.F05
+-rw-r--r-- 1 cyrus cyrus 3420304 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F08
+-rw-r--r-- 1 cyrus cyrus  180384 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F09
+-rw-r--r-- 1 cyrus cyrus 1014320 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F10
+-rw-r--r-- 1 cyrus cyrus  282056 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F11
+-rw-r--r-- 1 cyrus cyrus     464 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F12
+-rw-r--r-- 1 cyrus cyrus  400008 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F14
+-rw-r--r-- 1 cyrus cyrus  160496 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F15
+-rw-r--r-- 1 cyrus cyrus  200216 Apr  1 11:58 ./ci_oh_orbs_cas3-9.F16
+-rw-r----- 1 cyrus cyrus   59789 Apr  1 11:56 ./ci_oh_orbs_cas3-9.inp
+-rw-r--r-- 1 cyrus cyrus  143111 Apr  1 11:58 ./ci_oh_orbs_cas3-9.out
+Sat Apr  1 11:58:23 EDT 2017
+0.096u 0.047s 0:25.24 0.5%	0+0k 0+144io 0pf+0w
