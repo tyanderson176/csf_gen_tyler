@@ -292,28 +292,28 @@ class L2Projector:
         self.mol_bas = sparse_rep(self.a2m)
         self.ang_mom = self.get_ang_mom()
 
-        print('\nLZ: ')
-        for orb, coefs in self.lz.items():
-            print(orb, ' '.join([str(coef) for coef in coefs]))
-        print('\nLUP: ')
-        for orb, coefs in self.lup.items():
-            print(orb, ' '.join([str(coef) for coef in coefs]))
-        print('\nLDN: ')
-        for orb, coefs in self.ldn.items():
-            print(orb, ' '.join([str(coef) for coef in coefs]))
-        print("\nCOEFS: ")
-        for orb, coefs in self.mo_coeffs_sparse.items():
-            print(orb, ' '.join([str(coef) for coef in coefs]))
-        print("\nA2M: ")
-        for orb, coefs in sparse_rep(self.a2m.T).items():
-            print(orb, ' '.join([str(coef) for coef in coefs]))
-        print("\nA2M_FULL: ")
-        for orb, coefs in sparse_rep(self.a2m_full.T).items():
-            print(orb, ' '.join([str(coef) for coef in coefs]))
-        print("\nAtomic Orbs:")
-        for n, ao in enumerate(self.atomic_orbs):
-            print(n+1, ao)
-        print("\n")
+        #print('\nLZ: ')
+        #for orb, coefs in self.lz.items():
+        #    print(orb, ' '.join([str(coef) for coef in coefs]))
+        #print('\nLUP: ')
+        #for orb, coefs in self.lup.items():
+        #    print(orb, ' '.join([str(coef) for coef in coefs]))
+        #print('\nLDN: ')
+        #for orb, coefs in self.ldn.items():
+        #    print(orb, ' '.join([str(coef) for coef in coefs]))
+        #print("\nCOEFS: ")
+        #for orb, coefs in self.mo_coeffs_sparse.items():
+        #    print(orb, ' '.join([str(coef) for coef in coefs]))
+        #print("\nA2M: ")
+        #for orb, coefs in sparse_rep(self.a2m.T).items():
+        #    print(orb, ' '.join([str(coef) for coef in coefs]))
+        #print("\nA2M_FULL: ")
+        #for orb, coefs in sparse_rep(self.a2m_full.T).items():
+        #    print(orb, ' '.join([str(coef) for coef in coefs]))
+        #print("\nAtomic Orbs:")
+        #for n, ao in enumerate(self.atomic_orbs):
+        #    print(n+1, ao)
+        #print("\n")
 
     def hf_lz(self):
         res = 0

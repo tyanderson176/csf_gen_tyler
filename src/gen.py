@@ -91,22 +91,6 @@ class GenMethods():
                     " from the current directory.")
         return csf_info
 
-#def get_occ_combs(nup, nopen):
-#    def combs(n, r):
-#        #Returns all binary strings of length n w/ r 1's
-#        if r == 0:
-#            yield '0'*n
-#            return
-#        for m in range(n-r+1):
-#            for comb in combs(n-m-1, r-1):
-#                yield '0'*m + '1' + comb
-#    return {comb:n for n, comb in enumerate(combs(nopen, nup))}
-
-#    def det2open_occ_str(self, det):
-#        #could be faster
-#        occs = sorted(det.up_occ + det.dn_occ)
-#        return ''.join(['1' if occ in det.up_occ else '0' for occ in occs])
-
     def symm_configs(self, configs):
         #if mol is a sigma state, this avoids creating duplicate csfs
         skip = set()
@@ -124,17 +108,7 @@ class GenMethods():
             for csf in config_csfs:
                 csf.config_label = n
             csfs += config_csfs
-        print('Init csfs:')
-        for csf in csfs:
-            print('--------')
-            for det, coef in csf.dets.items():
-                print(det, "%12.8f"% coef)
         csfs = Vec.gram_schmidt(csfs, len(csfs), tol=1e-4)
-        print('After GS csfs:')
-        for csf in csfs:
-            print('--------')
-            for det, coef in csf.dets.items():
-                print(det, "%12.8f"% coef)
         return csfs
 
     def config2csfs(self, csf_cache, config):

@@ -64,7 +64,7 @@ class CsfMethods():
         print('projection err: %.10f' % perr)
         print('total err: %.10f'% err, ' (includes proj. err + csf_tol err + rotation err)')
         if self.config['project_l2']:
-            self.print_important_dets(dets, wf_coeffs, csfs, wf_csf_coeffs)
+            #self.print_important_dets(dets, wf_coeffs, csfs, wf_csf_coeffs)
             err_shci, err_proj = self.get_eigen_error(dets, wf_coeffs, csfs, wf_csf_coeffs)
             print('SHCI eigen err: %.10f'% err_shci)
             print('Proj eigen err: %.10f'% err_proj)
@@ -324,12 +324,6 @@ class CsfMethods():
         trunc_csfs = [csf for n, csf in enumerate(csfs) if n in idx]
         trunc_labels = [label for n, label in enumerate(config_labels) if n in idx]
         trunc_coeffs = [coef for n, coef in enumerate(wf_csf_coeffs) if n in idx]
-        print('Trunc csfs:')
-        for csf, coef in zip(trunc_csfs, trunc_coeffs):
-            print('--------')
-            print('Coef: ', coef)
-            for det, coef in csf.dets.items():
-                print(det, "%12.8f"% coef)
         return trunc_csfs, trunc_labels, trunc_coeffs
 
     def rotate_csfs(self, csfs, config_labels, wf_csf_coeffs, reduce_csfs = True):
@@ -468,15 +462,3 @@ class IndexList:
 
     def __repr__(self):
         return str(self.indices)
-
-if __name__ == '__main__':
-    d1 = vec.Det([1,2,3],[1,2,3])
-    d2 = vec.Det([1,2,4],[1,2,3])
-    d3 = vec.Det([1,2,3],[1,2,4])
-    csf1 = 1*d1 + 1e-8*d2 + 1e-8*d3
-    csf2 = 1*d1 + 1e-8*d2
-    csf3 = 1*d1 +    0*d2 + 1e-8*d3
-    csf4 = 1*d2 - 1*d3
-    cm = CsfMethods()
-    orthogonalized = cm.gram_schmidt([csf1, csf2, csf3, csf4], 4)
-    print(orthogonalized)
