@@ -1,6 +1,11 @@
 import numpy as np
 import shci4qmc.lib.load_wf as load_wf
 
+'''
+This code was originally authored by George Booth for the MOLSSI stochastic summer school. 
+It was modified by Tyler Anderson.
+'''
+
 class Ham:
     def __init__(self, filename = 'FCIDUMP', real_orbs = True):
         ''' Define a hamiltonian to sample, as well as its quantum numbers.
@@ -11,8 +16,6 @@ class Ham:
         # All these quantities are defined by the 'read_in_fcidump' method
         self.nelec = None       # Number of electrons
         self.ms = None          # 2 x spin-polarization
-        self.n_alpha = None     # Number of alpha electrons
-        self.n_beta = None      # Number of beta electrons
         self.nbasis = None      # Number of spatial orbitals
         self.spin_basis = None  # Number of spin orbitals (= 2 x self.nbasis)
         self.real_orbs = real_orbs
@@ -31,13 +34,9 @@ class Ham:
         return
 
     def read_in_fcidump(self, filename):
-        ''' This function looks (and is!) pretty messy. Don't worry about it too much. It sets up the system parameters
-        as defined by the hamiltonian in the file. It sets the following system parameters:
-
+        '''
         self.nelec          # Number of electrons
         self.ms             # 2 x spin-polarization
-        self.n_alpha        # Number of alpha electrons
-        self.n_beta         # Number of beta electrons
         self.nbasis         # Number of spatial orbitals
         self.spin_basis     # Number of spin orbitals (= 2 x self.nbasis)
 
@@ -46,7 +45,6 @@ class Ham:
         self.h2[:,:,:,:]    # A rank-4 self.spin_basis array for the two electron terms
         self.nn             # The (scalar) nuclear repulsion energy
 
-        Note that the integrals are defined in the spin-orbital basis, and the self.h2 term is defined as follows:
         eri[i,j,k,l] = < phi_i(r_1) phi_k(r_2) | 1/r12 | phi_j(r_1) phi_l(r_2) >
         This ordering is called 'chemical ordering', and means that the first two indices of the array
         define the charge density for electron 1, and the second two for electron two.'''
@@ -62,8 +60,6 @@ class Ham:
         self.nbasis = int(dat[1])
         self.nelec = int(dat[3])
         self.ms = int(dat[5])
-        self.n_alpha = (self.ms + self.nelec) // 2
-        self.n_beta = self.nelec - self.n_alpha
 
         # Read in symmetry information, but we are not using it
         sym = []
@@ -167,42 +163,33 @@ class Ham:
 
         hel = 0.0
         if excit_mat == None or len(excit_mat[0]) == 0:
-            # Diagonal Hamiltonian matrix element
             assert(det == excited_det)
 
-            # Include nuclear-nuclear repulsion
             hel += self.nn
 
             for i in range(self.nelec):
-                # Sum over all diagonal terms in one-electron operator
                 hel += self.h1[det[i],det[i]]
                 for j in range(i+1, self.nelec):
-                    # Run through electron pairs and sum in 'coulomb' and 'exchange' contribution
-                    hel += (self.h2[det[i],det[i],det[j],det[j]] - self.h2[det[i],det[j],det[j],det[i]])
+                    dir_2b = self.h2[det[i],det[i],det[j],det[j]]
+                    exc_2b = self.h2[det[i],det[j],det[j],det[i]]
+                    hel += dir_2b - exc_2b
         elif len(excit_mat[0]) == 1:
             # Single excitation
-
-            # One electron part to single excitation
             hel += self.h1[excit_mat[0][0], excit_mat[1][0]]
-            # Two electron part to single excitation
             for i in det:
-                hel += ( self.h2[excit_mat[0][0], excit_mat[1][0], i, i] - self.h2[excit_mat[0][0], i, i, excit_mat[1][0]] )
-                two_b_dir = self.h2[excit_mat[0][0], excit_mat[1][0], i, i]
-                two_b_exc = self.h2[excit_mat[0][0], i, i, excit_mat[1][0]]
-
-            # Multiply by the parity of the excitation
+                dir_2b = self.h2[excit_mat[0][0], excit_mat[1][0], i, i]
+                exc_2b = self.h2[excit_mat[0][0], i, i, excit_mat[1][0]]
+                hel += dir_2b -  exc_2b
             hel *= parity
         elif len(excit_mat[0]) == 2:
             # Double excitation
-
-            # Just a single 'coulomb'-like and 'exchange'-like contribution
-            hel += ( self.h2[excit_mat[0][0], excit_mat[1][0], excit_mat[0][1], excit_mat[1][1]] - \
-                        self.h2[excit_mat[0][0], excit_mat[1][1], excit_mat[0][1], excit_mat[1][0]] )
-            # Multiply by the parity of the excitation
+            dir_2b = self.h2[excit_mat[0][0], excit_mat[1][0], excit_mat[0][1], excit_mat[1][1]]
+            exc_2b = self.h2[excit_mat[0][0], excit_mat[1][1], excit_mat[0][1], excit_mat[1][0]]
+            hel += dir_2b - exc_2b
             hel *= parity
         return hel
 
-    def energy_of(self, dets, coefs):
+    def get_e(self, dets, coefs):
         energy, norm = 0, 0
         for i in range(len(dets)):
             det, d_coef = dets[i], coefs[i]
@@ -223,7 +210,7 @@ class Ham:
     def expectation(self, wf):
         dets = [self.det_to_list(det) for det in wf.dets.keys()]
         coefs = [coef for coef in wf.dets.values()]
-        return self.energy_of(dets, coefs)
+        return self.get_e(dets, coefs)
 
 def elec_exchange_ops(det, ind):
     ''' Given a determinant defined by a list of occupied orbitals
@@ -278,5 +265,5 @@ if __name__ == '__main__':
     dets = [[orb for orb in up] + [orb + ham.nbasis for orb in dn] 
             for [up, dn] in wf['dets']]
     coefs = [coef for coef in wf['coefs']]
-    e = ham.energy_of(dets[:1], coefs[:1])
-    e = ham.energy_of(dets, coefs)
+    e = ham.get_e(dets[:1], coefs[:1])
+    e = ham.get_e(dets, coefs)

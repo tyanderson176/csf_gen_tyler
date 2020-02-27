@@ -6,7 +6,6 @@ import subprocess
 from pyscf import symm
 import numpy as np
 import shci4qmc.src.vec as vec
-import shci4qmc.src.symm as sy
 from shci4qmc.src.vec import Det, Vec, Config
 from shci4qmc.src.proj_l2 import L2Projector
 
@@ -59,20 +58,6 @@ class GenMethods():
                 csf_cache_file.write(line)
                 file_contents += line
             csf_cache_file.close()
-
-#            csf_gen_exe = os.path.join(os.path.dirname(__file__), '../lib/spin_csf_gen')
-#            out_dir = '.'
-#            nelecs = str(max_open)
-#            subprocess.run([gen_script, out_dir, filename, nelecs])
-#            f = open(filename, 'r')
-#            file_contents = f.read()
-
-#            gen_script = os.path.join(os.path.dirname(__file__), '../bin/run_csfgen')
-#            out_dir = '.'
-#            nelecs = str(max_open)
-#            subprocess.run([gen_script, out_dir, filename, nelecs])
-#            f = open(filename, 'r')
-#            file_contents = f.read()
             return self.parse_csf_file(sys.maxsize, twice_s, file_contents)
 
     def load_csf_file(self, max_open, twice_s):
@@ -143,14 +128,6 @@ class GenMethods():
                 csfs.append(csf)
         return np.array(csfs)
 
-    def check_orthogonal(self, csfs):
-        for n, csf1 in enumerate(csfs):
-            for m, csf2 in enumerate(csfs):
-                if m <= n:
-                    continue
-                if (csf1.dot(csf2) > 1e-2):
-                    print('Not orthogonal: ', csf1.dot(csf2)) 
-
     def make_det(self, occ_str, config):
         up_occs, dn_occs, orbs, is_open = [], [], [], {}
         orbs = sorted([orb for orb in config.occs])
@@ -167,24 +144,3 @@ class GenMethods():
                 dn_occs.append(orb)
         assert(occ_str == '')
         return Det(up_occs, dn_occs)
-
-#def parity(det):
-#    #computes parity relative to ordering s.t. up/down spins for the same
-#    #spacial orbital are adjacent
-#    up_occ, dn_occ = det.up_occ, det.dn_occ
-#    if len(up_occ) == 0 or len(dn_occ) == 0:
-#        return 1
-#    up_ptr, dn_ptr = len(up_occ)-1, len(dn_occ)-1
-#    alt_sum, count = 0, 0
-#    while -1 < dn_ptr:
-#        dn = dn_occ[dn_ptr]
-#        if up_ptr != -1 and up_occ[up_ptr] > dn:
-#            count += 1
-#            up_ptr += -1
-#        else:
-#            alt_sum = count - alt_sum 
-#            dn_ptr += -1
-#    assert(alt_sum > -1)
-#    return (1 if alt_sum%2 == 0 else -1)
-
-#if __name__ == "__main__":

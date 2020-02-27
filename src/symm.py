@@ -48,9 +48,9 @@ class SymMethods():
             self.partner_orbs = self.mf.partner_orbs
             self.xorbs = self.get_xorbs()
             self.porbs = {n+1: orb+1 for n, orb in enumerate(self.partner_orbs) }
-            print('ORB, PARTNER ORB:')
-            for n, (orb, partner) in enumerate(self.porbs.items()):
-                print(self.orb_symm_labels[n], orb, partner)
+            #print('ORB, PARTNER ORB:')
+            #for n, (orb, partner) in enumerate(self.porbs.items()):
+            #    print(self.orb_symm_labels[n], orb, partner)
         self.orb2lz = self.get_orb2lz()
         self.use_real_part = None #Use Hartree-Fock det from SHCI
         self.real2complex_coeffs = None

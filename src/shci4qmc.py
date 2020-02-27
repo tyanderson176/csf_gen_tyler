@@ -50,10 +50,10 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         #Optimized_orbs
         self.optimize_orbs = optimize_orbs
         self.rotation_matrix = []
-        print('HF ENERGY: ' + str(self.hf_energy))
-        print('MO ENERGY: ')
-        for n, energy in enumerate(self.mf.mo_energy):
-            print(n, "%10.5f"%energy)
+        #print('HF ENERGY: ' + str(self.hf_energy))
+        #print('MO ENERGY: ')
+        #for n, energy in enumerate(self.mf.mo_energy):
+        #    print(n, "%10.5f"%energy)
 
         #Initialize symmetry vars
         SymMethods.__init__(self)

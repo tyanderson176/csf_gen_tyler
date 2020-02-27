@@ -315,16 +315,6 @@ class L2Projector:
         #    print(n+1, ao)
         #print("\n")
 
-    def hf_lz(self):
-        res = 0
-        for mo, occ in enumerate(self.mo_occ):
-            ao_lz = set(self.atomic_orbs[ao-1].m for coef, ao in self.mo_coeffs_sparse[mo+1])
-            assert(len(ao_lz) == 1)
-            res += int(round(occ))*ao_lz.pop()
-        print('occ: ', self.mo_occ)
-        print('lz: ', res)
-        return res
-            
     def lz_of(self, state):
         assert(isinstance(state, Det))
         res = 0
@@ -415,7 +405,6 @@ class L2Projector:
         res = Vec.zero()
         for det, coef in state.dets.items():
             res += coef*self.proj_det(targ, det)
-        #res = self.prune(targ, res, 1e-8)
         res = self.real_coeffs(res)
         return res
 
@@ -428,21 +417,16 @@ class L2Projector:
         #OP IN COMPLEX BAS
         #res = change_basis(self.complex_bas, res)
         for l in projected_out_ls:
-#            print("Projecting l = ", l, " with ", len(res.dets), " dets.")
             l2_state = self.apply_l2(res)
             res *= -l*(l+1)
             res += l2_state
             res /= (targ*(targ+1) - l*(l+1))
-            #Prune res s.t. some percentage of total magnitude is present
-#            print("Ndets before prune: ", len(res.dets))
-#            res = self.prune(targ, res, 1e-8)
-#            print("Ndets after prune: ", len(res.dets))
-            remove = []
-            for det, coef in res.dets.items():
-                if abs(coef) < 1e-8:
-                    remove.append(det)
-            for det in remove:
-                del res.dets[det]
+            #remove = []
+            #for det, coef in res.dets.items():
+            #    if abs(coef) < 1e-8:
+            #        remove.append(det)
+            #for det in remove:
+            #    del res.dets[det]
         #OP IN COMPLEX BAS
         #res = change_basis(self.mol_bas, res)
         return res
@@ -466,7 +450,7 @@ class L2Projector:
             err += abs(coef.imag)
             real += det*(coef.real)
         if (err > 1e-2):
-            print('\n', 'Warning: imag. part of complex coef discarded in L2 projection')
+            print('\n', 'Warning: large imag. part of complex coef discarded in L2 projection')
         return real
 
     def eigen_error(self, targ, state):
@@ -550,15 +534,6 @@ class AndreProjector():
         self.max_n = max(ao.n for ao in self.atomic_orbs)
 
         l_z, l_plus, l_minus = self.build_ops()
-#        print('lz: ')
-#        for orb, res in l_z.items():
-#            print(orb, ': ', res)
-#        print('l_plus: ')
-#        for orb, res in l_plus.items():
-#            print(orb, ': ', res)
-#        print('l_minus: ')
-#        for orb, res in l_minus.items():
-#            print(orb, ': ', res)
         self.l_z = l_z
         self.l_plus = l_plus
         self.l_minus = l_minus
@@ -622,8 +597,6 @@ class AndreProjector():
         return Operator(l_z), Operator(l_plus), Operator(l_minus)
 
     def possible_ang_mom(self, det):
-#        if isinstance(config, Det):
-#            return self.possible_ang_mom(Config(config))
         assert(isinstance(det, Det))
         def update_min_l(min_l, max_l, l):
             if l > max_l:
