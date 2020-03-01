@@ -426,25 +426,28 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         self.out_file.write('5 5 5         norda,nordb,nordc\n')
         self.out_file.write('1. 0. scalek,a21\n')
         self.out_file.write('0. 0. 0. 0. 0. 0. (a(iparmj),iparmj=1,nparma)\n')
-        self.out_file.write('0. 1. 0. 0. 0. 0. (b(iparmj),iparmj=1,nparmb)\n')
+        self.out_file.write('.5 1. 0. 0. 0. 0. (b(iparmj),iparmj=1,nparmb)\n')
         self.out_file.write('0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. ' 
                             + '(c(iparmj),iparmj=1,nparmc)\n')
     
     def print_opt(self):
         self.out_file.write('\n\'* Optimization section\'\n')
-        self.out_file.write('0 10000 1.d-8 0.05 1.d-4     ' 
+        self.out_file.write('12 10000 1.d-8 0.05 1.d-4     ' 
                             + 'nopt_iter,nblk_max,add_diag(1),p_var,tol_energy\n') 
-        self.out_file.write('1000 24 1 1 5 1000 21101 1 NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr\n')
+        self.out_file.write('INSERT NDATA LINE NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr\n')
         self.out_file.write('0 0 0 0 i3body,irewgt,iaver,istrech\n')
         self.out_file.write('0 0 0 0 0 0 0 0 0 0 ' 
                             + 'ipos,idcds,idcdr,idcdt,id2cds,id2cdr,id2cdt,idbds,idbdr,idbdt\n')
         self.out_file.write('1 '*len(self.mo_coeffs) + '(lo(iorb),iorb=1,norb)\n')
-        self.out_file.write('0  4  5  15  0  0 0 0  ' 
-                            + 'nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmg\n')
+#        self.out_file.write('0  4  5  15  0  0 0 0  ' 
+#                            + 'nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmg\n')
+        self.out_file.write('INSERT NPARAM LINE '
+                            + 'nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmgp\n')
         self.out_file.write('  (iworb(iparm),iwbasi(iparm),iparm=1,nlarml)\n')
         self.out_file.write('  (iwbase(iparm),iparm=1,nparm-nparml)\n')
-        self.out_file.write('  (iwcsf(iparm),iparm=1,nparmcsf)\n')
+        self.out_file.write('INSERT PARMCSF LINE  (iwcsf(iparm),iparm=1,nparmcsf)\n')
         self.out_file.write('    3 4 5 6 (iwjasa(iparm),iparm=1,nparma)\n')
+        self.out_file.write('  2 3 4 5 6 (iwjasb(iparm),iparm=1,nparmb)\n')
         self.out_file.write('    3   5   7 8 9    11    13 14 15 16 17 18    20 21    23 '
                             + '(iwjasc(iparm),iparm=1,nparmc)\n')
         self.out_file.write('0 0       necn,nebase\n')
@@ -468,15 +471,14 @@ class CacheMaker(SymMethods, GenMethods, CsfMethods):
         self.out_file.write(' '.join(self.orb_symm_labels) + '\n')
         self.out_file.write(' end\n')
         self.out_file.write('end\n\n')
-        self.out_file.write('exit\n\n')
         self.out_file.write('optimization\n')
-        self.out_file.write(' parameters jastrow end\n')
+        self.out_file.write(' parameters jastrow csfs orbitals end\n')
         self.out_file.write('  method = linear\n')
         self.out_file.write('!linear renormalize=true end\n')
         self.out_file.write(' increase_blocks=true\n')
         self.out_file.write(' increase_blocks_factor=1.4\n')
-        self.out_file.write('!casscf=true\n')
-        self.out_file.write('!check_redundant_orbital_derivative=false\n')
+        self.out_file.write('casscf=true\n')
+        self.out_file.write('check_redundant_orbital_derivative=false\n')
         self.out_file.write('!do_add_diag_mult_exp=.true.\n')
         self.out_file.write('end\n')
 

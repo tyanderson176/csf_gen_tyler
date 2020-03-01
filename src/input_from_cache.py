@@ -12,7 +12,7 @@ def input_from_cache(cache_filename, csf_tol):
         before_csfs = copy_before_csfs(qmc_cache, qmc_file)
         wf_energy, ncsf, ndet, csf_section = \
             write_csf_section(qmc_cache, qmc_file, csf_tol, reduce_csfs = False)
-        after_csfs = copy_after_csfs(qmc_cache, qmc_file)
+        after_csfs = after_csfs_section(qmc_cache, qmc_file, ncsf)
         before_csfs = update_before_csfs(before_csfs, ncsf, ndet, wf_energy)
 #        qmc_file.write("\'ncsf=%d ndet=%d norb=%d\'\t\t\t\ttitle\n"% (ncsf, ndet, norb))
         qmc_file.write(''.join(before_csfs))
@@ -155,8 +155,19 @@ def write_csfs(qmc_file, config_csfs, config_labels, csf_tol, reduce_csfs):
     wf_energy = Ham("FCIDUMP_real_orbs").expectation(wf)
     return wf_energy, len(sorted_csfs), len(sorted_dets), output_lines
 
-def copy_after_csfs(qmc_cache, qmc_file):
+def after_csfs_section(qmc_cache, qmc_file, ncsf):
     output_lines = []
     for line in qmc_cache:
-        output_lines.append(line)
+        if 'INSERT NPARAM LINE' in line:
+            nparam_line = ('0  4  5  15  0 ' + str(ncsf-1) + ' 0 0' 
+                          + 'nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmg')
+            output_lines.append(nparam_line) 
+        if 'INSERT PARMCSF LINE' in line:
+            parmcsf_line = (''.join(str(n+2) for n in range(ncsf-1))
+                           + '(iwcsf(iparm),iparm=1,nparmcsf)(iwcsf(iparm),iparm=1,nparmcsf)')
+        if 'INSERT NDATA LINE' in line:
+            ndata_line = ('1000 ' + str(24 + ncsf-1) + ' 1 1 5 1000 21101 1 ' 
+                         + 'NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr'
+        else:
+            output_lines.append(line)
     return output_lines
