@@ -111,7 +111,6 @@ def write_csfs(qmc_file, config_csfs, config_labels, csf_tol, reduce_csfs):
     for config, csfs in config_csfs.items():
         config_sum = add_csfs([coef for coef, csf in csfs], [csf for coef, csf in csfs])
         n_dets = len(config_sum.dets)
-        #n_dets = 1
         if (config_sum.norm()/np.sqrt(n_dets) < csf_tol): continue
         for coef, csf in csfs:
 #            for det in csf.dets:
@@ -160,14 +159,16 @@ def after_csfs_section(qmc_cache, qmc_file, ncsf):
     for line in qmc_cache:
         if 'INSERT NPARAM LINE' in line:
             nparam_line = ('0  4  5  15  0 ' + str(ncsf-1) + ' 0 0' 
-                          + 'nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmg')
+                          + ' nparml,nparma,nparmb,nparmc,nparmf,nparmcsf,nparms,nparmg\n')
             output_lines.append(nparam_line) 
-        if 'INSERT PARMCSF LINE' in line:
-            parmcsf_line = (''.join(str(n+2) for n in range(ncsf-1))
-                           + '(iwcsf(iparm),iparm=1,nparmcsf)(iwcsf(iparm),iparm=1,nparmcsf)')
-        if 'INSERT NDATA LINE' in line:
-            ndata_line = ('1000 ' + str(24 + ncsf-1) + ' 1 1 5 1000 21101 1 ' 
-                         + 'NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr'
+        elif 'INSERT PARMCSF LINE' in line:
+            parmcsf_line = (' '.join(str(n+2) for n in range(ncsf-1))
+                           + ' (iwcsf(iparm),iparm=1,nparmcsf)\n')
+            output_lines.append(parmcsf_line)
+        elif 'INSERT NDATA LINE' in line:
+            ndata_line = ('1000 ' + str(24 + ncsf-1) + ' 1 1 5 1000 21101 1' 
+                         + ' NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr\n')
+            output_lines.append(ndata_line)
         else:
             output_lines.append(line)
     return output_lines
