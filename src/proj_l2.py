@@ -263,7 +263,7 @@ class AtomicOrb:
         self.ia = ia
 #TEST
 
-class L2Projector:
+class L2_Projector:
     def __init__(self, mol, mf):
         self.op_tol = 1e-2
         truncate = np.vectorize(lambda num : num if abs(num) > self.op_tol else 0j)
@@ -698,7 +698,7 @@ def main():
     mf.max_cycle = 1000
     mf.run()
 
-    p = L2Projector(mol, mf)
+    p = L2_Projector(mol, mf)
 
     print('Is atomic: ', mol.is_atomic_system)
     print('Type: ', type(mf))

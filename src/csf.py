@@ -4,6 +4,7 @@ import math
 from scipy.sparse import csr_matrix
 import scipy.sparse as sparse
 
+import shci4qmc.src.csf_rf as rf
 import shci4qmc.src.vec as vec
 import shci4qmc.src.gen as gen
 import shci4qmc.lib.load_wf as load_wf
@@ -31,6 +32,35 @@ class CsfMethods():
         if self.symmetry in ('DOOH', 'COOV'):
             self.real_or_imag_part(dets[0])
         csfs, config_labels = self.get_csfs(dets)
+
+        print('ORIG SHCI WF LENGTH: ', len(dets))
+        print('Init CSFS: ')
+        for n, csf in enumerate(csfs):
+            print("CSF ", n)
+            for det, coef in csf.dets.items():
+                print(det, '%.8f'%coef)
+            print()
+
+        g = rf.CSF_Generator(wf_filename, self.mol, self.mf, wf_tol, self.target_l2)
+        csfs_rf = g.generate()
+        '''
+        print('RF CSFS: ')
+        for n, csf in enumerate(csfs_rf):
+            print("CSF ", n)
+            for det, coef in csf.dets.items():
+                print(det, '%.8f'%coef)
+            print()
+        '''
+        for n, (csf_rf, csf) in enumerate(zip(csfs_rf, csfs)):
+            print("CSF ", n)
+            for (det_rf, coef_rf), (det, coef) in zip(csf_rf.dets.items(), csf.dets.items()):
+                print(det_rf, '%.8f'%coef_rf, det, '%.8f'%coef)
+            diff = vec.Vec.zero()
+            diff += csf
+            diff += -1*csf_rf
+            if (diff.norm() > 1e-8):
+                print("Warning! diff= ", diff.norm())
+        assert(False)
 
 #       Convert to real wf if molecule has linear symm
         if self.symmetry in ('DOOH', 'COOV'):

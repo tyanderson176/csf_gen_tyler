@@ -28,6 +28,18 @@ class Vec:
                 scalar_product += numpy.conj(coef)*other.dets[det]
         return scalar_product
 
+    def real_part(self):
+        real_part = Vec.zero()
+        for det, coef in self.dets.items():
+            real_part += coef.real * det 
+        return real_part
+
+    def imag_part(self):
+        imag_part = Vec.zero()
+        for det, coef in self.dets.items():
+            imag_part += coef.imag * det
+        return imag_part
+
     @staticmethod
     def zero():
         return Vec({})
@@ -96,6 +108,8 @@ class Det:
     def __init__(self, up_occ, dn_occ):
         self.up_occ = sorted(up_occ)
         self.dn_occ = sorted(dn_occ)
+        self.up = self.up_occ
+        self.dn = self.dn_occ
         self.my_hash = None #self._get_hash()
 
     def get_Sz(self):
@@ -148,6 +162,7 @@ class Config:
             self.occs[up_orb] = 1
         for dn_orb in det.dn_occ:
             self.occs[dn_orb] = 1 if dn_orb not in self.occs else 2
+        self.orbs = self.occs
         self.num_open = \
             sum([1 if self.occs[orb] == 1 else 0 for orb in self.occs])
         self.config_str = self.make_config_str()

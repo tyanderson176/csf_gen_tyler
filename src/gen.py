@@ -7,14 +7,14 @@ from pyscf import symm
 import numpy as np
 import shci4qmc.src.vec as vec
 from shci4qmc.src.vec import Det, Vec, Config
-from shci4qmc.src.proj_l2 import L2Projector
+from shci4qmc.src.proj_l2 import L2_Projector
 
 class GenMethods():
     def __init__(self):
         if self.config['project_l2']:
             assert(self.mol.is_atomic_system and self.symmetry == 'DOOH')
             #TODO: Add some tolerance options here? prune tol + mol matrix tol 
-            self.L2projector = L2Projector(self.mol, self.mf)
+            self.L2projector = L2_Projector(self.mol, self.mf)
             self.target_l2 = self.config['target_l2']
 
     def parse_csf_file(self, num_open_shells_max, twice_s, csf_file_contents):
