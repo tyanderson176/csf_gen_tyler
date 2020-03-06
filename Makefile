@@ -37,8 +37,9 @@ all: $(CSF) $(WF_LOAD) $(REL_PAR)
 
 clean:
 	rm -rf $(BUILD_DIR)
-	rm $(LIB_DIR)/$(MODULE).so
-	rm $(LIB_DIR)/$(EXE)
+	rm $(LIB_DIR)/$(WF_LOAD).so
+	rm $(LIB_DIR)/$(REL_PAR).so
+	rm $(LIB_DIR)/$(CSF)
 
 $(WF_LOAD): $(OBJS) $(WF_LOAD_OBJS) $(HEADERS) 
 	echo $(WF_LOAD)

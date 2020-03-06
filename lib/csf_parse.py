@@ -81,14 +81,14 @@ if __name__ == "__main__":
     mol.spin = 3
     mol.symmetry = 'dooh'
     
-    basis_path = 'n_sto14g_cvb1_hf.out'
+    basis_path = '../src/test/n_sto14g_cvb1_hf.out'
     mol.basis = gamess.get_basis(basis_path).get_pyscf_basis()
     mol.build()
     mol.is_atomic_system = (mol.natm == 1)
     
     mf = sym_rhf.RHF(mol).run()
     
-    p = l2.L2Projector(mol, mf)
+    p = l2.L2_Projector(mol, mf)
 
     parser = CsfParser(mol, mf)
 

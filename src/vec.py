@@ -45,6 +45,13 @@ class Vec:
         return Vec({})
 
     @staticmethod
+    def add(states, coefs):
+        sum_st = Vec.zero()
+        for state, coef in zip(states, coefs):
+            sum_st += coef*state
+        return sum_st
+
+    @staticmethod
     def gram_schmidt(vecs, dim, tol=tol):
         orthonormal_basis = []
         for vec in vecs: #for vec in numpy.copy(vecs):
@@ -144,6 +151,9 @@ class Det:
 
     def __repr__(self):
         return self._get_repr()
+    
+    def __lt__(self, other):
+        return str(self) < str(other)
 
     def _get_repr(self):
         det_str = '|'

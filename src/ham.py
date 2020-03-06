@@ -212,6 +212,11 @@ class Ham:
         coefs = [coef for coef in wf.dets.values()]
         return self.get_e(dets, coefs)
 
+    def expec_val(self, wf):
+        convert = lambda det, coef: (self.det_to_list(det), coef)
+        pairs = [convert(*pair) for pair in wf.dets.items()]
+        return self.get_e(*zip(*pairs))
+
 def elec_exchange_ops(det, ind):
     ''' Given a determinant defined by a list of occupied orbitals
     which is ordered apart from one element (ind), find the number of

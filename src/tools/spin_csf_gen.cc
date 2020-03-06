@@ -229,7 +229,7 @@ void save_csfs(csf_vec3D &spins, int nelecs) {
         std::unordered_map<Det, int, DetHasher> index_of;
         std::vector<std::string> det_strings;
         fill_index_of(index_of, det_strings, nelecs, two_s);
-        printf("\nSTART\nN = %d S = %3.1f\n", nelecs, two_s/2.);
+        printf("\nSTART\nN= %d S= %3.1f\n", nelecs, two_s/2.);
         for(std::string str : det_strings)
             printf("%s ", str.c_str());
         printf("\n");

@@ -138,11 +138,11 @@ writeIntNoSymm.argtypes = [
     ndpointer(ctypes.c_int32)
 ]
 
-def writeComplexOrbIntegrals(self, h1, eri, norb, nelec, ecore, orbsym, partner_orbs):
+def writeComplexOrbIntegrals(h1, eri, norb, nelec, ecore, orbsym, partner_orbs):
     coeffs, num_rows, row_index, row_coeffs, orbsym = \
-        self.realToComplex(norb, nelec, orbsym, partner_orbs)
+        realToComplex(norb, nelec, orbsym, partner_orbs)
 
-    self.real2complex_coeffs = coeffs
+    #self.real2complex_coeffs = coeffs
     new_h1 = reduce(np.dot, (coeffs, h1, coeffs.conj().T)).real
     eri = pyscf.ao2mo.restore(1, eri, norb)
     new_eri = np.zeros_like(eri)
@@ -162,7 +162,13 @@ def writeComplexOrbIntegrals(self, h1, eri, norb, nelec, ecore, orbsym, partner_
                    np.ascontiguousarray(orbsym, np.int32))
     return
 
-def realToComplex(self, norb, nelec, orbsym, partner_orbs):
+def get_real2complex_coeffs(h1, eri, norb, nelec, ecore, orbsym, partner_orbs):
+    coeffs, num_rows, row_index, row_coeffs, orbsym = \
+        realToComplex(norb, nelec, orbsym, partner_orbs)
+    return coeffs
+#    self.real2complex_coeffs = coeffs
+
+def realToComplex(norb, nelec, orbsym, partner_orbs):
     coeffs = np.zeros(shape=(norb, norb)).astype(complex)
     num_rows = np.zeros(shape=(norb, ), dtype=int)
     row_index = np.zeros(shape=(2 * norb, ), dtype=int)
