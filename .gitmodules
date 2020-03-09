@@ -1,3 +1,3 @@
 [submodule "hps"]
-	path = lib/hps
+	path = shci4qmc/lib/hps
 	url = https://github.com/jl2922/hps.git

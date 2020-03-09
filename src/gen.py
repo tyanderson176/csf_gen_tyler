@@ -7,21 +7,6 @@ from shci4qmc.src.rotate_orbs import OrbRotator
 from shci4qmc.src.l2_proj import L2_Projector
 from shci4qmc.src.vec import Vec, Det, Config
 
-def load_shci_wf(filename, tol):
-    def make_det(orbs):
-        [up, dn] = orbs
-        reindex_up = [orb+1 for orb in up]
-        reindex_dn = [orb+1 for orb in dn]
-        return Det(reindex_up, reindex_dn)
-
-    shci_wf_dict = lwf.load(filename)
-    pairs = zip(shci_wf_dict['dets'], shci_wf_dict['coefs'])
-    shci_wf = Vec.zero()
-    for orbs, coef in pairs:
-        if abs(coef) > tol:
-            shci_wf += coef*make_det(orbs) 
-    return shci_wf
-
 def orthogonalize(csfs):
     csfs = Vec.gram_schmidt(csfs, len(csfs), tol=1e-4)
     return csfs
