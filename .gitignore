@@ -1,18 +1,10 @@
-scripts/*
-out*/*
-bin/*
-old_bin/*
-test/*
-build/*.o
+shci4qmc/build/*.o
 
-__pycache__/*
+shci4qmc/__pycache__/*
 
-lib/__pycache__/*
-lib/hps/*
-lib/*.so
-lib/spin_csf_gen
-
-run_vmc/*
-linsymm/*
+shci4qmc/lib/__pycache__/*
+shci4qmc/lib/hps/*
+shci4qmc/lib/*.so
+shci4qmc/lib/spin_csf_gen
 
 *.pyc
