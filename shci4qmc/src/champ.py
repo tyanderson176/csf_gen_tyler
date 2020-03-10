@@ -27,8 +27,8 @@ class ChampInputFiles:
     def __init__(self):
         self.config = None
         self.shci_cmd = None
-        self.dir_in = '.'
-        self.dir_out = None
+        self.dir_reuse = '.'
+        self.dir_qmc_inp = None
         self.bas_path = None
 
         self.tol_det = 1e-3
@@ -44,14 +44,14 @@ class ChampInputFiles:
         self.out_file = None
 
     def make(self):
-        self.dat_file_path = os.path.join(self.dir_in, 'champ.dat')
+        self.dat_file_path = os.path.join(self.dir_reuse, 'champ.dat')
         if os.path.exists(self.dat_file_path):
             self.make_inp_file()
             return
 
         self.wf_filename = 'wf_eps1_%.2e.dat'%min(self.config['eps_vars'])
-        self.wf_path = os.path.join(self.dir_in, self.wf_filename)
-        self.rot_matrix_path = os.path.join(self.dir_in, 'rotation_matrix')
+        self.wf_path = os.path.join(self.dir_reuse, self.wf_filename)
+        self.rot_matrix_path = os.path.join(self.dir_reuse, 'rotation_matrix')
 
         assert(self.mol.unit == 'bohr' and self.mol.symmetry)
         assert(self.mol.spin == abs(self.config['n_up'] - self.config['n_dn']))
@@ -95,7 +95,7 @@ class ChampInputFiles:
 
     def make_inp_file(self):
         for tol in self.tol_csf:
-            inp.make_input(self.dat_file_path, self.dir_out, tol)
+            inp.make_input(self.dat_file_path, self.dir_qmc_inp, tol)
         return
 
     def make_dat_file(self):
@@ -129,7 +129,7 @@ class ChampInputFiles:
             format_str.format('0  1 slater') 
             + 'iperiodic,ibasis,which_analytical_basis\n')
         self.out_file.write(
-            format_str.format('0.5  %10.3f  \'Hartrees\''% self.hf_energy) 
+            format_str.format('0.5  %10.3f  \'Hartrees\''% self.proj_e) 
             + 'hb,etrial,eunit\n')
         self.out_file.write(
             format_str.format('100  100  1  100  0') 
@@ -205,7 +205,7 @@ class ChampInputFiles:
         return
     
     def make_radial_file(self, atom):
-        filename = os.path.join(self.dir_out, str(atom) + ".out")
+        filename = os.path.join(self.dir_qmc_inp, str(atom) + ".out")
         r0, rf, num_pts, x = 0, 7., 100, 1.03
         grid = p2d.radial_grid(r0, rf, num_pts, x)
         vals = p2d.radial_bf_vals(self.aos, atom, grid)
@@ -258,7 +258,7 @@ class ChampInputFiles:
     #SETUP SHCI CALCULATION
     #----------------------
     def setup_shci(self):
-        fcidump_path = os.path.join(self.dir_out, 'FCIDUMP')
+        fcidump_path = os.path.join(self.dir_qmc_inp, 'FCIDUMP')
         if not os.path.exists(fcidump_path):
             self.make_fcidump(fcidump_path)
         if self.symmetry in ('dooh', 'coov'):
@@ -267,7 +267,7 @@ class ChampInputFiles:
         complex_ints = self.symmetry in ('dooh', 'coov')
         self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
 
-        config_path = os.path.join(self.dir_out, 'config.json')
+        config_path = os.path.join(self.dir_qmc_inp, 'config.json')
         with open(config_path, 'a') as f:
             json.dump(self.config, f)
         return
@@ -325,65 +325,6 @@ class ChampInputFiles:
             filename, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym,
             tol=1e-15, float_format=' %.16g')
     
-#    def make_config(self):
-#        #Get variables
-#        eps_vars = self.config['eps_vars']
-#        eps_vars_sched = self.config['eps_vars_sched']
-#        n_up = (self.mol.nelectron + self.mol.spin)//2
-#        n_dn = (self.mol.nelectron - self.mol.spin)//2
-#        if not self.mol.symmetry:
-#            raise Exception(
-#                "Point group for molecule is required to run SHCI.\n"
-#                + "SHCI supports `C1`, `C2`, `Cs`, `Ci`, `C2v`, `C2h`, `Coov`," 
-#                + "`D2`, `D2h`, and `Dooh`.")
-#
-#        symmetry = self.mol.symmetry
-#        sym = '\"' + str(symmetry) + '\"'
-#    
-#        #Write config file
-#        config = open('config.json', 'w')
-#        config.write('{\n')
-#        self.write_config_var(config, 'system', '\"chem\"')
-#        self.write_config_var(config, 'n_up', n_up)
-#        self.write_config_var(config, 'n_dn', n_dn)
-#        self.write_config_var(config, 'var_only', 'true')
-#        self.write_config_var(config, 'reorder_orbs', 'false')
-#        self.write_config_var(config, 'target_error', 1e-12)
-#        self.write_config_var(config, 'eps_vars', eps_vars)
-#        self.write_config_var(config, 'eps_vars_schedule', eps_vars_sched)
-#
-#        if self.opt_orbs:
-#            self.write_config_var(config, 'optorb', 'true')
-#            opt_orbs_vars = [
-#                '\"rotation_matrix\": true', 
-#                '\"method\": \"appnewton\"',
-#                '\"accelerate\": true']
-#            self.write_config_var(config, 'optimization', opt_orbs_vars, curly = True)
-#
-#        sym_var = ('{\n' +
-#                   '\t\t\"point_group\": ' + sym + '\n' +
-#                   '\t}')
-#        self.write_config_var(config, 'chem', sym_var, end = '')
-#        config.write('}')
-#        config.close()
-#        return
-#    
-#    def write_config_var(self, config_file, var_name, vals, end = ",", curly = False):
-#        config_file.write('\t"'+var_name+'": ')
-#        if not isinstance(vals, list):
-#            config_file.write(str(vals) + end + '\n')
-#            return
-#        else:
-#            open_paren, closed_paren = ('{', '}') if curly else ('[', ']')
-#            config_file.write(open_paren + '\n')
-#            for val in vals[:-1]:
-#                config_file.write('\t\t' + str(val) + ',\n')
-#            config_file.write('\t\t' + str(vals[-1]) + '\n')
-#            config_file.write('\t' + closed_paren + end + '\n')
-#            return
-#        raise Exception('Passed null list as vals to write_config_var.')
-#        return
-
     #GET SHCI DATA
     #-------------
     def get_shci_output(self):
@@ -396,7 +337,10 @@ class ChampInputFiles:
             print('Running shci...\n')
             self.run_shci()
             if self.opt_orbs:
-                os.rename(os.path.join(self.dir_out, 'rotation_matrix'), self.rot_matrix_path)
+                os.rename(os.path.join(self.dir_qmc_inp, 'rotation_matrix'), self.rot_matrix_path)
+
+        #write FCIDUMP in real basis
+
 
         if self.opt_orbs:
                 self.load_rotation_matrix()
@@ -417,10 +361,10 @@ class ChampInputFiles:
         return
 
     def run_shci(self):
-        shci_output_path = os.path.join(self.dir_out, 'shci.out')
+        shci_output_path = os.path.join(self.dir_qmc_inp, 'shci.out')
         shci_output_file = open(shci_output_path, 'w')
-        subprocess.run(self.shci_cmd.split(), stdout=shci_output_file, cwd = self.dir_out)
-        self.wf_path_init = os.path.join(self.dir_out, self.wf_filename) #wf placed here by shci
+        subprocess.run(self.shci_cmd.split(), stdout=shci_output_file, cwd = self.dir_qmc_inp)
+        self.wf_path_init = os.path.join(self.dir_qmc_inp, self.wf_filename) #wf placed here by shci
         os.rename(self.wf_path_init, self.wf_path)
         return
 

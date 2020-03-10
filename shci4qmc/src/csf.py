@@ -33,10 +33,11 @@ def load_shci_wf(filename, tol):
     return shci_wf
 
 def rotate_by_configs(csfs, coefs):
-    def rotate(csfs):
+    def rotate(config, csfs):
         sum_csf = Vec.zero()
         for csf in csfs:
             sum_csf += csf
+        sum_csf.config_label = config
         coefs = [sum_csf.norm() if n == 0 else 0. for n, csf in enumerate(csfs)]
         csfs = Vec.gram_schmidt([sum_csf] + csfs, len(csfs))
         return list(zip(csfs, coefs))
@@ -46,7 +47,7 @@ def rotate_by_configs(csfs, coefs):
         group_by_configs[csf.config_label].append(coef*csf)
     pairs = []
     for config, group in group_by_configs.items():
-        pairs += rotate(group) 
+        pairs += rotate(config, group) 
     return zip(*pairs)
 
 def error(pairs, wf):

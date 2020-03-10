@@ -103,7 +103,9 @@ class Vec:
         mul_dict = {}
         for det in self.dets:
             mul_dict[det] = scalar*self.dets[det]
-        return Vec(mul_dict)
+        res = Vec(mul_dict)
+        res.config_label = self.config_label
+        return res
 
     def __truediv__(self, scalar):
         return (1./scalar)*self

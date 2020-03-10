@@ -9,12 +9,12 @@ fs.config = {
 	"n_dn": 7,
 	"var_only": True,
 	"eps_vars": [
-		0.05
+		0.005
 	],
 	"eps_vars_schedule": [
-        0.2,
-		0.1,
-        0.05
+        0.02,
+		0.01,
+        0.005
 	],
 	"chem": {
 		"point_group": "Dooh"
@@ -28,10 +28,10 @@ fs.config = {
 }
 
 fs.shci_cmd = 'mpirun -np 1 /home/tanderson/shci/shci'
-fs.dir_in = './in'
-fs.dir_out = './out'
-fs.tol_det = 1e-2
-fs.tol_csf = [0., 1e-1, 1e-2]
+fs.dir_reuse = './reuse'
+fs.dir_qmc_inp = './qmc_inp'
+fs.tol_det = 0. #tolerance for det coef in shci wf
+fs.tol_csf = [1e-1, 3e-2, 7e-3, 0.] #tolerance for (csf coef in shci_wf)/sqrt(ndet in csf)
 fs.opt_orbs = True
 fs.target_l2 = None
 

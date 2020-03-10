@@ -112,11 +112,9 @@ def write_csfs(qmc_file, dir_out, config_csfs, config_labels, csf_tol, reduce_cs
     for config, csfs in config_csfs.items():
         config_sum = add_csfs([coef for coef, csf in csfs], [csf for coef, csf in csfs])
         n_dets = len(config_sum.dets)
-        if (config_sum.norm()/np.sqrt(n_dets) < csf_tol): continue
+        if (config_sum.norm()/np.sqrt(n_dets) < csf_tol): 
+            continue
         for coef, csf in csfs:
-#            for det in csf.dets:
-#                if det not in det_indices:
-#                    det_indices[det] = len(det_indices)
             accepted_csfs.append((coef, csf))
     
     decreasing_coefs = lambda coef_and_csf: -abs(coef_and_csf[0])
