@@ -205,11 +205,12 @@ class ChampInputFiles:
         return
     
     def make_radial_file(self, atom):
-        filename = os.path.join(self.dir_qmc_inp, str(atom) + ".out")
+        radial_filename = "rad_bas_func_" + str(atom) + ".out"
+        path = os.path.join(self.dir_qmc_inp, radial_filename)
         r0, rf, num_pts, x = 0, 7., 100, 1.03
         grid = p2d.radial_grid(r0, rf, num_pts, x)
         vals = p2d.radial_bf_vals(self.aos, atom, grid)
-        self.write_radial_format(filename, grid, vals, num_pts, x, r0, rf) 
+        self.write_radial_format(path, grid, vals, num_pts, x, r0, rf) 
         return
     
     def write_radial_format(self, filename, grid, vals, num_pts, x, r0, rf):
@@ -268,8 +269,8 @@ class ChampInputFiles:
 #        self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
 
         config_path = os.path.join(self.dir_qmc_inp, 'config.json')
-        with open(config_path, 'a') as f:
-            json.dump(self.config, f)
+        with open(config_path, 'w') as f:
+            json.dump(self.config, f, indent=2)
         return
 
     def make_real2complex_coeffs(self):
@@ -345,10 +346,10 @@ class ChampInputFiles:
     #GET SHCI DATA
     #-------------
     def get_shci_output(self):
-        self.setup_shci()
         wf_file_exists = os.path.exists(self.wf_path)
         mat_file_exists = os.path.exists(self.rot_matrix_path)
         if (not wf_file_exists) or (self.opt_orbs and not mat_file_exists):
+            self.setup_shci()
             print('wf_file: ', self.wf_path, wf_file_exists)
             print('self.rot_matrix_path: ', self.rot_matrix_path, mat_file_exists)
             print('Running shci...\n')
