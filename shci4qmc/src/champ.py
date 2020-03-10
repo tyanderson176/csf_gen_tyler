@@ -264,8 +264,8 @@ class ChampInputFiles:
         if self.symmetry in ('dooh', 'coov'):
             self.make_real2complex_coeffs()
 
-        complex_ints = self.symmetry in ('dooh', 'coov')
-        self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
+#        complex_ints = self.symmetry in ('dooh', 'coov')
+#        self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
 
         config_path = os.path.join(self.dir_qmc_inp, 'config.json')
         with open(config_path, 'a') as f:
@@ -302,13 +302,30 @@ class ChampInputFiles:
             writeComplexOrbIntegrals(h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, 
                                      orbsym, self.mf.partner_orbs)
             os.rename('FCIDUMP', filename)
-            real_fcidump_path = filename + '_real_orbs'
-            fcidump.from_integrals(real_fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
-                                   orbsym)
+#            real_fcidump_path = filename + '_real_orbs'
+#            fcidump.from_integrals(real_fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
+#                                   orbsym)
         else:
             orbsym = [sym+1 for sym in orbsym]
             fcidump.from_integrals(filename, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym, 
                                    tol=1e-15, float_format=' %.16g')
+    
+    def make_real_orb_fcidump(self, fcidump_path):
+        #Prints FCIDUMP using real orbitals (only used if linear symmetry is used)
+        if self.opt_orbs:
+            mo_coeff = numpy.matmul(self.rotation_matrix, self.mo_coeffs).conj().T
+        else:
+            mo_coeff = self.mo_coeffs.conj().T
+        h1 = reduce(numpy.dot, (mo_coeff.conj().T, self.mf.get_hcore(), mo_coeff))
+        if self.mf._eri is None:
+            eri = ao2mo.full(self.mol, mo_coeff)
+        else:
+            eri = ao2mo.full(self.mf._eri, mo_coeff)
+        nuc = self.mf.energy_nuc()
+        orbsym = getattr(mo_coeff, 'orbsym', None) 
+        fcidump.from_integrals(fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
+                               orbsym)
+        return
 
     def test_fcidump(self, filename):
         mo_coeff = self.mf.mo_coeff
@@ -339,11 +356,25 @@ class ChampInputFiles:
             if self.opt_orbs:
                 os.rename(os.path.join(self.dir_qmc_inp, 'rotation_matrix'), self.rot_matrix_path)
 
-        #write FCIDUMP in real basis
-
-
         if self.opt_orbs:
                 self.load_rotation_matrix()
+
+        #write FCIDUMP in real basis
+        fcidump_path = os.path.join(self.dir_qmc_inp, 'FCIDUMP')
+        if self.symmetry in ('dooh', 'coov'):
+            fcidump_path += '_real_orbs'
+            self.make_real_orb_fcidump(fcidump_path)
+        elif self.opt_orbs:
+            fcidump_path += '_optorb'
+        self.ham = Ham(fcidump_path)
+        
+#        real_fcidump_path = filename + '_real_orbs'
+#        fcidump.from_integrals(real_fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
+#                                   orbsym)
+#        complex_ints = self.symmetry in ('dooh', 'coov')
+#        self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
+
+
         print('Loading WF from: ' + self.wf_path)
         print('Starting CSF calculation...')
 
