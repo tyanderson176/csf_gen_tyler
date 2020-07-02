@@ -313,10 +313,13 @@ class ChampInputFiles:
     
     def make_real_orb_fcidump(self, fcidump_path):
         #Prints FCIDUMP using real orbitals (only used if linear symmetry is used)
+        mo_coeff = self.mf.mo_coeff
         if self.opt_orbs:
-            mo_coeff = numpy.matmul(self.rotation_matrix, self.mo_coeffs).conj().T
-        else:
-            mo_coeff = self.mo_coeffs.conj().T
+            mo_coeff = numpy.matmul(mo_coeff, self.rotation_matrix.conj().T)
+#        if self.opt_orbs:
+#            mo_coeff = numpy.matmul(self.rotation_matrix, self.mo_coeffs).conj().T
+#        else:
+#            mo_coeff = self.mo_coeffs.conj().T
         h1 = reduce(numpy.dot, (mo_coeff.conj().T, self.mf.get_hcore(), mo_coeff))
         if self.mf._eri is None:
             eri = ao2mo.full(self.mol, mo_coeff)
@@ -549,7 +552,7 @@ class ChampInputFiles:
     
     def print_opt(self):
         self.out_file.write('\n\'* Optimization section\'\n')
-        self.out_file.write('12 10000 1.d-8 0.05 1.d-4     ' 
+        self.out_file.write('12 10000 1.d-8 0.00 1.d-4     ' 
                             + 'nopt_iter,nblk_max,add_diag(1),p_var,tol_energy\n') 
         self.out_file.write('INSERT NDATA LINE NDATA,NPARM,icusp,icusp2,NSIG,NCALLS,iopt,ipr\n')
         self.out_file.write('0 0 0 0 i3body,irewgt,iaver,istrech\n')
