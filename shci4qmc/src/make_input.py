@@ -117,7 +117,7 @@ def write_csfs(qmc_file, dir_out, config_csfs, config_labels, csf_tol, reduce_cs
         for coef, csf in csfs:
             accepted_csfs.append((coef, csf))
     
-    decreasing_coefs = lambda coef_and_csf: -abs(coef_and_csf[0])
+    decreasing_coefs = lambda coef_and_csf: -abs(coef_and_csf[0])/np.sqrt(len(coef_and_csf[1].dets))
     sorted_csfs = sorted([(coef, csf) for coef, csf in accepted_csfs], key = decreasing_coefs)
     sorted_dets, reindex, det_indices = [], {}, {}
     for coef, csf in sorted_csfs:

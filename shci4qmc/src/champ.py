@@ -262,8 +262,7 @@ class ChampInputFiles:
         fcidump_path = os.path.join(self.dir_qmc_inp, 'FCIDUMP')
         if not os.path.exists(fcidump_path):
             self.make_fcidump(fcidump_path)
-        if self.symmetry in ('dooh', 'coov'):
-            self.make_real2complex_coeffs()
+
 
 #        complex_ints = self.symmetry in ('dooh', 'coov')
 #        self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
@@ -359,7 +358,6 @@ class ChampInputFiles:
             self.run_shci()
             if self.opt_orbs:
                 os.rename(os.path.join(self.dir_qmc_inp, 'rotation_matrix'), self.rot_matrix_path)
-
         if self.opt_orbs:
                 self.load_rotation_matrix()
 
@@ -411,6 +409,7 @@ class ChampInputFiles:
             self.rotation_matrix.append(row)
         self.rotation_matrix = numpy.array(self.rotation_matrix).T
         if self.symmetry in ('dooh', 'coov'):
+            self.make_real2complex_coeffs()
             R = self.real2complex_coeffs
             self.rotation_matrix = reduce(numpy.dot, (R.conj().T, self.rotation_matrix, R)).real
 
@@ -436,9 +435,10 @@ class ChampInputFiles:
         class Pair:
             def __init__(self, csf, coef):
                 self.csf, self.coef = csf, coef
+                self.ndetsqrt = numpy.sqrt(len(csf.dets.items()))
             def __lt__(self, other):
                 if self.coef != other.coef: #deterministic csf order
-                    return abs(other.coef) < abs(self.coef)
+                    return abs(other.coef)/other.ndetsqrt < abs(self.coef)/self.ndetsqrt
                 else:
                     return str(self.csf) < str(other.csf)
         
