@@ -285,12 +285,12 @@ class ChampInputFiles:
         nuc = self.mf.energy_nuc()
         orbsym = getattr(mo_coeff, 'orbsym', None) 
         self.real2complex_coeffs = \
-            get_real2complex_coeffs(h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, orbsym, 
+            get_real2complex_coeffs(h1, eri, h1.shape[0], 
+                                    self.n_up + self.n_down, nuc, orbsym, 
                                     self.mf.partner_orbs) 
         return
 
     def make_fcidump(self, filename):
-        print('filename: ', filename) 
         mo_coeff = self.mf.mo_coeff
         h1 = reduce(numpy.dot, (mo_coeff.T, self.mf.get_hcore(), mo_coeff))
         if self.mf._eri is None:
@@ -300,16 +300,48 @@ class ChampInputFiles:
         nuc = self.mf.energy_nuc()
         orbsym = getattr(mo_coeff, 'orbsym', None) 
         if self.symmetry in ('dooh', 'coov'):
-            writeComplexOrbIntegrals(h1, eri, h1.shape[0], self.n_up + self.n_down, nuc, 
-                                     orbsym, self.mf.partner_orbs)
+            writeComplexOrbIntegrals(h1, eri, h1.shape[0], self.n_up + self.n_down, 
+                                     nuc, orbsym, self.mf.partner_orbs)
             os.rename('FCIDUMP', filename)
 #            real_fcidump_path = filename + '_real_orbs'
-#            fcidump.from_integrals(real_fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
-#                                   orbsym)
+#            fcidump.from_integrals(real_fcidump_path, h1, eri, h1.shape[0], 
+#                                   self.mol.nelec, nuc, 0, orbsym)
         else:
             orbsym = [sym+1 for sym in orbsym]
-            fcidump.from_integrals(filename, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, orbsym, 
-                                   tol=1e-15, float_format=' %.16g')
+            fcidump.from_integrals(filename, h1, eri, h1.shape[0], self.mol.nelec, 
+                                   nuc, 0, orbsym, tol=1e-15, float_format=' %.16g')
+
+    def make_erf_fcidump(self, filename):
+        h1e = self.mf.get_hcore()
+
+        with self.mol.with_range_coulomb(omega = self.omega):
+            h2e = self.mol.intor('int2e_coulerf', aosym='s8')
+
+        jtot, ktot = self.mf.get_jk()
+        jerf, kerf = self.mf.get_jk(omega = omega)
+        veff = (jtot - jerf) - 0.5*(ktot - kerf)
+
+        mo_coeffs = self.mf.mo_coeff
+        mo_h1e = reduce(np.dot, (mo_coeffs.T, h1e + veff, mo_coeffs))
+        mo_h2e = ao2mo.full(h2e, mo_coeffs)
+    
+        rdm = self.mf.make_rdm1()
+        ext = 0.5*np.einsum('ij,ji', veff, rdm)
+        nuc = self.mf.energy_nuc() - ext
+        nmo = mo_h1e.shape[0]
+        sym = getattr(mo_coeffs, 'orbsym', None)
+    
+        if self.symmetry in ('dooh', 'coov'):
+            writeComplexOrbIntegrals(mo_h1e, mo_h2e, nmo, self.mol.nelec, 
+                                     nuc, orbsym, self.mf.partner_orbs)
+            os.rename('FCIDUMP', filename)
+        else:
+            orbsym = [s+1 for s in sym]
+	    fcidump.from_integrals(filename, mo_h1e, mo_h2e, nmo, self.mol.nelec, 
+	                           nuc=nuc, ms=0, orbsym=orbsym,tol=1e-15, 
+	                           float_format = "% .12e\t")
+        return
+
     
     def make_real_orb_fcidump(self, fcidump_path):
         #Prints FCIDUMP using real orbitals (only used if linear symmetry is used)
