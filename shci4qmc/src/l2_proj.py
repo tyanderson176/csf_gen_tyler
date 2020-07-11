@@ -17,12 +17,12 @@ from shci4qmc.lib.rel_parity import rel_parity_few_elec as rel_parity
 import shci4qmc.src.p2d as p2d
 import shci4qmc.src.sym_rhf as sym_rhf
 
-from shci4qmc.lib.andre.determinant import Determinant
-from shci4qmc.lib.andre.det_lin_comb import DeterminantLinearCombination
-from shci4qmc.lib.andre.orbital import Orbital
-from shci4qmc.lib.andre.csf import project_ang_mom
-from shci4qmc.lib.andre.csf import build_operators
-from shci4qmc.lib.andre.operators import Operator
+#from shci4qmc.lib.andre.determinant import Determinant
+#from shci4qmc.lib.andre.det_lin_comb import DeterminantLinearCombination
+#from shci4qmc.lib.andre.orbital import Orbital
+#from shci4qmc.lib.andre.csf import project_ang_mom
+#from shci4qmc.lib.andre.csf import build_operators
+#from shci4qmc.lib.andre.operators import Operator
 
 def get_indices(atomic_orbs):
     indices = {}
@@ -480,170 +480,170 @@ class L2_Projector:
                     mat[i][j] = np.conj(mat[j][i])
         return mat
 
-class AndreProjector():
-    def __init__(self, mol, mf):
-        self.atomic_orbs = p2d.mol2aos(mol, mf, None)
-        self.mo_coeffs = p2d.aos2mo_coeffs(self.atomic_orbs)
-        self.a2m = atomic2mol_matrix(self.mo_coeffs, self.atomic_orbs)
-        self.op_tol = 1e-8
-
-        self.mo_coeffs_sparse = sparse_rep(self.mo_coeffs.T)
-        self.ang_mom = self.get_ang_mom()
-
-        self.l_chars = {0: 'S', 1: 'P', 2: 'D', 3: 'F', 4: 'G', 5: 'H'}  
-        self.up_mos, self.dn_mos = self.get_mos()
-        self.up_aos, self.dn_aos = self.get_aos()
-        self.ao_basis = self.get_ao_basis()
-        self.mo_basis = self.get_mo_basis()
-        self.max_n = max(ao.n for ao in self.atomic_orbs)
-
-        l_z, l_plus, l_minus = self.build_ops()
-        self.l_z = l_z
-        self.l_plus = l_plus
-        self.l_minus = l_minus
-
-    def get_basis(self, init_orbs, fin_orbs, coeffs):
-        #rows of coeffs = the coefs of each init_orb in the fin_orbs
-        tol = 1e-15
-        basis = {}
-        init_up_orbs, init_dn_orbs = init_orbs
-        fin_up_orbs, fin_dn_orbs = fin_orbs
-        for orb, row in zip(init_up_orbs, coeffs):
-            coefs = [coef for coef in row if abs(coef) > tol]
-            dets = [Determinant([fin_up_orbs[n]]) for n, coef in enumerate(row) if abs(coef) > tol]
-            basis[orb] = DeterminantLinearCombination(coefs, dets)
-        for orb, row in zip(init_dn_orbs, coeffs):
-            coefs = [coef for coef in row if abs(coef) > tol]
-            dets = [Determinant([fin_dn_orbs[n]]) for n, coef in enumerate(row) if abs(coef) > tol]
-            basis[orb] = DeterminantLinearCombination(coefs, dets)
-        return basis
-
-    def get_mo_basis(self):
-        init_orbs = self.up_aos, self.dn_aos
-        fin_orbs = self.up_mos, self.dn_mos
-        return self.get_basis(init_orbs, fin_orbs, np.linalg.inv(self.a2m))
-
-    def get_ao_basis(self):
-        init_orbs = self.up_mos, self.dn_mos
-        fin_orbs = self.up_aos, self.dn_aos
-        return self.get_basis(init_orbs, fin_orbs, self.a2m)
-
-    def get_ang_mom(self):
-        ang_mom = {}
-        for mol_orb, ao_coefs in self.mo_coeffs_sparse.items():
-            ang_mom[mol_orb] = set()
-            for coef, atom_orb in ao_coefs:
-                ang_mom[mol_orb].add(self.atomic_orbs[atom_orb-1].l)
-        return ang_mom
-
-    def build_ops(self):
-        l_minus, l_plus, l_z = {}, {}, {}
-        for ao in self.atomic_orbs:
-            n, l, m = ao.quant_nums
-            bv_id = ao.bvec.bv_id
-            for spin_char, s_z in [('-', -0.5), ('+', 0.5)]:
-                name = str(n) + self.l_chars[l] + '_' + str(m) + spin_char + '_bv' + str(bv_id)
-                orb = Orbital({'name': name, 'n': n, 's': +0.5, 'l': l, 'l_z': m, 's_z': s_z})
-                l_z[orb] = m*orb
-                if m < l:
-                    name = str(n) + self.l_chars[l] + '_' + str(m+1) + spin_char + '_bv' + str(bv_id)
-                    new_orb = Orbital({'name': name, 'n': n, 's': +0.5, 'l': l, 'l_z': m+1, 's_z': s_z})
-                    l_plus[orb] = np.sqrt(l*(l+1) - m*(m+1)) * new_orb
-                else:
-                    l_plus[orb] = 0
-
-                if m > -l:
-                    name = str(n) + self.l_chars[l] + '_' + str(m-1) + spin_char + '_bv' + str(bv_id)
-                    new_orb = Orbital({'name': name, 'n': n, 's': +0.5, 'l': l, 'l_z': m-1, 's_z': s_z})
-                    l_minus[orb] = np.sqrt(l*(l+1) - m*(m-1)) * new_orb
-                else:
-                    l_minus[orb] = 0
-        return Operator(l_z), Operator(l_plus), Operator(l_minus)
-
-    def possible_ang_mom(self, det):
-        assert(isinstance(det, Det))
-        def update_min_l(min_l, max_l, l):
-            if l > max_l:
-                return l - max_l 
-            elif l < min_l:
-                return min_l - l
-            else:
-                return 0
-        min_l, max_l = 0, 0
-        occs = det.up_occ + det.dn_occ
-        for orb in occs:
-            ls = self.ang_mom[orb]
-            min_l = min([update_min_l(min_l, max_l, l) for l in ls])
-            max_l = max_l + max(ls)
-        return min_l, max_l
-
-    def get_wrong_ang_mom(self, target, state):
-        min_l = min([self.possible_ang_mom(det)[0] for det in state.dets])
-        max_l = max([self.possible_ang_mom(det)[1] for det in state.dets])
-        assert(min_l <= target and target <= max_l)
-        return [l for l in range(min_l, max_l+1) if l != target]
-
-    def convert_det_lin_comb(self, state):
-        dets, coefs = [], []
-        for det, coef in state.dets.items():
-            orbitals = self.get_orbitals(det)
-            dets.append(Determinant(orbitals)) 
-            coefs.append(coef)
-        return DeterminantLinearCombination(coefs, dets)
-    
-    def get_orbitals(self, det):
-        up_orbitals = [self.up_mos[orb-1] for orb in det.up_occ]
-        dn_orbitals = [self.dn_mos[orb-1] for orb in det.dn_occ]
-        return up_orbitals + dn_orbitals
-
-    def get_mos(self):
-        up_mos = [Orbital({'name': 'mol_orb_up_' + str(n+1), 's_z': +0.5}) 
-                  for n in range(len(self.mo_coeffs))]
-        dn_mos = [Orbital({'name': 'mol_orb_dn_' + str(n+1), 's_z': -0.5}) 
-                  for n in range(len(self.mo_coeffs))]
-        return up_mos, dn_mos
-        
-    def get_aos(self):
-        dn_aos, up_aos = [], []
-        count = {}
-        for atomic_orb in self.atomic_orbs:
-            n, l, m = atomic_orb.quant_nums
-            bv_id = atomic_orb.bvec.bv_id
-            name_up = str(n) + self.l_chars[l] + '_' + str(m) + '+' + '_bv' + str(bv_id)
-            name_dn = str(n) + self.l_chars[l] + '_' + str(m) + '-' + '_bv' + str(bv_id)
-            up_orb = Orbital({'name': name_up, 'n': n, 's': +0.5, 'l': l, 'l_z': m, 's_z': +0.5})
-            dn_orb = Orbital({'name': name_dn, 'n': n, 's': +0.5, 'l': l, 'l_z': m, 's_z': -0.5})
-            up_aos.append(up_orb)
-            dn_aos.append(dn_orb)
-        return up_aos, dn_aos
-
-    def convert_vec(self, state):
-        if isinstance(state, DeterminantLinearCombination):
-            res = Vec.zero() 
-            for det, coef in state.det_coeffs.items():
-                p, converted_det = self.convert_vec(det)
-                res += coef * p * converted_det
-            return res
-        elif isinstance(state, Determinant):
-            up_orbs, dn_orbs = [], []
-            for orbital in state.orbitals:
-                name = orbital.labels['name']
-                orbs = up_orbs if name[8:10] == 'up' else dn_orbs
-                orbs.append(int(name[11:]))
-            p = rel_parity(up_orbs)*rel_parity(dn_orbs)
-            return p, Det(up_orbs, dn_orbs)
-
-    def proj(self, target, state):
-        assert(isinstance(state, Vec))
-        wrong_ang_mom = self.get_wrong_ang_mom(target, state)
-        #build det_lin_comb object
-        state = self.convert_det_lin_comb(state)
-        #change basis to complex atomic orbitals
-        state.change_basis(self.ao_basis)
-        projected = project_ang_mom(state, self.l_z, self.l_plus, self.l_minus, wrong_ang_mom) 
-        #change basis to molecular orbitals
-        projected.change_basis(self.mo_basis)
-        return self.convert_vec(projected)
+#class AndreProjector():
+#    def __init__(self, mol, mf):
+#        self.atomic_orbs = p2d.mol2aos(mol, mf, None)
+#        self.mo_coeffs = p2d.aos2mo_coeffs(self.atomic_orbs)
+#        self.a2m = atomic2mol_matrix(self.mo_coeffs, self.atomic_orbs)
+#        self.op_tol = 1e-8
+#
+#        self.mo_coeffs_sparse = sparse_rep(self.mo_coeffs.T)
+#        self.ang_mom = self.get_ang_mom()
+#
+#        self.l_chars = {0: 'S', 1: 'P', 2: 'D', 3: 'F', 4: 'G', 5: 'H'}  
+#        self.up_mos, self.dn_mos = self.get_mos()
+#        self.up_aos, self.dn_aos = self.get_aos()
+#        self.ao_basis = self.get_ao_basis()
+#        self.mo_basis = self.get_mo_basis()
+#        self.max_n = max(ao.n for ao in self.atomic_orbs)
+#
+#        l_z, l_plus, l_minus = self.build_ops()
+#        self.l_z = l_z
+#        self.l_plus = l_plus
+#        self.l_minus = l_minus
+#
+#    def get_basis(self, init_orbs, fin_orbs, coeffs):
+#        #rows of coeffs = the coefs of each init_orb in the fin_orbs
+#        tol = 1e-15
+#        basis = {}
+#        init_up_orbs, init_dn_orbs = init_orbs
+#        fin_up_orbs, fin_dn_orbs = fin_orbs
+#        for orb, row in zip(init_up_orbs, coeffs):
+#            coefs = [coef for coef in row if abs(coef) > tol]
+#            dets = [Determinant([fin_up_orbs[n]]) for n, coef in enumerate(row) if abs(coef) > tol]
+#            basis[orb] = DeterminantLinearCombination(coefs, dets)
+#        for orb, row in zip(init_dn_orbs, coeffs):
+#            coefs = [coef for coef in row if abs(coef) > tol]
+#            dets = [Determinant([fin_dn_orbs[n]]) for n, coef in enumerate(row) if abs(coef) > tol]
+#            basis[orb] = DeterminantLinearCombination(coefs, dets)
+#        return basis
+#
+#    def get_mo_basis(self):
+#        init_orbs = self.up_aos, self.dn_aos
+#        fin_orbs = self.up_mos, self.dn_mos
+#        return self.get_basis(init_orbs, fin_orbs, np.linalg.inv(self.a2m))
+#
+#    def get_ao_basis(self):
+#        init_orbs = self.up_mos, self.dn_mos
+#        fin_orbs = self.up_aos, self.dn_aos
+#        return self.get_basis(init_orbs, fin_orbs, self.a2m)
+#
+#    def get_ang_mom(self):
+#        ang_mom = {}
+#        for mol_orb, ao_coefs in self.mo_coeffs_sparse.items():
+#            ang_mom[mol_orb] = set()
+#            for coef, atom_orb in ao_coefs:
+#                ang_mom[mol_orb].add(self.atomic_orbs[atom_orb-1].l)
+#        return ang_mom
+#
+#    def build_ops(self):
+#        l_minus, l_plus, l_z = {}, {}, {}
+#        for ao in self.atomic_orbs:
+#            n, l, m = ao.quant_nums
+#            bv_id = ao.bvec.bv_id
+#            for spin_char, s_z in [('-', -0.5), ('+', 0.5)]:
+#                name = str(n) + self.l_chars[l] + '_' + str(m) + spin_char + '_bv' + str(bv_id)
+#                orb = Orbital({'name': name, 'n': n, 's': +0.5, 'l': l, 'l_z': m, 's_z': s_z})
+#                l_z[orb] = m*orb
+#                if m < l:
+#                    name = str(n) + self.l_chars[l] + '_' + str(m+1) + spin_char + '_bv' + str(bv_id)
+#                    new_orb = Orbital({'name': name, 'n': n, 's': +0.5, 'l': l, 'l_z': m+1, 's_z': s_z})
+#                    l_plus[orb] = np.sqrt(l*(l+1) - m*(m+1)) * new_orb
+#                else:
+#                    l_plus[orb] = 0
+#
+#                if m > -l:
+#                    name = str(n) + self.l_chars[l] + '_' + str(m-1) + spin_char + '_bv' + str(bv_id)
+#                    new_orb = Orbital({'name': name, 'n': n, 's': +0.5, 'l': l, 'l_z': m-1, 's_z': s_z})
+#                    l_minus[orb] = np.sqrt(l*(l+1) - m*(m-1)) * new_orb
+#                else:
+#                    l_minus[orb] = 0
+#        return Operator(l_z), Operator(l_plus), Operator(l_minus)
+#
+#    def possible_ang_mom(self, det):
+#        assert(isinstance(det, Det))
+#        def update_min_l(min_l, max_l, l):
+#            if l > max_l:
+#                return l - max_l 
+#            elif l < min_l:
+#                return min_l - l
+#            else:
+#                return 0
+#        min_l, max_l = 0, 0
+#        occs = det.up_occ + det.dn_occ
+#        for orb in occs:
+#            ls = self.ang_mom[orb]
+#            min_l = min([update_min_l(min_l, max_l, l) for l in ls])
+#            max_l = max_l + max(ls)
+#        return min_l, max_l
+#
+#    def get_wrong_ang_mom(self, target, state):
+#        min_l = min([self.possible_ang_mom(det)[0] for det in state.dets])
+#        max_l = max([self.possible_ang_mom(det)[1] for det in state.dets])
+#        assert(min_l <= target and target <= max_l)
+#        return [l for l in range(min_l, max_l+1) if l != target]
+#
+#    def convert_det_lin_comb(self, state):
+#        dets, coefs = [], []
+#        for det, coef in state.dets.items():
+#            orbitals = self.get_orbitals(det)
+#            dets.append(Determinant(orbitals)) 
+#            coefs.append(coef)
+#        return DeterminantLinearCombination(coefs, dets)
+#    
+#    def get_orbitals(self, det):
+#        up_orbitals = [self.up_mos[orb-1] for orb in det.up_occ]
+#        dn_orbitals = [self.dn_mos[orb-1] for orb in det.dn_occ]
+#        return up_orbitals + dn_orbitals
+#
+#    def get_mos(self):
+#        up_mos = [Orbital({'name': 'mol_orb_up_' + str(n+1), 's_z': +0.5}) 
+#                  for n in range(len(self.mo_coeffs))]
+#        dn_mos = [Orbital({'name': 'mol_orb_dn_' + str(n+1), 's_z': -0.5}) 
+#                  for n in range(len(self.mo_coeffs))]
+#        return up_mos, dn_mos
+#        
+#    def get_aos(self):
+#        dn_aos, up_aos = [], []
+#        count = {}
+#        for atomic_orb in self.atomic_orbs:
+#            n, l, m = atomic_orb.quant_nums
+#            bv_id = atomic_orb.bvec.bv_id
+#            name_up = str(n) + self.l_chars[l] + '_' + str(m) + '+' + '_bv' + str(bv_id)
+#            name_dn = str(n) + self.l_chars[l] + '_' + str(m) + '-' + '_bv' + str(bv_id)
+#            up_orb = Orbital({'name': name_up, 'n': n, 's': +0.5, 'l': l, 'l_z': m, 's_z': +0.5})
+#            dn_orb = Orbital({'name': name_dn, 'n': n, 's': +0.5, 'l': l, 'l_z': m, 's_z': -0.5})
+#            up_aos.append(up_orb)
+#            dn_aos.append(dn_orb)
+#        return up_aos, dn_aos
+#
+#    def convert_vec(self, state):
+#        if isinstance(state, DeterminantLinearCombination):
+#            res = Vec.zero() 
+#            for det, coef in state.det_coeffs.items():
+#                p, converted_det = self.convert_vec(det)
+#                res += coef * p * converted_det
+#            return res
+#        elif isinstance(state, Determinant):
+#            up_orbs, dn_orbs = [], []
+#            for orbital in state.orbitals:
+#                name = orbital.labels['name']
+#                orbs = up_orbs if name[8:10] == 'up' else dn_orbs
+#                orbs.append(int(name[11:]))
+#            p = rel_parity(up_orbs)*rel_parity(dn_orbs)
+#            return p, Det(up_orbs, dn_orbs)
+#
+#    def proj(self, target, state):
+#        assert(isinstance(state, Vec))
+#        wrong_ang_mom = self.get_wrong_ang_mom(target, state)
+#        #build det_lin_comb object
+#        state = self.convert_det_lin_comb(state)
+#        #change basis to complex atomic orbitals
+#        state.change_basis(self.ao_basis)
+#        projected = project_ang_mom(state, self.l_z, self.l_plus, self.l_minus, wrong_ang_mom) 
+#        #change basis to molecular orbitals
+#        projected.change_basis(self.mo_basis)
+#        return self.convert_vec(projected)
 
 def main():
     mol = gto.Mole()
