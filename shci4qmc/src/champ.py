@@ -40,6 +40,7 @@ class ChampInputFiles:
         self.target_l2 = None
         self.mol = None
         self.basis = None
+        self.omega = 0.
 
         self.out_file = None
 
@@ -71,7 +72,7 @@ class ChampInputFiles:
         print("Starting RHF...")
         self.mf = sym_rhf.RHF(self.mol).run()
         #self.mf = scf.RHF(self.mol).run()
-        print("Finished RHF.") 
+        print("Finished RHF. HF Energy = %12.8e" % self.mf.energy_tot()) 
         
         self.orb_symm_labels = symm.label_orb_symm(
             self.mol, self.mol.irrep_name, self.mol.symm_orb, self.mf.mo_coeff)
@@ -261,12 +262,7 @@ class ChampInputFiles:
     def setup_shci(self):
         fcidump_path = os.path.join(self.dir_qmc_inp, 'FCIDUMP')
         if not os.path.exists(fcidump_path):
-            self.make_fcidump(fcidump_path)
-
-
-#        complex_ints = self.symmetry in ('dooh', 'coov')
-#        self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
-
+            self.make_erf_fcidump(fcidump_path)
         config_path = os.path.join(self.dir_qmc_inp, 'config.json')
         with open(config_path, 'w') as f:
             json.dump(self.config, f, indent=2)
@@ -317,49 +313,74 @@ class ChampInputFiles:
             h2e = self.mol.intor('int2e_coulerf', aosym='s8')
 
         jtot, ktot = self.mf.get_jk()
-        jerf, kerf = self.mf.get_jk(omega = omega)
+        jerf, kerf = self.mf.get_jk(omega = self.omega)
         veff = (jtot - jerf) - 0.5*(ktot - kerf)
 
         mo_coeffs = self.mf.mo_coeff
-        mo_h1e = reduce(np.dot, (mo_coeffs.T, h1e + veff, mo_coeffs))
+        mo_h1e = reduce(numpy.dot, (mo_coeffs.T, h1e + veff, mo_coeffs))
         mo_h2e = ao2mo.full(h2e, mo_coeffs)
     
         rdm = self.mf.make_rdm1()
-        ext = 0.5*np.einsum('ij,ji', veff, rdm)
+        ext = 0.5*numpy.einsum('ij,ji', veff, rdm)
         nuc = self.mf.energy_nuc() - ext
         nmo = mo_h1e.shape[0]
         sym = getattr(mo_coeffs, 'orbsym', None)
     
         if self.symmetry in ('dooh', 'coov'):
-            writeComplexOrbIntegrals(mo_h1e, mo_h2e, nmo, self.mol.nelec, 
-                                     nuc, orbsym, self.mf.partner_orbs)
+            writeComplexOrbIntegrals(mo_h1e, mo_h2e, nmo, self.n_up + self.n_down, 
+                                     nuc, sym, self.mf.partner_orbs)
             os.rename('FCIDUMP', filename)
         else:
-            orbsym = [s+1 for s in sym]
-	    fcidump.from_integrals(filename, mo_h1e, mo_h2e, nmo, self.mol.nelec, 
-	                           nuc=nuc, ms=0, orbsym=orbsym,tol=1e-15, 
-	                           float_format = "% .12e\t")
+            sym = [s+1 for s in sym]
+            fcidump.from_integrals(filename, mo_h1e, mo_h2e, nmo, self.mol.nelec, 
+                                   nuc=nuc, ms=0, orbsym=sym, tol=1e-15, 
+                                   float_format = "% .12e\t")
         return
 
     
-    def make_real_orb_fcidump(self, fcidump_path):
-        #Prints FCIDUMP using real orbitals (only used if linear symmetry is used)
-        mo_coeff = self.mf.mo_coeff
-        if self.opt_orbs:
-            mo_coeff = numpy.matmul(mo_coeff, self.rotation_matrix.conj().T)
+#    def make_real_orb_fcidump(self, fcidump_path):
+#        #Prints FCIDUMP using real orbitals (only used if linear symmetry is used)
+#        mo_coeff = self.mf.mo_coeff
 #        if self.opt_orbs:
-#            mo_coeff = numpy.matmul(self.rotation_matrix, self.mo_coeffs).conj().T
+#            mo_coeff = numpy.matmul(mo_coeff, self.rotation_matrix.conj().T)
+##        if self.opt_orbs:
+##            mo_coeff = numpy.matmul(self.rotation_matrix, self.mo_coeffs).conj().T
+##        else:
+##            mo_coeff = self.mo_coeffs.conj().T
+#        h1 = reduce(numpy.dot, (mo_coeff.conj().T, self.mf.get_hcore(), mo_coeff))
+#        if self.mf._eri is None:
+#            eri = ao2mo.full(self.mol, mo_coeff)
 #        else:
-#            mo_coeff = self.mo_coeffs.conj().T
-        h1 = reduce(numpy.dot, (mo_coeff.conj().T, self.mf.get_hcore(), mo_coeff))
-        if self.mf._eri is None:
-            eri = ao2mo.full(self.mol, mo_coeff)
-        else:
-            eri = ao2mo.full(self.mf._eri, mo_coeff)
-        nuc = self.mf.energy_nuc()
-        orbsym = getattr(mo_coeff, 'orbsym', None) 
-        fcidump.from_integrals(fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
-                               orbsym)
+#            eri = ao2mo.full(self.mf._eri, mo_coeff)
+#        nuc = self.mf.energy_nuc()
+#        orbsym = getattr(mo_coeff, 'orbsym', None) 
+#        fcidump.from_integrals(fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
+#                               orbsym)
+#        return
+
+    def make_fcidump_real_orbs(self, filename):
+        h1e = self.mf.get_hcore()
+
+        with self.mol.with_range_coulomb(omega = self.omega):
+            h2e = self.mol.intor('int2e_coulerf', aosym='s8')
+
+        jtot, ktot = self.mf.get_jk()
+        jerf, kerf = self.mf.get_jk(omega = self.omega)
+        veff = (jtot - jerf) - 0.5*(ktot - kerf)
+
+        mo_coeffs = numpy.matmul(self.mf.mo_coeff, self.rotation_matrix.conj().T)
+        mo_h1e = reduce(numpy.dot, (mo_coeffs.T, h1e + veff, mo_coeffs))
+        mo_h2e = ao2mo.full(h2e, mo_coeffs)
+    
+        rdm = self.mf.make_rdm1()
+        ext = 0.5*numpy.einsum('ij,ji', veff, rdm)
+        nuc = self.mf.energy_nuc() - ext
+        nmo = mo_h1e.shape[0]
+        sym = getattr(mo_coeffs, 'orbsym', None)
+    
+        fcidump.from_integrals(filename, mo_h1e, mo_h2e, nmo, self.mol.nelec, 
+                               nuc=nuc, ms=0, orbsym=sym, tol=1e-15, 
+                               float_format = "% .12e\t")
         return
 
     def test_fcidump(self, filename):
@@ -384,8 +405,6 @@ class ChampInputFiles:
         mat_file_exists = os.path.exists(self.rot_matrix_path)
         if (not wf_file_exists) or (self.opt_orbs and not mat_file_exists):
             self.setup_shci()
-            print('wf_file: ', self.wf_path, wf_file_exists)
-            print('self.rot_matrix_path: ', self.rot_matrix_path, mat_file_exists)
             print('Running shci...\n')
             self.run_shci()
             if self.opt_orbs:
@@ -397,18 +416,11 @@ class ChampInputFiles:
         fcidump_path = os.path.join(self.dir_qmc_inp, 'FCIDUMP')
         if self.symmetry in ('dooh', 'coov'):
             fcidump_path += '_real_orbs'
-            self.make_real_orb_fcidump(fcidump_path)
+            self.make_fcidump_real_orbs(fcidump_path)
         elif self.opt_orbs:
             fcidump_path += '_optorb'
         self.ham = Ham(fcidump_path)
         
-#        real_fcidump_path = filename + '_real_orbs'
-#        fcidump.from_integrals(real_fcidump_path, h1, eri, h1.shape[0], self.mol.nelec, nuc, 0, 
-#                                   orbsym)
-#        complex_ints = self.symmetry in ('dooh', 'coov')
-#        self.ham = Ham(fcidump_path + '_real_orbs' if complex_ints else fcidump_path)
-
-
         print('Loading WF from: ' + self.wf_path)
         print('Starting CSF calculation...')
 
