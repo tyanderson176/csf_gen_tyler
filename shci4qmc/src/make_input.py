@@ -6,13 +6,14 @@ import numpy as np
 from shci4qmc.src.ham import Ham
 from shci4qmc.src.vec import Det, Vec, Config
 
-def make_input(cache_filename, dir_out, csf_tol):
+def make_input(cache_filename, dir_out, csf_key, csf_tol):
     qmc_filename = os.path.join(dir_out, 'champ_tol%7.1e'%csf_tol + '.in')
     qmc_file = open(qmc_filename, 'w+')
     with open(cache_filename, 'r') as qmc_cache:
         before_csfs = copy_before_csfs(qmc_cache, qmc_file)
         wf_energy, ncsf, ndet, csf_section = \
-            write_csf_section(qmc_cache, qmc_file, dir_out, csf_tol, reduce_csfs = False)
+            write_csf_section(qmc_cache, qmc_file, dir_out, 
+                              csf_key, csf_tol, reduce_csfs = False)
         after_csfs = after_csfs_section(qmc_cache, qmc_file, ncsf)
         before_csfs = update_before_csfs(before_csfs, ncsf, ndet, wf_energy)
 #        qmc_file.write("\'ncsf=%d ndet=%d norb=%d\'\t\t\t\ttitle\n"% (ncsf, ndet, norb))
@@ -66,7 +67,7 @@ def add_csfs(coefs, csfs):
         res += coef*csf
     return res
 
-def write_csf_section(qmc_cache, qmc_file, dir_out, csf_tol, reduce_csfs):
+def write_csf_section(qmc_cache, qmc_file, dir_out, csf_key, csf_tol, reduce_csfs):
     config_labels, dets = {}, []
     config_csfs = {}
     for line in qmc_cache:
@@ -101,12 +102,14 @@ def write_csf_section(qmc_cache, qmc_file, dir_out, csf_tol, reduce_csfs):
             break
         det_line = qmc_cache.readline()
         coef_line = qmc_cache.readline()
-    return write_csfs(qmc_file, dir_out, config_csfs, config_labels, csf_tol, reduce_csfs)
+    return write_csfs(qmc_file, dir_out, config_csfs, config_labels, 
+                      csf_key, csf_tol, reduce_csfs)
 
 def det_row_str(det, n, config_label):
     return (det.qmc_str() + '\t\t' + str(n+1) + '\t' + str(config_label+1))
 
-def write_csfs(qmc_file, dir_out, config_csfs, config_labels, csf_tol, reduce_csfs):
+def write_csfs(qmc_file, dir_out, config_csfs, config_labels, 
+               csf_key, csf_tol, reduce_csfs):
     det_indices, accepted_csfs = {}, []
     output_lines = []
     for config, csfs in config_csfs.items():
@@ -117,8 +120,8 @@ def write_csfs(qmc_file, dir_out, config_csfs, config_labels, csf_tol, reduce_cs
         for coef, csf in csfs:
             accepted_csfs.append((coef, csf))
     
-    decreasing_coefs = lambda coef_and_csf: -abs(coef_and_csf[0])/np.sqrt(len(coef_and_csf[1].dets))
-    sorted_csfs = sorted([(coef, csf) for coef, csf in accepted_csfs], key = decreasing_coefs)
+#    decreasing_coefs = lambda coef_and_csf: -abs(coef_and_csf[0])/np.sqrt(len(coef_and_csf[1].dets))
+    sorted_csfs = sorted(accepted_csfs, key = lambda p: -csf_key(*p))
     sorted_dets, reindex, det_indices = [], {}, {}
     for coef, csf in sorted_csfs:
         for det in csf.dets:

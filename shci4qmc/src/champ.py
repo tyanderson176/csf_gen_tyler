@@ -33,6 +33,7 @@ class ChampInputFiles:
 
         self.tol_det = 1e-3
         self.tol_csf = [5e-2, 2e-2, 1e-1]
+        self.csf_key = lambda coef, csf: abs(coef)/numpy.sqrt(len(csf.dets))
 
         self.opt_orbs = False
         self.rot_matrix = None
@@ -96,7 +97,7 @@ class ChampInputFiles:
 
     def make_inp_file(self):
         for tol in self.tol_csf:
-            inp.make_input(self.dat_file_path, self.dir_qmc_inp, tol)
+            inp.make_input(self.dat_file_path, self.dir_qmc_inp, self.csf_key, tol)
         return
 
     def make_dat_file(self):
@@ -368,7 +369,9 @@ class ChampInputFiles:
         jerf, kerf = self.mf.get_jk(omega = self.omega)
         veff = (jtot - jerf) - 0.5*(ktot - kerf)
 
-        mo_coeffs = numpy.matmul(self.mf.mo_coeff, self.rotation_matrix.conj().T)
+        mo_coeffs = self.mf.mo_coeff
+        if self.opt_orbs:
+            mo_coeffs = numpy.matmul(mo_coeffs, self.rotation_matrix.conj().T)
         mo_h1e = reduce(numpy.dot, (mo_coeffs.T, h1e + veff, mo_coeffs))
         mo_h2e = ao2mo.full(h2e, mo_coeffs)
     
@@ -477,12 +480,13 @@ class ChampInputFiles:
 
     def sort_csfs(self):
         class Pair:
-            def __init__(self, csf, coef):
-                self.csf, self.coef = csf, coef
-                self.ndetsqrt = numpy.sqrt(len(csf.dets.items()))
+            def __init__(_self, csf, coef):
+                _self.csf  = csf
+                _self.coef = coef
+                _self.key  = self.csf_key(coef, csf)
             def __lt__(self, other):
-                if self.coef != other.coef: #deterministic csf order
-                    return abs(other.coef)/other.ndetsqrt < abs(self.coef)/self.ndetsqrt
+                if self.key != other.key: #deterministic csf order
+                    return other.key < self.key
                 else:
                     return str(self.csf) < str(other.csf)
         

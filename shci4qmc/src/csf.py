@@ -11,6 +11,7 @@ from shci4qmc.src.vec import Vec, Det, Config
 
 def get_csfs(filename, det_tol, mol, mf, target_l2):
     wf = load_shci_wf(filename, det_tol)
+    print('Loaded in %d dets from %s' % (len(wf.dets), filename))
     gen = CSF_Generator(wf, mol, mf, target_l2)
     csfs = gen.generate()
     coefs = [csf.dot(gen.real_wf) for csf in csfs]
