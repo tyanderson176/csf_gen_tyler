@@ -6,14 +6,15 @@ import numpy as np
 from shci4qmc.src.ham import Ham
 from shci4qmc.src.vec import Det, Vec, Config
 
-def make_input(cache_filename, dir_out, csf_key, csf_tol, reduce_csfs = True):
+def make_input(cache_filename, dir_out, csf_key, csf_tol, 
+               reduce_csfs, rotate_csfs):
     qmc_filename = os.path.join(dir_out, 'champ_tol%7.1e'%csf_tol + '.in')
     qmc_file = open(qmc_filename, 'w+')
     with open(cache_filename, 'r') as qmc_cache:
         before_csfs = copy_before_csfs(qmc_cache, qmc_file)
         wf_energy, ncsf, ndet, csf_section = \
             write_csf_section(qmc_cache, qmc_file, dir_out, 
-                              csf_key, csf_tol, reduce_csfs)
+                              csf_key, csf_tol, reduce_csfs, rotate_csfs)
         after_csfs = after_csfs_section(qmc_cache, qmc_file, ncsf)
         before_csfs = update_before_csfs(before_csfs, ncsf, ndet, wf_energy)
 #        qmc_file.write("\'ncsf=%d ndet=%d norb=%d\'\t\t\t\ttitle\n"% (ncsf, ndet, norb))
@@ -67,7 +68,8 @@ def add_csfs(coefs, csfs):
         res += coef*csf
     return res
 
-def write_csf_section(qmc_cache, qmc_file, dir_out, csf_key, csf_tol, reduce_csfs):
+def write_csf_section(qmc_cache, qmc_file, dir_out, csf_key, csf_tol, 
+                      reduce_csfs, rotate_csfs):
     config_labels, dets = {}, []
     config_csfs = {}
     for line in qmc_cache:
@@ -103,27 +105,33 @@ def write_csf_section(qmc_cache, qmc_file, dir_out, csf_key, csf_tol, reduce_csf
         det_line = qmc_cache.readline()
         coef_line = qmc_cache.readline()
     return write_csfs(qmc_file, dir_out, config_csfs, config_labels, 
-                      csf_key, csf_tol, reduce_csfs)
+                      csf_key, csf_tol, reduce_csfs, rotate_csfs)
 
 def det_row_str(det, n, config_label):
     return (det.qmc_str() + '\t\t' + str(n+1) + '\t' + str(config_label+1))
 
 def write_csfs(qmc_file, dir_out, config_csfs, config_labels, 
-               csf_key, csf_tol, reduce_csfs):
+               csf_key, csf_tol, reduce_csfs, rotate_csfs):
     det_indices, accepted_csfs = {}, []
     output_lines = []
     for config, csfs in config_csfs.items():
-        cnfg_sum = add_csfs([coef for coef, csf in csfs], [csf for coef, csf in csfs])
-#        if (config_sum.norm()/np.sqrt(n_dets) < csf_tol): 
-#            continue
-        cnfg_norm = cnfg_sum.norm()
-        cnfg_sum *= 1./cnfg_norm
-        if (csf_key(cnfg_norm, cnfg_sum) < csf_tol):
-            continue
-        if reduce_csfs:
-            accepted_csfs.append((cnfg_norm, cnfg_sum))
+        if rotate_csfs:
+            cnfg_sum = add_csfs([coef for coef, csf in csfs], [csf for coef, csf in csfs])
+#            if (config_sum.norm()/np.sqrt(n_dets) < csf_tol): 
+#                continue
+            cnfg_norm = cnfg_sum.norm()
+            cnfg_sum *= 1./cnfg_norm
+            if (csf_key(cnfg_norm, cnfg_sum) < csf_tol):
+                continue
+            if reduce_csfs:
+                accepted_csfs.append((cnfg_norm, cnfg_sum))
+            else:
+                for coef, csf in csfs:
+                    accepted_csfs.append((coef, csf))
         else:
             for coef, csf in csfs:
+                if csf_key(coef, csf) < csf_tol:
+                    continue
                 accepted_csfs.append((coef, csf))
     
 #    decreasing_coefs = lambda coef_and_csf: -abs(coef_and_csf[0])/np.sqrt(len(coef_and_csf[1].dets))
@@ -164,7 +172,8 @@ def write_csfs(qmc_file, dir_out, config_csfs, config_labels,
         fcidump_path += '_real_orbs'
     if not os.path.exists(fcidump_path):
         raise Exception("FCIDUMP/FCIDUMP_real_orbs file not found")
-    wf_energy = Ham(fcidump_path).expectation(wf)
+#    wf_energy = Ham(fcidump_path).expectation(wf)
+    wf_energy = 0.0
     return wf_energy, len(sorted_csfs), len(sorted_dets), output_lines
 
 def after_csfs_section(qmc_cache, qmc_file, ncsf):

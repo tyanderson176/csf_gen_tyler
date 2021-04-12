@@ -119,7 +119,7 @@ def mol2aos(mol, mf, basis = None):
         if nelec_ecp == 0 or l > 3:
             shl_start = count[ia,l]+l+1
         else:
-            coreshl = ecp.core_configuration(nelec_ecp)
+            coreshl = gto.ecp.core_configuration(nelec_ecp)
             shl_start = coreshl[l]+count[ia,l]+l+1
         count[ia,l] += nc
         ns = range(shl_start, shl_start+nc)

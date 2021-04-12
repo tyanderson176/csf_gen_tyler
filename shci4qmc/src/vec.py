@@ -40,6 +40,10 @@ class Vec:
             imag_part += coef.imag * det
         return imag_part
 
+    def remove(self, det):
+        del self.dets[det]
+        return
+
     @staticmethod
     def zero():
         return Vec({})
@@ -66,6 +70,7 @@ class Vec:
             new_vec /= new_vec.norm()
             new_vec.config_label = vec.config_label
             orthonormal_basis.append(new_vec)
+            print("Orthonormal Basis Dim: ", len(orthonormal_basis))
         return orthonormal_basis
 
     def __repr__(self):

@@ -35,6 +35,8 @@ class ChampInputFiles:
         self.tol_csf = [5e-2, 2e-2, 1e-1]
         self.csf_key = lambda coef, csf: abs(coef)/numpy.sqrt(len(csf.dets))
         self.config_1csf = False
+        self.truncate_csfs = False
+        self.rotate_csfs = True
 
         self.opt_orbs = False
         self.rot_matrix = None
@@ -52,16 +54,22 @@ class ChampInputFiles:
             self.make_inp_file()
             return
 
-        self.wf_filename = 'wf_eps1_%.2e.dat'%min(self.config['eps_vars'])
+        if not self.wf_filename:
+            self.wf_filename = 'wf_eps1_%.2e.dat'%min(self.config['eps_vars'])
         self.wf_path = os.path.join(self.dir_reuse, self.wf_filename)
         self.rot_matrix_path = os.path.join(self.dir_reuse, 'rotation_matrix')
 
-        assert(self.mol.unit == 'bohr' and self.mol.symmetry)
-        assert(self.mol.spin == abs(self.config['n_up'] - self.config['n_dn']))
-        assert(self.mol.symmetry.lower() == self.config['chem']['point_group'].lower())
-        assert(self.opt_orbs == self.config['optorb'])
-
-        self.symmetry = self.mol.symmetry.lower()
+#        assert(self.mol.unit == 'bohr' and self.mol.symmetry)
+        if self.config:
+            assert(self.mol.spin 
+                    == abs(self.config['n_up'] - self.config['n_dn']))
+            assert(self.mol.symmetry.lower() 
+                    == self.config['chem']['point_group'].lower())
+            assert(self.opt_orbs == self.config['optorb'])
+        if type(self.mol.symmetry) == str:
+            self.symmetry = self.mol.symmetry.lower()
+        else:
+            self.symmetry = ""
 
         #Use analytic basis external to pyscf
         if self.bas_path:
@@ -99,7 +107,8 @@ class ChampInputFiles:
     def make_inp_file(self):
         for tol in self.tol_csf:
             inp.make_input(self.dat_file_path, self.dir_qmc_inp, 
-                           self.csf_key, tol, self.config_1csf)
+                           self.csf_key, tol, self.config_1csf, 
+                           self.rotate_csfs)
         return
 
     def make_dat_file(self):
@@ -464,8 +473,9 @@ class ChampInputFiles:
         print('Starting CSF calculation...')
 
 
-        self.csfs, self.coefs, self.shci_wf = get_csfs(self.wf_path, self.tol_det, 
-                                                       self.mol, self.mf, self.target_l2)
+        self.csfs, self.coefs, self.shci_wf = \
+            get_csfs(self.wf_path, self.tol_det, self.mol, self.mf, 
+                     self.target_l2, self.truncate_csfs, self.rotate_csfs)
         self.proj_wf = Vec.add(self.csfs, self.coefs)
         self.sort_dets()
         self.sort_csfs()
@@ -474,6 +484,9 @@ class ChampInputFiles:
         self.proj_e = self.mf.energy_tot()
         print("CSF calculation complete.")
         print("Error = %.8f" % self.error())
+        #for det in self.proj_wf.dets:
+        #    if det not in self.shci_wf.dets:
+        #        print("NEW DET: ", det) 
         #print('Energies = %.8f, %.8f'% (self.shci_e, self.proj_e))
         return
 
@@ -495,6 +508,17 @@ class ChampInputFiles:
         if self.symmetry in ('dooh', 'coov'):
             self.make_real2complex_coeffs()
             R = self.real2complex_coeffs
+            totmat = reduce(numpy.dot, (R.conj().T, self.rotation_matrix, R))
+            rmat = totmat.real
+            imat = totmat.imag
+            rdiff = rmat - self.rotation_matrix
+            print('imag part     :\n', imat)
+            print('imag part norm:\n', numpy.linalg.norm(imat))
+            print('real part diff:\n', rdiff)
+            print('real diff norm:\n', numpy.linalg.norm(rdiff))
+            print('real          :\n', rmat)
+            print('orig          :\n', self.rotation_matrix)
+            print('R             :\n', R)
             self.rotation_matrix = reduce(numpy.dot, (R.conj().T, self.rotation_matrix, R)).real
 
     def sort_dets(self):
@@ -682,7 +706,7 @@ class ChampInputFiles:
         self.out_file.write('!linear renormalize=true end\n')
         self.out_file.write(' increase_blocks=true\n')
         self.out_file.write(' increase_blocks_factor=1.4\n')
-        self.out_file.write('casscf=true\n')
+        self.out_file.write('casscf=false\n')
         self.out_file.write('check_redundant_orbital_derivative=false\n')
         self.out_file.write('!do_add_diag_mult_exp=.true.\n')
         self.out_file.write('end\n')

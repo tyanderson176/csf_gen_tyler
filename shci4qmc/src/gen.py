@@ -20,7 +20,7 @@ def generate_spin_csfs(n_open_max, spin):
         for line in iter(process.stdout.readline, ''):
             f.write(line)
     spin_csfs = parse_spin_csfs(spin, filepath)
-    os.remove(filepath) #cleanup
+#    os.remove(filepath) #cleanup
     return spin_csfs
 
 def parse_spin_csfs(spin, filepath):
@@ -88,7 +88,8 @@ class CSF_Generator():
         self.n_open_max = get_n_open_max(self.wf)
         self.spin_csf_data = generate_spin_csfs(self.n_open_max, abs(mol.spin))
         self.target_l2 = target_l2
-        self.linear_sys = (mol.symmetry.lower() in ('dooh', 'coov'))
+        self.linear_sys = ((type(mol.symmetry) == str)
+                          and (mol.symmetry.lower() in ('dooh', 'coov')))
         self.atomic_sys = (mol.natm == 1 and self.linear_sys and self.target_l2 != None)
         self.real_wf = wf
         if self.linear_sys:
@@ -138,7 +139,14 @@ class CSF_Generator():
         def configs_of(wf):
             return sorted(set(Config(det) for det in wf.dets.keys()))
 
+        count = 0
+        configs = configs_of(self.wf)
+
         def csfs_from_config(config):
+            nonlocal count
+            nonlocal configs
+            count += 1
+            print("Generating CSFs from config #", count, "/", len(configs))
             data, det_strs = self.spin_csf_data[config.num_open]
             dets = [make_det(config, det_str) for det_str in det_strs]
             csfs = [make_csf(coefs, dets) for coefs in data]
@@ -146,7 +154,6 @@ class CSF_Generator():
                 csf.config_label = config
             return csfs
 
-        configs = configs_of(self.wf)
         csfs = [csf for config in configs for csf in csfs_from_config(config)]
         return csfs
 
@@ -156,7 +163,11 @@ class CSF_Generator():
             csfs = self.linear_sys_csfs(csfs)
         if self.atomic_sys: 
             csfs = self.atomic_sys_csfs(csfs) 
-        csfs = orthogonalize(csfs)
+        if self.linear_sys or self.atomic_sys:
+            print("Orthogonalizing CSFs...")
+            csfs = orthogonalize(csfs)
+            print("Finished orthogonalizing.")
+        print("CSFs generated.")
         return csfs
 
 if __name__ == "__main__":

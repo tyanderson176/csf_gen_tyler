@@ -9,13 +9,18 @@ from shci4qmc.src.gen import CSF_Generator
 from shci4qmc.src.ham import Ham
 from shci4qmc.src.vec import Vec, Det, Config
 
-def get_csfs(filename, det_tol, mol, mf, target_l2):
+def get_csfs(filename, det_tol, mol, mf, target_l2, truncate_csfs, rotate_csfs):
     wf = load_shci_wf(filename, det_tol)
     print('Loaded in %d dets from %s' % (len(wf.dets), filename))
     gen = CSF_Generator(wf, mol, mf, target_l2)
     csfs = gen.generate()
+    if truncate_csfs:
+        print("Start truncating CSFs.")
+        csfs = truncate(csfs, gen.real_wf)
+        print("Finished truncating CSFs.")
     coefs = [csf.dot(gen.real_wf) for csf in csfs]
-    csfs, coefs = rotate_by_configs(csfs, coefs)
+    if rotate_csfs:
+        csfs, coefs = rotate_by_configs(csfs, coefs)
     return csfs, coefs, gen.real_wf
 
 def load_shci_wf(filename, tol):
@@ -32,6 +37,20 @@ def load_shci_wf(filename, tol):
         if abs(coef) > tol:
             shci_wf += coef*make_det(orbs) 
     return shci_wf
+
+def truncate(csfs, wf):
+    truncated = []
+    for csf in csfs:
+        trunc = Vec.zero()
+        for det, coef in csf.dets.items():
+            if det in wf.dets:
+                trunc += coef*det
+        if trunc.norm() > 0.0:
+            norm_inv = 1./trunc.norm()
+            trunc = norm_inv*trunc
+            trunc.config_label = csf.config_label
+            truncated.append(trunc)
+    return Vec.gram_schmidt(truncated, len(truncated), tol=1e-4)
 
 def rotate_by_configs(csfs, coefs):
     def rotate(config, csfs):
